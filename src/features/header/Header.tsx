@@ -1,6 +1,8 @@
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 import Link from 'next/link'
+import { Locale } from '@/i18n/config'
 
-const Header = () => {
+const Header = ({locale}: {locale: Locale}) => {
   return (
     <header className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,6 +36,8 @@ const Header = () => {
               info@ebcenter.by
             </a>
           </div>
+
+          <LanguageSwitcher locale={locale} />
 
           {/* Mobile menu button */}
           <div className="md:hidden">

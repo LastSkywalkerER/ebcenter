@@ -1,0 +1,149 @@
+{
+  "common": {
+    "more": "Learn More",
+    "tariffs": "Tariffs",
+    "register": "Register",
+    "courseProgram": "Course Program",
+    "sendRequest": "Send Request",
+    "home": "Home",
+    "services": "Services",
+    "training": "Training",
+    "contactUs": "Contact Us",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "workingHours": "Working Hours",
+    "name": "Full Name",
+    "message": "Message",
+    "selectCourse": "Select Course"
+  },
+  "home": {
+    "hero": {
+      "title": "Construction Cost Estimation Services",
+      "subtitle": "Fast and quality documentation preparation",
+      "cta": "Our Services"
+    },
+    "services": {
+      "title": "Main Services",
+      "items": {
+        "estimates": {
+          "title": "Cost Estimation",
+          "description": "Professional preparation of cost estimation documentation for construction projects"
+        },
+        "acts": {
+          "title": "Work Completion Certificates",
+          "description": "Proper documentation of work completion certificates in accordance with legislation"
+        },
+        "service": {
+          "title": "Estimation Service",
+          "description": "Comprehensive estimation service for organizations on a regular basis"
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact Information",
+      "address": "123 Example St, Minsk",
+      "phone": "+375 (29) 123-45-67",
+      "email": "info@example.com",
+      "workingHours": "Mon-Fri: 9:00 AM - 6:00 PM"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Professional services in construction and design",
+    "items": {
+      "estimateService": {
+        "title": "Estimation Service",
+        "description": "Professional estimation service for construction organizations"
+      },
+      "currentRepair": {
+        "title": "Current Repair Estimates",
+        "description": "Preparation of estimation documentation for defect reports and current repairs"
+      },
+      "estimateDocs": {
+        "title": "Estimation Documentation",
+        "description": "Preparation of estimation documentation by project sections"
+      },
+      "contractPrice": {
+        "title": "Contract Price Calculation",
+        "description": "Calculation of contract price for negotiations or tenders"
+      },
+      "contracts": {
+        "title": "Construction Contract Preparation",
+        "description": "Preparation of construction contracts and their annexes"
+      },
+      "reporting": {
+        "title": "Reporting Documentation",
+        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates"
+      },
+      "localEstimates": {
+        "title": "Local Estimates",
+        "description": "Preparation of local estimates for general construction and special works"
+      },
+      "consulting": {
+        "title": "Consulting Services",
+        "description": "Consulting services on cost estimation and pricing"
+      },
+      "selfService": {
+        "title": "Self-Service Estimates",
+        "description": "Preparation of reporting documentation for organizations performing work with their own resources"
+      },
+      "individual": {
+        "title": "Individual Request",
+        "description": "Individual or one-time service according to agreed list of services"
+      }
+    }
+  },
+  "training": {
+    "title": "Training",
+    "subtitle": "Professional courses in cost estimation and pricing",
+    "registration": {
+      "title": "Training Registration",
+      "form": {
+        "name": "Full Name",
+        "phone": "Phone",
+        "email": "Email",
+        "course": "Select Course",
+        "message": "Message"
+      }
+    },
+    "courses": {
+      "express": {
+        "title": "Express Course \"Estimator\"",
+        "duration": "13 hours",
+        "price": "300 BYN",
+        "topics": [
+          "Based on Belsmeta Cloud program",
+          "Offline/online",
+          "Practicing instructor",
+          "Certificate upon completion",
+          "Suitable for beginners"
+        ]
+      },
+      "contractPrice": {
+        "title": "Contract Price Course",
+        "duration": "10 hours",
+        "price": "250 BYN",
+        "topics": [
+          "Based on Belsmeta Cloud program",
+          "Offline/online",
+          "Practicing instructor",
+          "Certificate upon completion",
+          "In-depth work with legislation"
+        ]
+      },
+      "individual": {
+        "title": "Individual Training",
+        "duration": "By agreement",
+        "price": "Individual",
+        "topics": [
+          "Personal learning plan",
+          "Flexible schedule",
+          "Individual approach",
+          "Practical assignments",
+          "Certificate upon completion"
+        ]
+      }
+    }
+  }
+} 

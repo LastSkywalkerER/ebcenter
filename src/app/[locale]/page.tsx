@@ -1,11 +1,18 @@
+
 import Header from '@/features/header/Header'
+import { Locale } from '@/i18n/config'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Home() {
+interface HomeProps {
+  params: { locale: Locale };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function Home({params: {locale}}: HomeProps) {
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative h-[600px] bg-gray-100">
@@ -32,8 +39,8 @@ export default function Home() {
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Наши услуги
-              </a>
-            </div>
+          </a>
+        </div>
           </div>
         </section>
 
@@ -138,7 +145,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+    </div>
+    
         </section>
       </main>
     </>
