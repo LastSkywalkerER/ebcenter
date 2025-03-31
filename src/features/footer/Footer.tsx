@@ -50,14 +50,14 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Контакты</h3>
             <ul className="space-y-2 text-gray-300">
               <li>
-                <a href="tel:+375291234567" className="hover:text-white">
+                <Link href="tel:+375291234567" className="hover:text-white">
                   +375 (29) 123-45-67
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="mailto:info@ebcenter.by" className="hover:text-white">
+                <Link href="mailto:info@ebcenter.by" className="hover:text-white">
                   info@ebcenter.by
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,4 +1,5 @@
 import Header from '@/features/header/Header'
+import { Locale } from '@/i18n/config'
 import Link from 'next/link'
 
 const serviceTariffs = {
@@ -44,16 +45,18 @@ const serviceTariffs = {
   }
 }
 
-export default function ServiceTariffs({ params }: { params: { service: string } }) {
-  const service = serviceTariffs[params.service as keyof typeof serviceTariffs]
+export default async function ServiceTariffs({ params }: { params: Promise<{ service: string, locale: Locale }> }) {
+  const pramsService = (await params).service
+  const locale = (await params).locale
+  const service = serviceTariffs[pramsService as keyof typeof serviceTariffs]
 
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main className="flex-grow py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link 
-            href={`/services/${params.service}`}
+            href={`/services/${pramsService}`}
             className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

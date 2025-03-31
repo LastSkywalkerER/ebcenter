@@ -1,4 +1,5 @@
 import Header from '@/features/header/Header'
+import { Locale } from '@/i18n/config'
 import Link from 'next/link'
 
 const courses = [
@@ -58,10 +59,12 @@ const courses = [
   }
 ]
 
-export default function Training() {
+export default async function Training({params}: {params: Promise<{locale: Locale}>}) {
+  const locale = (await params).locale
+
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main className="flex-grow py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -80,7 +83,7 @@ export default function Training() {
                       {course.icon}
                     </div>
                     <h2 className="text-xl font-semibold text-gray-900 mb-2">{course.title}</h2>
-                    <p className="text-gray-600 mb-4">{course.description}</p>
+                    {/* <p className="text-gray-600 mb-4">{course.description}</p> */}
                     <div className="flex justify-center space-x-4 text-sm text-gray-500 mb-4">
                       <span>{course.duration}</span>
                       <span>•</span>

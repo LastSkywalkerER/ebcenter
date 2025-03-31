@@ -29,12 +29,12 @@ const Header = ({locale}: {locale: Locale}) => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <a href="tel:+375291234567" className="text-gray-600 hover:text-gray-900">
+            <Link href="tel:+375291234567" className="text-gray-600 hover:text-gray-900">
               +375 (29) 123-45-67
-            </a>
-            <a href="mailto:info@ebcenter.by" className="text-gray-600 hover:text-gray-900">
+            </Link>
+            <Link href="mailto:info@ebcenter.by" className="text-gray-600 hover:text-gray-900">
               info@ebcenter.by
-            </a>
+            </Link>
           </div>
 
           <LanguageSwitcher locale={locale} />

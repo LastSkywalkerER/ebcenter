@@ -1,4 +1,5 @@
 import Header from '@/features/header/Header'
+import { Locale } from '@/i18n/config'
 import Link from 'next/link'
 
 const coursePrograms = {
@@ -246,12 +247,14 @@ const coursePrograms = {
   }
 }
 
-export default function CourseProgram({ params }: { params: { course: string } }) {
-  const program = coursePrograms[params.course as keyof typeof coursePrograms]
+export default async function CourseProgram({ params }: { params: Promise<{ course: string, locale: Locale }> }) {
+  const pramsCourse = (await params).course
+  const locale = (await params).locale
+  const program = coursePrograms[pramsCourse as keyof typeof coursePrograms]
 
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main className="flex-grow py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link 

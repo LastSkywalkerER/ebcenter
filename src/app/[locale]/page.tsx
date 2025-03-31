@@ -5,11 +5,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface HomeProps {
-  params: { locale: Locale };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ locale: Locale }>;
 }
 
-export default function Home({params: {locale}}: HomeProps) {
+export default async function Home({params}: HomeProps) {
+  const locale = (await params).locale
+
   return (
     <>
       <Header locale={locale} />
@@ -34,12 +35,12 @@ export default function Home({params: {locale}}: HomeProps) {
               <p className="text-xl md:text-2xl mb-8">
                 Быстрое и качественное составление документации
               </p>
-              <a
+              <Link
                 href="/services"
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Наши услуги
-          </a>
+          </Link>
         </div>
           </div>
         </section>

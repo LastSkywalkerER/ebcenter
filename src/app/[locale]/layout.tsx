@@ -10,13 +10,15 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }))
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: Locale }>
 }) {
+  const locale = (await params).locale
+
   // Validate that the incoming `locale` parameter is valid
   if (!i18n.locales.includes(locale as Locale)) notFound()
 
