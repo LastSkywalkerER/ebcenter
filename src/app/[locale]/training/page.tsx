@@ -69,7 +69,7 @@ export default async function Training() {
           <div className="text-center mb-12">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">Обучение</h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Профессиональные курсы по сметному делу и ценообразованию
+              Курсы по сметному делу и ценообразованию
             </p>
           </div>
 

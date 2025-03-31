@@ -57,7 +57,7 @@ export default async function Home() {
                     </div>
                     <h2 className="text-xl font-semibold text-gray-900 mb-2">Составление смет</h2>
                     <p className="text-gray-600">
-                      Профессиональное составление сметной документации для строительных проектов
+                      Составление сметной документации для строительных проектов
                     </p>
                   </div>
                 </div>

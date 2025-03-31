@@ -1,5 +1,6 @@
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Locale } from '@/i18n/config'
 
 const Header = ({locale}: {locale: Locale}) => {
@@ -7,7 +8,14 @@ const Header = ({locale}: {locale: Locale}) => {
     <header className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center">
+            <Image
+              src="/images/web-app-manifest-512x512.png"
+              alt="EBCenter Logo"
+              width={32}
+              height={32}
+              className="mr-2"
+            />
             <Link href="/" className="text-2xl font-bold text-gray-800">
               EBCenter
             </Link>
