@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Услуги по составлению смет, Сметных работ и обучение сметному делу',
   keywords: 'смета, Сметные работы, обучение сметчиков, составление смет, сметное обслуживание',
   icons: {
-    icon: '/web-app-manifest-512x512.png',
+    icon: '/web-app-manifest-192x192.png',
   },
   openGraph: {
     title: 'EBCenter - Сметные работы и обучение',
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     locale: 'ru_RU',
     images: [
       {
-        url: '/web-app-manifest-512x512.png',
-        width: 512,
-        height: 512,
+        url: '/web-app-manifest-192x192.png',
+        width: 192,
+        height: 192,
         alt: 'EBCenter Logo',
       },
     ],
