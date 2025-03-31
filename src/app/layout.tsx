@@ -1,7 +1,8 @@
+import Footer from '@/features/footer/Footer'
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Footer from '@/features/footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className='min-h-screen flex flex-col'>
           {children}
           <Footer />
+          <Analytics />
         </div>
       </body>
     </html>
