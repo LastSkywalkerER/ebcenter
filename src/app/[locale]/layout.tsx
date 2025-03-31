@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 import '../globals.css'
+import Header from '@/features/header/Header'
+import Disclaimer from '@/features/Disclaimer/Disclaimer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +27,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
+        <Disclaimer locale={locale as Locale} />
+        <Header locale={locale as Locale} />
         <main>{children}</main>
       </body>
     </html>

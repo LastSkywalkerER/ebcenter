@@ -1,5 +1,4 @@
-import Header from '@/features/header/Header'
-import { Locale } from '@/i18n/config'
+
 import Link from 'next/link'
 
 const services = [
@@ -105,12 +104,12 @@ const services = [
   }
 ]
 
-export default async function Services({params}: {params: Promise<{locale: Locale}>}) {
-  const locale = (await params).locale
+export default async function Services() {
+
 
   return (
     <>
-      <Header locale={locale} />
+
       <main className="flex-grow py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">

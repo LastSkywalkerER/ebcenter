@@ -15,7 +15,8 @@
     "workingHours": "Working Hours",
     "name": "Full Name",
     "message": "Message",
-    "selectCourse": "Select Course"
+    "selectCourse": "Select Course",
+    "disclaimer": "We have improved our website, you can see the old version here"
   },
   "home": {
     "hero": {

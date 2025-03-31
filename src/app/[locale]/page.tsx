@@ -1,31 +1,27 @@
 
-import Header from '@/features/header/Header'
-import { Locale } from '@/i18n/config'
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface HomeProps {
-  params: Promise<{ locale: Locale }>;
-}
 
-export default async function Home({params}: HomeProps) {
-  const locale = (await params).locale
+
+export default async function Home() {
+
 
   return (
     <>
-      <Header locale={locale} />
+
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative h-[600px] bg-gray-100">
           <div className="absolute inset-0">
             <Image
-              src="/images/hero-bg.jpg"
+              src="/images/hero-bg.png"
               alt="Проектно-сметные работы"
               fill
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
+            <div className="absolute inset-0 bg-black opacity-70" />
           </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
             <div className="text-white">

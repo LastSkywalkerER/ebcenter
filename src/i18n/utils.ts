@@ -22,6 +22,7 @@ type Translations = {
     name: string
     message: string
     selectCourse: string
+    disclaimer: string
   }
   home: {
     hero: {

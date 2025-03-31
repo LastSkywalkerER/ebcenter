@@ -1,12 +1,10 @@
-import Header from '@/features/header/Header'
-import { Locale } from '@/i18n/config'
 
-export default async function Contacts({params}: {params: Promise<{locale: Locale}>}) {
-  const locale = (await params).locale
+export default async function Contacts() {
+
 
   return (
     <>
-      <Header locale={locale} />
+      
       <main className="flex-grow py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-center mb-12 text-gray-900">Контакты</h1>
