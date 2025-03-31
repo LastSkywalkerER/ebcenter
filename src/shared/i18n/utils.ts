@@ -3,13 +3,13 @@ import { Locale } from './config'
 
 type TranslationValue = string | string[] | { [key: string]: TranslationValue }
 
-type Translations = {
+export type Translations = {
   common: {
     more: string
     tariffs: string
     register: string
-    courseProgram: string
     sendRequest: string
+    courseProgram: string
     home: string
     services: string
     training: string
@@ -44,20 +44,11 @@ type Translations = {
     }
     services: {
       title: string
+      description: string
       items: {
-        estimates: {
-          title: string
-          description: string
-        }
-        acts: {
-          title: string
-          description: string
-        }
-        service: {
-          title: string
-          description: string
-        }
-      }
+        title: string
+        description: string
+      }[]
     }
     contact: {
       title: string
@@ -71,47 +62,9 @@ type Translations = {
     title: string
     subtitle: string
     items: {
-      estimateService: {
-        title: string
-        description: string
-      }
-      currentRepair: {
-        title: string
-        description: string
-      }
-      estimateDocs: {
-        title: string
-        description: string
-      }
-      contractPrice: {
-        title: string
-        description: string
-      }
-      contracts: {
-        title: string
-        description: string
-      }
-      reporting: {
-        title: string
-        description: string
-      }
-      localEstimates: {
-        title: string
-        description: string
-      }
-      consulting: {
-        title: string
-        description: string
-      }
-      selfService: {
-        title: string
-        description: string
-      }
-      individual: {
-        title: string
-        description: string
-      }
-    }
+      title: string
+      description: string
+    }[]
   }
   training: {
     title: string
@@ -147,29 +100,44 @@ type Translations = {
         topics: string[]
       }
     }
+    courseProgram: {
+      backToCourses: string
+      inDevelopment: string
+      title: string
+      programs: {
+        'express-course': {
+          title: string
+          sections: {
+            title: string
+            content: (string | string[])[]
+          }[]
+        }
+        'contract-price': {
+          title: string
+          sections: {
+            title: string
+            content: (string | string[])[]
+          }[]
+        }
+        individual: {
+          title: string
+          sections: {
+            title: string
+            content: (string | string[])[]
+          }[]
+        }
+      }
+    }
   }
   contacts: {
     title: string
-    contactInfo: {
-      title: string
-      address: string
-      addressValue: string
-      phone: string
-      phoneValue: string
-      email: string
-      emailValue: string
-      unp: string
-      unpValue: string
-      workingHours: string
-      workingHoursValue: string
-    }
+    subtitle: string
     form: {
-      title: string
       name: string
-      email: string
       phone: string
+      email: string
       message: string
-      submit: string
+      send: string
     }
   }
   footer: {
@@ -182,10 +150,12 @@ type Translations = {
     }
     quickLinks: {
       title: string
-      home: string
-      services: string
-      training: string
-      contacts: string
+      links: {
+        home: string
+        services: string
+        training: string
+        contacts: string
+      }
     }
     contactInfo: {
       title: string

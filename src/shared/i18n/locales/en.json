@@ -159,6 +159,252 @@
           "Certificate upon completion"
         ]
       }
+    },
+    "courseProgram": {
+      "backToCourses": "Back to courses",
+      "inDevelopment": "Course program is under development",
+      "programs": {
+        "express-course": {
+          "title": "Course Program \"Express Estimator Course\"",
+          "sections": [
+            {
+              "title": "1. Basics of Estimating",
+              "content": [
+                "Determining the estimated cost of construction objects",
+                "Regulatory bases for determining construction costs",
+                "Procedure for determining the estimated cost of a construction object and preparing estimate documentation based on resource consumption standards in natural terms NRR 2017"
+              ]
+            },
+            {
+              "title": "2. Resource Consumption Standards",
+              "content": [
+                "Resource consumption standards in natural terms",
+                "Procedure for applying resource consumption standards",
+                "Resource consumption standards for dismantling and demolition",
+                "Features of applying resource consumption standards for equipment installation",
+                "Costs for equipment dismantling works"
+              ]
+            },
+            {
+              "title": "3. Cost Calculation",
+              "content": [
+                "Procedure for calculating current labor costs",
+                "Calculation of construction materials costs",
+                "Calculation of construction machinery operation costs",
+                "Inter-category calculation coefficients for determining labor costs",
+                "Impact of complicated and constrained working conditions"
+              ]
+            },
+            {
+              "title": "4. Additional Expenses",
+              "content": [
+                "Procedure for determining transportation costs",
+                "Construction zones",
+                "General business and general production expenses",
+                "Planned profit",
+                "Funds for construction of temporary buildings and structures"
+              ]
+            },
+            {
+              "title": "5. Special Conditions",
+              "content": [
+                "Funds for additional expenses during construction and installation works in winter",
+                "Part I - standards by construction types",
+                "Part II - standards by structures and work types"
+              ]
+            },
+            {
+              "title": "6. Other Works and Expenses",
+              "content": [
+                "Funds related to social insurance contributions",
+                "Funds to cover expenses related to traveling nature of works",
+                "Funds for contractor's workers business trips"
+              ]
+            },
+            {
+              "title": "7. Workers Business Trips",
+              "content": [
+                "Methodological recommendations for calculating business trip funds",
+                "Amounts of expense reimbursement for business trips",
+                "Number of business trip construction workers and machine operators",
+                "Standard labor intensity of works",
+                "Conditional example of calculating funds for workers business trips"
+              ]
+            },
+            {
+              "title": "8. Taxes and Contributions",
+              "content": [
+                "Taxes and contributions",
+                "Funds considering the application of forecast price indices",
+                "Deviation in materials cost"
+              ]
+            },
+            {
+              "title": "9. Estimate Documentation",
+              "content": [
+                "Composition of estimate documentation",
+                "Procedure for preparing local estimates",
+                "Formation of information data block",
+                "Grouping data in local estimates by design and technological modules (PTM)",
+                "Preparation of object estimates and summary estimate calculation"
+              ]
+            },
+            {
+              "title": "10. Construction Documentation",
+              "content": [
+                "Main forms of accounting documents:",
+                [
+                  "Form С-1 - Report on completed works",
+                  "Form С-2а - Work completion acceptance certificates",
+                  "Form С-2б - Installation work completion acceptance certificates",
+                  "Form С-3 - Certificate of completed works cost",
+                  "Form С-3а - Certificate of completed works cost and expenses",
+                  "Form С-4 - Report on main materials consumption",
+                  "Form С-7 - Report on materials consumption",
+                  "Form С-14 - Report on fuel consumption"
+                ]
+              ]
+            },
+            {
+              "title": "11. Contractual Relations",
+              "content": [
+                "Ensuring contractor's obligations fulfillment",
+                "Customer's supply materials",
+                "Customer's, contractor's and subcontractor's supply equipment",
+                "Procedure for forming unchanged contract price",
+                "Cases of contract price changes"
+              ]
+            },
+            {
+              "title": "12. Commissioning Works",
+              "content": [
+                "Procedure for determining estimated cost of commissioning works",
+                "Example of calculating estimated cost of commissioning works",
+                "Report on construction materials consumption (Form С-29)"
+              ]
+            },
+            {
+              "title": "13. Comparative Analysis",
+              "content": [
+                "Comparative analysis of NRR 2012 and NRR 2017",
+                "Ways to reduce construction costs",
+                "Forming contract price by local estimates and PTM"
+              ]
+            },
+            {
+              "title": "14. Regulatory Base",
+              "content": [
+                "MAiS Instruction No. 29 on filling out acceptance certificate forms",
+                "MAiS Resolution of 07.02.2019 N 9 on man-hour rate",
+                "Analysis of tender documentation"
+              ]
+            }
+          ]
+        },
+        "contract-price": {
+          "title": "Course Program \"Contract Price\"",
+          "sections": [
+            {
+              "title": "1. Brief Overview",
+              "content": [
+                "Rules for determining estimated cost of construction and preparing estimate documentation based on resource consumption standards in natural terms in NRR 2012 and 2017, including formation of individual cost items:",
+                [
+                  "Labor costs of workers and machine operators",
+                  "Costs for construction materials and construction machinery operation, transportation costs",
+                  "General business and general production expenses and planned profit",
+                  "Impact of complicated and constrained working conditions",
+                  "Funds for construction of temporary buildings and structures and funds for additional expenses during construction and installation works in winter",
+                  "Other works and expenses",
+                  "Funds considering the application of forecast price indices in construction, taxes and contributions"
+                ]
+              ]
+            },
+            {
+              "title": "2. Comparative Analysis of Standards",
+              "content": [
+                "Comparative analysis of NRR 2012 and NRR 2017",
+                "Main changes and differences",
+                "Practical application of standards"
+              ]
+            },
+            {
+              "title": "3. Estimate Documentation",
+              "content": [
+                "Composition of estimate documentation",
+                "Formation of information data block",
+                "Grouping data in local estimates by design and technological modules (PTM)"
+              ]
+            },
+            {
+              "title": "4. Procurement in Construction",
+              "content": [
+                "Procurement of goods (works, services) during construction",
+                "Procedure for conducting procurement",
+                "Requirements for procurement participants"
+              ]
+            },
+            {
+              "title": "5. Contract Price Formation",
+              "content": [
+                "Procedure for forming unchanged contract price for construction objects",
+                "Customer's price",
+                "Contractor's offer price",
+                "Cases of contract price changes during construction of objects financed fully or partially from budgets and other sources",
+                "Contractor's savings"
+              ]
+            },
+            {
+              "title": "6. Additional Works",
+              "content": [
+                "Procedure for forming cost of additional works",
+                "Features of accounting for additional works in estimate documentation"
+              ]
+            },
+            {
+              "title": "7. Accounting Documentation",
+              "content": [
+                "Main forms of accounting documents in construction:",
+                [
+                  "Form С-2а - Work completion acceptance certificates",
+                  "Form С-2б - Installation work completion acceptance certificates",
+                  "Form С-3а - Certificate of completed works cost and expenses"
+                ],
+                "Recommendations for forms application and filling"
+              ]
+            },
+            {
+              "title": "8. Competitive Tenders",
+              "content": [
+                "Analysis of tender documentation",
+                "Determining procedure for forming contract price for tender proposal"
+              ]
+            },
+            {
+              "title": "9. Cost Optimization",
+              "content": [
+                "Ways to reduce construction costs",
+                "Forming contract price by local estimates and design and technological modules (PTM)"
+              ]
+            },
+            {
+              "title": "10. Regulatory Base",
+              "content": [
+                "Procedure for application and filling of forms of acceptance certificates for completed construction and other special installation works (С-2а and С-2б)",
+                "MAiS Instruction No. 29"
+              ]
+            }
+          ]
+        },
+        "individual": {
+          "title": "Course Program \"Individual Training\"",
+          "sections": [
+            {
+              "title": "Information",
+              "content": ["Course program will be formed based on your request"]
+            }
+          ]
+        }
+      }
     }
   },
   "contacts": {
