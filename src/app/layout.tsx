@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     description: 'Услуги по составлению смет, Сметных работ и обучение сметному делу',
     type: 'website',
     locale: 'ru_RU',
+    images: [
+      {
+        url: '/web-app-manifest-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'EBCenter Logo',
+      },
+    ],
   },
 }
 
