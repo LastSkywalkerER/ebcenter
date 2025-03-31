@@ -3,6 +3,39 @@ import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
+const serviceIcons = {
+  estimateService: (
+    <svg className='w-24 h-24 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={2}
+        d='M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'
+      />
+    </svg>
+  ),
+  currentRepair: (
+    <svg className='w-24 h-24 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={2}
+        d='M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z'
+      />
+    </svg>
+  ),
+  estimateDocs: (
+    <svg className='w-24 h-24 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={2}
+        d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'
+      />
+    </svg>
+  ),
+}
+
 export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const locale = (await params).locale
   const t = await getTranslations(locale)
@@ -36,6 +69,18 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
           </div>
         </section>
 
+        {/* Description Section */}
+        <section className='py-16 bg-white'>
+          <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
+            <h2 className='text-3xl font-bold text-center mb-8 text-gray-900'>
+              {t.home.description.title}
+            </h2>
+            <p className='text-lg text-gray-700 leading-relaxed text-center'>
+              {t.home.description.text}
+            </p>
+          </div>
+        </section>
+
         {/* Services Section */}
         <section className='py-16 bg-white'>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -43,131 +88,40 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
               {t.home.services.title}
             </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-              {/* Service 1 */}
-              <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
-                <div className='flex-grow'>
-                  <div className='text-center mb-6'>
-                    <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
-                      <svg
-                        className='w-24 h-24 text-blue-600'
-                        fill='none'
-                        stroke='currentColor'
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'
-                        />
-                      </svg>
+              {Object.entries(t.services.items)
+                .slice(0, 3)
+                .map(([key, service]) => (
+                  <div key={key} className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
+                    <div className='flex-grow'>
+                      <div className='text-center mb-6'>
+                        <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
+                          {serviceIcons[key as keyof typeof serviceIcons]}
+                        </div>
+                        <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+                          {service.title}
+                        </h2>
+                        <p className='text-gray-600'>{service.description}</p>
+                      </div>
                     </div>
-                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.services.items.estimateService.title}
-                    </h2>
-                    <p className='text-gray-600'>{t.services.items.estimateService.description}</p>
-                  </div>
-                </div>
 
-                <div className='space-y-3 mt-auto'>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.estimateService.slug}`}
-                    className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
-                  >
-                    {t.common.more}
-                  </Link>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.estimateService.slug}/tariffs`}
-                    className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
-                  >
-                    {t.common.tariffs}
-                  </Link>
-                </div>
-              </div>
-
-              {/* Service 2 */}
-              <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
-                <div className='flex-grow'>
-                  <div className='text-center mb-6'>
-                    <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
-                      <svg
-                        className='w-24 h-24 text-blue-600'
-                        fill='none'
-                        stroke='currentColor'
-                        viewBox='0 0 24 24'
+                    <div className='space-y-3 mt-auto'>
+                      {key in t.services.tariffs && (
+                        <Link
+                          href={`/${locale}/services/${service.slug}/tariffs`}
+                          className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
+                        >
+                          {t.common.tariffs}
+                        </Link>
+                      )}
+                      <Link
+                        href={`/${locale}/services/${service.slug}`}
+                        className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                       >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-                        />
-                      </svg>
+                        {t.common.more}
+                      </Link>
                     </div>
-                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.services.items.currentRepair.title}
-                    </h2>
-                    <p className='text-gray-600'>{t.services.items.currentRepair.description}</p>
                   </div>
-                </div>
-
-                <div className='space-y-3 mt-auto'>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.currentRepair.slug}`}
-                    className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
-                  >
-                    {t.common.more}
-                  </Link>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.currentRepair.slug}/tariffs`}
-                    className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
-                  >
-                    {t.common.tariffs}
-                  </Link>
-                </div>
-              </div>
-
-              {/* Service 3 */}
-              <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
-                <div className='flex-grow'>
-                  <div className='text-center mb-6'>
-                    <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
-                      <svg
-                        className='w-24 h-24 text-blue-600'
-                        fill='none'
-                        stroke='currentColor'
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'
-                        />
-                      </svg>
-                    </div>
-                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.services.items.estimateDocs.title}
-                    </h2>
-                    <p className='text-gray-600'>{t.services.items.estimateDocs.description}</p>
-                  </div>
-                </div>
-
-                <div className='space-y-3 mt-auto'>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.estimateDocs.slug}`}
-                    className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
-                  >
-                    {t.common.more}
-                  </Link>
-                  <Link
-                    href={`/${locale}/services/${t.services.items.estimateDocs.slug}/tariffs`}
-                    className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
-                  >
-                    {t.common.tariffs}
-                  </Link>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
         </section>

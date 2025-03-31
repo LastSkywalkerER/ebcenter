@@ -127,6 +127,7 @@ export default async function Services({ params }: { params: Promise<{ locale: L
     description: value.description,
     icon: serviceIcons[key as keyof typeof serviceIcons],
     slug: serviceSlugs[key as keyof typeof serviceSlugs],
+    hasTariffs: key in t.services.tariffs,
   }))
 
   return (
@@ -152,17 +153,19 @@ export default async function Services({ params }: { params: Promise<{ locale: L
                 </div>
 
                 <div className='space-y-3 mt-auto'>
+                  {service.hasTariffs && (
+                    <Link
+                      href={`/${locale}/services/${service.slug}/tariffs`}
+                      className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
+                    >
+                      {t.common.tariffs}
+                    </Link>
+                  )}
                   <Link
                     href={`/${locale}/services/${service.slug}`}
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
                     {t.common.more}
-                  </Link>
-                  <Link
-                    href={`/${locale}/services/${service.slug}/tariffs`}
-                    className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
-                  >
-                    {t.common.tariffs}
                   </Link>
                 </div>
               </div>

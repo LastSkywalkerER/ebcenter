@@ -71,6 +71,10 @@ export type Translations = {
       subtitle: string
       cta: string
     }
+    description: {
+      title: string
+      text: string
+    }
     services: {
       title: string
       description: string

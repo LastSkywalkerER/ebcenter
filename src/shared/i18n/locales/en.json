@@ -33,9 +33,13 @@
   },
   "home": {
     "hero": {
-      "title": "Professional Cost Estimation Services",
-      "subtitle": "Cost estimation and training services",
-      "cta": "Contact Us"
+      "title": "Construction Cost Estimation Services",
+      "subtitle": "Fast and quality documentation preparation",
+      "cta": "Our Services"
+    },
+    "description": {
+      "title": "Cost Estimation Documentation, Work Production Project Development, and Estimator Training",
+      "text": "Engineering Business Center provides services for preparing cost estimation documentation, cost estimation services for construction companies in terms of preparing reporting documentation, services for developing work production projects, and educational services for individual, corporate, remote, and group training in cost estimation."
     },
     "services": {
       "title": "Our Services",
