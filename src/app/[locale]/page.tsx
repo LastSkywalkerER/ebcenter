@@ -63,21 +63,21 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
                       </svg>
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.home.services.items.estimates.title}
+                      {t.services.items.estimateService.title}
                     </h2>
-                    <p className='text-gray-600'>{t.home.services.items.estimates.description}</p>
+                    <p className='text-gray-600'>{t.services.items.estimateService.description}</p>
                   </div>
                 </div>
 
                 <div className='space-y-3 mt-auto'>
                   <Link
-                    href='/services/составление-смет'
+                    href={`/${locale}/services/${t.services.items.estimateService.slug}`}
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
                     {t.common.more}
                   </Link>
                   <Link
-                    href='/services/составление-смет/tariffs'
+                    href={`/${locale}/services/${t.services.items.estimateService.slug}/tariffs`}
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
                     {t.common.tariffs}
@@ -105,21 +105,21 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
                       </svg>
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.home.services.items.acts.title}
+                      {t.services.items.currentRepair.title}
                     </h2>
-                    <p className='text-gray-600'>{t.home.services.items.acts.description}</p>
+                    <p className='text-gray-600'>{t.services.items.currentRepair.description}</p>
                   </div>
                 </div>
 
                 <div className='space-y-3 mt-auto'>
                   <Link
-                    href='/services/акты-выполненных-работ'
+                    href={`/${locale}/services/${t.services.items.currentRepair.slug}`}
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
                     {t.common.more}
                   </Link>
                   <Link
-                    href='/services/акты-выполненных-работ/tariffs'
+                    href={`/${locale}/services/${t.services.items.currentRepair.slug}/tariffs`}
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
                     {t.common.tariffs}
@@ -147,21 +147,21 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
                       </svg>
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      {t.home.services.items.service.title}
+                      {t.services.items.estimateDocs.title}
                     </h2>
-                    <p className='text-gray-600'>{t.home.services.items.service.description}</p>
+                    <p className='text-gray-600'>{t.services.items.estimateDocs.description}</p>
                   </div>
                 </div>
 
                 <div className='space-y-3 mt-auto'>
                   <Link
-                    href='/services/сметное-обслуживание'
+                    href={`/${locale}/services/${t.services.items.estimateDocs.slug}`}
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
                     {t.common.more}
                   </Link>
                   <Link
-                    href='/services/сметное-обслуживание/tariffs'
+                    href={`/${locale}/services/${t.services.items.estimateDocs.slug}/tariffs`}
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
                     {t.common.tariffs}
