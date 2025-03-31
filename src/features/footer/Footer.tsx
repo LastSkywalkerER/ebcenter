@@ -1,45 +1,47 @@
+import { Locale } from '@/shared/i18n/config'
+import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
 
-const Footer = () => {
+const Footer = async ({ locale }: { locale: Locale }) => {
+  const t = await getTranslations(locale)
+
   return (
     <footer className='bg-gray-800 text-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Company Info */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>EBCenter</h3>
-            <p className='text-gray-300 mb-4'>
-              Сметные услуги в строительстве и обучение сметному делу
-            </p>
+            <h3 className='text-xl font-bold mb-4'>{t.footer.companyInfo.title}</h3>
+            <p className='text-gray-300 mb-4'>{t.footer.companyInfo.description}</p>
             <div className='space-y-2 text-gray-300'>
-              <p>УНП: 123456789</p>
-              <p>г. Минск, ул. Примерная, 123</p>
-              <p>Пн-Пт: 9:00 - 18:00</p>
+              <p>{t.footer.companyInfo.unp}</p>
+              <p>{t.footer.companyInfo.address}</p>
+              <p>{t.footer.companyInfo.workingHours}</p>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>Быстрые ссылки</h3>
+            <h3 className='text-xl font-bold mb-4'>{t.footer.quickLinks.title}</h3>
             <ul className='space-y-2'>
               <li>
-                <Link href='/' className='text-gray-300 hover:text-white'>
-                  Главная
+                <Link href={`/${locale}`} className='text-gray-300 hover:text-white'>
+                  {t.footer.quickLinks.home}
                 </Link>
               </li>
               <li>
-                <Link href='/services' className='text-gray-300 hover:text-white'>
-                  Услуги
+                <Link href={`/${locale}/services`} className='text-gray-300 hover:text-white'>
+                  {t.footer.quickLinks.services}
                 </Link>
               </li>
               <li>
-                <Link href='/training' className='text-gray-300 hover:text-white'>
-                  Обучение
+                <Link href={`/${locale}/training`} className='text-gray-300 hover:text-white'>
+                  {t.footer.quickLinks.training}
                 </Link>
               </li>
               <li>
-                <Link href='/contacts' className='text-gray-300 hover:text-white'>
-                  Контакты
+                <Link href={`/${locale}/contacts`} className='text-gray-300 hover:text-white'>
+                  {t.footer.quickLinks.contacts}
                 </Link>
               </li>
             </ul>
@@ -47,16 +49,16 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>Контакты</h3>
+            <h3 className='text-xl font-bold mb-4'>{t.footer.contactInfo.title}</h3>
             <ul className='space-y-2 text-gray-300'>
               <li>
                 <Link href='tel:+375291234567' className='hover:text-white'>
-                  +375 (29) 123-45-67
+                  {t.footer.contactInfo.phone}
                 </Link>
               </li>
               <li>
                 <Link href='mailto:info@ebcenter.by' className='hover:text-white'>
-                  info@ebcenter.by
+                  {t.footer.contactInfo.email}
                 </Link>
               </li>
             </ul>
@@ -64,7 +66,9 @@ const Footer = () => {
         </div>
 
         <div className='mt-8 pt-8 border-t border-gray-700 text-center text-gray-300'>
-          <p>&copy; {new Date().getFullYear()} EBCenter. Все права защищены.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {t.footer.companyInfo.title}. {t.footer.copyright}
+          </p>
         </div>
       </div>
     </footer>

@@ -23,6 +23,19 @@ type Translations = {
     selectCourse: string
     disclaimer: string
   }
+  header: {
+    logo: string
+    navigation: {
+      home: string
+      services: string
+      training: string
+      contacts: string
+    }
+    contact: {
+      phone: string
+      email: string
+    }
+  }
   home: {
     hero: {
       title: string
@@ -103,6 +116,7 @@ type Translations = {
   training: {
     title: string
     subtitle: string
+    courseDetails: string
     registration: {
       title: string
       form: {
@@ -133,6 +147,52 @@ type Translations = {
         topics: string[]
       }
     }
+  }
+  contacts: {
+    title: string
+    contactInfo: {
+      title: string
+      address: string
+      addressValue: string
+      phone: string
+      phoneValue: string
+      email: string
+      emailValue: string
+      unp: string
+      unpValue: string
+      workingHours: string
+      workingHoursValue: string
+    }
+    form: {
+      title: string
+      name: string
+      email: string
+      phone: string
+      message: string
+      submit: string
+    }
+  }
+  footer: {
+    companyInfo: {
+      title: string
+      description: string
+      unp: string
+      address: string
+      workingHours: string
+    }
+    quickLinks: {
+      title: string
+      home: string
+      services: string
+      training: string
+      contacts: string
+    }
+    contactInfo: {
+      title: string
+      phone: string
+      email: string
+    }
+    copyright: string
   }
 }
 

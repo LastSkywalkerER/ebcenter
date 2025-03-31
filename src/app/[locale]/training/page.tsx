@@ -1,17 +1,10 @@
+import { Locale } from '@/shared/i18n/config'
+import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
 
 const courses = [
   {
-    title: 'Экспресс курс "Сметчик"',
-    duration: '13 часов',
-    price: '300 BYN',
-    topics: [
-      'На базе программы Belsmeta\xa0Cloud',
-      'Оффлайн/онлайн',
-      'Практикующий преподаватель',
-      'Сертификат по окончанию курса',
-      'Подходит для начинающих',
-    ],
+    programSlug: 'express-course',
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'
@@ -27,19 +20,9 @@ const courses = [
         />
       </svg>
     ),
-    programSlug: 'express-course',
   },
   {
-    title: 'Курс "Контрактная цена"',
-    duration: '10 часов',
-    price: '250 BYN',
-    topics: [
-      'На базе программы Belsmeta\xa0Cloud',
-      'Оффлайн/онлайн',
-      'Практикующий преподаватель',
-      'Сертификат по окончанию курса',
-      'Углубленная работа с законодательством',
-    ],
+    programSlug: 'contract-price',
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'
@@ -55,19 +38,9 @@ const courses = [
         />
       </svg>
     ),
-    programSlug: 'contract-price',
   },
   {
-    title: 'Индивидуальное обучение',
-    duration: 'По договоренности',
-    price: 'Индивидуально',
-    topics: [
-      'Персональный план обучения',
-      'Гибкий график занятий',
-      'Индивидуальный подход',
-      'Практические задания',
-      'Сертификат по окончанию курса',
-    ],
+    programSlug: 'individual',
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'
@@ -83,89 +56,96 @@ const courses = [
         />
       </svg>
     ),
-    programSlug: 'individual',
   },
 ]
 
-export default async function Training() {
+export default async function Training({ params }: { params: Promise<{ locale: Locale }> }) {
+  const { locale } = await params
+  const t = await getTranslations(locale)
+
   return (
     <>
       <main className='flex-grow py-16 bg-white'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-12'>
-            <h1 className='text-3xl font-bold text-gray-900 mb-4'>Обучение</h1>
-            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
-              Курсы по сметному делу и ценообразованию
-            </p>
+            <h1 className='text-3xl font-bold text-gray-900 mb-4'>{t.training.title}</h1>
+            <p className='text-xl text-gray-600 max-w-2xl mx-auto'>{t.training.subtitle}</p>
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            {courses.map((course, index) => (
-              <div key={index} className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
-                <div className='flex-grow'>
-                  <div className='text-center mb-6'>
-                    <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
-                      {course.icon}
-                    </div>
-                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>{course.title}</h2>
-                    {/* <p className="text-gray-600 mb-4">{course.description}</p> */}
-                    <div className='flex justify-center space-x-4 text-sm text-gray-500 mb-4'>
-                      <span>{course.duration}</span>
-                      <span>•</span>
-                      <span>{course.price}</span>
-                    </div>
-                    <div className='text-left'>
-                      <h3 className='font-semibold text-gray-900 mb-2'>Детали курса:</h3>
-                      <ul className='space-y-2 text-gray-600'>
-                        {course.topics.map((topic, idx) => (
-                          <li key={idx} className='flex items-start'>
-                            <svg
-                              className='w-5 h-5 text-blue-600 mr-2 mt-0.5'
-                              fill='none'
-                              stroke='currentColor'
-                              viewBox='0 0 24 24'
-                            >
-                              <path
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                strokeWidth={2}
-                                d='M5 13l4 4L19 7'
-                              />
-                            </svg>
-                            {topic}
-                          </li>
-                        ))}
-                      </ul>
+            {courses.map((course, index) => {
+              const courseData =
+                t.training.courses[course.programSlug as keyof typeof t.training.courses]
+              return (
+                <div key={index} className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
+                  <div className='flex-grow'>
+                    <div className='text-center mb-6'>
+                      <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>
+                        {course.icon}
+                      </div>
+                      <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+                        {courseData.title}
+                      </h2>
+                      <div className='flex justify-center space-x-4 text-sm text-gray-500 mb-4'>
+                        <span>{courseData.duration}</span>
+                        <span>•</span>
+                        <span>{courseData.price}</span>
+                      </div>
+                      <div className='text-left'>
+                        <h3 className='font-semibold text-gray-900 mb-2'>
+                          {t.training.courseDetails}
+                        </h3>
+                        <ul className='space-y-2 text-gray-600'>
+                          {courseData.topics.map((topic, idx) => (
+                            <li key={idx} className='flex items-start'>
+                              <svg
+                                className='w-5 h-5 text-blue-600 mr-2 mt-0.5'
+                                fill='none'
+                                stroke='currentColor'
+                                viewBox='0 0 24 24'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  strokeWidth={2}
+                                  d='M5 13l4 4L19 7'
+                                />
+                              </svg>
+                              {topic}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className='space-y-3 mt-auto'>
-                  <Link
-                    href={`/training/${course.programSlug}`}
-                    className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
-                  >
-                    Программа курса
-                  </Link>
-                  <Link
-                    href='#registration'
-                    className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
-                  >
-                    Записаться
-                  </Link>
+                  <div className='space-y-3 mt-auto'>
+                    <Link
+                      href={`/${locale}/training/${course.programSlug}`}
+                      className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
+                    >
+                      {t.common.courseProgram}
+                    </Link>
+                    <Link
+                      href='#registration'
+                      className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
+                    >
+                      {t.common.register}
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <div id='registration' className='mt-16'>
             <h2 className='text-2xl font-bold text-gray-900 mb-8 text-center'>
-              Запись на обучение
+              {t.training.registration.title}
             </h2>
             <form className='max-w-2xl mx-auto space-y-6'>
               <div>
                 <label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1'>
-                  ФИО
+                  {t.training.registration.form.name}
                 </label>
                 <input
                   type='text'
@@ -177,7 +157,7 @@ export default async function Training() {
               </div>
               <div>
                 <label htmlFor='phone' className='block text-sm font-medium text-gray-700 mb-1'>
-                  Телефон
+                  {t.training.registration.form.phone}
                 </label>
                 <input
                   type='tel'
@@ -189,7 +169,7 @@ export default async function Training() {
               </div>
               <div>
                 <label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-1'>
-                  Email
+                  {t.training.registration.form.email}
                 </label>
                 <input
                   type='email'
@@ -201,7 +181,7 @@ export default async function Training() {
               </div>
               <div>
                 <label htmlFor='course' className='block text-sm font-medium text-gray-700 mb-1'>
-                  Выберите курс
+                  {t.training.registration.form.course}
                 </label>
                 <select
                   id='course'
@@ -209,17 +189,21 @@ export default async function Training() {
                   className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
                   required
                 >
-                  <option value=''>Выберите курс</option>
-                  {courses.map((course, index) => (
-                    <option key={index} value={course.title}>
-                      {course.title}
-                    </option>
-                  ))}
+                  <option value=''>{t.training.registration.form.course}</option>
+                  {courses.map((course, index) => {
+                    const courseData =
+                      t.training.courses[course.programSlug as keyof typeof t.training.courses]
+                    return (
+                      <option key={index} value={courseData.title}>
+                        {courseData.title}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
               <div>
                 <label htmlFor='message' className='block text-sm font-medium text-gray-700 mb-1'>
-                  Сообщение
+                  {t.training.registration.form.message}
                 </label>
                 <textarea
                   id='message'
@@ -232,7 +216,7 @@ export default async function Training() {
                 type='submit'
                 className='w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors'
               >
-                Отправить заявку
+                {t.common.sendRequest}
               </button>
             </form>
           </div>

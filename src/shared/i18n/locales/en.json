@@ -13,31 +13,44 @@
     "email": "Email",
     "address": "Address",
     "workingHours": "Working Hours",
-    "name": "Name",
+    "name": "Full Name",
     "message": "Message",
     "selectCourse": "Select Course",
-    "disclaimer": "By clicking 'Send', you agree to the processing of personal data"
+    "disclaimer": "By clicking the button, you agree to the privacy policy"
+  },
+  "header": {
+    "logo": "EBCenter",
+    "navigation": {
+      "home": "Home",
+      "services": "Services",
+      "training": "Training",
+      "contacts": "Contacts"
+    },
+    "contact": {
+      "phone": "+375 (29) 123-45-67",
+      "email": "info@ebcenter.by"
+    }
   },
   "home": {
     "hero": {
-      "title": "Estimating Services in Construction",
-      "subtitle": "Fast and quality documentation preparation",
-      "cta": "Our Services"
+      "title": "Professional Cost Estimation Services",
+      "subtitle": "Cost estimation and training services",
+      "cta": "Contact Us"
     },
     "services": {
-      "title": "Main Services",
+      "title": "Our Services",
       "items": {
         "estimates": {
-          "title": "Cost Estimates",
-          "description": "Preparation of cost estimate documentation for construction projects"
+          "title": "Cost Estimation",
+          "description": "Professional cost estimation for construction works"
         },
         "acts": {
           "title": "Work Completion Certificates",
-          "description": "Proper preparation of work completion certificates in accordance with legislation"
+          "description": "Preparation of work completion certificates (KS-2, KS-3)"
         },
         "service": {
-          "title": "Estimating Service",
-          "description": "Comprehensive estimating service for organizations on a regular basis"
+          "title": "Estimation Service",
+          "description": "Complete cost estimation support for construction projects"
         }
       }
     },
@@ -50,54 +63,55 @@
     }
   },
   "services": {
-    "title": "Our Services",
-    "subtitle": "Professional services in construction and design",
+    "title": "Services",
+    "subtitle": "Professional cost estimation services for construction companies",
     "items": {
       "estimateService": {
-        "title": "Estimation Service",
-        "description": "Professional estimation service for construction organizations"
+        "title": "Cost Estimation",
+        "description": "Professional cost estimation for construction works of any complexity"
       },
       "currentRepair": {
-        "title": "Current Repair Estimates",
-        "description": "Preparation of estimation documentation for defect reports and current repairs"
+        "title": "Current Repair",
+        "description": "Cost estimation for current repairs of premises and buildings"
       },
       "estimateDocs": {
         "title": "Estimation Documentation",
-        "description": "Preparation of estimation documentation by project sections"
+        "description": "Development of a complete set of estimation documentation"
       },
       "contractPrice": {
-        "title": "Contract Price Calculation",
-        "description": "Calculation of contract price for negotiations or tenders"
+        "title": "Contract Price",
+        "description": "Calculation of contract prices for construction works"
       },
       "contracts": {
-        "title": "Construction Contract Preparation",
-        "description": "Preparation of construction contracts and their annexes"
+        "title": "Contracts",
+        "description": "Preparation of contracts for construction works"
       },
       "reporting": {
-        "title": "Reporting Documentation",
-        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates"
+        "title": "Reporting",
+        "description": "Preparation of reporting documentation for construction works"
       },
       "localEstimates": {
         "title": "Local Estimates",
-        "description": "Preparation of local estimates for general construction and special works"
+        "description": "Preparation of local estimates for specific types of work"
       },
       "consulting": {
-        "title": "Consulting Services",
-        "description": "Consulting services on cost estimation and pricing"
+        "title": "Consulting",
+        "description": "Professional consulting on cost estimation"
       },
       "selfService": {
-        "title": "Self-Service Estimates",
-        "description": "Preparation of reporting documentation for organizations performing work with their own resources"
+        "title": "Self-Service",
+        "description": "Access to online service for independent cost estimation"
       },
       "individual": {
-        "title": "Individual Request",
-        "description": "Individual or one-time service according to agreed list of services"
+        "title": "Individual Approach",
+        "description": "Development of individual solutions for your project"
       }
     }
   },
   "training": {
     "title": "Training",
     "subtitle": "Professional courses in cost estimation and pricing",
+    "courseDetails": "Course Details:",
     "registration": {
       "title": "Training Registration",
       "form": {
@@ -109,25 +123,25 @@
       }
     },
     "courses": {
-      "express": {
-        "title": "Express Course \"Estimator\"",
+      "express-course": {
+        "title": "Express Course \"Cost Estimator\"",
         "duration": "13 hours",
         "price": "300 BYN",
         "topics": [
-          "Based on Belsmeta Cloud program",
-          "Offline/online",
+          "Based on Belsmeta Cloud software",
+          "Offline/Online",
           "Practicing instructor",
           "Certificate upon completion",
           "Suitable for beginners"
         ]
       },
-      "contractPrice": {
-        "title": "Contract Price Course",
+      "contract-price": {
+        "title": "Course \"Contract Price\"",
         "duration": "10 hours",
         "price": "250 BYN",
         "topics": [
-          "Based on Belsmeta Cloud program",
-          "Offline/online",
+          "Based on Belsmeta Cloud software",
+          "Offline/Online",
           "Practicing instructor",
           "Certificate upon completion",
           "In-depth work with legislation"
@@ -146,5 +160,51 @@
         ]
       }
     }
+  },
+  "contacts": {
+    "title": "Contacts",
+    "contactInfo": {
+      "title": "Contact Information",
+      "address": "Address",
+      "addressValue": "123 Example St, Minsk",
+      "phone": "Phone",
+      "phoneValue": "+375 (29) 123-45-67",
+      "email": "Email",
+      "emailValue": "info@ebcenter.by",
+      "unp": "UNP",
+      "unpValue": "123456789",
+      "workingHours": "Working Hours",
+      "workingHoursValue": "Mon-Fri: 9:00 AM - 6:00 PM"
+    },
+    "form": {
+      "title": "Contact Us",
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Send"
+    }
+  },
+  "footer": {
+    "companyInfo": {
+      "title": "EBCenter",
+      "description": "Construction cost estimation services and training",
+      "unp": "UNP: 123456789",
+      "address": "123 Example St, Minsk",
+      "workingHours": "Mon-Fri: 9:00 AM - 6:00 PM"
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "services": "Services",
+      "training": "Training",
+      "contacts": "Contacts"
+    },
+    "contactInfo": {
+      "title": "Contact Info",
+      "phone": "+375 (29) 123-45-67",
+      "email": "info@ebcenter.by"
+    },
+    "copyright": "All rights reserved"
   }
 }

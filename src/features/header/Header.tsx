@@ -1,9 +1,12 @@
 import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
 import { Locale } from '@/shared/i18n/config'
+import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Header = ({ locale }: { locale: Locale }) => {
+const Header = async ({ locale }: { locale: Locale }) => {
+  const t = await getTranslations(locale)
+
   return (
     <header className='bg-white shadow-md'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -11,37 +14,37 @@ const Header = ({ locale }: { locale: Locale }) => {
           <div className='flex-shrink-0 flex items-center'>
             <Image
               src='/web-app-manifest-512x512.png'
-              alt='EBCenter Logo'
+              alt={t.header.logo}
               width={32}
               height={32}
               className='mr-2'
             />
-            <Link href='/' className='text-2xl font-bold text-gray-800'>
-              EBCenter
+            <Link href={`/${locale}`} className='text-2xl font-bold text-gray-800'>
+              {t.header.logo}
             </Link>
           </div>
 
           <nav className='hidden md:flex space-x-8'>
-            <Link href='/' className='text-gray-600 hover:text-gray-900'>
-              Главная
+            <Link href={`/${locale}`} className='text-gray-600 hover:text-gray-900'>
+              {t.header.navigation.home}
             </Link>
-            <Link href='/services' className='text-gray-600 hover:text-gray-900'>
-              Услуги
+            <Link href={`/${locale}/services`} className='text-gray-600 hover:text-gray-900'>
+              {t.header.navigation.services}
             </Link>
-            <Link href='/training' className='text-gray-600 hover:text-gray-900'>
-              Обучение
+            <Link href={`/${locale}/training`} className='text-gray-600 hover:text-gray-900'>
+              {t.header.navigation.training}
             </Link>
-            <Link href='/contacts' className='text-gray-600 hover:text-gray-900'>
-              Контакты
+            <Link href={`/${locale}/contacts`} className='text-gray-600 hover:text-gray-900'>
+              {t.header.navigation.contacts}
             </Link>
           </nav>
 
           <div className='hidden md:flex items-center space-x-4'>
             <Link href='tel:+375291234567' className='text-gray-600 hover:text-gray-900'>
-              +375 (29) 123-45-67
+              {t.header.contact.phone}
             </Link>
             <Link href='mailto:info@ebcenter.by' className='text-gray-600 hover:text-gray-900'>
-              info@ebcenter.by
+              {t.header.contact.email}
             </Link>
           </div>
 
