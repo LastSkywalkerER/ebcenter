@@ -1,8 +1,8 @@
-import { getTranslations } from '@/i18n/utils'
-import { Locale } from '@/i18n/config'
+import { Locale } from '@/shared/i18n/config'
+import { getTranslations } from '@/shared/i18n/utils'
 
 export default async function Disclaimer({ locale }: { locale: Locale }) {
-  const t = getTranslations(locale)
+  const t = await getTranslations(locale)
 
   return (
     <div className='bg-blue-50 border-b border-blue-100'>

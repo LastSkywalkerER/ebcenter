@@ -1,5 +1,5 @@
-import LanguageSwitcher from '@/components/LanguageSwitcher'
-import { Locale } from '@/i18n/config'
+import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
+import { Locale } from '@/shared/i18n/config'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,7 +10,7 @@ const Header = ({ locale }: { locale: Locale }) => {
         <div className='flex justify-between items-center h-16'>
           <div className='flex-shrink-0 flex items-center'>
             <Image
-              src='/images/web-app-manifest-512x512.png'
+              src='/web-app-manifest-512x512.png'
               alt='EBCenter Logo'
               width={32}
               height={32}

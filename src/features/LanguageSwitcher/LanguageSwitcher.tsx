@@ -1,4 +1,4 @@
-import { i18n, Locale } from '@/i18n/config'
+import { i18n, Locale } from '@/shared/i18n/config'
 import Link from 'next/link'
 
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {

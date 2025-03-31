@@ -1,10 +1,10 @@
-import { i18n, Locale } from '@/i18n/config'
+import Disclaimer from '@/features/Disclaimer/Disclaimer'
+import Header from '@/features/header/Header'
+import { i18n, Locale } from '@/shared/i18n/config'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 import '../globals.css'
-import Header from '@/features/header/Header'
-import Disclaimer from '@/features/Disclaimer/Disclaimer'
 
 const inter = Inter({ subsets: ['latin'] })
 

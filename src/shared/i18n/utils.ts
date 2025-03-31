@@ -1,6 +1,5 @@
+import 'server-only'
 import { Locale } from './config'
-import ru from './locales/ru.json'
-import en from './locales/en.json'
 
 type TranslationValue = string | string[] | { [key: string]: TranslationValue }
 
@@ -137,18 +136,25 @@ type Translations = {
   }
 }
 
-const translations: Record<Locale, Translations> = {
-  ru,
-  en,
+const translationsCache: Record<Locale, Translations | null> = {
+  ru: null,
+  en: null,
 }
 
-export function getTranslations(locale: Locale): Translations {
-  return translations[locale]
+export async function getTranslations(locale: Locale): Promise<Translations> {
+  if (translationsCache[locale]) {
+    return translationsCache[locale]!
+  }
+
+  const translations = await import(`./locales/${locale}.json`)
+  translationsCache[locale] = translations.default
+  return translations.default
 }
 
-export function getTranslation(locale: Locale, key: string): string | string[] {
+export async function getTranslation(locale: Locale, key: string): Promise<string | string[]> {
+  const translations = await getTranslations(locale)
   const keys = key.split('.')
-  let value: TranslationValue = translations[locale]
+  let value: TranslationValue = translations
 
   for (const k of keys) {
     value = (value as { [key: string]: TranslationValue })?.[k]

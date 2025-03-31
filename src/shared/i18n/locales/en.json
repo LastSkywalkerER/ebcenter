@@ -13,14 +13,14 @@
     "email": "Email",
     "address": "Address",
     "workingHours": "Working Hours",
-    "name": "Full Name",
+    "name": "Name",
     "message": "Message",
     "selectCourse": "Select Course",
-    "disclaimer": "We have improved our website, you can see the old version here"
+    "disclaimer": "By clicking 'Send', you agree to the processing of personal data"
   },
   "home": {
     "hero": {
-      "title": "Construction Cost Estimation Services",
+      "title": "Estimating Services in Construction",
       "subtitle": "Fast and quality documentation preparation",
       "cta": "Our Services"
     },
@@ -28,16 +28,16 @@
       "title": "Main Services",
       "items": {
         "estimates": {
-          "title": "Cost Estimation",
-          "description": "Professional preparation of cost estimation documentation for construction projects"
+          "title": "Cost Estimates",
+          "description": "Preparation of cost estimate documentation for construction projects"
         },
         "acts": {
           "title": "Work Completion Certificates",
-          "description": "Proper documentation of work completion certificates in accordance with legislation"
+          "description": "Proper preparation of work completion certificates in accordance with legislation"
         },
         "service": {
-          "title": "Estimation Service",
-          "description": "Comprehensive estimation service for organizations on a regular basis"
+          "title": "Estimating Service",
+          "description": "Comprehensive estimating service for organizations on a regular basis"
         }
       }
     },

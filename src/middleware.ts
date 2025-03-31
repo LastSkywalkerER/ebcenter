@@ -1,8 +1,18 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { i18n } from './i18n/config'
+import { i18n } from './shared/i18n/config'
+
+const PUBLIC_FILE = /\.(.*)$/
 
 export function middleware(request: NextRequest) {
+  if (
+    request.nextUrl.pathname.startsWith('/_next') ||
+    request.nextUrl.pathname.includes('/api/') ||
+    PUBLIC_FILE.test(request.nextUrl.pathname)
+  ) {
+    return
+  }
+
   const pathname = request.nextUrl.pathname
 
   // Check if the pathname already has a locale

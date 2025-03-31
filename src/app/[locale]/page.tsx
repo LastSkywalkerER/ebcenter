@@ -1,7 +1,12 @@
+import { Locale } from '@/shared/i18n/config'
+import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default async function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
+  const locale = (await params).locale
+  const t = await getTranslations(locale)
+
   return (
     <>
       <main className='flex-grow'>
@@ -10,7 +15,7 @@ export default async function Home() {
           <div className='absolute inset-0'>
             <Image
               src='/images/hero-bg.png'
-              alt='Проектно-сметные работы'
+              alt={t.home.hero.title}
               fill
               className='object-cover'
               priority
@@ -19,17 +24,13 @@ export default async function Home() {
           </div>
           <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center'>
             <div className='text-white'>
-              <h1 className='text-4xl md:text-6xl font-bold mb-4'>
-                Сметные услуги в строительстве
-              </h1>
-              <p className='text-xl md:text-2xl mb-8'>
-                Быстрое и качественное составление документации
-              </p>
+              <h1 className='text-4xl md:text-6xl font-bold mb-4'>{t.home.hero.title}</h1>
+              <p className='text-xl md:text-2xl mb-8'>{t.home.hero.subtitle}</p>
               <Link
                 href='/services'
                 className='bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors'
               >
-                Наши услуги
+                {t.home.hero.cta}
               </Link>
             </div>
           </div>
@@ -38,7 +39,9 @@ export default async function Home() {
         {/* Services Section */}
         <section className='py-16 bg-white'>
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-            <h2 className='text-3xl font-bold text-center mb-12 text-gray-900'>Основные услуги</h2>
+            <h2 className='text-3xl font-bold text-center mb-12 text-gray-900'>
+              {t.home.services.title}
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {/* Service 1 */}
               <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
@@ -59,10 +62,10 @@ export default async function Home() {
                         />
                       </svg>
                     </div>
-                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>Составление смет</h2>
-                    <p className='text-gray-600'>
-                      Составление сметной документации для строительных проектов
-                    </p>
+                    <h2 className='text-xl font-semibold text-gray-900 mb-2'>
+                      {t.home.services.items.estimates.title}
+                    </h2>
+                    <p className='text-gray-600'>{t.home.services.items.estimates.description}</p>
                   </div>
                 </div>
 
@@ -71,13 +74,13 @@ export default async function Home() {
                     href='/services/составление-смет'
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
-                    Подробнее
+                    {t.common.more}
                   </Link>
                   <Link
                     href='/services/составление-смет/tariffs'
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
-                    Тарифы
+                    {t.common.tariffs}
                   </Link>
                 </div>
               </div>
@@ -102,12 +105,9 @@ export default async function Home() {
                       </svg>
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      Акты выполненных работ
+                      {t.home.services.items.acts.title}
                     </h2>
-                    <p className='text-gray-600'>
-                      Корректное оформление актов выполненных работ в соответствии с
-                      законодательством
-                    </p>
+                    <p className='text-gray-600'>{t.home.services.items.acts.description}</p>
                   </div>
                 </div>
 
@@ -116,13 +116,13 @@ export default async function Home() {
                     href='/services/акты-выполненных-работ'
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
-                    Подробнее
+                    {t.common.more}
                   </Link>
                   <Link
                     href='/services/акты-выполненных-работ/tariffs'
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
-                    Тарифы
+                    {t.common.tariffs}
                   </Link>
                 </div>
               </div>
@@ -147,11 +147,9 @@ export default async function Home() {
                       </svg>
                     </div>
                     <h2 className='text-xl font-semibold text-gray-900 mb-2'>
-                      Сметное обслуживание
+                      {t.home.services.items.service.title}
                     </h2>
-                    <p className='text-gray-600'>
-                      Комплексное сметное обслуживание организаций на постоянной основе
-                    </p>
+                    <p className='text-gray-600'>{t.home.services.items.service.description}</p>
                   </div>
                 </div>
 
@@ -160,13 +158,13 @@ export default async function Home() {
                     href='/services/сметное-обслуживание'
                     className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center'
                   >
-                    Подробнее
+                    {t.common.more}
                   </Link>
                   <Link
                     href='/services/сметное-обслуживание/tariffs'
                     className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
                   >
-                    Тарифы
+                    {t.common.tariffs}
                   </Link>
                 </div>
               </div>
