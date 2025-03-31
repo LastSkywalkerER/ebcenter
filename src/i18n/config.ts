@@ -3,4 +3,4 @@ export const i18n = {
   locales: ['ru', 'en'],
 } as const
 
-export type Locale = (typeof i18n)['locales'][number] 
+export type Locale = (typeof i18n)['locales'][number]

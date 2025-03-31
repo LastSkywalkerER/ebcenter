@@ -34,4 +34,4 @@ const config: Config = {
   plugins: [forms],
 }
 
-export default config 
+export default config

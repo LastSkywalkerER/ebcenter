@@ -1,4 +1,3 @@
-
 import Link from 'next/link'
 
 const serviceDetails = {
@@ -13,8 +12,8 @@ const serviceDetails = {
       'Перерасчет актов выполненных работ при изменении проектных решений, в случае корректировки объемов работ и затрат, корректировки сметной стоимости строительства и переутверждении сметной документации при прохождении повторной государственной экспертизы',
       'Оформление различных форм учетных документов в строительстве (С-4, С-7, С-14, С-23), дефектных ведомостей (С-1) и составление отчета о расходе строительных материалов в сопоставлении с производственными нормами (С-29)',
       'Составление договоров строительного подряда, графиков производства работ и финансирования, дополнительных соглашений, протоколов разногласий',
-      'Консультационные услуги по вопросам сметного ценообразования в рамках сметного обслуживания'
-    ]
+      'Консультационные услуги по вопросам сметного ценообразования в рамках сметного обслуживания',
+    ],
   },
   'tekuciy-remont': {
     title: 'Текущий ремонт',
@@ -27,19 +26,19 @@ const serviceDetails = {
       'Форма С-1 "Дефектный акт" подлежит применению организациями независимо от организационно-правовой формы и формы собственности и индивидуальными предпринимателями',
       'Форма С-1 применяется организациями для обоснования принятия решения о проведении текущего ремонта и служит исходным документом для составления сметы на проведение строительно-монтажных работ по текущему ремонту',
       'В соответствующих строках формы С-1 в произвольной форме приводятся сведения о стесненных и усложненных условиях производства работ и особенностях технологии ведения работ с применением грузоподъемных механизмов, люлек электрических, автовышек и другие сведения, необходимые для определения сметной стоимости работ',
-      'Примерный (укрупненный) перечень видов предполагаемых строительно-монтажных работ указывается в форме С-1 и составляется по результатам первичного осмотра объекта ремонта'
-    ]
+      'Примерный (укрупненный) перечень видов предполагаемых строительно-монтажных работ указывается в форме С-1 и составляется по результатам первичного осмотра объекта ремонта',
+    ],
   },
-  'proektirovanie': {
+  proektirovanie: {
     title: 'Проектирование',
     description: 'Проектирование строительных объектов',
     content: [
       'Разработка проектной документации',
       'Согласование проектов',
       'Авторский надзор',
-      'Консультации по проектированию'
-    ]
-  }
+      'Консультации по проектированию',
+    ],
+  },
 }
 
 export default async function ServiceDetails({ params }: { params: Promise<{ service: string }> }) {
@@ -49,45 +48,59 @@ export default async function ServiceDetails({ params }: { params: Promise<{ ser
 
   return (
     <>
-     
-      <main className="flex-grow py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            href="/services"
-            className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
+      <main className='flex-grow py-16 bg-white'>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <Link
+            href='/services'
+            className='inline-flex items-center text-gray-600 hover:text-gray-900 mb-8'
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className='w-5 h-5 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
             </svg>
             Вернуться к услугам
           </Link>
 
           {service ? (
             <>
-              <div className="mb-12">
-                <h1 className="text-2xl font-semibold text-gray-900 mb-2">{service.title}</h1>
-                <p className="text-gray-600 text-sm">{service.description}</p>
+              <div className='mb-12'>
+                <h1 className='text-2xl font-semibold text-gray-900 mb-2'>{service.title}</h1>
+                <p className='text-gray-600 text-sm'>{service.description}</p>
               </div>
 
-              <div className="space-y-4">
+              <div className='space-y-4'>
                 {service.content.map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <svg className="w-5 h-5 text-gray-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <div key={index} className='flex items-start'>
+                    <svg
+                      className='w-5 h-5 text-gray-400 mr-3 mt-0.5 flex-shrink-0'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth={2}
+                        d='M5 13l4 4L19 7'
+                      />
                     </svg>
-                    <p className="text-gray-600">{item}</p>
+                    <p className='text-gray-600'>{item}</p>
                   </div>
                 ))}
               </div>
             </>
           ) : (
-            <div className="text-center py-12">
-              <h1 className="text-2xl font-semibold text-gray-900 mb-2">Услуга не найдена</h1>
-              <p className="text-sm text-gray-600">Запрошенная услуга не существует</p>
+            <div className='text-center py-12'>
+              <h1 className='text-2xl font-semibold text-gray-900 mb-2'>Услуга не найдена</h1>
+              <p className='text-sm text-gray-600'>Запрошенная услуга не существует</p>
             </div>
           )}
         </div>
       </main>
     </>
   )
-} 
+}

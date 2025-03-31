@@ -7,7 +7,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   }
 
   return (
-    <div className="flex gap-2">
+    <div className='flex gap-2'>
       {i18n.locales.map((newLocale) => (
         <Link
           key={newLocale}
@@ -23,4 +23,4 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
       ))}
     </div>
   )
-} 
+}

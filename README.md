@@ -12,22 +12,26 @@
 ## Установка
 
 1. Клонируйте репозиторий:
+
 ```bash
 git clone https://github.com/yourusername/ebcenter.git
 cd ebcenter
 ```
 
 2. Установите зависимости:
+
 ```bash
 npm install
 ```
 
 3. Создайте файл `.env.local` в корневой директории проекта и добавьте необходимые переменные окружения:
+
 ```env
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 4. Запустите проект в режиме разработки:
+
 ```bash
 npm run dev
 ```

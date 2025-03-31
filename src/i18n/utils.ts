@@ -149,7 +149,7 @@ export function getTranslations(locale: Locale): Translations {
 export function getTranslation(locale: Locale, key: string): string | string[] {
   const keys = key.split('.')
   let value: TranslationValue = translations[locale]
-  
+
   for (const k of keys) {
     value = (value as { [key: string]: TranslationValue })?.[k]
     if (value === undefined) {
@@ -157,6 +157,6 @@ export function getTranslation(locale: Locale, key: string): string | string[] {
       return key
     }
   }
-  
+
   return value as string | string[]
-} 
+}
