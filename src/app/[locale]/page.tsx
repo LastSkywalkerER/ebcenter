@@ -27,7 +27,7 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
               <h1 className='text-4xl md:text-6xl font-bold mb-4'>{t.home.hero.title}</h1>
               <p className='text-xl md:text-2xl mb-8'>{t.home.hero.subtitle}</p>
               <Link
-                href='/services'
+                href={`/${locale}/services`}
                 className='bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors'
               >
                 {t.home.hero.cta}

@@ -1,7 +1,36 @@
 import 'server-only'
 import { Locale } from './config'
 
-type TranslationValue = string | string[] | { [key: string]: TranslationValue }
+type TranslationValue =
+  | string
+  | string[]
+  | { [key: string]: TranslationValue }
+  | Array<{ [key: string]: TranslationValue }>
+  | Course
+  | Program
+  | Section
+  | Record<string, Course>
+  | Record<string, Program>
+
+type Course = {
+  title: string
+  duration: string
+  price: string
+  topics: string[]
+}
+
+type Section = {
+  title: string
+  content: (string | string[])[]
+}
+
+type Program = {
+  title: string
+  sections: Section[]
+}
+
+type CourseSlug = 'express' | 'contractPrice' | 'individual'
+type ProgramSlug = 'express-course' | 'contract-price' | 'individual'
 
 export type Translations = {
   common: {
@@ -46,9 +75,19 @@ export type Translations = {
       title: string
       description: string
       items: {
-        title: string
-        description: string
-      }[]
+        estimates: {
+          title: string
+          description: string
+        }
+        acts: {
+          title: string
+          description: string
+        }
+        service: {
+          title: string
+          description: string
+        }
+      }
     }
     contact: {
       title: string
@@ -61,10 +100,43 @@ export type Translations = {
   services: {
     title: string
     subtitle: string
-    items: {
+    backToServices: string
+    backToService: string
+    notFound: {
       title: string
       description: string
-    }[]
+    }
+    items: {
+      [key: string]: {
+        title: string
+        description: string
+        slug: string
+      }
+    }
+    details: {
+      [key: string]: {
+        title: string
+        description: string
+        content: string[]
+      }
+    }
+    tariffs: {
+      notFound: {
+        title: string
+        description: string
+      }
+    } & {
+      [key: string]: {
+        title: string
+        description: string
+        items: Array<{
+          name: string
+          price: string
+          description: string
+          features: string[]
+        }>
+      }
+    }
   }
   training: {
     title: string
@@ -80,64 +152,37 @@ export type Translations = {
         message: string
       }
     }
-    courses: {
-      express: {
-        title: string
-        duration: string
-        price: string
-        topics: string[]
-      }
-      contractPrice: {
-        title: string
-        duration: string
-        price: string
-        topics: string[]
-      }
-      individual: {
-        title: string
-        duration: string
-        price: string
-        topics: string[]
-      }
-    }
+    courses: Record<CourseSlug, Course>
     courseProgram: {
       backToCourses: string
       inDevelopment: string
       title: string
-      programs: {
-        'express-course': {
-          title: string
-          sections: {
-            title: string
-            content: (string | string[])[]
-          }[]
-        }
-        'contract-price': {
-          title: string
-          sections: {
-            title: string
-            content: (string | string[])[]
-          }[]
-        }
-        individual: {
-          title: string
-          sections: {
-            title: string
-            content: (string | string[])[]
-          }[]
-        }
-      }
+      programs: Record<ProgramSlug, Program>
     }
   }
   contacts: {
     title: string
     subtitle: string
+    contactInfo: {
+      title: string
+      address: string
+      addressValue: string
+      phone: string
+      phoneValue: string
+      email: string
+      emailValue: string
+      unp: string
+      unpValue: string
+      workingHours: string
+      workingHoursValue: string
+    }
     form: {
+      title: string
       name: string
       phone: string
       email: string
       message: string
-      send: string
+      submit: string
     }
   }
   footer: {
@@ -150,12 +195,10 @@ export type Translations = {
     }
     quickLinks: {
       title: string
-      links: {
-        home: string
-        services: string
-        training: string
-        contacts: string
-      }
+      home: string
+      services: string
+      training: string
+      contacts: string
     }
     contactInfo: {
       title: string

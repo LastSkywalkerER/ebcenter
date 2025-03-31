@@ -63,48 +63,235 @@
     }
   },
   "services": {
-    "title": "Services",
-    "subtitle": "Professional cost estimation services for construction companies",
+    "title": "Our Services",
+    "subtitle": "Services in construction and design",
+    "backToServices": "Back to Services",
+    "backToService": "Back to Service",
+    "notFound": {
+      "title": "Service Not Found",
+      "description": "The requested service does not exist"
+    },
     "items": {
       "estimateService": {
-        "title": "Cost Estimation",
-        "description": "Professional cost estimation for construction works of any complexity"
+        "title": "Cost Estimation Service",
+        "description": "Cost estimation service for construction organizations",
+        "slug": "cost-estimation-service"
       },
       "currentRepair": {
-        "title": "Current Repair",
-        "description": "Cost estimation for current repairs of premises and buildings"
+        "title": "Current Repair Estimates",
+        "description": "Preparation of estimate documentation based on defect reports and current repairs",
+        "slug": "current-repair-estimates"
       },
       "estimateDocs": {
-        "title": "Estimation Documentation",
-        "description": "Development of a complete set of estimation documentation"
+        "title": "Estimate Documentation",
+        "description": "Preparation of estimate documentation for project sections",
+        "slug": "estimate-documentation"
       },
       "contractPrice": {
-        "title": "Contract Price",
-        "description": "Calculation of contract prices for construction works"
+        "title": "Contract Price Calculation",
+        "description": "Calculation of contract prices for negotiations or tenders",
+        "slug": "contract-price-calculation"
       },
       "contracts": {
-        "title": "Contracts",
-        "description": "Preparation of contracts for construction works"
+        "title": "Contract Preparation",
+        "description": "Preparation of construction contracts and their attachments",
+        "slug": "contract-preparation"
       },
       "reporting": {
-        "title": "Reporting",
-        "description": "Preparation of reporting documentation for construction works"
+        "title": "Reporting Documentation",
+        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates",
+        "slug": "reporting-documentation"
       },
       "localEstimates": {
         "title": "Local Estimates",
-        "description": "Preparation of local estimates for specific types of work"
+        "description": "Preparation of local estimates for general construction and special works",
+        "slug": "local-estimates"
       },
       "consulting": {
-        "title": "Consulting",
-        "description": "Professional consulting on cost estimation"
+        "title": "Consulting Services",
+        "description": "Consulting services on cost estimation and pricing",
+        "slug": "consulting-services"
       },
       "selfService": {
-        "title": "Self-Service",
-        "description": "Access to online service for independent cost estimation"
+        "title": "Self-Service Estimates",
+        "description": "Preparation of reporting documentation for organizations performing work with their own resources",
+        "slug": "self-service-estimates"
       },
       "individual": {
-        "title": "Individual Approach",
-        "description": "Development of individual solutions for your project"
+        "title": "Individual Request",
+        "description": "Individual or one-time service according to an agreed list of services",
+        "slug": "individual-request"
+      }
+    },
+    "details": {
+      "estimateService": {
+        "title": "Cost Estimation Service",
+        "description": "Cost estimation service for construction organizations",
+        "content": [
+          "Preparation of local estimates for general construction and special works",
+          "Preparation of work completion acceptance certificates for construction and other special installation works according to forms approved by the Ministry of Architecture and Construction (С-2а, С-2б)",
+          "Preparation of certificates of completed works cost and expenses (С-3, С-3а)",
+          "Preparation of certificates for additional works",
+          "Recalculation of work completion certificates when changing design solutions, in case of adjusting work volumes and costs, adjusting construction cost estimates and re-approving estimate documentation when passing repeated state expertise",
+          "Preparation of various forms of accounting documents in construction (С-4, С-7, С-14, С-23), defect reports (С-1) and preparation of report on construction materials consumption in comparison with production standards (С-29)",
+          "Preparation of construction contracts, work production and financing schedules, additional agreements, protocols of disagreements",
+          "Consulting services on cost estimation pricing within the framework of estimation service"
+        ]
+      },
+      "currentRepair": {
+        "title": "Current Repair",
+        "description": "Current repair support",
+        "content": [
+          "Preparation of defect reports",
+          "Calculation of repair works cost",
+          "Preparation of estimates for current repairs",
+          "Consultations on repair works",
+          "Form С-1 \"Defect Report\" is subject to application by organizations regardless of organizational and legal form and form of ownership and individual entrepreneurs",
+          "Form С-1 is used by organizations to justify the decision to conduct current repairs and serves as the initial document for preparing an estimate for construction and installation works on current repairs",
+          "In the corresponding lines of Form С-1, information about constrained and complicated working conditions and features of work technology using lifting mechanisms, electric cradles, auto-towers and other information necessary for determining the estimated cost of works is provided in arbitrary form",
+          "Approximate (enlarged) list of expected construction and installation works is indicated in Form С-1 and is compiled based on the results of primary inspection of the repair object"
+        ]
+      },
+      "estimateDocs": {
+        "title": "Estimate Documentation",
+        "description": "Preparation of estimate documentation for project sections",
+        "content": [
+          "Preparation of local estimates",
+          "Preparation of object estimates",
+          "Preparation of summary estimate calculation",
+          "Preparation of estimates for commissioning works",
+          "Preparation of estimates for design works",
+          "Preparation of estimates for survey works"
+        ]
+      },
+      "contractPrice": {
+        "title": "Contract Price Calculation",
+        "description": "Calculation of contract prices for negotiations or tenders",
+        "content": [
+          "Calculation of contract price based on estimate documentation",
+          "Calculation of contract price based on design documentation",
+          "Calculation of contract price based on technical specification",
+          "Calculation of contract price based on tender documentation",
+          "Calculation of contract price based on commercial proposal"
+        ]
+      },
+      "contracts": {
+        "title": "Contract Preparation",
+        "description": "Preparation of construction contracts and their attachments",
+        "content": [
+          "Preparation of construction contracts",
+          "Preparation of contracts for design works",
+          "Preparation of contracts for survey works",
+          "Preparation of contracts for commissioning works",
+          "Preparation of contracts for repair works",
+          "Preparation of contracts for installation works"
+        ]
+      },
+      "reporting": {
+        "title": "Reporting Documentation",
+        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates",
+        "content": [
+          "Preparation of work completion certificates",
+          "Preparation of certificates of completed works cost",
+          "Preparation of certificates of completed works cost and expenses",
+          "Preparation of certificates for additional works",
+          "Preparation of certificates for hidden works",
+          "Preparation of certificates for dismantling works"
+        ]
+      },
+      "localEstimates": {
+        "title": "Local Estimates",
+        "description": "Preparation of local estimates for general construction and special works",
+        "content": [
+          "Preparation of local estimates for general construction works",
+          "Preparation of local estimates for special works",
+          "Preparation of local estimates for installation works",
+          "Preparation of local estimates for commissioning works",
+          "Preparation of local estimates for repair works",
+          "Preparation of local estimates for dismantling works"
+        ]
+      },
+      "consulting": {
+        "title": "Consulting Services",
+        "description": "Consulting services on cost estimation and pricing",
+        "content": [
+          "Consultations on cost estimation",
+          "Consultations on pricing",
+          "Consultations on preparation of estimate documentation",
+          "Consultations on preparation of reporting documentation",
+          "Consultations on preparation of contracts",
+          "Consultations on contract price calculation"
+        ]
+      },
+      "selfService": {
+        "title": "Self-Service Estimates",
+        "description": "Preparation of reporting documentation for organizations performing work with their own resources",
+        "content": [
+          "Preparation of estimates for current repairs",
+          "Preparation of work completion certificates",
+          "Preparation of certificates of completed works cost",
+          "Preparation of certificates for additional works",
+          "Preparation of certificates for hidden works",
+          "Preparation of certificates for dismantling works"
+        ]
+      },
+      "individual": {
+        "title": "Individual Request",
+        "description": "Individual or one-time service according to an agreed list of services",
+        "content": [
+          "Development of individual service list",
+          "Preparation of estimate documentation",
+          "Preparation of reporting documentation",
+          "Preparation of contracts",
+          "Contract price calculation",
+          "Consulting services"
+        ]
+      }
+    },
+    "tariffs": {
+      "notFound": {
+        "title": "Tariffs Not Found",
+        "description": "Tariffs for the requested service do not exist"
+      },
+      "estimateService": {
+        "title": "Cost Estimation Service Tariffs",
+        "description": "Choose a suitable tariff plan for your organization",
+        "items": [
+          {
+            "name": "Cost Estimation Service (PROGRAM 1)",
+            "price": "from 50 BYN per month",
+            "description": "calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list up to 3 objects.",
+            "features": [
+              "Up to 3 objects",
+              "Contract price calculation",
+              "Estimate documentation preparation",
+              "Reporting documentation"
+            ]
+          },
+          {
+            "name": "Cost Estimation Service (PROGRAM 2)",
+            "price": "from 150 BYN per month",
+            "description": "calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list from 3 objects.",
+            "features": [
+              "From 3 objects",
+              "Contract price calculation",
+              "Estimate documentation preparation",
+              "Reporting documentation"
+            ]
+          },
+          {
+            "name": "Cost Estimation Service (PAY AS YOU GO)",
+            "price": "from 20 BYN - 1 hour",
+            "description": "subscription cost estimation service based on actual hours worked according to agreed list: calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation.",
+            "features": [
+              "Hourly payment",
+              "Flexible schedule",
+              "Contract price calculation",
+              "Estimate documentation preparation",
+              "Reporting documentation"
+            ]
+          }
+        ]
       }
     }
   },
