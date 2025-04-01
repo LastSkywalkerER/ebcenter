@@ -1,3 +1,4 @@
+import { sendTelegramMessage } from '@/shared/lib/telegram'
 import { NextResponse } from 'next/server'
 
 interface ContactFormData {
@@ -35,11 +36,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Invalid security check' }, { status: 400 })
     }
 
-    // Here you would typically send an email or save to database
-    // For now, we'll just simulate a delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Format message for Telegram
+    const telegramMessage = `
+<b>New Contact Form Submission</b>
 
-    console.log({ name, email, phone, message })
+<b>Name:</b> ${name}
+<b>Email:</b> ${email}
+<b>Phone:</b> ${phone}
+<b>Message:</b>
+${message}
+    `.trim()
+
+    console.log(telegramMessage)
+    // Send message to Telegram
+    await sendTelegramMessage(telegramMessage)
 
     return NextResponse.json({ message: 'Message sent successfully' }, { status: 200 })
   } catch (error) {
