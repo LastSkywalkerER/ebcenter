@@ -245,6 +245,11 @@ export default async function HomeAlt({ params }: { params: Promise<{ locale: Lo
                 sending={t.contacts.form.sending}
                 securityCheck={t.contacts.form.securityCheck}
                 securityError={t.contacts.form.securityError}
+                validation={{
+                  nameRequired: t.contacts.form.validation.nameRequired,
+                  messageRequired: t.contacts.form.validation.messageRequired,
+                  emailInvalid: t.contacts.form.validation.emailInvalid,
+                }}
               />
             </div>
           </div>

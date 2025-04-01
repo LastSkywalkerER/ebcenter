@@ -16,7 +16,18 @@
     "name": "Full Name",
     "message": "Message",
     "selectCourse": "Select Course",
-    "disclaimer": "By clicking the button, you agree to the privacy policy"
+    "disclaimer": "By clicking the button, you agree to the privacy policy",
+    "phoneError": "Please enter a valid phone number in the format +375XXXXXXXXX",
+    "success": "Your message has been sent successfully!",
+    "error": "An error occurred while sending your message. Please try again.",
+    "sending": "Sending...",
+    "securityCheck": "Please complete the security check",
+    "securityError": "Security check failed. Please try again.",
+    "validation": {
+      "nameRequired": "Please enter your name",
+      "messageRequired": "Please enter your message",
+      "emailInvalid": "Please enter a valid email address"
+    }
   },
   "header": {
     "logo": "EBCenter",

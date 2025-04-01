@@ -1,3 +1,4 @@
+import { ContactForm } from '@/features/ContactForm'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
@@ -139,86 +140,26 @@ export default async function Training({ params }: { params: Promise<{ locale: L
           </div>
 
           <div id='registration' className='mt-16'>
-            <h2 className='text-2xl font-bold text-gray-900 mb-8 text-center'>
-              {t.training.registration.title}
-            </h2>
-            <form className='max-w-2xl mx-auto space-y-6'>
-              <div>
-                <label htmlFor='name' className='block text-sm font-medium text-gray-700 mb-1'>
-                  {t.training.registration.form.name}
-                </label>
-                <input
-                  type='text'
-                  id='name'
-                  name='name'
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor='phone' className='block text-sm font-medium text-gray-700 mb-1'>
-                  {t.training.registration.form.phone}
-                </label>
-                <input
-                  type='tel'
-                  id='phone'
-                  name='phone'
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-1'>
-                  {t.training.registration.form.email}
-                </label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor='course' className='block text-sm font-medium text-gray-700 mb-1'>
-                  {t.training.registration.form.course}
-                </label>
-                <select
-                  id='course'
-                  name='course'
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                  required
-                >
-                  <option value=''>{t.training.registration.form.course}</option>
-                  {courses.map((course, index) => {
-                    const courseData =
-                      t.training.courses[course.programSlug as keyof typeof t.training.courses]
-                    return (
-                      <option key={index} value={courseData.title}>
-                        {courseData.title}
-                      </option>
-                    )
-                  })}
-                </select>
-              </div>
-              <div>
-                <label htmlFor='message' className='block text-sm font-medium text-gray-700 mb-1'>
-                  {t.training.registration.form.message}
-                </label>
-                <textarea
-                  id='message'
-                  name='message'
-                  rows={4}
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                ></textarea>
-              </div>
-              <button
-                type='submit'
-                className='w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors'
-              >
-                {t.common.sendRequest}
-              </button>
-            </form>
+            <ContactForm
+              title={t.training.registration.title}
+              name={t.training.registration.form.name}
+              email={t.training.registration.form.email}
+              phone={t.training.registration.form.phone}
+              message={t.training.registration.form.message}
+              submit={t.common.sendRequest}
+              phonePlaceholder={t.contacts.form.phonePlaceholder}
+              phoneError={t.contacts.form.phoneError}
+              success={t.contacts.form.success}
+              error={t.contacts.form.error}
+              sending={t.contacts.form.sending}
+              securityCheck={t.contacts.form.securityCheck}
+              securityError={t.contacts.form.securityError}
+              validation={{
+                nameRequired: t.contacts.form.validation.nameRequired,
+                messageRequired: t.contacts.form.validation.messageRequired,
+                emailInvalid: t.contacts.form.validation.emailInvalid,
+              }}
+            />
           </div>
         </div>
       </main>

@@ -2,8 +2,8 @@ import { ContactForm } from '@/features/ContactForm'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
 
-export default async function ContactsPage({ params }: { params: { locale: Locale } }) {
-  const t = await getTranslations(params.locale)
+export default async function ContactsPage({ params }: { params: Promise<{ locale: Locale }> }) {
+  const t = await getTranslations((await params).locale)
 
   return (
     <>
