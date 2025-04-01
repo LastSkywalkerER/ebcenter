@@ -183,10 +183,22 @@ export type Translations = {
     form: {
       title: string
       name: string
-      phone: string
       email: string
+      phone: string
       message: string
       submit: string
+      phonePlaceholder: string
+      phoneError: string
+      success: string
+      error: string
+      sending: string
+      securityCheck: string
+      securityError: string
+      validation: {
+        nameRequired: string
+        messageRequired: string
+        emailInvalid: string
+      }
     }
   }
   footer: {

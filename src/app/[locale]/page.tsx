@@ -1,3 +1,4 @@
+import { ContactForm } from '@/features/ContactForm'
 import { Hero } from '@/features/Hero/Hero'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
@@ -229,57 +230,22 @@ export default async function HomeAlt({ params }: { params: Promise<{ locale: Lo
                   </div>
                 </div>
               </div>
-              <div className='bg-white rounded-2xl shadow-xl p-8'>
-                <h3 className='text-2xl font-bold text-gray-900 mb-6'>{t.contacts.form.title}</h3>
-                <form className='space-y-6'>
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      {t.contacts.form.name}
-                    </label>
-                    <input
-                      type='text'
-                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      {t.contacts.form.email}
-                    </label>
-                    <input
-                      type='email'
-                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      {t.contacts.form.phone}
-                    </label>
-                    <input
-                      type='tel'
-                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      {t.contacts.form.message}
-                    </label>
-                    <textarea
-                      rows={4}
-                      className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-                      required
-                    />
-                  </div>
-                  <button
-                    type='submit'
-                    className='w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium'
-                  >
-                    {t.contacts.form.submit}
-                  </button>
-                </form>
-              </div>
+
+              <ContactForm
+                title={t.contacts.form.title}
+                name={t.contacts.form.name}
+                email={t.contacts.form.email}
+                phone={t.contacts.form.phone}
+                message={t.contacts.form.message}
+                submit={t.contacts.form.submit}
+                phonePlaceholder={t.contacts.form.phonePlaceholder}
+                phoneError={t.contacts.form.phoneError}
+                success={t.contacts.form.success}
+                error={t.contacts.form.error}
+                sending={t.contacts.form.sending}
+                securityCheck={t.contacts.form.securityCheck}
+                securityError={t.contacts.form.securityError}
+              />
             </div>
           </div>
         </section>
