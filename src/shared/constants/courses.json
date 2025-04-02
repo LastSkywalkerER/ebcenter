@@ -1,0 +1,11 @@
+{
+  "express-course": {
+    "slug": "express-course"
+  },
+  "contract-price": {
+    "slug": "contract-price"
+  },
+  "individual": {
+    "slug": "individual"
+  }
+}

@@ -1,11 +1,12 @@
 import { ContactForm } from '@/features/ContactForm'
+import coursesData from '@/shared/constants/courses.json'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
 
 const courses = [
   {
-    programSlug: 'express-course',
+    programSlug: coursesData['express-course'].slug,
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'
@@ -23,7 +24,7 @@ const courses = [
     ),
   },
   {
-    programSlug: 'contract-price',
+    programSlug: coursesData['contract-price'].slug,
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'
@@ -41,7 +42,7 @@ const courses = [
     ),
   },
   {
-    programSlug: 'individual',
+    programSlug: coursesData['individual'].slug,
     icon: (
       <svg
         className='w-12 h-12 text-blue-600'

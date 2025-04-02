@@ -1,3 +1,4 @@
+import { serviceSlugs } from '@/shared/constants/services'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
@@ -103,19 +104,6 @@ const serviceIcons = {
       />
     </svg>
   ),
-}
-
-const serviceSlugs = {
-  estimateService: 'smetnoe-obsluzhivanie',
-  currentRepair: 'tekuciy-remont',
-  estimateDocs: 'smetnaya-dokumentatsiya',
-  contractPrice: 'raschet-kontraktnoy-tseny',
-  contracts: 'sostavlenie-dogovorov-podryada',
-  reporting: 'otchetnaya-dokumentatsiya',
-  localEstimates: 'sostavlenie-lokalnyh-smet',
-  consulting: 'konsultatsionnye-uslugi',
-  selfService: 'smeti-dlya-hozsposoba',
-  individual: 'individualnyy-zapros',
 }
 
 export default async function Services({ params }: { params: Promise<{ locale: Locale }> }) {
