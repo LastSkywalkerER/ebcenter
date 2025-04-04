@@ -1,6 +1,6 @@
 {
   "common": {
-    "more": "Learn More",
+    "more": "More",
     "tariffs": "Tariffs",
     "register": "Register",
     "courseProgram": "Course Program",
@@ -17,10 +17,10 @@
     "name": "Full Name",
     "message": "Message",
     "selectCourse": "Select Course",
-    "disclaimer": "By clicking the button, you agree to the privacy policy",
+    "disclaimer": "We have improved our website, you can find the old version at the link",
     "phoneError": "Please enter a valid phone number in the format +375XXXXXXXXX",
     "success": "Your message has been sent successfully!",
-    "error": "An error occurred while sending your message. Please try again.",
+    "error": "An error occurred while sending the message. Please try again.",
     "sending": "Sending...",
     "securityCheck": "Please complete the security check",
     "securityError": "Security check failed. Please try again.",
@@ -33,8 +33,8 @@
     "contactInfo": {
       "phone": "+375 (29) 123-45-67",
       "email": "info@ebcenter.by",
-      "address": "123 Example St, Minsk",
-      "workingHours": "Mon-Fri: 9:00 AM - 6:00 PM",
+      "address": "Minsk, Example St., 123",
+      "workingHours": "Mon-Fri: 9:00 - 18:00",
       "unp": "123456789"
     }
   },
@@ -49,28 +49,28 @@
   },
   "home": {
     "hero": {
-      "title": "Construction Cost Estimation Services",
+      "title": "Construction Estimate Services",
       "subtitle": "Fast and quality documentation preparation",
       "cta": "Our Services"
     },
     "description": {
-      "title": "Cost Estimation Documentation, Work Production Project Development, and Estimator Training",
-      "text": "Engineering Business Center provides services for preparing cost estimation documentation, cost estimation services for construction companies in terms of preparing reporting documentation, services for developing work production projects, and educational services for individual, corporate, remote, and group training in cost estimation."
+      "title": "Estimate Documentation and Estimator Training",
+      "text": "Engineering Business Center provides services for preparing estimate documentation, estimate maintenance for construction companies in terms of preparing reporting documentation, and educational services for individual, corporate, remote, and group training in estimate work."
     },
     "services": {
-      "title": "Our Services",
+      "title": "Main Services",
       "items": {
         "estimates": {
-          "title": "Cost Estimation",
-          "description": "Professional cost estimation for construction works"
+          "title": "Estimate Preparation",
+          "description": "Preparation of estimate documentation for construction projects"
         },
         "acts": {
           "title": "Work Completion Certificates",
-          "description": "Preparation of work completion certificates (KS-2, KS-3)"
+          "description": "Proper preparation of work completion certificates in accordance with legislation"
         },
         "service": {
-          "title": "Estimation Service",
-          "description": "Complete cost estimation support for construction projects"
+          "title": "Estimate Maintenance",
+          "description": "Comprehensive estimate maintenance for organizations on a regular basis"
         }
       }
     },
@@ -93,174 +93,209 @@
     },
     "items": {
       "estimateService": {
-        "title": "Cost Estimation Service",
-        "description": "Cost estimation service for construction organizations",
-        "slug": "cost-estimation-service"
+        "title": "Organization Estimate Maintenance",
+        "description": "Estimate maintenance for construction organizations",
+        "slug": "smetnoe-obsluzhivanie"
       },
       "currentRepair": {
         "title": "Current Repair Estimates",
-        "description": "Preparation of estimate documentation based on defect reports and current repairs",
-        "slug": "current-repair-estimates"
+        "description": "Preparation of estimate documentation for defect statements and current repairs",
+        "slug": "tekuciy-remont"
       },
       "estimateDocs": {
-        "title": "Estimate Documentation",
+        "title": "Project Estimates",
         "description": "Preparation of estimate documentation for project sections",
-        "slug": "estimate-documentation"
+        "slug": "smetnaya-dokumentatsiya"
       },
       "contractPrice": {
         "title": "Contract Price Calculation",
-        "description": "Calculation of contract prices for negotiations or tenders",
-        "slug": "contract-price-calculation"
+        "description": "Contract price calculation for negotiations or tenders",
+        "slug": "raschet-kontraktnoy-tseny"
       },
       "contracts": {
         "title": "Contract Preparation",
-        "description": "Preparation of construction contracts and their attachments",
-        "slug": "contract-preparation"
+        "description": "Preparation of contracts and appendices",
+        "slug": "sostavlenie-dogovorov-podryada"
       },
       "reporting": {
         "title": "Reporting Documentation",
-        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates",
-        "slug": "reporting-documentation"
+        "description": "Preparation of reporting documentation - work completion certificates, statements, additional works",
+        "slug": "otchetnaya-dokumentatsiya"
       },
       "localEstimates": {
-        "title": "Local Estimates",
+        "title": "Work Type Estimates",
         "description": "Preparation of local estimates for general construction and special works",
-        "slug": "local-estimates"
+        "slug": "sostavlenie-lokalnyh-smet"
       },
       "consulting": {
         "title": "Consulting Services",
-        "description": "Consulting services on cost estimation and pricing",
-        "slug": "consulting-services"
+        "description": "Consulting services in estimate work and pricing",
+        "slug": "konsultatsionnye-uslugi"
       },
       "selfService": {
         "title": "Self-Service Estimates",
-        "description": "Preparation of reporting documentation for organizations performing work with their own resources",
-        "slug": "self-service-estimates"
+        "description": "Preparation of estimate documentation for organizations performing works with their own resources",
+        "slug": "smeti-dlya-hozsposoba"
       },
       "individual": {
         "title": "Individual Request",
-        "description": "Individual or one-time service according to an agreed list of services",
-        "slug": "individual-request"
+        "description": "Individual or one-time service according to agreed list of services",
+        "slug": "individualnyy-zapros"
       }
     },
     "details": {
       "estimateService": {
-        "title": "Cost Estimation Service",
-        "description": "Cost estimation service for construction organizations",
+        "title": "Estimate Maintenance",
+        "description": "Estimate maintenance for construction organizations",
         "content": [
-          "Contract price calculation for contract conclusion and tender participation",
-          "Estimate documentation preparation",
-          "Reporting documentation preparation",
-          "Cost estimation consulting",
-          "Contract preparation",
-          "Work completion certificates preparation"
+          "Preparation of local estimates for general construction and special types of works",
+          "Preparation of work completion certificates for construction and other special installation works according to forms approved by the Ministry of Architecture and Construction (C-2a, C-2b)",
+          "Preparation of statements on the cost of completed works and expenses (C-3, C-3a)",
+          "Preparation of certificates for additional works",
+          "Recalculation of work completion certificates when changing design solutions, in case of adjustment of work volumes and expenses, adjustment of construction estimate cost and re-approval of estimate documentation when passing repeated state expertise",
+          "Preparation of various forms of accounting documents in construction (C-4, C-7, C-14, C-23), defect statements (C-1) and preparation of report on construction materials consumption in comparison with production standards (C-29)",
+          "Preparation of construction contracts, work production and financing schedules, additional agreements, protocols of disagreements",
+          "Consulting services on estimate pricing within estimate maintenance"
         ]
       },
       "currentRepair": {
         "title": "Current Repair",
         "description": "Current repair support",
         "content": [
-          "Defect report preparation",
-          "Repair works cost calculation",
-          "Current repair estimates preparation",
-          "Repair works consulting",
-          "Form С-1 \"Defect Report\" is subject to application by organizations regardless of organizational and legal form and form of ownership and individual entrepreneurs",
-          "Form С-1 is used by organizations to justify the decision to conduct current repairs and serves as the initial document for preparing an estimate for construction and installation works on current repairs",
-          "In the corresponding lines of Form С-1, information about constrained and complicated working conditions and features of work technology using lifting mechanisms, electric cradles, auto-towers and other information necessary for determining the estimated cost of works is provided in arbitrary form",
-          "Approximate (enlarged) list of expected construction and installation works is indicated in Form С-1 and is compiled based on the results of primary inspection of the repair object"
+          "Preparation of defect certificates",
+          "Calculation of repair works cost",
+          "Preparation of estimates for current repair",
+          "Consultations on repair works",
+          "Form C-1 \"Defect Certificate\" is subject to application by organizations regardless of organizational and legal form and form of ownership and individual entrepreneurs",
+          "Form C-1 is used by organizations to justify the decision to conduct current repair and serves as the initial document for preparing estimates for construction and installation works for current repair",
+          "In the corresponding lines of Form C-1, information about constrained and complicated conditions of work production and features of work technology using lifting mechanisms, electric cradles, aerial platforms and other information necessary for determining the estimate cost of works is provided in arbitrary form",
+          "Approximate (enlarged) list of types of expected construction and installation works is indicated in Form C-1 and is prepared based on the results of initial inspection of the repair object"
         ]
       },
       "estimateDocs": {
         "title": "Estimate Documentation",
         "description": "Preparation of estimate documentation for project sections",
         "content": [
-          "Local estimates preparation",
-          "Object estimates preparation",
-          "Summary estimate calculation preparation",
-          "Commissioning works estimates preparation",
-          "Design works estimates preparation",
-          "Survey works estimates preparation"
+          "Engineering Business Center offers services for preparing a complete set of estimate documentation at different design stages (at the architectural project stage, at the construction project stage) for all project sections:",
+          "Cost summary;",
+          "Summary estimate calculation of construction cost;",
+          "Object estimates;",
+          "Local estimates for individual types of works: for construction and special works, internal sanitary and technical works (water supply, sewerage, heating, ventilation, air conditioning), internal telephony, radio, gasification, television networks, internal electric lighting, power installations, technological and other types of equipment, control and measuring instruments and automation, automated control system, vertical planning, engineering networks installation, landscaping and other works.",
+          "Statements of work volumes and resource consumption and resource statements."
         ]
       },
       "contractPrice": {
         "title": "Contract Price Calculation",
-        "description": "Calculation of contract prices for negotiations or tenders",
+        "description": "Contract price calculation for negotiations or tenders",
         "content": [
-          "Contract price calculation based on estimate documentation",
-          "Contract price calculation based on design documentation",
-          "Contract price calculation based on technical specification",
-          "Contract price calculation based on tender documentation",
-          "Contract price calculation based on commercial proposal"
+          "When forming a competitive proposal for participation in negotiations or tenders for the selection of a general contractor or subcontractor, it is necessary to calculate the contract (contract) price - the estimate cost of construction of the facility or performance of construction works.",
+          "When forming an unchanged contract price, it is necessary to take into account the conditions of the competitive task (documentation) for negotiations or tenders, conditions provided for by the design documentation, rules for forming the estimate cost of construction, as well as to think through which cost items to reduce the estimate cost, in case it is planned to be reduced.",
+          "The rules for forming an unchanged contract price are regulated by the Regulation on the procedure for forming an unchanged contract (contract) price for construction of facilities, approved by the Resolution of the Council of Ministers of the Republic of Belarus dated 18.11.2011 No. 1553.",
+          "The estimate cost of construction is formed in current prices, taking into account all circumstances under which the construction of the facility will be carried out, taking into account the standard construction period. Cases of changing the contract price are limited by legislation, and therefore it is important to think through all points when forming it. In conditions of fierce competition in the construction market, as a rule, it is necessary to reduce the cost of construction of the facility in order to win tenders and conclude a construction contract.",
+          "Currently, many different competitions, negotiations and tenders are held, and one of the main criteria for evaluating competitive proposals is - price. Other criteria, such as terms, payment conditions, warranty period and others have less weight.",
+          "We offer services for calculating an unchanged contract (contract) price:",
+          "contract price for participation in negotiations or tenders - the price of the contractor's (subcontractor's) proposal;",
+          "contract price for concluding a construction contract;",
+          "contract price - the customer's starting price.",
+          "The initial data for forming unchanged contract (contract) prices is the design, including estimate documentation, in case of participation in negotiations or tenders, competitive documentation, and in case of reducing the estimate cost of the facility compared to the design and estimate documentation, technical task for calculating the contract (contract) price with information about the cost of materials, products and structures, machines, mechanisms and planned measures to reduce the cost of construction works. The estimate documentation is provided in electronic format, allowing to load the estimate documentation for the facility into the estimate program. The calculation of the unchanged contract (contract) price is carried out according to PTM, which allows further formation of work completion certificates according to form C-2b."
         ]
       },
       "contracts": {
         "title": "Contract Preparation",
-        "description": "Preparation of construction contracts and their attachments",
+        "description": "Preparation of contracts and their appendices",
         "content": [
-          "Construction contracts preparation",
-          "Design works contracts preparation",
-          "Survey works contracts preparation",
-          "Commissioning works contracts preparation",
-          "Repair works contracts preparation",
-          "Installation works contracts preparation"
+          "The construction contract regulates the relationship between the customer and the contractor when performing construction or installation works. It fixes key conditions: subject of works, terms, cost, payment procedure and acceptance.",
+          "The contract conclusion procedure includes development of work and payment schedules, distribution of responsibilities for design documentation and, if necessary, involvement of subcontractors. The contract may include provisions on warranty periods, intermediate stages, advances and other features.",
+          "The document may be changed or terminated by agreement of the parties, and arising disputes are resolved through negotiations."
         ]
       },
       "reporting": {
         "title": "Reporting Documentation",
-        "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates",
+        "description": "Preparation of reporting documentation - work completion certificates, statements, additional works",
         "content": [
-          "Work completion certificates preparation",
-          "Completed works cost certificates preparation",
-          "Completed works cost and expenses certificates preparation",
-          "Additional works certificates preparation",
-          "Hidden works certificates preparation",
-          "Dismantling works certificates preparation"
+          "⚖️ Why is it important to properly prepare primary documents?",
+          "According to Article 10 of the Law of the Republic of Belarus dated 12.07.2013 No. 57-Z \"On Accounting and Reporting\" (as amended on 17.07.2017), any business transaction must be confirmed by a primary accounting document.",
+          "📌 For construction and installation works, such documents are work completion certificates. They confirm the fact of work performance, their volume, cost and are the basis for reflection in accounting both for the contractor and the customer.",
+          "⸻",
+          "📝 What must be in primary documents:",
+          "document name and date of preparation;",
+          "name of the organization or individual entrepreneur participating in the operation;",
+          "description and basis of the business operation, its assessment in natural and monetary units;",
+          "positions, surnames and signatures of responsible persons.",
+          "⸻",
+          "📄 Preparation of work completion certificates",
+          "When the contractor transfers completed construction works and their acceptance by the customer, a certificate is drawn up, which is signed by both parties. This is provided for by paragraph 64 of Rules No. 1450.",
+          "Certificates are prepared on the basis of Instruction No. 29, approved by Resolution of Minarchitect RB dated 20.07.2018 No. 29 (as amended on 27.05.2021), and contain:",
+          "name,",
+          "volume (in natural units),",
+          "cost of completed works.",
+          "⸻",
+          "📚 Legislative basis",
+          "Forms of primary accounting documents, including work completion certificates, are approved by Resolution of the Ministry of Architecture and Construction of RB dated 29.04.2011 No. 13 (as amended on 27.05.2021).",
+          "⸻",
+          "📌 Why this is important:",
+          "Proper preparation of primary documents is not only a requirement of the law, but also a guarantee of:",
+          "proper accounting;",
+          "absence of claims during inspections;",
+          "transparency of settlements between parties."
         ]
       },
       "localEstimates": {
         "title": "Local Estimates",
         "description": "Preparation of local estimates for general construction and special works",
         "content": [
-          "Local estimates for general construction works preparation",
-          "Local estimates for special works preparation",
-          "Local estimates for installation works preparation",
-          "Local estimates for commissioning works preparation",
-          "Local estimates for repair works preparation",
-          "Local estimates for dismantling works preparation"
+          "We develop local estimates for the following types of works:",
+          "Construction and special works,",
+          "Internal sanitary and technical works (water supply, sewerage, heating, ventilation, air conditioning),",
+          "Internal telephony, radio, gasification, television networks,",
+          "Internal electric lighting,",
+          "Power installations,",
+          "Technological and other types of equipment,",
+          "Control and measuring instruments and automation,",
+          "Automated control system,",
+          "Vertical planning,",
+          "Engineering networks installation,",
+          "Landscaping and other works.",
+          "We offer services for preparing estimate documentation for various types of works and according to the agreed list of services:",
+          "Preparation of local estimates for general construction and special types of works according to defect statement, work volume statement, customer's technical task, room finishing statement and design project;",
+          "Preparation of estimates for individual project sections (working drawings);",
+          "Preparation of estimates for commissioning works;",
+          "Preparation of estimate for bank to obtain a loan;",
+          "Preparation of estimate documentation during construction of an individual residential house for construction control;",
+          "Restoration of estimates and cumulative work volume statement according to customer's data;",
+          "Adjustment of work volumes and expenses in estimates when changing design solutions;",
+          "Checking the validity of including expenses in the estimate, correctness of applying rates;",
+          "Checking work volumes in estimates for compliance with design solutions (working drawings) and fact;",
+          "Optimization of estimates and expenses in estimate documentation in order to prepare estimates for the amount determined by the Customer."
         ]
       },
       "consulting": {
         "title": "Consulting Services",
-        "description": "Consulting services on cost estimation and pricing",
+        "description": "Consulting services in estimate work and pricing",
         "content": [
-          "Cost estimation consulting",
-          "Pricing consulting",
-          "Estimate documentation preparation consulting",
-          "Reporting documentation preparation consulting",
-          "Contract preparation consulting",
-          "Contract price calculation consulting"
+          "We will help you competently prepare estimates, optimize costs and avoid unnecessary expenses.",
+          "We work according to the current regulatory framework, we will tell you how to properly prepare documents and calculate the cost of works.",
+          "Save time, reduce risks and make informed decisions with expert support."
         ]
       },
       "selfService": {
         "title": "Self-Service Estimates",
-        "description": "Preparation of reporting documentation for organizations performing work with their own resources",
+        "description": "Preparation of estimate documentation for organizations performing works with their own resources",
         "content": [
-          "Current repair estimates preparation",
-          "Work completion certificates preparation",
-          "Completed works cost certificates preparation",
-          "Additional works certificates preparation",
-          "Hidden works certificates preparation",
-          "Dismantling works certificates preparation"
+          "Self-service construction is an organizational form of construction in which construction and installation works are performed by the developer's own resources, who has the right of ownership, economic management, operational management of the construction facility (part of the facility) or acquires this right upon completion of construction. In case of construction with the involvement of contracting organizations, self-service construction includes that part of the works that is performed by the developer's own resources.",
+          "Expenses for performing works by self-service are reflected by the developer in accounting in the established manner.",
+          "Based on actual construction expenses, the cost of the construction facility is formed.",
+          "For registration of works performed by self-service, certificate form C-2a and statement of actual expenses are prepared."
         ]
       },
       "individual": {
         "title": "Individual Request",
-        "description": "Individual or one-time service according to an agreed list of services",
+        "description": "Individual or one-time service according to agreed list of services",
         "content": [
-          "Individual service list development",
-          "Estimate documentation preparation",
-          "Reporting documentation preparation",
-          "Contract preparation",
+          "Development of individual list of services",
+          "Preparation of estimate documentation",
+          "Preparation of reporting documentation",
+          "Preparation of contracts",
           "Contract price calculation",
           "Consulting services"
         ]
@@ -272,35 +307,35 @@
         "description": "Tariffs for the requested service do not exist"
       },
       "estimateService": {
-        "title": "Cost Estimation Service Tariffs",
+        "title": "Estimate Maintenance Tariffs",
         "description": "Choose a suitable tariff plan for your organization",
         "items": [
           {
-            "name": "Cost Estimation Service (PROGRAM 1)",
-            "price": "from 50 BYN per month",
-            "description": "calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list up to 3 objects.",
+            "name": "Estimate Maintenance (PROGRAM 1)",
+            "price": "from 50 rubles per month",
+            "description": "calculation of contract price for concluding a construction contract and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list up to 3 facilities.",
             "features": [
-              "Up to 3 objects",
+              "Up to 3 facilities",
               "Contract price calculation",
               "Estimate documentation preparation",
               "Reporting documentation"
             ]
           },
           {
-            "name": "Cost Estimation Service (PROGRAM 2)",
-            "price": "from 150 BYN per month",
-            "description": "calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list from 3 objects.",
+            "name": "Estimate Maintenance (PROGRAM 2)",
+            "price": "from 150 rubles per month",
+            "description": "calculation of contract price for concluding a construction contract and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation for completed works according to agreed list from 3 facilities.",
             "features": [
-              "From 3 objects",
+              "From 3 facilities",
               "Contract price calculation",
               "Estimate documentation preparation",
               "Reporting documentation"
             ]
           },
           {
-            "name": "Cost Estimation Service (PAY AS YOU GO)",
-            "price": "from 20 BYN - 1 hour",
-            "description": "subscription cost estimation service based on actual hours worked according to agreed list: calculation of contract price for construction contract conclusion and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation.",
+            "name": "Estimate Maintenance (PAYMENT BY FACT)",
+            "price": "from 20 rubles - 1 hour",
+            "description": "subscription estimate maintenance based on actually processed hours according to agreed list: calculation of contract price for concluding a construction contract and for participation in tenders or negotiations, preparation of estimate documentation, reporting documentation.",
             "features": [
               "Hourly payment",
               "Flexible schedule",
@@ -315,7 +350,7 @@
   },
   "training": {
     "title": "Training",
-    "subtitle": "Professional courses in cost estimation and pricing",
+    "subtitle": "Courses in estimate work and pricing",
     "courseDetails": "Course Details:",
     "registration": {
       "title": "Training Registration",
@@ -329,12 +364,12 @@
     },
     "courses": {
       "express-course": {
-        "title": "Express Course \"Cost Estimator\"",
+        "title": "Express Course \"Estimator\"",
         "duration": "13 hours",
         "price": "300 BYN",
         "topics": [
-          "Based on Belsmeta Cloud software",
-          "Offline/Online",
+          "Based on Belsmeta Cloud program",
+          "Offline/online",
           "Practicing instructor",
           "Certificate upon completion",
           "Suitable for beginners"
@@ -345,8 +380,8 @@
         "duration": "10 hours",
         "price": "250 BYN",
         "topics": [
-          "Based on Belsmeta Cloud software",
-          "Offline/Online",
+          "Based on Belsmeta Cloud program",
+          "Offline/online",
           "Practicing instructor",
           "Certificate upon completion",
           "In-depth work with legislation"
@@ -357,8 +392,8 @@
         "duration": "By agreement",
         "price": "Individual",
         "topics": [
-          "Personal learning plan",
-          "Flexible schedule",
+          "Personal training plan",
+          "Flexible class schedule",
           "Individual approach",
           "Practical assignments",
           "Certificate upon completion"
@@ -366,44 +401,44 @@
       }
     },
     "courseProgram": {
-      "backToCourses": "Back to courses",
+      "backToCourses": "Back to Courses",
       "inDevelopment": "Course program is under development",
       "programs": {
         "express-course": {
-          "title": "Course Program \"Express Estimator Course\"",
+          "title": "Course Program \"Express Course Estimator\"",
           "sections": [
             {
-              "title": "1. Basics of Estimating",
+              "title": "1. Basics of Estimate Work",
               "content": [
-                "Determining the estimated cost of construction objects",
-                "Regulatory bases for determining construction costs",
-                "Procedure for determining the estimated cost of a construction object and preparing estimate documentation based on resource consumption standards in natural terms NRR 2017"
+                "Determination of estimate cost of construction of facilities",
+                "Regulatory frameworks for determining construction cost",
+                "Procedure for determining estimate cost of construction of facility and preparation of estimate documentation based on resource consumption standards in natural expression НРР 2017"
               ]
             },
             {
               "title": "2. Resource Consumption Standards",
               "content": [
-                "Resource consumption standards in natural terms",
+                "Resource consumption standards in natural expression",
                 "Procedure for applying resource consumption standards",
-                "Resource consumption standards for dismantling and demolition",
+                "Resource consumption standards for disassembly and dismantling",
                 "Features of applying resource consumption standards for equipment installation",
-                "Costs for equipment dismantling works"
+                "Expenses for equipment dismantling works"
               ]
             },
             {
               "title": "3. Cost Calculation",
               "content": [
-                "Procedure for calculating current labor costs",
-                "Calculation of construction materials costs",
-                "Calculation of construction machinery operation costs",
-                "Inter-category calculation coefficients for determining labor costs",
-                "Impact of complicated and constrained working conditions"
+                "Procedure for calculating current labor cost prices",
+                "Calculation of construction materials cost",
+                "Calculation of construction machines operation cost",
+                "Inter-category calculation coefficients for determining labor cost",
+                "Influence of complicated and constrained conditions of work production"
               ]
             },
             {
               "title": "4. Additional Expenses",
               "content": [
-                "Procedure for determining transportation costs",
+                "Procedure for determining transport expenses",
                 "Construction zones",
                 "General business and general production expenses",
                 "Planned profit",
@@ -413,34 +448,34 @@
             {
               "title": "5. Special Conditions",
               "content": [
-                "Funds for additional expenses during construction and installation works in winter",
-                "Part I - standards by construction types",
-                "Part II - standards by structures and work types"
+                "Funds for additional expenses when producing construction and installation works in winter time",
+                "Part I - standards by types of construction",
+                "Part II - standards by structures and types of works"
               ]
             },
             {
               "title": "6. Other Works and Expenses",
               "content": [
-                "Funds related to social insurance contributions",
-                "Funds to cover expenses related to traveling nature of works",
-                "Funds for contractor's workers business trips"
+                "Funds related to social insurance deductions",
+                "Funds for covering expenses related to traveling nature of works",
+                "Funds for business trips of contractor's workers"
               ]
             },
             {
-              "title": "7. Workers Business Trips",
+              "title": "7. Worker Business Trips",
               "content": [
-                "Methodological recommendations for calculating business trip funds",
-                "Amounts of expense reimbursement for business trips",
-                "Number of business trip construction workers and machine operators",
+                "Methodological recommendations for calculating funds for business trips",
+                "Amounts of compensation for expenses during business trips",
+                "Number of business-tripping construction workers and machine operators",
                 "Standard labor intensity of works",
-                "Conditional example of calculating funds for workers business trips"
+                "Conditional example of calculating funds for worker business trips"
               ]
             },
             {
-              "title": "8. Taxes and Contributions",
+              "title": "8. Taxes and Deductions",
               "content": [
-                "Taxes and contributions",
-                "Funds considering the application of forecast price indices",
+                "Taxes and deductions",
+                "Funds taking into account application of forecast price indices",
                 "Deviation in materials cost"
               ]
             },
@@ -459,49 +494,49 @@
               "content": [
                 "Main forms of accounting documents:",
                 [
-                  "Form С-1 - Report on completed works",
-                  "Form С-2а - Work completion acceptance certificates",
-                  "Form С-2б - Installation work completion acceptance certificates",
-                  "Form С-3 - Certificate of completed works cost",
-                  "Form С-3а - Certificate of completed works cost and expenses",
-                  "Form С-4 - Report on main materials consumption",
-                  "Form С-7 - Report on materials consumption",
-                  "Form С-14 - Report on fuel consumption"
+                  "Form C-1 - Report on completed works",
+                  "Form C-2a - Work completion certificates",
+                  "Form C-2b - Installation works completion certificates",
+                  "Form C-3 - Statement of cost of completed works",
+                  "Form C-3a - Statement of cost of completed works and expenses",
+                  "Form C-4 - Report on consumption of basic materials",
+                  "Form C-7 - Report on materials consumption",
+                  "Form C-14 - Report on fuel consumption"
                 ]
               ]
             },
             {
-              "title": "11. Contractual Relations",
+              "title": "11. Contract Relations",
               "content": [
                 "Ensuring contractor's obligations fulfillment",
                 "Customer's supply materials",
                 "Customer's, contractor's and subcontractor's supply equipment",
-                "Procedure for forming unchanged contract price",
-                "Cases of contract price changes"
+                "Procedure for forming unchanged contract (contract) price",
+                "Cases of changing contract price"
               ]
             },
             {
               "title": "12. Commissioning Works",
               "content": [
-                "Procedure for determining estimated cost of commissioning works",
-                "Example of calculating estimated cost of commissioning works",
-                "Report on construction materials consumption (Form С-29)"
+                "Procedure for determining estimate cost of commissioning works",
+                "Example of calculating estimate cost of commissioning works",
+                "Report on consumption of construction materials (form C-29)"
               ]
             },
             {
               "title": "13. Comparative Analysis",
               "content": [
-                "Comparative analysis of NRR 2012 and NRR 2017",
-                "Ways to reduce construction costs",
+                "Comparative analysis of НРР 2012 and НРР 2017",
+                "Ways to reduce construction cost",
                 "Forming contract price by local estimates and PTM"
               ]
             },
             {
-              "title": "14. Regulatory Base",
+              "title": "14. Regulatory Framework",
               "content": [
-                "MAiS Instruction No. 29 on filling out acceptance certificate forms",
-                "MAiS Resolution of 07.02.2019 N 9 on man-hour rate",
-                "Analysis of tender documentation"
+                "Instruction МАиС No. 29 on filling out certificate forms",
+                "Resolution МАиС dated 07.02.2019 N 9 on man-hour rate",
+                "Analysis of competitive documentation for tenders"
               ]
             }
           ]
@@ -512,22 +547,22 @@
             {
               "title": "1. Brief Overview",
               "content": [
-                "Rules for determining estimated cost of construction and preparing estimate documentation based on resource consumption standards in natural terms in NRR 2012 and 2017, including formation of individual cost items:",
+                "Rules for determining estimate cost of construction and preparing estimate documentation based on resource consumption standards in natural expression in НРР 2012 and 2017, including formation of individual cost items:",
                 [
                   "Labor costs of workers and machine operators",
-                  "Costs for construction materials and construction machinery operation, transportation costs",
+                  "Costs for construction materials and operation of construction machines, transport expenses",
                   "General business and general production expenses and planned profit",
-                  "Impact of complicated and constrained working conditions",
-                  "Funds for construction of temporary buildings and structures and funds for additional expenses during construction and installation works in winter",
+                  "Influence of complicated and constrained conditions of work production",
+                  "Funds for construction of temporary buildings and structures and funds for additional expenses when producing construction and installation works in winter time",
                   "Other works and expenses",
-                  "Funds considering the application of forecast price indices in construction, taxes and contributions"
+                  "Funds taking into account application of forecast price indices in construction, taxes and deductions"
                 ]
               ]
             },
             {
-              "title": "2. Comparative Analysis of Standards",
+              "title": "2. Standards Comparative Analysis",
               "content": [
-                "Comparative analysis of NRR 2012 and NRR 2017",
+                "Comparative analysis of НРР 2012 and НРР 2017",
                 "Main changes and differences",
                 "Practical application of standards"
               ]
@@ -541,7 +576,7 @@
               ]
             },
             {
-              "title": "4. Procurement in Construction",
+              "title": "4. Construction Procurement",
               "content": [
                 "Procurement of goods (works, services) during construction",
                 "Procedure for conducting procurement",
@@ -551,10 +586,10 @@
             {
               "title": "5. Contract Price Formation",
               "content": [
-                "Procedure for forming unchanged contract price for construction objects",
+                "Procedure for forming unchanged contract (contract) price for construction of facilities",
                 "Customer's price",
-                "Contractor's offer price",
-                "Cases of contract price changes during construction of objects financed fully or partially from budgets and other sources",
+                "Contractor's proposal price",
+                "Cases of changing contract price when constructing facilities financed fully or partially from budget funds and other sources",
                 "Contractor's savings"
               ]
             },
@@ -570,32 +605,32 @@
               "content": [
                 "Main forms of accounting documents in construction:",
                 [
-                  "Form С-2а - Work completion acceptance certificates",
-                  "Form С-2б - Installation work completion acceptance certificates",
-                  "Form С-3а - Certificate of completed works cost and expenses"
+                  "Form C-2a - Work completion certificates",
+                  "Form C-2b - Installation works completion certificates",
+                  "Form C-3a - Statement of cost of completed works and expenses"
                 ],
-                "Recommendations for forms application and filling"
+                "Recommendations for application and filling out forms"
               ]
             },
             {
               "title": "8. Competitive Tenders",
               "content": [
-                "Analysis of tender documentation",
-                "Determining procedure for forming contract price for tender proposal"
+                "Analysis of competitive documentation for tenders",
+                "Determining procedure for forming contract price for competitive proposal"
               ]
             },
             {
               "title": "9. Cost Optimization",
               "content": [
-                "Ways to reduce construction costs",
-                "Forming contract price by local estimates and design and technological modules (PTM)"
+                "Ways to reduce construction cost",
+                "Forming contract (contract) price by local estimates and by design and technological modules (PTM)"
               ]
             },
             {
-              "title": "10. Regulatory Base",
+              "title": "10. Regulatory Framework",
               "content": [
-                "Procedure for application and filling of forms of acceptance certificates for completed construction and other special installation works (С-2а and С-2б)",
-                "MAiS Instruction No. 29"
+                "Procedure for application and filling out forms of work completion certificates for construction and other special installation works (C-2a and C-2b)",
+                "Instruction МАиС No. 29"
               ]
             }
           ]
@@ -605,7 +640,7 @@
           "sections": [
             {
               "title": "Information",
-              "content": ["Course program will be formed based on your request"]
+              "content": ["Course program will be formed from your request"]
             }
           ]
         }
@@ -626,13 +661,13 @@
   "footer": {
     "companyInfo": {
       "title": "EBCenter",
-      "description": "Construction cost estimation services and training"
+      "description": "Construction estimate services and estimate work training"
     },
     "quickLinks": {
       "title": "Quick Links"
     },
     "contactInfo": {
-      "title": "Contact Info"
+      "title": "Contacts"
     },
     "copyright": "All rights reserved"
   }
