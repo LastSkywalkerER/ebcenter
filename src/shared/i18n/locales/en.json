@@ -8,6 +8,7 @@
     "home": "Home",
     "services": "Services",
     "training": "Training",
+    "contacts": "Contacts",
     "contactUs": "Contact Us",
     "phone": "Phone",
     "email": "Email",
@@ -23,10 +24,18 @@
     "sending": "Sending...",
     "securityCheck": "Please complete the security check",
     "securityError": "Security check failed. Please try again.",
+    "unp": "UNP",
     "validation": {
       "nameRequired": "Please enter your name",
       "messageRequired": "Please enter your message",
       "emailInvalid": "Please enter a valid email address"
+    },
+    "contactInfo": {
+      "phone": "+375 (29) 123-45-67",
+      "email": "info@ebcenter.by",
+      "address": "123 Example St, Minsk",
+      "workingHours": "Mon-Fri: 9:00 AM - 6:00 PM",
+      "unp": "123456789"
     }
   },
   "header": {
@@ -36,10 +45,6 @@
       "services": "Services",
       "training": "Training",
       "contacts": "Contacts"
-    },
-    "contact": {
-      "phone": "+375 (29) 123-45-67",
-      "email": "info@ebcenter.by"
     }
   },
   "home": {
@@ -143,24 +148,22 @@
         "title": "Cost Estimation Service",
         "description": "Cost estimation service for construction organizations",
         "content": [
-          "Preparation of local estimates for general construction and special works",
-          "Preparation of work completion acceptance certificates for construction and other special installation works according to forms approved by the Ministry of Architecture and Construction (С-2а, С-2б)",
-          "Preparation of certificates of completed works cost and expenses (С-3, С-3а)",
-          "Preparation of certificates for additional works",
-          "Recalculation of work completion certificates when changing design solutions, in case of adjusting work volumes and costs, adjusting construction cost estimates and re-approving estimate documentation when passing repeated state expertise",
-          "Preparation of various forms of accounting documents in construction (С-4, С-7, С-14, С-23), defect reports (С-1) and preparation of report on construction materials consumption in comparison with production standards (С-29)",
-          "Preparation of construction contracts, work production and financing schedules, additional agreements, protocols of disagreements",
-          "Consulting services on cost estimation pricing within the framework of estimation service"
+          "Contract price calculation for contract conclusion and tender participation",
+          "Estimate documentation preparation",
+          "Reporting documentation preparation",
+          "Cost estimation consulting",
+          "Contract preparation",
+          "Work completion certificates preparation"
         ]
       },
       "currentRepair": {
         "title": "Current Repair",
         "description": "Current repair support",
         "content": [
-          "Preparation of defect reports",
-          "Calculation of repair works cost",
-          "Preparation of estimates for current repairs",
-          "Consultations on repair works",
+          "Defect report preparation",
+          "Repair works cost calculation",
+          "Current repair estimates preparation",
+          "Repair works consulting",
           "Form С-1 \"Defect Report\" is subject to application by organizations regardless of organizational and legal form and form of ownership and individual entrepreneurs",
           "Form С-1 is used by organizations to justify the decision to conduct current repairs and serves as the initial document for preparing an estimate for construction and installation works on current repairs",
           "In the corresponding lines of Form С-1, information about constrained and complicated working conditions and features of work technology using lifting mechanisms, electric cradles, auto-towers and other information necessary for determining the estimated cost of works is provided in arbitrary form",
@@ -171,93 +174,93 @@
         "title": "Estimate Documentation",
         "description": "Preparation of estimate documentation for project sections",
         "content": [
-          "Preparation of local estimates",
-          "Preparation of object estimates",
-          "Preparation of summary estimate calculation",
-          "Preparation of estimates for commissioning works",
-          "Preparation of estimates for design works",
-          "Preparation of estimates for survey works"
+          "Local estimates preparation",
+          "Object estimates preparation",
+          "Summary estimate calculation preparation",
+          "Commissioning works estimates preparation",
+          "Design works estimates preparation",
+          "Survey works estimates preparation"
         ]
       },
       "contractPrice": {
         "title": "Contract Price Calculation",
         "description": "Calculation of contract prices for negotiations or tenders",
         "content": [
-          "Calculation of contract price based on estimate documentation",
-          "Calculation of contract price based on design documentation",
-          "Calculation of contract price based on technical specification",
-          "Calculation of contract price based on tender documentation",
-          "Calculation of contract price based on commercial proposal"
+          "Contract price calculation based on estimate documentation",
+          "Contract price calculation based on design documentation",
+          "Contract price calculation based on technical specification",
+          "Contract price calculation based on tender documentation",
+          "Contract price calculation based on commercial proposal"
         ]
       },
       "contracts": {
         "title": "Contract Preparation",
         "description": "Preparation of construction contracts and their attachments",
         "content": [
-          "Preparation of construction contracts",
-          "Preparation of contracts for design works",
-          "Preparation of contracts for survey works",
-          "Preparation of contracts for commissioning works",
-          "Preparation of contracts for repair works",
-          "Preparation of contracts for installation works"
+          "Construction contracts preparation",
+          "Design works contracts preparation",
+          "Survey works contracts preparation",
+          "Commissioning works contracts preparation",
+          "Repair works contracts preparation",
+          "Installation works contracts preparation"
         ]
       },
       "reporting": {
         "title": "Reporting Documentation",
         "description": "Preparation of reporting documentation - work completion certificates, certificates, additional work certificates",
         "content": [
-          "Preparation of work completion certificates",
-          "Preparation of certificates of completed works cost",
-          "Preparation of certificates of completed works cost and expenses",
-          "Preparation of certificates for additional works",
-          "Preparation of certificates for hidden works",
-          "Preparation of certificates for dismantling works"
+          "Work completion certificates preparation",
+          "Completed works cost certificates preparation",
+          "Completed works cost and expenses certificates preparation",
+          "Additional works certificates preparation",
+          "Hidden works certificates preparation",
+          "Dismantling works certificates preparation"
         ]
       },
       "localEstimates": {
         "title": "Local Estimates",
         "description": "Preparation of local estimates for general construction and special works",
         "content": [
-          "Preparation of local estimates for general construction works",
-          "Preparation of local estimates for special works",
-          "Preparation of local estimates for installation works",
-          "Preparation of local estimates for commissioning works",
-          "Preparation of local estimates for repair works",
-          "Preparation of local estimates for dismantling works"
+          "Local estimates for general construction works preparation",
+          "Local estimates for special works preparation",
+          "Local estimates for installation works preparation",
+          "Local estimates for commissioning works preparation",
+          "Local estimates for repair works preparation",
+          "Local estimates for dismantling works preparation"
         ]
       },
       "consulting": {
         "title": "Consulting Services",
         "description": "Consulting services on cost estimation and pricing",
         "content": [
-          "Consultations on cost estimation",
-          "Consultations on pricing",
-          "Consultations on preparation of estimate documentation",
-          "Consultations on preparation of reporting documentation",
-          "Consultations on preparation of contracts",
-          "Consultations on contract price calculation"
+          "Cost estimation consulting",
+          "Pricing consulting",
+          "Estimate documentation preparation consulting",
+          "Reporting documentation preparation consulting",
+          "Contract preparation consulting",
+          "Contract price calculation consulting"
         ]
       },
       "selfService": {
         "title": "Self-Service Estimates",
         "description": "Preparation of reporting documentation for organizations performing work with their own resources",
         "content": [
-          "Preparation of estimates for current repairs",
-          "Preparation of work completion certificates",
-          "Preparation of certificates of completed works cost",
-          "Preparation of certificates for additional works",
-          "Preparation of certificates for hidden works",
-          "Preparation of certificates for dismantling works"
+          "Current repair estimates preparation",
+          "Work completion certificates preparation",
+          "Completed works cost certificates preparation",
+          "Additional works certificates preparation",
+          "Hidden works certificates preparation",
+          "Dismantling works certificates preparation"
         ]
       },
       "individual": {
         "title": "Individual Request",
         "description": "Individual or one-time service according to an agreed list of services",
         "content": [
-          "Development of individual service list",
-          "Preparation of estimate documentation",
-          "Preparation of reporting documentation",
-          "Preparation of contracts",
+          "Individual service list development",
+          "Estimate documentation preparation",
+          "Reporting documentation preparation",
+          "Contract preparation",
           "Contract price calculation",
           "Consulting services"
         ]
@@ -612,58 +615,24 @@
   "contacts": {
     "title": "Contacts",
     "contactInfo": {
-      "title": "Contact Information",
-      "address": "Address",
-      "addressValue": "123 Example St, Minsk",
-      "phone": "Phone",
-      "phoneValue": "+375 (29) 123-45-67",
-      "email": "Email",
-      "emailValue": "info@ebcenter.by",
-      "unp": "UNP",
-      "unpValue": "123456789",
-      "workingHours": "Working Hours",
-      "workingHoursValue": "Mon-Fri: 9:00 AM - 6:00 PM"
+      "title": "Contact Information"
     },
     "form": {
       "title": "Contact Us",
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "message": "Message",
       "submit": "Send Message",
-      "phonePlaceholder": "+375XXXXXXXXX",
-      "phoneError": "Please enter a valid phone number in the format +375XXXXXXXXX",
-      "success": "Your message has been sent successfully!",
-      "error": "An error occurred while sending your message. Please try again.",
-      "sending": "Sending...",
-      "securityCheck": "Please complete the security check",
-      "securityError": "Security check failed. Please try again.",
-      "validation": {
-        "nameRequired": "Please enter your name",
-        "messageRequired": "Please enter your message",
-        "emailInvalid": "Please enter a valid email address"
-      }
+      "phonePlaceholder": "+375XXXXXXXXX"
     }
   },
   "footer": {
     "companyInfo": {
       "title": "EBCenter",
-      "description": "Construction cost estimation services and training",
-      "unp": "UNP: 123456789",
-      "address": "123 Example St, Minsk",
-      "workingHours": "Mon-Fri: 9:00 AM - 6:00 PM"
+      "description": "Construction cost estimation services and training"
     },
     "quickLinks": {
-      "title": "Quick Links",
-      "home": "Home",
-      "services": "Services",
-      "training": "Training",
-      "contacts": "Contacts"
+      "title": "Quick Links"
     },
     "contactInfo": {
-      "title": "Contact Info",
-      "phone": "+375 (29) 123-45-67",
-      "email": "info@ebcenter.by"
+      "title": "Contact Info"
     },
     "copyright": "All rights reserved"
   }

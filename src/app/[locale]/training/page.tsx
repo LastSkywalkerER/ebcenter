@@ -57,22 +57,22 @@ export default async function Training({ params }: { params: Promise<{ locale: L
           <div id='registration' className='mt-16'>
             <ContactForm
               title={t.training.registration.title}
-              name={t.training.registration.form.name}
-              email={t.training.registration.form.email}
-              phone={t.training.registration.form.phone}
-              message={t.training.registration.form.message}
+              name={t.common.name}
+              email={t.common.email}
+              phone={t.common.phone}
+              message={t.common.message}
               submit={t.common.sendRequest}
               phonePlaceholder={t.contacts.form.phonePlaceholder}
-              phoneError={t.contacts.form.phoneError}
-              success={t.contacts.form.success}
-              error={t.contacts.form.error}
-              sending={t.contacts.form.sending}
-              securityCheck={t.contacts.form.securityCheck}
-              securityError={t.contacts.form.securityError}
+              phoneError={t.common.phoneError}
+              success={t.common.success}
+              error={t.common.error}
+              sending={t.common.sending}
+              securityCheck={t.common.securityCheck}
+              securityError={t.common.securityError}
               validation={{
-                nameRequired: t.contacts.form.validation.nameRequired,
-                messageRequired: t.contacts.form.validation.messageRequired,
-                emailInvalid: t.contacts.form.validation.emailInvalid,
+                nameRequired: t.common.validation.nameRequired,
+                messageRequired: t.common.validation.messageRequired,
+                emailInvalid: t.common.validation.emailInvalid,
               }}
             />
           </div>

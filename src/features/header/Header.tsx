@@ -26,25 +26,25 @@ const Header = async ({ locale }: { locale: Locale }) => {
 
           <nav className='hidden md:flex space-x-8'>
             <Link href={`/${locale}`} className='text-gray-600 hover:text-gray-900'>
-              {t.header.navigation.home}
+              {t.common.home}
             </Link>
             <Link href={`/${locale}/services`} className='text-gray-600 hover:text-gray-900'>
-              {t.header.navigation.services}
+              {t.common.services}
             </Link>
             <Link href={`/${locale}/training`} className='text-gray-600 hover:text-gray-900'>
-              {t.header.navigation.training}
+              {t.common.training}
             </Link>
             <Link href={`/${locale}/contacts`} className='text-gray-600 hover:text-gray-900'>
-              {t.header.navigation.contacts}
+              {t.common.contacts}
             </Link>
           </nav>
 
           <div className='hidden md:flex items-center space-x-4'>
             <Link href='tel:+375291234567' className='text-gray-600 hover:text-gray-900'>
-              {t.header.contact.phone}
+              {t.common.contactInfo.phone}
             </Link>
             <Link href='mailto:info@ebcenter.by' className='text-gray-600 hover:text-gray-900'>
-              {t.header.contact.email}
+              {t.common.contactInfo.email}
             </Link>
           </div>
 

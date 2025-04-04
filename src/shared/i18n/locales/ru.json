@@ -8,6 +8,7 @@
     "home": "Главная",
     "services": "Услуги",
     "training": "Обучение",
+    "contacts": "Контакты",
     "contactUs": "Связаться с нами",
     "phone": "Телефон",
     "email": "Email",
@@ -23,10 +24,18 @@
     "sending": "Отправка...",
     "securityCheck": "Пожалуйста, пройдите проверку безопасности",
     "securityError": "Проверка безопасности не пройдена. Пожалуйста, попробуйте еще раз.",
+    "unp": "УНП",
     "validation": {
       "nameRequired": "Пожалуйста, введите ваше имя",
       "messageRequired": "Пожалуйста, введите ваше сообщение",
       "emailInvalid": "Пожалуйста, введите корректный email адрес"
+    },
+    "contactInfo": {
+      "phone": "+375 (29) 123-45-67",
+      "email": "info@ebcenter.by",
+      "address": "г. Минск, ул. Примерная, 123",
+      "workingHours": "Пн-Пт: 9:00 - 18:00",
+      "unp": "123456789"
     }
   },
   "header": {
@@ -36,10 +45,6 @@
       "services": "Услуги",
       "training": "Обучение",
       "contacts": "Контакты"
-    },
-    "contact": {
-      "phone": "+375 (29) 123-45-67",
-      "email": "info@ebcenter.by"
     }
   },
   "home": {
@@ -68,13 +73,6 @@
           "description": "Комплексное сметное обслуживание организаций на регулярной основе"
         }
       }
-    },
-    "contact": {
-      "title": "Контакты",
-      "address": "г. Минск, ул. Примерная, 123",
-      "phone": "+375 (29) 123-45-67",
-      "email": "info@example.com",
-      "workingHours": "Пн-Пт: 9:00 - 18:00"
     }
   },
   "services": {
@@ -118,7 +116,7 @@
         "slug": "otchetnaya-dokumentatsiya"
       },
       "localEstimates": {
-        "title": " Сметы на виды работ",
+        "title": "Сметы на виды работ",
         "description": "Подготовка локальных смет по общестроительным и специальным работам",
         "slug": "sostavlenie-lokalnyh-smet"
       },
@@ -645,58 +643,24 @@
   "contacts": {
     "title": "Контакты",
     "contactInfo": {
-      "title": "Контактная информация",
-      "address": "Адрес",
-      "addressValue": "г. Минск, ул. Примерная, 123",
-      "phone": "Телефон",
-      "phoneValue": "+375 (29) 123-45-67",
-      "email": "Email",
-      "emailValue": "info@ebcenter.by",
-      "unp": "УНП",
-      "unpValue": "123456789",
-      "workingHours": "Режим работы",
-      "workingHoursValue": "Пн-Пт: 9:00 - 18:00"
+      "title": "Контактная информация"
     },
     "form": {
       "title": "Связаться с нами",
-      "name": "ФИО",
-      "email": "Email",
-      "phone": "Телефон",
-      "message": "Сообщение",
       "submit": "Отправить сообщение",
-      "phonePlaceholder": "+375XXXXXXXXX",
-      "phoneError": "Номер телефона должен быть в формате +375XXXXXXXXX",
-      "success": "Сообщение успешно отправлено!",
-      "error": "Не удалось отправить сообщение. Пожалуйста, попробуйте снова.",
-      "sending": "Отправка...",
-      "securityCheck": "Пожалуйста, пройдите проверку безопасности",
-      "securityError": "Проверка безопасности не пройдена. Пожалуйста, попробуйте еще раз.",
-      "validation": {
-        "nameRequired": "Пожалуйста, введите ваше имя",
-        "messageRequired": "Пожалуйста, введите ваше сообщение",
-        "emailInvalid": "Пожалуйста, введите корректный email адрес"
-      }
+      "phonePlaceholder": "+375XXXXXXXXX"
     }
   },
   "footer": {
     "companyInfo": {
       "title": "EBCenter",
-      "description": "Сметные услуги в строительстве и обучение сметному делу",
-      "unp": "УНП: 123456789",
-      "address": "г. Минск, ул. Примерная, 123",
-      "workingHours": "Пн-Пт: 9:00 - 18:00"
+      "description": "Сметные услуги в строительстве и обучение сметному делу"
     },
     "quickLinks": {
-      "title": "Быстрые ссылки",
-      "home": "Главная",
-      "services": "Услуги",
-      "training": "Обучение",
-      "contacts": "Контакты"
+      "title": "Быстрые ссылки"
     },
     "contactInfo": {
-      "title": "Контакты",
-      "phone": "+375 (29) 123-45-67",
-      "email": "info@ebcenter.by"
+      "title": "Контакты"
     },
     "copyright": "Все права защищены"
   }

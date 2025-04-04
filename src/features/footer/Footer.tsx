@@ -14,9 +14,11 @@ const Footer = async ({ locale }: { locale: Locale }) => {
             <h3 className='text-xl font-bold mb-4'>{t.footer.companyInfo.title}</h3>
             <p className='text-gray-300 mb-4'>{t.footer.companyInfo.description}</p>
             <div className='space-y-2 text-gray-300'>
-              <p>{t.footer.companyInfo.unp}</p>
-              <p>{t.footer.companyInfo.address}</p>
-              <p>{t.footer.companyInfo.workingHours}</p>
+              <p>
+                {t.common.unp}: {t.common.contactInfo.unp}
+              </p>
+              <p>{t.common.contactInfo.address}</p>
+              <p>{t.common.contactInfo.workingHours}</p>
             </div>
           </div>
 
@@ -26,22 +28,22 @@ const Footer = async ({ locale }: { locale: Locale }) => {
             <ul className='space-y-2'>
               <li>
                 <Link href={`/${locale}`} className='text-gray-300 hover:text-white'>
-                  {t.footer.quickLinks.home}
+                  {t.common.home}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/services`} className='text-gray-300 hover:text-white'>
-                  {t.footer.quickLinks.services}
+                  {t.common.services}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/training`} className='text-gray-300 hover:text-white'>
-                  {t.footer.quickLinks.training}
+                  {t.common.training}
                 </Link>
               </li>
               <li>
                 <Link href={`/${locale}/contacts`} className='text-gray-300 hover:text-white'>
-                  {t.footer.quickLinks.contacts}
+                  {t.common.contacts}
                 </Link>
               </li>
             </ul>
@@ -53,12 +55,12 @@ const Footer = async ({ locale }: { locale: Locale }) => {
             <ul className='space-y-2 text-gray-300'>
               <li>
                 <Link href='tel:+375291234567' className='hover:text-white'>
-                  {t.footer.contactInfo.phone}
+                  {t.common.contactInfo.phone}
                 </Link>
               </li>
               <li>
                 <Link href='mailto:info@ebcenter.by' className='hover:text-white'>
-                  {t.footer.contactInfo.email}
+                  {t.common.contactInfo.email}
                 </Link>
               </li>
             </ul>

@@ -64,37 +64,37 @@ export default async function HomeAlt({ params }: { params: Promise<{ locale: Lo
               <div>
                 <h2 className='text-2xl font-bold text-gray-900 mb-6'>{t.contacts.title}</h2>
                 <ContactInfo
-                  address={t.contacts.contactInfo.address}
-                  addressValue={t.contacts.contactInfo.addressValue}
-                  phone={t.contacts.contactInfo.phone}
-                  phoneValue={t.contacts.contactInfo.phoneValue}
-                  email={t.contacts.contactInfo.email}
-                  emailValue={t.contacts.contactInfo.emailValue}
-                  unp={t.contacts.contactInfo.unp}
-                  unpValue={t.contacts.contactInfo.unpValue}
-                  workingHours={t.contacts.contactInfo.workingHours}
-                  workingHoursValue={t.contacts.contactInfo.workingHoursValue}
+                  address={t.common.address}
+                  addressValue={t.common.contactInfo.address}
+                  phone={t.common.phone}
+                  phoneValue={t.common.contactInfo.phone}
+                  email={t.common.email}
+                  emailValue={t.common.contactInfo.email}
+                  unp={t.common.unp}
+                  unpValue={t.common.contactInfo.unp}
+                  workingHours={t.common.workingHours}
+                  workingHoursValue={t.common.contactInfo.workingHours}
                 />
               </div>
 
               <ContactForm
                 title={t.contacts.form.title}
-                name={t.contacts.form.name}
-                email={t.contacts.form.email}
-                phone={t.contacts.form.phone}
-                message={t.contacts.form.message}
+                name={t.common.name}
+                email={t.common.email}
+                phone={t.common.phone}
+                message={t.common.message}
                 submit={t.contacts.form.submit}
                 phonePlaceholder={t.contacts.form.phonePlaceholder}
-                phoneError={t.contacts.form.phoneError}
-                success={t.contacts.form.success}
-                error={t.contacts.form.error}
-                sending={t.contacts.form.sending}
-                securityCheck={t.contacts.form.securityCheck}
-                securityError={t.contacts.form.securityError}
+                phoneError={t.common.phoneError}
+                success={t.common.success}
+                error={t.common.error}
+                sending={t.common.sending}
+                securityCheck={t.common.securityCheck}
+                securityError={t.common.securityError}
                 validation={{
-                  nameRequired: t.contacts.form.validation.nameRequired,
-                  messageRequired: t.contacts.form.validation.messageRequired,
-                  emailInvalid: t.contacts.form.validation.emailInvalid,
+                  nameRequired: t.common.validation.nameRequired,
+                  messageRequired: t.common.validation.messageRequired,
+                  emailInvalid: t.common.validation.emailInvalid,
                 }}
               />
             </div>

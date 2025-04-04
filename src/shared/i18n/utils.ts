@@ -42,6 +42,7 @@ export type Translations = {
     home: string
     services: string
     training: string
+    contacts: string
     contactUs: string
     phone: string
     email: string
@@ -51,6 +52,25 @@ export type Translations = {
     message: string
     selectCourse: string
     disclaimer: string
+    phoneError: string
+    success: string
+    error: string
+    sending: string
+    securityCheck: string
+    securityError: string
+    unp: string
+    validation: {
+      nameRequired: string
+      messageRequired: string
+      emailInvalid: string
+    }
+    contactInfo: {
+      phone: string
+      email: string
+      address: string
+      workingHours: string
+      unp: string
+    }
   }
   header: {
     logo: string
