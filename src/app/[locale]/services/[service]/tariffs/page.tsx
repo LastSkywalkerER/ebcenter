@@ -25,11 +25,7 @@ export default async function ServiceTariffs({
     <>
       <main className='flex-grow py-16 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <BackButton
-            href={`/services/${service}`}
-            text={t.services.backToService}
-            locale={locale}
-          />
+          <BackButton href={`/services`} text={t.services.backToServices} locale={locale} />
 
           {tariffs ? (
             <>
