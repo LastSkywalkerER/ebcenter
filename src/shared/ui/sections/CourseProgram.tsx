@@ -16,7 +16,7 @@ export const CourseProgram: React.FC<CourseProgramProps> = ({ sections }) => {
         {sections.map((section, sectionIndex) => (
           <div key={sectionIndex} className='border-b border-gray-200 pb-6 last:border-b-0'>
             <h2 className='text-xl font-semibold text-gray-900 mb-4'>{section.title}</h2>
-            <div className='space-y-4'>
+            <div className='space-y-4 text-justify'>
               {section.content.map((item, itemIndex) => (
                 <div key={itemIndex}>
                   {Array.isArray(item) ? (

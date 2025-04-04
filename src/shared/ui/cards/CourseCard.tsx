@@ -32,19 +32,19 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>{course.icon}</div>
           <h2 className='text-xl font-semibold text-gray-900 mb-2'>{course.title}</h2>
           <div className='flex justify-center space-x-4 text-sm text-gray-500 mb-4'>
-            <span>{course.duration}</span>
+            <span className='whitespace-nowrap'>{course.duration}</span>
             <span>•</span>
-            <span>{course.price}</span>
+            <span className='whitespace-nowrap'>{course.price}</span>
           </div>
           <div className='text-left'>
             <h3 className='font-semibold text-gray-900 mb-2'>{courseDetailsText}</h3>
             <ul className='space-y-2 text-gray-600'>
               {course.topics.map((topic, idx) => (
                 <li key={idx} className='flex items-start'>
-                  <div className='w-5 h-5 text-blue-600 mr-2 mt-0.5'>
+                  <div className='w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0'>
                     <CheckIcon />
                   </div>
-                  {topic}
+                  <span className='break-words'>{topic}</span>
                 </li>
               ))}
             </ul>

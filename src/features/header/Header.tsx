@@ -1,4 +1,5 @@
 import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
+import { MobileMenu } from '@/features/header/MobileMenu'
 import { Locale } from '@/shared/i18n/config'
 import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
@@ -50,19 +51,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
 
           <LanguageSwitcher locale={locale} />
 
-          {/* Mobile menu button */}
-          <div className='md:hidden'>
-            <button type='button' className='text-gray-600 hover:text-gray-900'>
-              <svg className='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M4 6h16M4 12h16M4 18h16'
-                />
-              </svg>
-            </button>
-          </div>
+          <MobileMenu locale={locale} translations={t} />
         </div>
       </div>
     </header>

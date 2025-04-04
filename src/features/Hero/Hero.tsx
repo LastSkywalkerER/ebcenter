@@ -20,7 +20,7 @@ export const Hero = ({ title, subtitle, cta, training, locale }: HeroProps) => {
       <div className='absolute inset-0'>
         <div
           style={{
-            transform: `translateY(calc(-30% + ${offset}px))`,
+            transform: `translateY(calc(-20% + ${offset}px))`,
             transition: 'transform 0.1s ease-out',
             position: 'absolute',
             top: 0,
@@ -36,6 +36,9 @@ export const Hero = ({ title, subtitle, cta, training, locale }: HeroProps) => {
             height={1080}
             className='object-cover object-top'
             priority
+            style={{
+              minHeight: '150%',
+            }}
           />
         </div>
         <div className='absolute inset-0 bg-black opacity-70' />
@@ -43,10 +46,10 @@ export const Hero = ({ title, subtitle, cta, training, locale }: HeroProps) => {
       <div className='relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='max-w-3xl'>
-            <h1 className='text-5xl md:text-7xl font-bold mb-6 text-white leading-tight'>
+            <h1 className='text-4xl sm:text-5xl md:text-7xl font-bold mb-6 text-white leading-tight'>
               {title}
             </h1>
-            <p className='text-xl md:text-2xl mb-8 text-gray-200'>{subtitle}</p>
+            <p className='text-xl md:text-2xl mb-8 text-gray-200 text-justify'>{subtitle}</p>
             <div className='flex flex-col sm:flex-row gap-4'>
               <Link
                 href={`/${locale}/services`}

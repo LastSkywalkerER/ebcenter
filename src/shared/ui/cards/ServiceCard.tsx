@@ -34,7 +34,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             {title}
           </h3>
         </div>
-        <p className='text-gray-600 mb-6'>{description}</p>
+        <p className='text-gray-600 mb-6 text-justify'>{description}</p>
       </div>
       <div className='space-y-3 mt-auto'>
         {hasTariffs && (
