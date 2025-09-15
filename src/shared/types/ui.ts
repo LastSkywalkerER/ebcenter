@@ -68,7 +68,7 @@ export interface DateFilterData {
   endDate: string
 }
 
-export interface RequestParams {
+export interface RequestParams extends Record<string, string | number | undefined> {
   limit?: number
   offset?: number
   sort?: string

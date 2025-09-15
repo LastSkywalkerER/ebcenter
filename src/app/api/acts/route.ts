@@ -3,7 +3,7 @@ import { getAuthUser } from '@/shared/lib/auth'
 import { nocodb } from '@/shared/lib/nocodb'
 import type { Act } from '@/shared/types/admin'
 import { ActCreateSchema } from '@/shared/types/admin'
-import type { ActSummary, DateFilterData, RequestParams } from '@/shared/types/ui'
+import type { ActSummary, DateFilterData, DateType, RequestParams } from '@/shared/types/ui'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
           (act): ActSummary => ({
             id: act.Id,
             date: act.date,
-            dateType: typeof act.date,
+            dateType: typeof act.date as DateType,
           })
         )
       )
