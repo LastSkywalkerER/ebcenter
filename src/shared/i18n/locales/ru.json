@@ -663,5 +663,73 @@
       "title": "Контакты"
     },
     "copyright": "Все права защищены"
+  },
+  "admin": {
+    "title": "Админ панель",
+    "welcome": "Добро пожаловать",
+    "logout": "Выйти",
+    "loading": "Загрузка...",
+    "acts": {
+      "title": "Акты",
+      "notFound": "Акты не найдены",
+      "notFoundDescription": "Попробуйте изменить фильтры или добавить новый акт",
+      "number": "Номер",
+      "date": "Дата",
+      "quantity": "Кол-во",
+      "price": "Цена",
+      "total": "Итого",
+      "client": "Клиент",
+      "downloadError": "Ошибка скачивания отчётов",
+      "selectedCount": "Выбрано актов",
+      "downloadReports": "Скачать отчёты"
+    },
+    "dialog": {
+      "addAct": "Добавить акт",
+      "addClient": "Добавить клиента",
+      "client": "Клиент",
+      "selectClient": "Выберите клиента",
+      "actNumber": "Номер акта",
+      "actNumberHint": "Автоматически +1 от последнего акта клиента",
+      "year": "Год",
+      "month": "Месяц",
+      "selectMonth": "Выберите месяц",
+      "quantity": "Количество",
+      "price": "Цена",
+      "total": "Итого",
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "saving": "Сохранение...",
+      "createActError": "Ошибка создания акта",
+      "createClientError": "Ошибка создания клиента",
+      "name": "Название",
+      "companyName": "Название компании",
+      "requisites": "Реквизиты",
+      "requisitesPlaceholder": "ИНН, КПП, ОГРН",
+      "position": "Должность",
+      "positionPlaceholder": "Должность руководителя",
+      "initials": "Инициалы",
+      "initialsPlaceholder": "Ф.И.О. руководителя",
+      "document": "Документ",
+      "documentPlaceholder": "Устав, доверенность",
+      "contract": "Договор",
+      "contractPlaceholder": "Номер договора",
+      "required": "*"
+    },
+    "filters": {
+      "client": "Клиент",
+      "selectClient": "Выберите клиента",
+      "allClients": "Все клиенты",
+      "period": "Период (год-месяц)",
+      "allPeriods": "Все периоды",
+      "addClient": "Добавить клиента",
+      "addAct": "Добавить акт"
+    }
+  },
+  "login": {
+    "title": "Вход в админ панель",
+    "email": "Email",
+    "password": "Пароль",
+    "login": "Войти",
+    "loggingIn": "Вход..."
   }
 }

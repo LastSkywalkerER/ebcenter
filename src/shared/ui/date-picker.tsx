@@ -3,6 +3,7 @@
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
 
+import { MONTHS_RU } from '@/shared/constants/months'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
@@ -14,21 +15,6 @@ interface DatePickerProps {
   className?: string
   id?: string
 }
-
-const months = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-]
 
 export function DatePicker({
   value = '',
@@ -88,7 +74,7 @@ export function DatePicker({
 
   const getDisplayText = () => {
     if (selectedMonth && selectedYear) {
-      return `${months[selectedMonth - 1]} ${selectedYear}`
+      return `${MONTHS_RU[selectedMonth - 1]} ${selectedYear}`
     }
     return placeholder
   }
@@ -146,7 +132,7 @@ export function DatePicker({
 
             {/* Months Grid */}
             <div className='grid grid-cols-3 gap-2'>
-              {months.map((month, index) => {
+              {MONTHS_RU.map((month, index) => {
                 const monthNumber = index + 1
                 const isSelected = selectedMonth === monthNumber && selectedYear === currentYear
                 return (

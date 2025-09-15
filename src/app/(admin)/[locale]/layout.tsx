@@ -1,4 +1,5 @@
 import { i18n, Locale } from '@/shared/i18n/config'
+import { I18nProvider } from '@/shared/i18n/I18nProvider'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
@@ -18,6 +19,6 @@ export default async function AdminLocaleLayout({
   // Validate that the incoming `locale` parameter is valid
   if (!i18n.locales.includes(locale as Locale)) notFound()
 
-  // Возвращаем только children без хэдера и футера
-  return <>{children}</>
+  // Возвращаем только children без хэдера и футера, обернутые в I18nProvider
+  return <I18nProvider locale={locale}>{children}</I18nProvider>
 }

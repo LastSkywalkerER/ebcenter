@@ -2,6 +2,7 @@
 
 import type { Act } from '@/shared/types/admin'
 import { Checkbox } from '@/shared/ui/checkbox'
+import { useTranslation } from 'react-i18next'
 
 interface ActsTableProps {
   acts: Act[]
@@ -18,12 +19,13 @@ export function ActsTable({
   onSelectAll,
   loading,
 }: ActsTableProps) {
+  const { t } = useTranslation()
   if (loading) {
     return (
       <div className='flex justify-center py-8'>
         <div className='flex items-center space-x-2'>
           <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600'></div>
-          <span className='text-gray-600'>Загрузка...</span>
+          <span className='text-gray-600'>{t('admin.loading', 'Loading...')}</span>
         </div>
       </div>
     )
@@ -32,8 +34,12 @@ export function ActsTable({
   if (acts.length === 0) {
     return (
       <div className='text-center py-12 text-gray-600'>
-        <div className='text-lg font-medium mb-2 text-gray-900'>Акты не найдены</div>
-        <div className='text-sm'>Попробуйте изменить фильтры или добавить новый акт</div>
+        <div className='text-lg font-medium mb-2 text-gray-900'>
+          {t('admin.acts.notFound', 'Acts not found')}
+        </div>
+        <div className='text-sm'>
+          {t('admin.acts.notFoundDescription', 'Try changing filters or add a new act')}
+        </div>
       </div>
     )
   }
@@ -62,22 +68,22 @@ export function ActsTable({
               />
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-              Номер
+              {t('admin.acts.number', 'Number')}
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell'>
-              Дата
+              {t('admin.acts.date', 'Date')}
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-              Кол-во
+              {t('admin.acts.quantity', 'Qty')}
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-              Цена
+              {t('admin.acts.price', 'Price')}
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-              Итого
+              {t('admin.acts.total', 'Total')}
             </th>
             <th className='px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell'>
-              Клиент
+              {t('admin.acts.client', 'Client')}
             </th>
           </tr>
         </thead>

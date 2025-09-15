@@ -670,5 +670,73 @@
       "title": "Contacts"
     },
     "copyright": "All rights reserved"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "acts": {
+      "title": "Acts",
+      "notFound": "Acts not found",
+      "notFoundDescription": "Try changing filters or add a new act",
+      "number": "Number",
+      "date": "Date",
+      "quantity": "Qty",
+      "price": "Price",
+      "total": "Total",
+      "client": "Client",
+      "downloadError": "Error downloading reports",
+      "selectedCount": "Selected acts",
+      "downloadReports": "Download reports"
+    },
+    "dialog": {
+      "addAct": "Add Act",
+      "addClient": "Add Client",
+      "client": "Client",
+      "selectClient": "Select client",
+      "actNumber": "Act Number",
+      "actNumberHint": "Automatically +1 from client's last act",
+      "year": "Year",
+      "month": "Month",
+      "selectMonth": "Select month",
+      "quantity": "Quantity",
+      "price": "Price",
+      "total": "Total",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving...",
+      "createActError": "Error creating act",
+      "createClientError": "Error creating client",
+      "name": "Name",
+      "companyName": "Company name",
+      "requisites": "Requisites",
+      "requisitesPlaceholder": "INN, KPP, OGRN",
+      "position": "Position",
+      "positionPlaceholder": "Manager position",
+      "initials": "Initials",
+      "initialsPlaceholder": "Manager full name",
+      "document": "Document",
+      "documentPlaceholder": "Charter, power of attorney",
+      "contract": "Contract",
+      "contractPlaceholder": "Contract number",
+      "required": "*"
+    },
+    "filters": {
+      "client": "Client",
+      "selectClient": "Select client",
+      "allClients": "All clients",
+      "period": "Period (year-month)",
+      "allPeriods": "All periods",
+      "addClient": "Add client",
+      "addAct": "Add act"
+    }
+  },
+  "login": {
+    "title": "Admin Panel Login",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "loggingIn": "Logging in..."
   }
 }

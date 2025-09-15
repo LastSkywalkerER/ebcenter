@@ -6,11 +6,15 @@ import { ClientDialog } from '@/features/admin/components/ClientDialog'
 import { Filters } from '@/features/admin/components/Filters'
 import type { Act, ActCreate, Client, ClientCreate } from '@/shared/types/admin'
 import { Button } from '@/shared/ui/button'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function AdminPage() {
   const router = useRouter()
+  const params = useParams()
+  const locale = params.locale as string
+  const { t } = useTranslation()
   const [user, setUser] = useState<{ id: number; email: string } | null>(null)
   const [clients, setClients] = useState<Client[]>([])
   const [acts, setActs] = useState<Act[]>([])
@@ -41,16 +45,16 @@ export default function AdminPage() {
     try {
       const response = await fetch('/api/auth/me')
       if (!response.ok) {
-        router.push('/login')
+        router.push(`/${locale}/login`)
         return
       }
       const data = await response.json()
       setUser(data.user)
     } catch (error) {
       console.error('Auth check error:', error)
-      router.push('/login')
+      router.push(`/${locale}/login`)
     }
-  }, [router])
+  }, [router, locale])
 
   const loadClients = useCallback(async () => {
     try {
@@ -88,7 +92,7 @@ export default function AdminPage() {
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
-      router.push('/login')
+      router.push(`/${locale}/login`)
     } catch (error) {
       console.error('Logout error:', error)
     }
@@ -146,7 +150,7 @@ export default function AdminPage() {
       window.open(downloadUrl, '_blank')
     } catch (error) {
       console.error('Download error:', error)
-      alert('Ошибка скачивания отчётов')
+      alert(t('admin.acts.downloadError', 'Error downloading reports'))
     }
   }
 
@@ -155,7 +159,7 @@ export default function AdminPage() {
       <div className='min-h-screen flex items-center justify-center bg-white'>
         <div className='flex items-center space-x-2'>
           <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600'></div>
-          <span className='text-gray-600'>Загрузка...</span>
+          <span className='text-gray-600'>{t('admin.loading', 'Loading...')}</span>
         </div>
       </div>
     )
@@ -166,10 +170,11 @@ export default function AdminPage() {
       <div className='bg-white shadow-sm border-b border-gray-200'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 gap-4'>
-            <h1 className='text-2xl font-bold text-gray-900'>Админ панель</h1>
+            <h1 className='text-2xl font-bold text-gray-900'>{t('admin.title', 'Admin Panel')}</h1>
             <div className='flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4'>
               <span className='text-sm text-gray-600'>
-                Добро пожаловать, <span className='font-medium text-gray-900'>{user?.email}</span>
+                {t('admin.welcome', 'Welcome')},{' '}
+                <span className='font-medium text-gray-900'>{user?.email}</span>
               </span>
               <Button
                 onClick={handleLogout}
@@ -177,7 +182,7 @@ export default function AdminPage() {
                 size='sm'
                 className='w-full sm:w-auto border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white'
               >
-                Выйти
+                {t('admin.logout', 'Logout')}
               </Button>
             </div>
           </div>
@@ -199,7 +204,7 @@ export default function AdminPage() {
 
         <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
           <div className='px-4 sm:px-6 py-4 border-b border-gray-200'>
-            <h2 className='text-lg font-medium text-gray-900'>Акты</h2>
+            <h2 className='text-lg font-medium text-gray-900'>{t('admin.acts.title', 'Acts')}</h2>
           </div>
           <ActsTable
             acts={acts}

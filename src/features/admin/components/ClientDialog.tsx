@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface ClientDialogProps {
   isOpen: boolean
@@ -14,6 +15,7 @@ interface ClientDialogProps {
 }
 
 export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState<ClientCreate>({
     name: '',
     requisits: '',
@@ -42,7 +44,11 @@ export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
       })
       onClose()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка создания клиента')
+      setError(
+        err instanceof Error
+          ? err.message
+          : t('admin.dialog.createClientError', 'Error creating client')
+      )
     } finally {
       setLoading(false)
     }
@@ -52,13 +58,15 @@ export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='sm:max-w-[500px] bg-white border-gray-200'>
         <DialogHeader>
-          <DialogTitle className='text-gray-900'>Добавить клиента</DialogTitle>
+          <DialogTitle className='text-gray-900'>
+            {t('admin.dialog.addClient', 'Add Client')}
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className='space-y-6'>
           <div className='space-y-2'>
             <Label htmlFor='client-name' className='text-gray-700'>
-              Название *
+              {t('admin.dialog.name', 'Name')} {t('admin.dialog.required', '*')}
             </Label>
             <Input
               id='client-name'
@@ -66,77 +74,77 @@ export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder='Название компании'
+              placeholder={t('admin.dialog.companyName', 'Company name')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
 
           <div className='space-y-2'>
             <Label htmlFor='requisits' className='text-gray-700'>
-              Реквизиты
+              {t('admin.dialog.requisites', 'Requisites')}
             </Label>
             <Input
               id='requisits'
               type='text'
               value={formData.requisits}
               onChange={(e) => setFormData({ ...formData, requisits: e.target.value })}
-              placeholder='ИНН, КПП, ОГРН'
+              placeholder={t('admin.dialog.requisitesPlaceholder', 'INN, KPP, OGRN')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
 
           <div className='space-y-2'>
             <Label htmlFor='position' className='text-gray-700'>
-              Должность
+              {t('admin.dialog.position', 'Position')}
             </Label>
             <Input
               id='position'
               type='text'
               value={formData.position}
               onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-              placeholder='Должность руководителя'
+              placeholder={t('admin.dialog.positionPlaceholder', 'Manager position')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
 
           <div className='space-y-2'>
             <Label htmlFor='initials' className='text-gray-700'>
-              Инициалы
+              {t('admin.dialog.initials', 'Initials')}
             </Label>
             <Input
               id='initials'
               type='text'
               value={formData.initials}
               onChange={(e) => setFormData({ ...formData, initials: e.target.value })}
-              placeholder='Ф.И.О. руководителя'
+              placeholder={t('admin.dialog.initialsPlaceholder', 'Manager full name')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
 
           <div className='space-y-2'>
             <Label htmlFor='document' className='text-gray-700'>
-              Документ
+              {t('admin.dialog.document', 'Document')}
             </Label>
             <Input
               id='document'
               type='text'
               value={formData.document}
               onChange={(e) => setFormData({ ...formData, document: e.target.value })}
-              placeholder='Устав, доверенность'
+              placeholder={t('admin.dialog.documentPlaceholder', 'Charter, power of attorney')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
 
           <div className='space-y-2'>
             <Label htmlFor='contract' className='text-gray-700'>
-              Договор
+              {t('admin.dialog.contract', 'Contract')}
             </Label>
             <Input
               id='contract'
               type='text'
               value={formData.contract}
               onChange={(e) => setFormData({ ...formData, contract: e.target.value })}
-              placeholder='Номер договора'
+              placeholder={t('admin.dialog.contractPlaceholder', 'Contract number')}
               className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
             />
           </div>
@@ -154,14 +162,14 @@ export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
               onClick={onClose}
               className='border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white'
             >
-              Отмена
+              {t('admin.dialog.cancel', 'Cancel')}
             </Button>
             <Button
               type='submit'
               disabled={loading}
               className='bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400'
             >
-              {loading ? 'Сохранение...' : 'Сохранить'}
+              {loading ? t('admin.dialog.saving', 'Saving...') : t('admin.dialog.save', 'Save')}
             </Button>
           </DialogFooter>
         </form>

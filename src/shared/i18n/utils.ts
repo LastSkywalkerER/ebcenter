@@ -243,6 +243,74 @@ export type Translations = {
     }
     copyright: string
   }
+  admin: {
+    title: string
+    welcome: string
+    logout: string
+    loading: string
+    acts: {
+      title: string
+      notFound: string
+      notFoundDescription: string
+      number: string
+      date: string
+      quantity: string
+      price: string
+      total: string
+      client: string
+      downloadError: string
+      selectedCount: string
+      downloadReports: string
+    }
+    dialog: {
+      addAct: string
+      addClient: string
+      client: string
+      selectClient: string
+      actNumber: string
+      actNumberHint: string
+      year: string
+      month: string
+      selectMonth: string
+      quantity: string
+      price: string
+      total: string
+      cancel: string
+      save: string
+      saving: string
+      createActError: string
+      createClientError: string
+      name: string
+      companyName: string
+      requisites: string
+      requisitesPlaceholder: string
+      position: string
+      positionPlaceholder: string
+      initials: string
+      initialsPlaceholder: string
+      document: string
+      documentPlaceholder: string
+      contract: string
+      contractPlaceholder: string
+      required: string
+    }
+    filters: {
+      client: string
+      selectClient: string
+      allClients: string
+      period: string
+      allPeriods: string
+      addClient: string
+      addAct: string
+    }
+  }
+  login: {
+    title: string
+    email: string
+    password: string
+    login: string
+    loggingIn: string
+  }
 }
 
 const translationsCache: Record<Locale, Translations | null> = {

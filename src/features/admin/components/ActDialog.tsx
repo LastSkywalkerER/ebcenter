@@ -7,6 +7,7 @@ import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface ActDialogProps {
   isOpen: boolean
@@ -16,6 +17,7 @@ interface ActDialogProps {
 }
 
 export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps) {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState<ActCreate>({
     clientId: 0,
     number: 1,
@@ -109,7 +111,9 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
       })
       onClose()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка создания акта')
+      setError(
+        err instanceof Error ? err.message : t('admin.dialog.createActError', 'Error creating act')
+      )
     } finally {
       setLoading(false)
     }
@@ -119,13 +123,13 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='sm:max-w-[500px] bg-white border-gray-200'>
         <DialogHeader>
-          <DialogTitle className='text-gray-900'>Добавить акт</DialogTitle>
+          <DialogTitle className='text-gray-900'>{t('admin.dialog.addAct', 'Add Act')}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className='space-y-6'>
           <div className='space-y-2'>
             <Label htmlFor='client-select' className='text-gray-700'>
-              Клиент *
+              {t('admin.dialog.client', 'Client')} {t('admin.dialog.required', '*')}
             </Label>
             <Select
               value={formData.clientId.toString()}
@@ -136,7 +140,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
                 id='client-select'
                 className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
               >
-                <SelectValue placeholder='Выберите клиента' />
+                <SelectValue placeholder={t('admin.dialog.selectClient', 'Select client')} />
               </SelectTrigger>
               <SelectContent className='bg-white border-gray-200'>
                 {clients.map((client) => (
@@ -154,7 +158,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
 
           <div className='space-y-2'>
             <Label htmlFor='act-number' className='text-gray-700'>
-              Номер акта *
+              {t('admin.dialog.actNumber', 'Act Number')} {t('admin.dialog.required', '*')}
             </Label>
             <div className='relative'>
               <Input
@@ -173,13 +177,15 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
                 </div>
               )}
             </div>
-            <p className='text-xs text-gray-600'>Автоматически +1 от последнего акта клиента</p>
+            <p className='text-xs text-gray-600'>
+              {t('admin.dialog.actNumberHint', "Automatically +1 from client's last act")}
+            </p>
           </div>
 
           <div className='grid grid-cols-2 gap-4'>
             <div className='space-y-2'>
               <Label htmlFor='year' className='text-gray-700'>
-                Год *
+                {t('admin.dialog.year', 'Year')} {t('admin.dialog.required', '*')}
               </Label>
               <Input
                 id='year'
@@ -195,7 +201,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
 
             <div className='space-y-2'>
               <Label htmlFor='month' className='text-gray-700'>
-                Месяц *
+                {t('admin.dialog.month', 'Month')} {t('admin.dialog.required', '*')}
               </Label>
               <Select
                 value={formData.month.toString()}
@@ -206,7 +212,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
                   id='month'
                   className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
                 >
-                  <SelectValue placeholder='Выберите месяц' />
+                  <SelectValue placeholder={t('admin.dialog.selectMonth', 'Select month')} />
                 </SelectTrigger>
                 <SelectContent className='bg-white border-gray-200'>
                   {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
@@ -225,7 +231,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
 
           <div className='space-y-2'>
             <Label htmlFor='amount' className='text-gray-700'>
-              Количество *
+              {t('admin.dialog.quantity', 'Quantity')} {t('admin.dialog.required', '*')}
             </Label>
             <Input
               id='amount'
@@ -241,7 +247,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
 
           <div className='space-y-2'>
             <Label htmlFor='price' className='text-gray-700'>
-              Цена *
+              {t('admin.dialog.price', 'Price')} {t('admin.dialog.required', '*')}
             </Label>
             <Input
               id='price'
@@ -257,7 +263,7 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
 
           <div className='bg-gray-50 p-4 rounded-md border border-gray-200'>
             <div className='text-sm font-medium text-gray-900'>
-              Итого:{' '}
+              {t('admin.dialog.total', 'Total')}:{' '}
               <span className='text-lg'>{(formData.amount * formData.price).toFixed(2)} ₽</span>
             </div>
           </div>
@@ -275,14 +281,14 @@ export function ActDialog({ isOpen, onClose, onSubmit, clients }: ActDialogProps
               onClick={onClose}
               className='border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 bg-white'
             >
-              Отмена
+              {t('admin.dialog.cancel', 'Cancel')}
             </Button>
             <Button
               type='submit'
               disabled={loading}
               className='bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400'
             >
-              {loading ? 'Сохранение...' : 'Сохранить'}
+              {loading ? t('admin.dialog.saving', 'Saving...') : t('admin.dialog.save', 'Save')}
             </Button>
           </DialogFooter>
         </form>
