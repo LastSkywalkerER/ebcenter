@@ -1,3 +1,4 @@
+import { serverEnv } from '@/shared/config/server-env'
 import { getAuthUser } from '@/shared/lib/auth'
 import { nocodb } from '@/shared/lib/nocodb'
 import type { Client } from '@/shared/types/admin'
@@ -11,8 +12,8 @@ export async function GET() {
       return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
     }
 
-    const response = await nocodb.getRecords<Client>(process.env.NOCO_CLIENTS_TABLE_ID!, {
-      viewId: process.env.NOCO_CLIENTS_VIEW_ID!,
+    const response = await nocodb.getRecords<Client>(serverEnv.NOCO_CLIENTS_TABLE_ID, {
+      viewId: serverEnv.NOCO_CLIENTS_VIEW_ID,
       sort: 'name',
     })
 
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const clientData = ClientCreateSchema.parse(body)
 
-    const client = await nocodb.createRecord<Client>(process.env.NOCO_CLIENTS_TABLE_ID!, clientData)
+    const client = await nocodb.createRecord<Client>(serverEnv.NOCO_CLIENTS_TABLE_ID, clientData)
 
     return NextResponse.json(client, { status: 201 })
   } catch (error) {

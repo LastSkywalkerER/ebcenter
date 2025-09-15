@@ -1,9 +1,17 @@
+import { serverEnv } from '@/shared/config/server-env'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { cookies } from 'next/headers'
 import type { User } from '../types/admin'
 
-const JWT_SECRET = process.env.JWT_SECRET!
+const JWT_SECRET = serverEnv.JWT_SECRET
+
+interface JWTPayload {
+  id: number
+  email: string
+  iat?: number
+  exp?: number
+}
 
 export function generateToken(user: User): string {
   console.log('Generating token for user:', user.email)
@@ -15,9 +23,10 @@ export function generateToken(user: User): string {
   return token
 }
 
-export function verifyToken(token: string): { id: number; email: string } | null {
+export function verifyToken(token: string): JWTPayload | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as { id: number; email: string }
+    const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload
+    return decoded
   } catch {
     return null
   }
@@ -28,7 +37,7 @@ export function isValidToken(token: string): boolean {
     console.log('Validating token, length:', token.length)
     console.log('JWT_SECRET exists for validation:', !!JWT_SECRET)
 
-    const decoded = jwt.verify(token, JWT_SECRET)
+    const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload
     console.log('Token validation successful:', !!decoded)
     return true
   } catch (error) {
@@ -56,7 +65,12 @@ export async function getAuthUser(): Promise<{ id: number; email: string } | nul
     return null
   }
 
-  return verifyToken(token)
+  const decoded = verifyToken(token)
+  if (!decoded) {
+    return null
+  }
+
+  return { id: decoded.id, email: decoded.email }
 }
 
 export async function setAuthCookie(token: string): Promise<void> {

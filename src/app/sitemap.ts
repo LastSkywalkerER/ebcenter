@@ -1,10 +1,11 @@
+import { env } from '@/shared/config/env'
 import coursesData from '@/shared/constants/courses.json'
 import serviceData from '@/shared/constants/services.json'
 import { i18n } from '@/shared/i18n/config'
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  const baseUrl = env.BASE_URL
   if (!baseUrl) {
     throw new Error('NEXT_PUBLIC_BASE_URL environment variable is not set')
   }

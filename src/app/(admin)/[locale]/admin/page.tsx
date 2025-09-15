@@ -4,6 +4,7 @@ import { ActDialog } from '@/features/admin/components/ActDialog'
 import { ActsTable } from '@/features/admin/components/ActsTable'
 import { ClientDialog } from '@/features/admin/components/ClientDialog'
 import { Filters } from '@/features/admin/components/Filters'
+import { apiClient } from '@/shared/lib/api'
 import type { Act, ActCreate, Client, ClientCreate } from '@/shared/types/admin'
 import type { AuthUser } from '@/shared/types/ui'
 import { Button } from '@/shared/ui/button'
@@ -27,44 +28,40 @@ export default function AdminPage() {
   const [actDialogOpen, setActDialogOpen] = useState(false)
 
   const loadActs = useCallback(async () => {
-    try {
-      const params = new URLSearchParams()
-      if (selectedClient !== 'all') params.append('clientId', selectedClient)
-      if (selectedDate) params.append('date', selectedDate)
+    const params = new URLSearchParams()
+    if (selectedClient !== 'all') params.append('clientId', selectedClient)
+    if (selectedDate) params.append('date', selectedDate)
 
-      const response = await fetch(`/api/acts?${params.toString()}`)
-      if (!response.ok) throw new Error('Failed to load acts')
-      const data = await response.json()
-      setActs(data.list || [])
+    const result = await apiClient.get<{ list: Act[] }>(`/api/acts?${params.toString()}`)
+    if (result.error) {
+      // apiClient автоматически обработает 401
+      return
+    }
+    if (result.data) {
+      setActs(result.data.list || [])
       setSelectedActs([])
-    } catch (error) {
-      console.error('Load acts error:', error)
     }
   }, [selectedClient, selectedDate])
 
   const checkAuth = useCallback(async () => {
-    try {
-      const response = await fetch('/api/auth/me')
-      if (!response.ok) {
-        router.push(`/${locale}/login`)
-        return
-      }
-      const data = await response.json()
-      setUser(data.user)
-    } catch (error) {
-      console.error('Auth check error:', error)
-      router.push(`/${locale}/login`)
+    const result = await apiClient.get<{ user: AuthUser }>('/api/auth/me')
+    if (result.error) {
+      // apiClient автоматически обработает 401 и сделает logout
+      return
     }
-  }, [router, locale])
+    if (result.data) {
+      setUser(result.data.user)
+    }
+  }, [])
 
   const loadClients = useCallback(async () => {
-    try {
-      const response = await fetch('/api/clients')
-      if (!response.ok) throw new Error('Failed to load clients')
-      const data = await response.json()
-      setClients(data.list || [])
-    } catch (error) {
-      console.error('Load clients error:', error)
+    const result = await apiClient.get<{ list: Client[] }>('/api/clients')
+    if (result.error) {
+      // apiClient автоматически обработает 401
+      return
+    }
+    if (result.data) {
+      setClients(result.data.list || [])
     }
   }, [])
 
@@ -100,30 +97,20 @@ export default function AdminPage() {
   }
 
   const handleCreateClient = async (data: ClientCreate) => {
-    const response = await fetch('/api/clients', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
+    const result = await apiClient.post<Client>('/api/clients', data)
 
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || 'Failed to create client')
+    if (result.error) {
+      throw new Error(result.error)
     }
 
     await loadClients()
   }
 
   const handleCreateAct = async (data: ActCreate) => {
-    const response = await fetch('/api/acts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
+    const result = await apiClient.post<Act>('/api/acts', data)
 
-    if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || 'Failed to create act')
+    if (result.error) {
+      throw new Error(result.error)
     }
 
     await loadActs()

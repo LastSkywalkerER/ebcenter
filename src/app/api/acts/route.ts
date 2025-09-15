@@ -1,3 +1,4 @@
+import { serverEnv } from '@/shared/config/server-env'
 import { getAuthUser } from '@/shared/lib/auth'
 import { nocodb } from '@/shared/lib/nocodb'
 import type { Act } from '@/shared/types/admin'
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
       limit,
       offset,
       sort: '-date',
-      viewId: process.env.NOCO_ACTS_VIEW_ID!,
+      viewId: serverEnv.NOCO_ACTS_VIEW_ID,
     }
 
     // Формируем where-условие только для клиента (дату будем фильтровать на сервере)
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
 
     console.log('Acts where clause:', requestParams.where)
 
-    const response = await nocodb.getRecords<Act>(process.env.NOCO_ACTS_TABLE_ID!, requestParams)
+    const response = await nocodb.getRecords<Act>(serverEnv.NOCO_ACTS_TABLE_ID, requestParams)
 
     // Фильтруем по дате на сервере, если есть dateFilter
     if (dateFilterData) {
@@ -120,7 +121,7 @@ export async function POST(request: NextRequest) {
 
     // Проверяем уникальность комбинации номер + клиент
     // Сначала получаем все акты клиента
-    const clientActs = await nocodb.getRecords<Act>(process.env.NOCO_ACTS_TABLE_ID!, {
+    const clientActs = await nocodb.getRecords<Act>(serverEnv.NOCO_ACTS_TABLE_ID, {
       where: `(clients_id,eq,${actData.clientId})`,
       limit: 1000, // Получаем много актов чтобы проверить номера
     })
@@ -156,7 +157,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const act = await nocodb.createRecord<Act>(process.env.NOCO_ACTS_TABLE_ID!, {
+    const act = await nocodb.createRecord<Act>(serverEnv.NOCO_ACTS_TABLE_ID, {
       number: actData.number,
       date,
       amount: actData.amount,

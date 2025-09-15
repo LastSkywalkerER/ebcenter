@@ -1,5 +1,6 @@
 'use client'
 
+import { env } from '@/shared/config/env'
 import { Turnstile } from 'next-turnstile'
 import { useState } from 'react'
 
@@ -228,7 +229,7 @@ export const ContactForm = ({
         </div>
         <div className='flex justify-center'>
           <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
+            siteKey={env.TURNSTILE_SITE_KEY}
             onVerify={(token: string) => setTurnstileToken(token)}
             onError={() => setErrorMessage(securityError)}
             theme='light'

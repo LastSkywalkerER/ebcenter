@@ -1,3 +1,4 @@
+import { serverEnv } from '@/shared/config/server-env'
 import { sendTelegramMessage } from '@/shared/lib/telegram'
 import { NextResponse } from 'next/server'
 
@@ -11,7 +12,7 @@ interface ContactFormData {
 
 async function validateTurnstileToken(token: string) {
   const formData = new URLSearchParams()
-  formData.append('secret', process.env.TURNSTILE_SECRET_KEY || '')
+  formData.append('secret', serverEnv.TURNSTILE_SECRET_KEY)
   formData.append('response', token)
 
   const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'

@@ -1,5 +1,7 @@
-const NOCO_BASE_URL = process.env.NOCO_BASE_URL!
-const NOCO_API_TOKEN = process.env.NOCO_API_TOKEN!
+import { serverEnv } from '@/shared/config/server-env'
+
+const NOCO_BASE_URL = serverEnv.NOCO_BASE_URL
+const NOCO_API_TOKEN = serverEnv.NOCO_API_TOKEN
 
 interface NocoPageInfo {
   pageSize?: number
@@ -51,8 +53,7 @@ export class NocoDBClient {
       sort?: string
       viewId?: string
       fields?: string
-      [key: string]: string | number | undefined // Allow additional parameters
-    }
+    } & Record<string, string | number | undefined>
   ): Promise<{ list: T[]; pageInfo: NocoPageInfo }> {
     const searchParams = new URLSearchParams()
 

@@ -1,3 +1,4 @@
+import { serverEnv } from '@/shared/config/server-env'
 import { getAuthUser } from '@/shared/lib/auth'
 import type { ActIdsParam } from '@/shared/types/ui'
 import { NextRequest, NextResponse } from 'next/server'
@@ -32,7 +33,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Строим URL для n8n webhook с передачей ID актов через query параметры
-    const n8nBaseUrl = `${process.env.N8N_WEBHOOK_URL}/ebc-download-acts`
+    const n8nBaseUrl = `${serverEnv.N8N_WEBHOOK_URL}/ebc-download-acts`
     const queryParams = new URLSearchParams()
 
     // Передаем каждый ID акта как отдельный параметр actIds[]

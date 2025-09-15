@@ -75,18 +75,19 @@ export interface RequestParams {
   viewId?: string
   where?: string
   fields?: string
-  [key: string]: string | number | undefined
 }
 
 // Act processing types
+export type DateType = 'string' | 'number' | 'undefined' | 'object'
+
 export interface ActSummary {
   id: number
   date: string
-  dateType: string
+  dateType: DateType
 }
 
 export interface ActFilter {
   id: number
   date: string
-  dateType: string
+  dateType: DateType
 }

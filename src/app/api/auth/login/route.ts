@@ -1,3 +1,4 @@
+import { serverEnv } from '@/shared/config/server-env'
 import { generateToken } from '@/shared/lib/auth'
 import { nocodb } from '@/shared/lib/nocodb'
 import type { User } from '@/shared/types/admin'
@@ -9,10 +10,10 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { username, password } = LoginSchema.parse(body)
 
-    const response = await nocodb.getRecords<User>(process.env.NOCO_USERS_TABLE_ID!, {
+    const response = await nocodb.getRecords<User>(serverEnv.NOCO_USERS_TABLE_ID, {
       where: `(email,eq,${username})`,
       limit: 1,
-      viewId: process.env.NOCO_USERS_VIEW_ID!,
+      viewId: serverEnv.NOCO_USERS_VIEW_ID,
     })
 
     const user = response.list[0]
@@ -35,7 +36,7 @@ export async function POST(request: NextRequest) {
     response_obj.cookies.set('auth-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: 'strict',
       path: '/',
       maxAge: 24 * 60 * 60,
     })

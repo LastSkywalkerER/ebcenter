@@ -1,6 +1,8 @@
+import { serverEnv } from '@/shared/config/server-env'
+
 export async function sendTelegramMessage(message: string) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN
-  const chatId = process.env.TELEGRAM_CHAT_ID
+  const botToken = serverEnv.TELEGRAM_BOT_TOKEN
+  const chatId = serverEnv.TELEGRAM_CHAT_ID
 
   if (!botToken || !chatId) {
     throw new Error('Telegram configuration is missing')
