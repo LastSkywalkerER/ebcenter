@@ -1,6 +1,7 @@
 'use client'
 
 import type { Act } from '@/shared/types/admin'
+import type { CurrencyFormatter, DateFormatter } from '@/shared/types/ui'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { useTranslation } from 'react-i18next'
 
@@ -44,11 +45,11 @@ export function ActsTable({
     )
   }
 
-  const formatDate = (dateString: string) => {
+  const formatDate: DateFormatter = (dateString) => {
     return new Date(dateString).toLocaleDateString('ru-RU')
   }
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency: CurrencyFormatter = (amount) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
       currency: 'RUB',

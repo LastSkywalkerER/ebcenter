@@ -10,7 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const params = useParams()
-  const locale = params.locale as string
+  const locale = params.locale as string // TODO: Replace with proper typing when params type is available
   const { t } = useTranslation()
 
   const handleSubmit = async (e: React.FormEvent) => {

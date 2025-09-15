@@ -1,4 +1,5 @@
 import { getAuthUser } from '@/shared/lib/auth'
+import type { ActIdsParam } from '@/shared/types/ui'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Парсим массив ID актов
-    let parsedActIds: number[]
+    let parsedActIds: ActIdsParam['actIds']
     try {
       parsedActIds = JSON.parse(actIds)
       if (!Array.isArray(parsedActIds) || parsedActIds.length === 0) {

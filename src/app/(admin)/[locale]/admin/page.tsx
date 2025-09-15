@@ -5,6 +5,7 @@ import { ActsTable } from '@/features/admin/components/ActsTable'
 import { ClientDialog } from '@/features/admin/components/ClientDialog'
 import { Filters } from '@/features/admin/components/Filters'
 import type { Act, ActCreate, Client, ClientCreate } from '@/shared/types/admin'
+import type { AuthUser } from '@/shared/types/ui'
 import { Button } from '@/shared/ui/button'
 import { useParams, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
@@ -15,7 +16,7 @@ export default function AdminPage() {
   const params = useParams()
   const locale = params.locale as string
   const { t } = useTranslation()
-  const [user, setUser] = useState<{ id: number; email: string } | null>(null)
+  const [user, setUser] = useState<AuthUser | null>(null)
   const [clients, setClients] = useState<Client[]>([])
   const [acts, setActs] = useState<Act[]>([])
   const [loading, setLoading] = useState(true)

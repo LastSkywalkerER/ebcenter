@@ -2,6 +2,7 @@ import { getAuthUser } from '@/shared/lib/auth'
 import { nocodb } from '@/shared/lib/nocodb'
 import type { Act } from '@/shared/types/admin'
 import { ActCreateSchema } from '@/shared/types/admin'
+import type { ActSummary, DateFilterData, RequestParams } from '@/shared/types/ui'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -20,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     console.log('Acts filter params:', { clientId, dateFilter, page, limit })
 
-    const requestParams: Record<string, string | number> = {
+    const requestParams: RequestParams = {
       limit,
       offset,
       sort: '-date',
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Сохраняем фильтр по дате для обработки после получения данных
-    let dateFilterData: { startDate: string; endDate: string } | null = null
+    let dateFilterData: DateFilterData | null = null
     if (dateFilter) {
       const [year, month] = dateFilter.split('-')
       if (year && month) {
@@ -56,11 +57,13 @@ export async function GET(request: NextRequest) {
     if (dateFilterData) {
       console.log(
         'Raw response data:',
-        response.list.map((act) => ({
-          id: act.Id,
-          date: act.date,
-          dateType: typeof act.date,
-        }))
+        response.list.map(
+          (act): ActSummary => ({
+            id: act.Id,
+            date: act.date,
+            dateType: typeof act.date,
+          })
+        )
       )
       console.log('Filter range:', dateFilterData)
 
