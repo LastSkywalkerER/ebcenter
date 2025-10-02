@@ -83,13 +83,13 @@ export function ClientDialog({ isOpen, onClose, onSubmit }: ClientDialogProps) {
             <Label htmlFor='requisits' className='text-gray-700'>
               {t('admin.dialog.requisites', 'Requisites')}
             </Label>
-            <Input
+            <textarea
               id='requisits'
-              type='text'
               value={formData.requisits}
               onChange={(e) => setFormData({ ...formData, requisits: e.target.value })}
               placeholder={t('admin.dialog.requisitesPlaceholder', 'INN, KPP, OGRN')}
-              className='border-gray-300 text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500'
+              className='w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900 bg-white focus:ring-blue-500 focus:border-blue-500 resize-vertical min-h-[80px]'
+              rows={7}
             />
           </div>
 
