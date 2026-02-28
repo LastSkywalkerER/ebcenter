@@ -79,7 +79,9 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.1.8",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "@types/node": "^20",
+    "typescript": "^5"
   },
   "optionalDependencies": {
     "@img/sharp-linux-x64": "0.34.5"
@@ -87,7 +89,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/forms": "^0.5.10",
-    "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
@@ -98,8 +99,7 @@
     "eslint-plugin-prettier": "^5.2.5",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5"
+    "prettier": "^3.5.3"
   },
   "resolutions": {
     "sharp": "0.34.5"
