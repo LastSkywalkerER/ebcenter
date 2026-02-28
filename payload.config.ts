@@ -14,6 +14,9 @@ import { SiteSettings } from './src/globals/SiteSettings'
 export default buildConfig({
   admin: {
     user: Users.slug,
+    meta: {
+      defaultOGImageType: 'off',
+    },
     importMap: {
       baseDir: path.resolve(process.cwd()),
     },

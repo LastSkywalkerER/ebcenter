@@ -2,7 +2,7 @@ import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ['sharp'],
+  serverExternalPackages: ['sharp', '@payloadcms/next', '@payloadcms/ui'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**', pathname: '/**' },

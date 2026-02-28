@@ -9,7 +9,6 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'slug',
     defaultColumns: ['title', 'slug', 'showInNav', 'navOrder', 'updatedAt'],
-    defaultSort: 'navOrder',
     listSearchableFields: ['slug', 'title'],
   },
   fields: [
