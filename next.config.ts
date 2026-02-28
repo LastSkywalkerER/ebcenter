@@ -1,8 +1,9 @@
+import path from 'path'
 import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ['sharp', '@payloadcms/next', '@payloadcms/ui'],
+  serverExternalPackages: ['sharp'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**', pathname: '/**' },
@@ -11,6 +12,10 @@ const nextConfig: NextConfig = {
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve = webpackConfig.resolve ?? {}
+    webpackConfig.resolve.alias = {
+      ...webpackConfig.resolve.alias,
+      '@': path.join(process.cwd(), 'src'),
+    }
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
