@@ -84,6 +84,7 @@ export const SiteSettings: GlobalConfig = {
         },
         {
           label: 'Contact Info',
+          admin: { description: 'Fallback for footer/header. Edit on Contacts page for live preview.' },
           fields: [
             { name: 'contactPhone', type: 'text', localized: true },
             { name: 'contactEmail', type: 'text', localized: true },
@@ -151,6 +152,17 @@ export const SiteSettings: GlobalConfig = {
             },
             {
               type: 'collapsible',
+              label: 'Contacts (fallback)',
+              admin: { description: 'Used when Contacts page blocks have no data. Edit contacts on the Contacts page for live preview.' },
+              fields: [
+                { name: 'contactsSubtitle', type: 'text', localized: true },
+                { name: 'contactInfoTitle', type: 'text', localized: true },
+                { name: 'formTitle', type: 'text', localized: true },
+                { name: 'phonePlaceholder', type: 'text', localized: true },
+              ],
+            },
+            {
+              type: 'collapsible',
               label: 'Training',
               fields: [
                 { name: 'trainingSubtitle', type: 'text', localized: true },
@@ -159,16 +171,6 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'backToCourses', type: 'text', localized: true },
                 { name: 'inDevelopment', type: 'text', localized: true },
                 { name: 'courseProgramTitle', type: 'text', localized: true },
-              ],
-            },
-            {
-              type: 'collapsible',
-              label: 'Contacts',
-              fields: [
-                { name: 'contactsSubtitle', type: 'text', localized: true },
-                { name: 'contactInfoTitle', type: 'text', localized: true },
-                { name: 'formTitle', type: 'text', localized: true },
-                { name: 'phonePlaceholder', type: 'text', localized: true },
               ],
             },
           ],

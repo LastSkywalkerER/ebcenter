@@ -332,14 +332,85 @@ export interface Page {
           }
         | {
             /**
-             * Override form title (optional)
+             * Form title
              */
             title?: string | null;
+            /**
+             * Name field label
+             */
+            nameLabel?: string | null;
+            /**
+             * Email field label
+             */
+            emailLabel?: string | null;
+            /**
+             * Phone field label
+             */
+            phoneLabel?: string | null;
+            /**
+             * Message field label
+             */
+            messageLabel?: string | null;
+            /**
+             * Submit button text
+             */
+            submitLabel?: string | null;
+            /**
+             * Phone input placeholder
+             */
+            phonePlaceholder?: string | null;
+            /**
+             * Phone validation error
+             */
+            phoneError?: string | null;
+            /**
+             * Success message
+             */
+            successMessage?: string | null;
+            /**
+             * Error message
+             */
+            errorMessage?: string | null;
+            /**
+             * Sending state message
+             */
+            sendingMessage?: string | null;
+            /**
+             * Security check label
+             */
+            securityCheck?: string | null;
+            /**
+             * Security error message
+             */
+            securityError?: string | null;
+            validationNameRequired?: string | null;
+            validationMessageRequired?: string | null;
+            validationEmailInvalid?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactForm';
           }
         | {
+            /**
+             * Phone number
+             */
+            contactPhone?: string | null;
+            /**
+             * Email address
+             */
+            contactEmail?: string | null;
+            /**
+             * Physical address
+             */
+            contactAddress?: string | null;
+            /**
+             * Working hours
+             */
+            contactWorkingHours?: string | null;
+            /**
+             * UNP number
+             */
+            contactUnp?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactInfo';
@@ -597,12 +668,32 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              nameLabel?: T;
+              emailLabel?: T;
+              phoneLabel?: T;
+              messageLabel?: T;
+              submitLabel?: T;
+              phonePlaceholder?: T;
+              phoneError?: T;
+              successMessage?: T;
+              errorMessage?: T;
+              sendingMessage?: T;
+              securityCheck?: T;
+              securityError?: T;
+              validationNameRequired?: T;
+              validationMessageRequired?: T;
+              validationEmailInvalid?: T;
               id?: T;
               blockName?: T;
             };
         contactInfo?:
           | T
           | {
+              contactPhone?: T;
+              contactEmail?: T;
+              contactAddress?: T;
+              contactWorkingHours?: T;
+              contactUnp?: T;
               id?: T;
               blockName?: T;
             };
@@ -710,16 +801,16 @@ export interface SiteSetting {
   backToService?: string | null;
   notFoundTitle?: string | null;
   notFoundDescription?: string | null;
+  contactsSubtitle?: string | null;
+  contactInfoTitle?: string | null;
+  formTitle?: string | null;
+  phonePlaceholder?: string | null;
   trainingSubtitle?: string | null;
   courseDetails?: string | null;
   registrationTitle?: string | null;
   backToCourses?: string | null;
   inDevelopment?: string | null;
   courseProgramTitle?: string | null;
-  contactsSubtitle?: string | null;
-  contactInfoTitle?: string | null;
-  formTitle?: string | null;
-  phonePlaceholder?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -782,16 +873,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   backToService?: T;
   notFoundTitle?: T;
   notFoundDescription?: T;
+  contactsSubtitle?: T;
+  contactInfoTitle?: T;
+  formTitle?: T;
+  phonePlaceholder?: T;
   trainingSubtitle?: T;
   courseDetails?: T;
   registrationTitle?: T;
   backToCourses?: T;
   inDevelopment?: T;
   courseProgramTitle?: T;
-  contactsSubtitle?: T;
-  contactInfoTitle?: T;
-  formTitle?: T;
-  phonePlaceholder?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

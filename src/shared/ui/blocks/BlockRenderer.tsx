@@ -147,54 +147,58 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
               </section>
             )
           }
-          case 'contactForm':
+          case 'contactForm': {
+            const formBlock = block as Record<string, unknown>
             return (
               <section key={key} className='py-16 bg-gray-50'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                   <ContactForm
-                    title={(block.title as string) || t.contacts.form.title}
-                    name={t.common.name}
-                    email={t.common.email}
-                    phone={t.common.phone}
-                    message={t.common.message}
-                    submit={t.contacts.form.submit}
-                    phonePlaceholder={t.contacts.form.phonePlaceholder}
-                    phoneError={t.common.phoneError}
-                    success={t.common.success}
-                    error={t.common.error}
-                    sending={t.common.sending}
-                    securityCheck={t.common.securityCheck}
-                    securityError={t.common.securityError}
+                    title={(formBlock.title as string) || t.contacts.form.title}
+                    name={(formBlock.nameLabel as string) || t.common.name}
+                    email={(formBlock.emailLabel as string) || t.common.email}
+                    phone={(formBlock.phoneLabel as string) || t.common.phone}
+                    message={(formBlock.messageLabel as string) || t.common.message}
+                    submit={(formBlock.submitLabel as string) || t.contacts.form.submit}
+                    phonePlaceholder={(formBlock.phonePlaceholder as string) || t.contacts.form.phonePlaceholder}
+                    phoneError={(formBlock.phoneError as string) || t.common.phoneError}
+                    success={(formBlock.successMessage as string) || t.common.success}
+                    error={(formBlock.errorMessage as string) || t.common.error}
+                    sending={(formBlock.sendingMessage as string) || t.common.sending}
+                    securityCheck={(formBlock.securityCheck as string) || t.common.securityCheck}
+                    securityError={(formBlock.securityError as string) || t.common.securityError}
                     validation={{
-                      nameRequired: t.common.validation.nameRequired,
-                      messageRequired: t.common.validation.messageRequired,
-                      emailInvalid: t.common.validation.emailInvalid,
+                      nameRequired: (formBlock.validationNameRequired as string) || t.common.validation.nameRequired,
+                      messageRequired: (formBlock.validationMessageRequired as string) || t.common.validation.messageRequired,
+                      emailInvalid: (formBlock.validationEmailInvalid as string) || t.common.validation.emailInvalid,
                     }}
                   />
                 </div>
               </section>
             )
-          case 'contactInfo':
+          }
+          case 'contactInfo': {
+            const infoBlock = block as Record<string, unknown>
             return (
               <section key={key} className='py-16 bg-white'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                   <div className='bg-white rounded-lg shadow-lg p-8'>
                     <ContactInfo
                       address={t.common.address}
-                      addressValue={t.common.contactInfo.address}
+                      addressValue={(infoBlock.contactAddress as string) || t.common.contactInfo.address}
                       phone={t.common.phone}
-                      phoneValue={t.common.contactInfo.phone}
+                      phoneValue={(infoBlock.contactPhone as string) || t.common.contactInfo.phone}
                       email={t.common.email}
-                      emailValue={t.common.contactInfo.email}
+                      emailValue={(infoBlock.contactEmail as string) || t.common.contactInfo.email}
                       unp={t.common.unp}
-                      unpValue={t.common.contactInfo.unp}
+                      unpValue={(infoBlock.contactUnp as string) || t.common.contactInfo.unp}
                       workingHours={t.common.workingHours}
-                      workingHoursValue={t.common.contactInfo.workingHours}
+                      workingHoursValue={(infoBlock.contactWorkingHours as string) || t.common.contactInfo.workingHours}
                     />
                   </div>
                 </div>
               </section>
             )
+          }
           default:
             return null
         }
