@@ -38,11 +38,17 @@ const Header = async ({ locale }: { locale: Locale }) => {
             </Link>
           </nav>
 
-          <div className='hidden md:flex items-center space-x-4'>
-            <Link href='tel:+375291234567' className='text-gray-600 hover:text-gray-900'>
+          <div className='hidden md:flex items-center space-x-4 shrink-0'>
+            <Link
+              href='tel:+375291234567'
+              className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+            >
               {t.common.contactInfo.phone}
             </Link>
-            <Link href='mailto:info@ebcenter.by' className='text-gray-600 hover:text-gray-900'>
+            <Link
+              href='mailto:info@ebcenter.by'
+              className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+            >
               {t.common.contactInfo.email}
             </Link>
           </div>

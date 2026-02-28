@@ -26,7 +26,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   courseDetailsText,
 }) => {
   return (
-    <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col'>
+    <div className='bg-white rounded-lg shadow-lg p-6 flex flex-col min-w-0'>
       <div className='flex-grow'>
         <div className='text-center mb-6'>
           <div className='inline-block p-3 bg-blue-50 rounded-full mb-4'>{course.icon}</div>

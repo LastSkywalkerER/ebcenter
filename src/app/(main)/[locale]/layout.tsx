@@ -1,4 +1,3 @@
-import Disclaimer from '@/features/Disclaimer/Disclaimer'
 import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
 import { i18n, Locale } from '@/shared/i18n/config'
@@ -23,7 +22,6 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <Disclaimer locale={locale as Locale} />
       <Header locale={locale as Locale} />
       <main>{children}</main>
       <Footer locale={locale as Locale} />

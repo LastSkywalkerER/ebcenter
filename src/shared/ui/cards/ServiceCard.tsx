@@ -24,7 +24,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   moreText,
 }) => {
   return (
-    <div className='group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full'>
+    <div className='group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full min-w-0'>
       <div className='flex-grow'>
         <div className='flex items-center gap-4 mb-6'>
           <div className='p-3 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors'>
@@ -34,7 +34,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             {title}
           </h3>
         </div>
-        <p className='text-gray-600 mb-6 text-justify'>{description}</p>
+        <p className='text-gray-600 mb-6'>{description}</p>
       </div>
       <div className='space-y-3 mt-auto'>
         {hasTariffs && (

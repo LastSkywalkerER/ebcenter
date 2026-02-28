@@ -39,7 +39,7 @@ export default async function HomeAlt({ params }: { params: Promise<{ locale: Lo
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <SectionTitle title={t.home.description.title} subtitle={t.home.description.text} />
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {Object.entries(t.services.items)
                 .slice(0, 3)
                 .map(([key, service]) => (

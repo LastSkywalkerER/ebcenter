@@ -31,7 +31,7 @@ export default async function Training({ params }: { params: Promise<{ locale: L
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <SectionTitle title={t.training.title} subtitle={t.training.subtitle} />
 
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
             {courses.map((course, index) => {
               const courseData =
                 t.training.courses[course.programSlug as keyof typeof t.training.courses]
