@@ -79,6 +79,9 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.1.8"
   },
+  "optionalDependencies": {
+    "@img/sharp-linux-x64": "0.34.5"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/forms": "^0.5.10",
