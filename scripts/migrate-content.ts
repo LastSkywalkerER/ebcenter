@@ -4,25 +4,14 @@
  * Requires: DATABASE_URL, PAYLOAD_SECRET (in .env), and migrations applied.
  */
 import 'dotenv/config'
+import type { Payload } from 'payload'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type LocaleJson = Record<string, any>
 
-async function migrate() {
-  if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set. Add it to .env and ensure PostgreSQL is running.')
-  }
-  if (!process.env.PAYLOAD_SECRET) {
-    throw new Error(
-      'PAYLOAD_SECRET is not set. Add it to .env (e.g. generate with: openssl rand -base64 32)'
-    )
-  }
-
-  console.log('Starting content migration...')
-  const payload = await getPayload({ config })
-
+export async function migrateContent(payload: Payload) {
   const ruJson: LocaleJson = (await import('../src/shared/i18n/locales/ru.json')).default
   const enJson: LocaleJson = (await import('../src/shared/i18n/locales/en.json')).default
 
@@ -343,10 +332,27 @@ async function migrate() {
   }
 
   console.log('Migration complete!')
-  process.exit(0)
 }
 
-migrate().catch((err) => {
-  console.error('Migration failed:', err)
-  process.exit(1)
-})
+// Run when executed directly (yarn migrate:content), not when imported by seed
+const isMain = process.argv[1]?.includes('migrate-content')
+if (isMain) {
+  async function run() {
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL is not set. Add it to .env and ensure PostgreSQL is running.')
+    }
+    if (!process.env.PAYLOAD_SECRET) {
+      throw new Error(
+        'PAYLOAD_SECRET is not set. Add it to .env (e.g. generate with: openssl rand -base64 32)'
+      )
+    }
+    console.log('Starting content migration...')
+    const payload = await getPayload({ config })
+    await migrateContent(payload)
+    process.exit(0)
+  }
+  run().catch((err) => {
+    console.error('Migration failed:', err)
+    process.exit(1)
+  })
+}

@@ -1,0 +1,10 @@
+# Nixpacks config for Railway/Render deploy
+# Build: install deps, next build
+# Start: db:migrate, seed (admin+content), then next start
+
+[phases.build]
+cmds = ["...", "yarn build"]
+
+[start]
+# Run migrations, seed default admin + content, then start
+cmd = "yarn deploy:prepare && yarn start"
