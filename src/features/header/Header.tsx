@@ -1,16 +1,24 @@
 import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
 import { MobileMenu } from '@/features/header/MobileMenu'
 import { Locale } from '@/shared/i18n/config'
+import { getNavItems, getHeaderLogoUrl } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Header = async ({ locale }: { locale: Locale }) => {
-  const [t, logoUrl] = await Promise.all([
+  const [t, logoUrl, navItems] = await Promise.all([
     getTranslations(locale),
-    import('@/shared/lib/payload').then((m) => m.getHeaderLogoUrl(locale)),
+    getHeaderLogoUrl(locale),
+    getNavItems(locale),
   ])
   const logoSrc = logoUrl || '/web-app-manifest-512x512.png'
+  const nav = navItems.length > 0 ? navItems : [
+    { label: t.common.home, href: `/${locale}`, slug: '' },
+    { label: t.common.services, href: `/${locale}/services`, slug: 'services' },
+    { label: t.common.training, href: `/${locale}/training`, slug: 'training' },
+    { label: t.common.contacts, href: `/${locale}/contacts`, slug: 'contacts' },
+  ]
 
   return (
     <header className='bg-white shadow-md'>
@@ -24,18 +32,11 @@ const Header = async ({ locale }: { locale: Locale }) => {
           </div>
 
           <nav className='hidden md:flex space-x-8'>
-            <Link href={`/${locale}`} className='text-gray-600 hover:text-gray-900'>
-              {t.common.home}
-            </Link>
-            <Link href={`/${locale}/services`} className='text-gray-600 hover:text-gray-900'>
-              {t.common.services}
-            </Link>
-            <Link href={`/${locale}/training`} className='text-gray-600 hover:text-gray-900'>
-              {t.common.training}
-            </Link>
-            <Link href={`/${locale}/contacts`} className='text-gray-600 hover:text-gray-900'>
-              {t.common.contacts}
-            </Link>
+            {nav.map((item) => (
+              <Link key={item.slug || 'home'} href={item.href} className='text-gray-600 hover:text-gray-900'>
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className='hidden md:flex items-center space-x-4 shrink-0'>
@@ -55,7 +56,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
 
           <LanguageSwitcher locale={locale} />
 
-          <MobileMenu locale={locale} translations={t} />
+          <MobileMenu locale={locale} translations={t} navItems={nav} />
         </div>
       </div>
     </header>

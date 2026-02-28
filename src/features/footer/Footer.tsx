@@ -1,9 +1,16 @@
 import { Locale } from '@/shared/i18n/config'
+import { getNavItems } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
 
 const Footer = async ({ locale }: { locale: Locale }) => {
-  const t = await getTranslations(locale)
+  const [t, navItems] = await Promise.all([getTranslations(locale), getNavItems(locale)])
+  const nav = navItems.length > 0 ? navItems : [
+    { label: t.common.home, href: `/${locale}`, slug: '' },
+    { label: t.common.services, href: `/${locale}/services`, slug: 'services' },
+    { label: t.common.training, href: `/${locale}/training`, slug: 'training' },
+    { label: t.common.contacts, href: `/${locale}/contacts`, slug: 'contacts' },
+  ]
 
   return (
     <footer className='bg-gray-800 text-white'>
@@ -26,26 +33,13 @@ const Footer = async ({ locale }: { locale: Locale }) => {
           <div>
             <h3 className='text-xl font-bold mb-4'>{t.footer.quickLinks.title}</h3>
             <ul className='space-y-2'>
-              <li>
-                <Link href={`/${locale}`} className='text-gray-300 hover:text-white'>
-                  {t.common.home}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/services`} className='text-gray-300 hover:text-white'>
-                  {t.common.services}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/training`} className='text-gray-300 hover:text-white'>
-                  {t.common.training}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/contacts`} className='text-gray-300 hover:text-white'>
-                  {t.common.contacts}
-                </Link>
-              </li>
+              {nav.map((item) => (
+                <li key={item.slug || 'home'}>
+                  <Link href={item.href} className='text-gray-300 hover:text-white'>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

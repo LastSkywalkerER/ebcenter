@@ -1,5 +1,6 @@
 import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
+import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
 import { i18n, Locale } from '@/shared/i18n/config'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
@@ -22,6 +23,7 @@ export default async function LocaleLayout({
 
   return (
     <>
+      <LivePreviewRefresh />
       <Header locale={locale as Locale} />
       <main>{children}</main>
       <Footer locale={locale as Locale} />

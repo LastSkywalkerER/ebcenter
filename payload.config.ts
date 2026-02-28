@@ -17,6 +17,19 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(process.cwd()),
     },
+    livePreview: {
+      url: ({ data, locale }) => {
+        const loc = locale?.code ?? 'ru'
+        const path = data?.slug === 'home' ? '' : `/${(data?.slug as string) ?? ''}`
+        return `/${loc}${path}`
+      },
+      collections: ['pages'],
+      breakpoints: [
+        { label: 'Desktop', name: 'desktop', width: 1280, height: 800 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Mobile', name: 'mobile', width: 375, height: 667 },
+      ],
+    },
   },
   collections: [Users, Media, Services, Courses, Pages],
   globals: [SiteSettings],

@@ -29,7 +29,6 @@ type Program = {
   sections: Section[]
 }
 
-type CourseSlug = 'express' | 'contractPrice' | 'individual'
 type ProgramSlug = 'express-course' | 'contract-price' | 'individual'
 
 export type Translations = {
@@ -176,7 +175,8 @@ export type Translations = {
         message: string
       }
     }
-    courses: Record<CourseSlug, Course>
+    courses: Record<string, Course>
+    courseOrder: string[]
     courseProgram: {
       backToCourses: string
       inDevelopment: string

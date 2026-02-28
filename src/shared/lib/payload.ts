@@ -85,11 +85,17 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
       }
     }
 
+    const sortedCourses = [...courses].sort((a, b) => {
+      const orderA = (a as { order?: number }).order ?? 0
+      const orderB = (b as { order?: number }).order ?? 0
+      return orderA - orderB
+    })
     const coursesMap: Record<
       string,
       { title: string; duration: string; price: string; topics: string[] }
     > = {}
-    for (const c of courses) {
+    const courseOrder: string[] = []
+    for (const c of sortedCourses) {
       const course = c as {
         key?: string
         title?: string
@@ -98,6 +104,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         topics?: { topic?: string }[]
       }
       if (course.key) {
+        courseOrder.push(course.key)
         coursesMap[course.key] = {
           title: course.title ?? '',
           duration: course.duration ?? '',
@@ -235,7 +242,8 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
             message: (settings?.commonMessage as string) ?? '',
           },
         },
-        courses: coursesMap as unknown as Translations['training']['courses'],
+        courses: coursesMap,
+        courseOrder,
         courseProgram: {
           backToCourses: (settings?.backToCourses as string) ?? '',
           inDevelopment: (settings?.inDevelopment as string) ?? '',
@@ -347,6 +355,72 @@ export async function getHeaderLogoUrl(locale: Locale): Promise<string | null> {
     }
     return null
   } catch {
+    return null
+  }
+}
+
+export interface NavItem {
+  label: string
+  href: string
+  slug: string
+}
+
+export async function getNavItems(locale: Locale): Promise<NavItem[]> {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'pages',
+      where: { showInNav: { equals: true } },
+      sort: 'navOrder',
+      limit: 50,
+      locale,
+    })
+    const settings = (await payload.findGlobal({ slug: 'site-settings', locale })) as unknown as Record<
+      string,
+      unknown
+    >
+    const labelsBySlug: Record<string, string> = {
+      home: (settings?.navHome as string) ?? '',
+      services: (settings?.navServices as string) ?? '',
+      training: (settings?.navTraining as string) ?? '',
+      contacts: (settings?.navContacts as string) ?? '',
+    }
+    return result.docs.map((p) => {
+      const page = p as { title?: string; slug?: string }
+      const slug = page.slug ?? ''
+      const href = slug === 'home' ? `/${locale}` : `/${locale}/${slug}`
+      const label = labelsBySlug[slug] ?? (page.title as string) ?? slug
+      return { label, href, slug }
+    })
+  } catch (err) {
+    console.error('getNavItems failed:', err)
+    return []
+  }
+}
+
+export interface PageData {
+  id: string | number
+  title?: string
+  slug?: string
+  layout?: Array<{ blockType: string; [key: string]: unknown }>
+}
+
+export async function getPageBySlug(
+  slug: string,
+  locale: Locale
+): Promise<PageData | null> {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'pages',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      locale,
+    })
+    const page = result.docs[0] as PageData | undefined
+    return page ?? null
+  } catch (err) {
+    console.error('getPageBySlug failed:', err)
     return null
   }
 }

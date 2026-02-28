@@ -4,8 +4,14 @@ import { Locale } from '@/shared/i18n/config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+interface NavItem {
+  label: string
+  href: string
+  slug: string
+}
+
 interface MobileMenuProps {
-  locale: Locale
+  locale?: Locale
   translations: {
     common: {
       home: string
@@ -18,9 +24,10 @@ interface MobileMenuProps {
       }
     }
   }
+  navItems: NavItem[]
 }
 
-export const MobileMenu = ({ locale, translations }: MobileMenuProps) => {
+export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -115,34 +122,16 @@ export const MobileMenu = ({ locale, translations }: MobileMenuProps) => {
           </div>
 
           <div className='flex-1 px-4 pb-6 space-y-1 overflow-y-auto'>
-            <Link
-              href={`/${locale}`}
-              className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
-              onClick={() => setIsOpen(false)}
-            >
-              {translations.common.home}
-            </Link>
-            <Link
-              href={`/${locale}/services`}
-              className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
-              onClick={() => setIsOpen(false)}
-            >
-              {translations.common.services}
-            </Link>
-            <Link
-              href={`/${locale}/training`}
-              className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
-              onClick={() => setIsOpen(false)}
-            >
-              {translations.common.training}
-            </Link>
-            <Link
-              href={`/${locale}/contacts`}
-              className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
-              onClick={() => setIsOpen(false)}
-            >
-              {translations.common.contacts}
-            </Link>
+            {navItems.map((item) => (
+              <Link
+                key={item.slug || 'home'}
+                href={item.href}
+                className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
           <div className='border-t border-gray-200 px-4 py-6 space-y-3'>

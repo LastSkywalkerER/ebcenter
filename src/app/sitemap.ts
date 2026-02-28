@@ -1,10 +1,10 @@
 import { env } from '@/shared/config/env'
-import coursesData from '@/shared/constants/courses.json'
-import serviceData from '@/shared/constants/services.json'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { i18n } from '@/shared/i18n/config'
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = env.BASE_URL
   if (!baseUrl) {
     throw new Error('NEXT_PUBLIC_BASE_URL environment variable is not set')
@@ -26,47 +26,67 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   )
 
-  // Generate service pages
-  const serviceEntries = i18n.locales.flatMap((locale) =>
-    Object.values(serviceData).map((slug) => ({
-      url: `${baseUrl}/${locale}/services/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-      alternateRefs: i18n.locales.map((altLocale) => ({
-        href: `${baseUrl}/${altLocale}/services/${slug}`,
-        hreflang: altLocale,
-      })),
-    }))
-  )
+  try {
+    const payload = await getPayload({ config })
 
-  // Generate tariff pages
-  const tariffEntries = i18n.locales.flatMap((locale) =>
-    Object.values(serviceData).map((slug) => ({
-      url: `${baseUrl}/${locale}/tariffs/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-      alternateRefs: i18n.locales.map((altLocale) => ({
-        href: `${baseUrl}/${altLocale}/tariffs/${slug}`,
-        hreflang: altLocale,
-      })),
-    }))
-  )
+    const [servicesResult, coursesResult] = await Promise.all([
+      payload.find({ collection: 'services', limit: 100, pagination: false }),
+      payload.find({ collection: 'courses', limit: 100, pagination: false, sort: 'order' }),
+    ])
 
-  // Generate course pages
-  const courseEntries = i18n.locales.flatMap((locale) =>
-    Object.values(coursesData).map((course) => ({
-      url: `${baseUrl}/${locale}/training/${course.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-      alternateRefs: i18n.locales.map((altLocale) => ({
-        href: `${baseUrl}/${altLocale}/training/${course.slug}`,
-        hreflang: altLocale,
-      })),
-    }))
-  )
+    const serviceSlugs = servicesResult.docs
+      .map((s) => (s as { slug?: string }).slug)
+      .filter((s): s is string => !!s)
 
-  return [...sitemapEntries, ...serviceEntries, ...tariffEntries, ...courseEntries]
+    const courseSlugs = coursesResult.docs
+      .map((c) => (c as { slug?: string }).slug)
+      .filter((s): s is string => !!s)
+
+    // Service detail pages
+    const serviceEntries = i18n.locales.flatMap((locale) =>
+      serviceSlugs.map((slug) => ({
+        url: `${baseUrl}/${locale}/services/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+        alternateRefs: i18n.locales.map((altLocale) => ({
+          href: `${baseUrl}/${altLocale}/services/${slug}`,
+          hreflang: altLocale,
+        })),
+      }))
+    )
+
+    // Tariff pages
+    const tariffEntries = i18n.locales.flatMap((locale) =>
+      serviceSlugs.map((slug) => ({
+        url: `${baseUrl}/${locale}/services/${slug}/tariffs`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+        alternateRefs: i18n.locales.map((altLocale) => ({
+          href: `${baseUrl}/${altLocale}/services/${slug}/tariffs`,
+          hreflang: altLocale,
+        })),
+      }))
+    )
+
+    // Course detail pages
+    const courseEntries = i18n.locales.flatMap((locale) =>
+      courseSlugs.map((slug) => ({
+        url: `${baseUrl}/${locale}/training/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+        alternateRefs: i18n.locales.map((altLocale) => ({
+          href: `${baseUrl}/${altLocale}/training/${slug}`,
+          hreflang: altLocale,
+        })),
+      }))
+    )
+
+    return [...sitemapEntries, ...serviceEntries, ...tariffEntries, ...courseEntries]
+  } catch (err) {
+    console.error('sitemap: Payload fetch failed, using base routes only', err)
+    return sitemapEntries
+  }
 }

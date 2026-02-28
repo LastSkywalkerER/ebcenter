@@ -7,9 +7,17 @@ export const Courses: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'order', 'updatedAt'],
   },
   fields: [
+    {
+      name: 'order',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        description: 'Display order on training page (lower = first)',
+      },
+    },
     {
       name: 'key',
       type: 'text',

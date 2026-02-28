@@ -9,6 +9,7 @@ import { getPayload } from 'payload'
 
 // Import content migration logic
 import { migrateContent } from './migrate-content'
+import { seedPages } from './seed-pages'
 
 async function seed() {
   if (!process.env.DATABASE_URL) {
@@ -60,6 +61,11 @@ async function seed() {
   } else {
     console.log('Content exists, skipping migration (FORCE_SEED=1 to re-run)')
   }
+
+  // Seed Pages (idempotent - creates or updates Home, Services, Training, Contacts)
+  console.log('Seeding Pages...')
+  await seedPages(payload)
+  console.log('Pages seeded')
 
   console.log('Seed complete!')
   process.exit(0)

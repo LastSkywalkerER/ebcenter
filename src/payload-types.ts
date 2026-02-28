@@ -218,6 +218,10 @@ export interface Service {
 export interface Course {
   id: number;
   /**
+   * Display order on training page (lower = first)
+   */
+  order?: number | null;
+  /**
    * Unique key (e.g. express-course, contract-price)
    */
   key: string;
@@ -254,24 +258,94 @@ export interface Page {
   id: number;
   title: string;
   /**
-   * URL path (e.g. about-us)
+   * URL path (e.g. home, services, about-us). Use "home" for the main page.
    */
   slug: string;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  /**
+   * Show this page in header/footer navigation
+   */
+  showInNav?: boolean | null;
+  /**
+   * Order in navigation (lower = first)
+   */
+  navOrder?: number | null;
+  layout?:
+    | (
+        | {
+            title: string;
+            subtitle?: string | null;
+            cta?: string | null;
+            /**
+             * URL for CTA button
+             */
+            ctaLink?: string | null;
+            secondaryCta?: string | null;
+            /**
+             * URL for secondary button
+             */
+            secondaryCtaLink?: string | null;
+            background?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'section';
+          }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            /**
+             * Max services to show (0 = all)
+             */
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'serviceList';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'courseList';
+          }
+        | {
+            /**
+             * Override form title (optional)
+             */
+            title?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactForm';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactInfo';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -439,6 +513,7 @@ export interface ServicesSelect<T extends boolean = true> {
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
+  order?: T;
   key?: T;
   title?: T;
   duration?: T;
@@ -472,7 +547,66 @@ export interface CoursesSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  showInNav?: T;
+  navOrder?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              cta?: T;
+              ctaLink?: T;
+              secondaryCta?: T;
+              secondaryCtaLink?: T;
+              background?: T;
+              id?: T;
+              blockName?: T;
+            };
+        section?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        serviceList?:
+          | T
+          | {
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        courseList?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactInfo?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
