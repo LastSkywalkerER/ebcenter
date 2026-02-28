@@ -323,9 +323,26 @@ export async function getTranslations(locale: Locale): Promise<Translations> {
     return translationsCache[locale]!
   }
 
-  const translations = await import(`./locales/${locale}.json`)
-  translationsCache[locale] = translations.default
-  return translations.default
+  try {
+    const { getSiteContent } = await import('@/shared/lib/payload')
+    const cmsContent = await getSiteContent(locale)
+    if (cmsContent) {
+      const jsonTranslations = (await import(`./locales/${locale}.json`)).default as Translations
+      const merged: Translations = {
+        ...cmsContent,
+        admin: jsonTranslations.admin,
+        login: jsonTranslations.login,
+      }
+      translationsCache[locale] = merged
+      return merged
+    }
+  } catch {
+    // Fallback to JSON if Payload fails (e.g. DB not ready)
+  }
+
+  const translations = (await import(`./locales/${locale}.json`)).default as Translations
+  translationsCache[locale] = translations
+  return translations
 }
 
 export async function getTranslation(locale: Locale, key: string): Promise<string | string[]> {

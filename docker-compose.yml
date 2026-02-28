@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ebcenter-postgres
+    restart: unless-stopped
+    ports:
+      - "5444:5432"
+    environment:
+      POSTGRES_USER: ebcenter
+      POSTGRES_PASSWORD: ebcenter
+      POSTGRES_DB: ebcenter
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ebcenter -d ebcenter"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:

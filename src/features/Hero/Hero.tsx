@@ -10,9 +10,11 @@ interface HeroProps {
   cta: string
   training: string
   locale: string
+  backgroundImageUrl?: string | null
 }
 
-export const Hero = ({ title, subtitle, cta, training, locale }: HeroProps) => {
+export const Hero = ({ title, subtitle, cta, training, locale, backgroundImageUrl }: HeroProps) => {
+  const imageSrc = backgroundImageUrl || '/images/hero-bg.png'
   const offset = useParallax(0.1)
 
   return (
@@ -30,7 +32,7 @@ export const Hero = ({ title, subtitle, cta, training, locale }: HeroProps) => {
           }}
         >
           <Image
-            src='/images/hero-bg.png'
+            src={imageSrc}
             alt={title}
             width={1920}
             height={1080}
