@@ -59,610 +59,608 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    users: User
-    media: Media
-    services: Service
-    courses: Course
-    pages: Page
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    media: Media;
+    services: Service;
+    courses: Course;
+    pages: Page;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    media: MediaSelect<false> | MediaSelect<true>
-    services: ServicesSelect<false> | ServicesSelect<true>
-    courses: CoursesSelect<false> | CoursesSelect<true>
-    pages: PagesSelect<false> | PagesSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: number
-  }
-  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('ru' | 'en') | ('ru' | 'en')[]
+    defaultIDType: number;
+  };
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('ru' | 'en') | ('ru' | 'en')[];
   globals: {
-    'site-settings': SiteSetting
-  }
+    'site-settings': SiteSetting;
+  };
   globalsSelect: {
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>
-  }
-  locale: 'ru' | 'en'
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
+  locale: 'ru' | 'en';
   widgets: {
-    collections: CollectionsWidget
-  }
-  user: User
+    collections: CollectionsWidget;
+  };
+  user: User;
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
-  collection: 'users'
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number
-  alt: string
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
-  id: number
+  id: number;
   /**
    * Unique key for mapping (e.g. estimateService)
    */
-  key: string
-  title: string
-  description?: string | null
+  key: string;
+  title: string;
+  description?: string | null;
   /**
    * URL slug (e.g. smetnoe-obsluzhivanie)
    */
-  slug: string
+  slug: string;
   content?:
     | {
-        text: string
-        id?: string | null
+        text: string;
+        id?: string | null;
       }[]
-    | null
-  hasTariffs?: boolean | null
+    | null;
+  hasTariffs?: boolean | null;
   tariffItems?:
     | {
-        name: string
-        price: string
-        description?: string | null
+        name: string;
+        price: string;
+        description?: string | null;
         features?:
           | {
-              feature?: string | null
-              id?: string | null
+              feature?: string | null;
+              id?: string | null;
             }[]
-          | null
-        id?: string | null
+          | null;
+        id?: string | null;
       }[]
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
  */
 export interface Course {
-  id: number
+  id: number;
   /**
    * Unique key (e.g. express-course, contract-price)
    */
-  key: string
-  title: string
-  duration?: string | null
-  price?: string | null
-  slug: string
+  key: string;
+  title: string;
+  duration?: string | null;
+  price?: string | null;
+  slug: string;
   topics?:
     | {
-        topic?: string | null
-        id?: string | null
+        topic?: string | null;
+        id?: string | null;
       }[]
-    | null
+    | null;
   programSections?:
     | {
-        title: string
+        title: string;
         content?:
           | {
-              item?: string | null
-              id?: string | null
+              item?: string | null;
+              id?: string | null;
             }[]
-          | null
-        id?: string | null
+          | null;
+        id?: string | null;
       }[]
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number
-  title: string
+  id: number;
+  title: string;
   /**
    * URL path (e.g. about-us)
    */
-  slug: string
+  slug: string;
   content?: {
     root: {
-      type: string
+      type: string;
       children: {
-        type: any
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  } | null
-  updatedAt: string
-  createdAt: string
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number
-  key: string
+  id: number;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number
+  id: number;
   document?:
     | ({
-        relationTo: 'users'
-        value: number | User
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
-        relationTo: 'media'
-        value: number | Media
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
-        relationTo: 'services'
-        value: number | Service
+        relationTo: 'services';
+        value: number | Service;
       } | null)
     | ({
-        relationTo: 'courses'
-        value: number | Course
+        relationTo: 'courses';
+        value: number | Course;
       } | null)
     | ({
-        relationTo: 'pages'
-        value: number | Page
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'pages';
+        value: number | Page;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number
+  id: number;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: number | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services_select".
  */
 export interface ServicesSelect<T extends boolean = true> {
-  key?: T
-  title?: T
-  description?: T
-  slug?: T
+  key?: T;
+  title?: T;
+  description?: T;
+  slug?: T;
   content?:
     | T
     | {
-        text?: T
-        id?: T
-      }
-  hasTariffs?: T
+        text?: T;
+        id?: T;
+      };
+  hasTariffs?: T;
   tariffItems?:
     | T
     | {
-        name?: T
-        price?: T
-        description?: T
+        name?: T;
+        price?: T;
+        description?: T;
         features?:
           | T
           | {
-              feature?: T
-              id?: T
-            }
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
+              feature?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
-  key?: T
-  title?: T
-  duration?: T
-  price?: T
-  slug?: T
+  key?: T;
+  title?: T;
+  duration?: T;
+  price?: T;
+  slug?: T;
   topics?:
     | T
     | {
-        topic?: T
-        id?: T
-      }
+        topic?: T;
+        id?: T;
+      };
   programSections?:
     | T
     | {
-        title?: T
+        title?: T;
         content?:
           | T
           | {
-              item?: T
-              id?: T
-            }
-        id?: T
-      }
-  updatedAt?: T
-  createdAt?: T
+              item?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  content?: T
-  updatedAt?: T
-  createdAt?: T
+  title?: T;
+  slug?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
-  id: number
-  heroTitle: string
-  heroSubtitle?: string | null
-  heroCta?: string | null
-  heroBackground?: (number | null) | Media
-  descriptionTitle?: string | null
-  descriptionText?: string | null
-  headerLogo?: (number | null) | Media
-  headerLogoText?: string | null
-  navHome?: string | null
-  navServices?: string | null
-  navTraining?: string | null
-  navContacts?: string | null
-  contactPhone?: string | null
-  contactEmail?: string | null
-  contactAddress?: string | null
-  contactWorkingHours?: string | null
-  contactUnp?: string | null
-  footerTitle?: string | null
-  footerDescription?: string | null
-  footerCopyright?: string | null
-  commonMore?: string | null
-  commonTariffs?: string | null
-  commonRegister?: string | null
-  commonSendRequest?: string | null
-  commonCourseProgram?: string | null
-  commonHome?: string | null
-  commonServices?: string | null
-  commonTraining?: string | null
-  commonContacts?: string | null
-  commonContactUs?: string | null
-  commonPhone?: string | null
-  commonEmail?: string | null
-  commonAddress?: string | null
-  commonWorkingHours?: string | null
-  commonName?: string | null
-  commonMessage?: string | null
-  commonSelectCourse?: string | null
-  commonDisclaimer?: string | null
-  commonPhoneError?: string | null
-  commonSuccess?: string | null
-  commonError?: string | null
-  commonSending?: string | null
-  commonSecurityCheck?: string | null
-  commonSecurityError?: string | null
-  commonUnp?: string | null
-  validationNameRequired?: string | null
-  validationMessageRequired?: string | null
-  validationEmailInvalid?: string | null
-  servicesTitle?: string | null
-  servicesSubtitle?: string | null
-  backToServices?: string | null
-  backToService?: string | null
-  notFoundTitle?: string | null
-  notFoundDescription?: string | null
-  trainingSubtitle?: string | null
-  courseDetails?: string | null
-  registrationTitle?: string | null
-  backToCourses?: string | null
-  inDevelopment?: string | null
-  courseProgramTitle?: string | null
-  contactsSubtitle?: string | null
-  contactInfoTitle?: string | null
-  formTitle?: string | null
-  phonePlaceholder?: string | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  id: number;
+  heroTitle: string;
+  heroSubtitle?: string | null;
+  heroCta?: string | null;
+  heroBackground?: (number | null) | Media;
+  descriptionTitle?: string | null;
+  descriptionText?: string | null;
+  headerLogo?: (number | null) | Media;
+  headerLogoText?: string | null;
+  navHome?: string | null;
+  navServices?: string | null;
+  navTraining?: string | null;
+  navContacts?: string | null;
+  contactPhone?: string | null;
+  contactEmail?: string | null;
+  contactAddress?: string | null;
+  contactWorkingHours?: string | null;
+  contactUnp?: string | null;
+  footerTitle?: string | null;
+  footerDescription?: string | null;
+  footerCopyright?: string | null;
+  commonMore?: string | null;
+  commonTariffs?: string | null;
+  commonRegister?: string | null;
+  commonSendRequest?: string | null;
+  commonCourseProgram?: string | null;
+  commonHome?: string | null;
+  commonServices?: string | null;
+  commonTraining?: string | null;
+  commonContacts?: string | null;
+  commonContactUs?: string | null;
+  commonPhone?: string | null;
+  commonEmail?: string | null;
+  commonAddress?: string | null;
+  commonWorkingHours?: string | null;
+  commonName?: string | null;
+  commonMessage?: string | null;
+  commonSelectCourse?: string | null;
+  commonDisclaimer?: string | null;
+  commonPhoneError?: string | null;
+  commonSuccess?: string | null;
+  commonError?: string | null;
+  commonSending?: string | null;
+  commonSecurityCheck?: string | null;
+  commonSecurityError?: string | null;
+  commonUnp?: string | null;
+  validationNameRequired?: string | null;
+  validationMessageRequired?: string | null;
+  validationEmailInvalid?: string | null;
+  servicesTitle?: string | null;
+  servicesSubtitle?: string | null;
+  backToServices?: string | null;
+  backToService?: string | null;
+  notFoundTitle?: string | null;
+  notFoundDescription?: string | null;
+  trainingSubtitle?: string | null;
+  courseDetails?: string | null;
+  registrationTitle?: string | null;
+  backToCourses?: string | null;
+  inDevelopment?: string | null;
+  courseProgramTitle?: string | null;
+  contactsSubtitle?: string | null;
+  contactInfoTitle?: string | null;
+  formTitle?: string | null;
+  phonePlaceholder?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  heroTitle?: T
-  heroSubtitle?: T
-  heroCta?: T
-  heroBackground?: T
-  descriptionTitle?: T
-  descriptionText?: T
-  headerLogo?: T
-  headerLogoText?: T
-  navHome?: T
-  navServices?: T
-  navTraining?: T
-  navContacts?: T
-  contactPhone?: T
-  contactEmail?: T
-  contactAddress?: T
-  contactWorkingHours?: T
-  contactUnp?: T
-  footerTitle?: T
-  footerDescription?: T
-  footerCopyright?: T
-  commonMore?: T
-  commonTariffs?: T
-  commonRegister?: T
-  commonSendRequest?: T
-  commonCourseProgram?: T
-  commonHome?: T
-  commonServices?: T
-  commonTraining?: T
-  commonContacts?: T
-  commonContactUs?: T
-  commonPhone?: T
-  commonEmail?: T
-  commonAddress?: T
-  commonWorkingHours?: T
-  commonName?: T
-  commonMessage?: T
-  commonSelectCourse?: T
-  commonDisclaimer?: T
-  commonPhoneError?: T
-  commonSuccess?: T
-  commonError?: T
-  commonSending?: T
-  commonSecurityCheck?: T
-  commonSecurityError?: T
-  commonUnp?: T
-  validationNameRequired?: T
-  validationMessageRequired?: T
-  validationEmailInvalid?: T
-  servicesTitle?: T
-  servicesSubtitle?: T
-  backToServices?: T
-  backToService?: T
-  notFoundTitle?: T
-  notFoundDescription?: T
-  trainingSubtitle?: T
-  courseDetails?: T
-  registrationTitle?: T
-  backToCourses?: T
-  inDevelopment?: T
-  courseProgramTitle?: T
-  contactsSubtitle?: T
-  contactInfoTitle?: T
-  formTitle?: T
-  phonePlaceholder?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  heroTitle?: T;
+  heroSubtitle?: T;
+  heroCta?: T;
+  heroBackground?: T;
+  descriptionTitle?: T;
+  descriptionText?: T;
+  headerLogo?: T;
+  headerLogoText?: T;
+  navHome?: T;
+  navServices?: T;
+  navTraining?: T;
+  navContacts?: T;
+  contactPhone?: T;
+  contactEmail?: T;
+  contactAddress?: T;
+  contactWorkingHours?: T;
+  contactUnp?: T;
+  footerTitle?: T;
+  footerDescription?: T;
+  footerCopyright?: T;
+  commonMore?: T;
+  commonTariffs?: T;
+  commonRegister?: T;
+  commonSendRequest?: T;
+  commonCourseProgram?: T;
+  commonHome?: T;
+  commonServices?: T;
+  commonTraining?: T;
+  commonContacts?: T;
+  commonContactUs?: T;
+  commonPhone?: T;
+  commonEmail?: T;
+  commonAddress?: T;
+  commonWorkingHours?: T;
+  commonName?: T;
+  commonMessage?: T;
+  commonSelectCourse?: T;
+  commonDisclaimer?: T;
+  commonPhoneError?: T;
+  commonSuccess?: T;
+  commonError?: T;
+  commonSending?: T;
+  commonSecurityCheck?: T;
+  commonSecurityError?: T;
+  commonUnp?: T;
+  validationNameRequired?: T;
+  validationMessageRequired?: T;
+  validationEmailInvalid?: T;
+  servicesTitle?: T;
+  servicesSubtitle?: T;
+  backToServices?: T;
+  backToService?: T;
+  notFoundTitle?: T;
+  notFoundDescription?: T;
+  trainingSubtitle?: T;
+  courseDetails?: T;
+  registrationTitle?: T;
+  backToCourses?: T;
+  inDevelopment?: T;
+  courseProgramTitle?: T;
+  contactsSubtitle?: T;
+  contactInfoTitle?: T;
+  formTitle?: T;
+  phonePlaceholder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -670,17 +668,18 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  */
 export interface CollectionsWidget {
   data?: {
-    [k: string]: unknown
-  }
-  width: 'full'
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
