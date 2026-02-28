@@ -1,3 +1,3 @@
 {
-  "installCommand": "yarn install && npm install --no-save --omit=dev --legacy-peer-deps --os=linux --cpu=x64 --libc=glibc sharp"
+  "installCommand": "yarn install"
 }

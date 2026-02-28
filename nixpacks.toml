@@ -3,11 +3,10 @@
 # Start: db:migrate, seed (admin+content), then next start
 
 [phases.install]
-# Full override: corepack, yarn (no --frozen-lockfile), sharp for linux
+# Yarn only - on Linux build sharp gets correct binaries automatically
 cmds = [
   "npm install -g corepack@0.24.1 && corepack enable",
-  "yarn install",
-  "npm install --no-save --omit=dev --os=linux --cpu=x64 --libc=glibc sharp"
+  "yarn install"
 ]
 
 [phases.build]
