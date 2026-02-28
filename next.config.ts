@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
     webpackConfig.resolve.alias = {
       ...webpackConfig.resolve.alias,
       '@': path.join(process.cwd(), 'src'),
+      '@payload-config': path.join(process.cwd(), 'payload.config.ts'),
     }
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
