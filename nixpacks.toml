@@ -2,6 +2,10 @@
 # Build: install deps, next build
 # Start: db:migrate, seed (admin+content), then next start
 
+[phases.install]
+# Ensure sharp has linux binaries (same as Vercel)
+cmds = ["...", "npm install --no-save --omit=dev --os=linux --cpu=x64 --libc=glibc sharp"]
+
 [phases.build]
 cmds = ["...", "yarn build"]
 
