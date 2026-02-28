@@ -1,3 +1,0 @@
-# lint-staged disabled due to backup/stash issues
-# Run "yarn lint-staged" or "yarn lint" manually before committing
-exit 0
