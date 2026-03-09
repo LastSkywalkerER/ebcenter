@@ -4,12 +4,49 @@ import { i18n } from './shared/i18n/config'
 
 const PUBLIC_FILE = /\.(.*)$/
 
+function getCanonicalRedirect(request: NextRequest): NextResponse | null {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  if (!baseUrl || !baseUrl.startsWith('https://')) return null
+
+  const url = request.nextUrl.clone()
+  const host = request.headers.get('host') ?? url.host
+  const protocol = request.headers.get('x-forwarded-proto') ?? (url.protocol.replace(':', ''))
+
+  // Redirect HTTP to HTTPS
+  if (protocol === 'http') {
+    url.protocol = 'https'
+    url.host = host
+    return NextResponse.redirect(url, 301)
+  }
+
+  // Redirect www to non-www (or vice versa) to match BASE_URL
+  try {
+    const canonicalHost = new URL(baseUrl).host
+    const canonicalHasWww = canonicalHost.startsWith('www.')
+    const requestHasWww = host.startsWith('www.')
+
+    if (requestHasWww !== canonicalHasWww) {
+      url.host = canonicalHost
+      url.protocol = 'https'
+      return NextResponse.redirect(url, 301)
+    }
+  } catch {
+    // Invalid BASE_URL, skip redirect
+  }
+
+  return null
+}
+
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   if (request.nextUrl.pathname.startsWith('/_next') || PUBLIC_FILE.test(request.nextUrl.pathname)) {
     return
   }
+
+  // Redirect to canonical URL (HTTPS, www/non-www)
+  const redirect = getCanonicalRedirect(request)
+  if (redirect) return redirect
 
   if (pathname.startsWith('/api/')) {
     // Public API routes

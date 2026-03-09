@@ -13,6 +13,7 @@ import { TariffCard } from '@/shared/ui/cards/TariffCard'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { Breadcrumbs } from '@/shared/ui/seo/Breadcrumbs'
 import { env } from '@/shared/config/env'
+import { buildAlternates } from '@/shared/lib/alternates'
 
 type PageProps = {
   params: Promise<{ locale: Locale; slug?: string[] }>
@@ -24,6 +25,11 @@ function getPageSlugForMeta(slugSegments: string[] | undefined): string | null {
   if (slug.length === 1 && ['services', 'training', 'contacts'].includes(slug[0])) return slug[0]
   if (slug.length === 1) return slug[0]
   return null
+}
+
+function slugToPath(slug: string[]): string {
+  if (slug.length === 0) return ''
+  return '/' + slug.join('/')
 }
 
 function buildOgMetadata(ogImageUrl: string | null, title: string | null | undefined) {
@@ -43,6 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale, slug: slugSegments } = await params
   const slug = slugSegments ?? []
 
+  const baseUrl = env.BASE_URL || ''
+
   // Service detail: /services/{slug}
   if (slug.length === 2 && slug[0] === 'services') {
     const service = await getServiceBySlug(slug[1], locale)
@@ -50,10 +58,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const title = service.metaTitle ?? service.title ?? null
     const description = service.metaDescription ?? service.description ?? null
     const ogImageUrl = service.ogImage && typeof service.ogImage === 'object' && 'url' in service.ogImage ? (service.ogImage.url ?? null) : null
+    const path = slugToPath(slug)
     return {
       ...(title && { title }),
       ...(description && { description }),
       ...buildOgMetadata(ogImageUrl, title),
+      alternates: buildAlternates(baseUrl, locale, path),
     }
   }
 
@@ -62,9 +72,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const service = await getServiceBySlug(slug[1], locale)
     if (!service) return {}
     const title = service.metaTitle ?? service.title ?? null
+    const path = slugToPath(slug)
     return {
       ...(title && { title }),
       ...(service.metaDescription && { description: service.metaDescription }),
+      alternates: buildAlternates(baseUrl, locale, path),
     }
   }
 
@@ -74,10 +86,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (!course) return {}
     const title = course.metaTitle ?? course.title ?? null
     const ogImageUrl = course.ogImage && typeof course.ogImage === 'object' && 'url' in course.ogImage ? (course.ogImage.url ?? null) : null
+    const path = slugToPath(slug)
     return {
       ...(title && { title }),
       ...(course.metaDescription && { description: course.metaDescription }),
       ...buildOgMetadata(ogImageUrl, title),
+      alternates: buildAlternates(baseUrl, locale, path),
     }
   }
 
@@ -86,10 +100,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = await getPageBySlug(pageSlug, locale)
   if (!page?.metaTitle && !page?.metaDescription) return {}
   const ogImage = page.ogImage && typeof page.ogImage === 'object' && 'url' in page.ogImage ? (page.ogImage.url ?? null) : null
+  const path = slugToPath(slug)
   return {
     ...(page.metaTitle && { title: page.metaTitle }),
     ...(page.metaDescription && { description: page.metaDescription }),
     ...buildOgMetadata(ogImage, page.metaTitle),
+    alternates: buildAlternates(baseUrl, locale, path),
   }
 }
 

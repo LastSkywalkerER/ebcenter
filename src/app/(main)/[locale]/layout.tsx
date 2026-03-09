@@ -4,7 +4,7 @@ import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { env } from '@/shared/config/env'
 import { i18n, Locale } from '@/shared/i18n/config'
-import { getLocalePath } from '@/shared/lib/localePath'
+import { buildAlternates } from '@/shared/lib/alternates'
 import { getSiteMeta } from '@/shared/lib/payload'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -27,28 +27,14 @@ export async function generateMetadata({
   const locale = (await params).locale
   const meta = await getSiteMeta(locale)
   const baseUrl = env.BASE_URL || ''
-  const canonicalPath = getLocalePath(locale, '')
-  const canonical = baseUrl ? `${baseUrl}${canonicalPath === '/' ? '' : canonicalPath}` : undefined
+  const alternates = buildAlternates(baseUrl, locale, '')
+  const canonical = alternates?.canonical
   const rawOgImage = meta.ogImageUrl ?? meta.heroBackgroundUrl
   const ogImageUrl = rawOgImage?.startsWith('http')
     ? rawOgImage
     : rawOgImage && baseUrl
       ? `${baseUrl}${rawOgImage.startsWith('/') ? '' : '/'}${rawOgImage}`
       : undefined
-  const alternates =
-    baseUrl && i18n.locales.length > 1
-      ? {
-          canonical,
-          languages: Object.fromEntries(
-            i18n.locales.map((loc) => {
-              const path = getLocalePath(loc, '')
-              return [loc, `${baseUrl}${path === '/' ? '' : path}`]
-            })
-          ) as Record<string, string>,
-        }
-      : canonical
-        ? { canonical }
-        : undefined
 
   return {
     title: meta.metaTitle ?? 'EBCenter - Сметные работы и обучение',
@@ -68,7 +54,7 @@ export async function generateMetadata({
       description: meta.metaDescription ?? undefined,
       images: ogImageUrl ? [ogImageUrl] : undefined,
     },
-    alternates,
+    alternates: alternates ?? undefined,
   }
 }
 
