@@ -10,10 +10,11 @@ function getCanonicalRedirect(request: NextRequest): NextResponse | null {
 
   const url = request.nextUrl.clone()
   const host = request.headers.get('host') ?? url.host
-  const protocol = request.headers.get('x-forwarded-proto') ?? (url.protocol.replace(':', ''))
 
-  // Redirect HTTP to HTTPS
-  if (protocol === 'http') {
+  // Only redirect HTTP->HTTPS when x-forwarded-proto explicitly says "http".
+  // Behind Traefik/proxy the connection is always HTTP; url.protocol would wrongly trigger redirect loop.
+  const forwardedProto = request.headers.get('x-forwarded-proto')
+  if (forwardedProto === 'http') {
     url.protocol = 'https'
     url.host = host
     return NextResponse.redirect(url, 301)
