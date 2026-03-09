@@ -4,7 +4,6 @@ import * as migration_20260228_191845 from './20260228_191845';
 import * as migration_20260309_083920 from './20260309_083920';
 import * as migration_20260309_120000_services_locales_seo from './20260309_120000_services_locales_seo';
 import * as migration_20260309_161221_add_seo_blocks from './20260309_161221_add_seo_blocks';
-import * as migration_20260309_175303_add_media_seed_key from './20260309_175303_add_media_seed_key';
 
 export const migrations = [
   {
@@ -36,10 +35,5 @@ export const migrations = [
     up: migration_20260309_161221_add_seo_blocks.up,
     down: migration_20260309_161221_add_seo_blocks.down,
     name: '20260309_161221_add_seo_blocks',
-  },
-  {
-    up: migration_20260309_175303_add_media_seed_key.up,
-    down: migration_20260309_175303_add_media_seed_key.down,
-    name: '20260309_175303_add_media_seed_key'
   },
 ];
