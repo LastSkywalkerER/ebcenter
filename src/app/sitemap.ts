@@ -45,68 +45,70 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       payload.find({ collection: 'pages', limit: 200, pagination: false }),
     ])
 
-    const serviceSlugs = servicesResult.docs
-      .map((s) => (s as { slug?: string }).slug)
-      .filter((s): s is string => !!s)
+    type DocWithMeta = { slug?: string; updatedAt?: string }
 
-    const courseSlugs = coursesResult.docs
-      .map((c) => (c as { slug?: string }).slug)
-      .filter((s): s is string => !!s)
-
-    const pageSlugs = pagesResult.docs
-      .map((p) => (p as { slug?: string }).slug)
-      .filter((s): s is string => !!s && s !== 'home' && s !== 'services' && s !== 'training' && s !== 'contacts')
+    const services = servicesResult.docs as DocWithMeta[]
+    const courses = coursesResult.docs as DocWithMeta[]
+    const pages = pagesResult.docs as DocWithMeta[]
 
     const serviceEntries = i18n.locales.flatMap((locale) =>
-      serviceSlugs.map((slug) => ({
-        url: localeUrl(baseUrl, locale, `/services/${slug}`),
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-        alternateRefs: [
-          { href: localeUrl(baseUrl, i18n.defaultLocale, `/services/${slug}`), hreflang: 'x-default' },
-          ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/services/${slug}`), hreflang: loc })),
-        ],
-      }))
+      services
+        .filter((s): s is DocWithMeta & { slug: string } => !!s.slug)
+        .map((s) => ({
+          url: localeUrl(baseUrl, locale, `/services/${s.slug}`),
+          lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+          alternateRefs: [
+            { href: localeUrl(baseUrl, i18n.defaultLocale, `/services/${s.slug}`), hreflang: 'x-default' },
+            ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/services/${s.slug}`), hreflang: loc })),
+          ],
+        }))
     )
 
     const tariffEntries = i18n.locales.flatMap((locale) =>
-      serviceSlugs.map((slug) => ({
-        url: localeUrl(baseUrl, locale, `/services/${slug}/tariffs`),
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-        alternateRefs: [
-          { href: localeUrl(baseUrl, i18n.defaultLocale, `/services/${slug}/tariffs`), hreflang: 'x-default' },
-          ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/services/${slug}/tariffs`), hreflang: loc })),
-        ],
-      }))
+      services
+        .filter((s): s is DocWithMeta & { slug: string } => !!s.slug)
+        .map((s) => ({
+          url: localeUrl(baseUrl, locale, `/services/${s.slug}/tariffs`),
+          lastModified: s.updatedAt ? new Date(s.updatedAt) : new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.6,
+          alternateRefs: [
+            { href: localeUrl(baseUrl, i18n.defaultLocale, `/services/${s.slug}/tariffs`), hreflang: 'x-default' },
+            ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/services/${s.slug}/tariffs`), hreflang: loc })),
+          ],
+        }))
     )
 
     const courseEntries = i18n.locales.flatMap((locale) =>
-      courseSlugs.map((slug) => ({
-        url: localeUrl(baseUrl, locale, `/training/${slug}`),
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-        alternateRefs: [
-          { href: localeUrl(baseUrl, i18n.defaultLocale, `/training/${slug}`), hreflang: 'x-default' },
-          ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/training/${slug}`), hreflang: loc })),
-        ],
-      }))
+      courses
+        .filter((c): c is DocWithMeta & { slug: string } => !!c.slug)
+        .map((c) => ({
+          url: localeUrl(baseUrl, locale, `/training/${c.slug}`),
+          lastModified: c.updatedAt ? new Date(c.updatedAt) : new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.7,
+          alternateRefs: [
+            { href: localeUrl(baseUrl, i18n.defaultLocale, `/training/${c.slug}`), hreflang: 'x-default' },
+            ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/training/${c.slug}`), hreflang: loc })),
+          ],
+        }))
     )
 
     const customPageEntries = i18n.locales.flatMap((locale) =>
-      pageSlugs.map((slug) => ({
-        url: localeUrl(baseUrl, locale, `/${slug}`),
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.5,
-        alternateRefs: [
-          { href: localeUrl(baseUrl, i18n.defaultLocale, `/${slug}`), hreflang: 'x-default' },
-          ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/${slug}`), hreflang: loc })),
-        ],
-      }))
+      pages
+        .filter((p): p is DocWithMeta & { slug: string } => !!p.slug && p.slug !== 'home' && p.slug !== 'services' && p.slug !== 'training' && p.slug !== 'contacts')
+        .map((p) => ({
+          url: localeUrl(baseUrl, locale, `/${p.slug}`),
+          lastModified: p.updatedAt ? new Date(p.updatedAt) : new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.5,
+          alternateRefs: [
+            { href: localeUrl(baseUrl, i18n.defaultLocale, `/${p.slug}`), hreflang: 'x-default' },
+            ...i18n.locales.map((loc) => ({ href: localeUrl(baseUrl, loc, `/${p.slug}`), hreflang: loc })),
+          ],
+        }))
     )
 
     return [...sitemapEntries, ...serviceEntries, ...tariffEntries, ...courseEntries, ...customPageEntries]

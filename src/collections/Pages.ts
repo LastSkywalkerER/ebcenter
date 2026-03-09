@@ -50,7 +50,7 @@ export const Pages: CollectionConfig = {
       fields: [
         { name: 'metaTitle', type: 'text', localized: true, admin: { description: 'Page meta title' } },
         { name: 'metaDescription', type: 'textarea', localized: true, admin: { description: 'Page meta description' } },
-        { name: 'ogImage', type: 'upload', relationTo: 'media', localized: true, admin: { description: 'Page Open Graph image' } },
+        { name: 'ogImage', type: 'upload', relationTo: 'media', localized: true, admin: { description: 'OG изображение для этой страницы (рекомендуется 1200×630 px)' } },
       ],
     },
     {

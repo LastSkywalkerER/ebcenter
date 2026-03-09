@@ -55,6 +55,16 @@ export const Courses: CollectionConfig = {
       fields: [{ name: 'topic', type: 'text' }],
     },
     {
+      type: 'collapsible',
+      label: 'SEO',
+      admin: { description: 'Override meta for this course page (optional)' },
+      fields: [
+        { name: 'metaTitle', type: 'text', localized: true, admin: { description: 'Meta title (если не задан — используется title)' } },
+        { name: 'metaDescription', type: 'textarea', localized: true, admin: { description: 'Meta description' } },
+        { name: 'ogImage', type: 'upload', relationTo: 'media', localized: true, admin: { description: 'OG изображение (рекомендуется 1200×630 px)' } },
+      ],
+    },
+    {
       name: 'programSections',
       type: 'array',
       label: 'Program sections',

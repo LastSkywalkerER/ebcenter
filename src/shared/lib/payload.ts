@@ -405,8 +405,16 @@ export interface SiteMeta {
   metaDescription: string | null
   metaKeywords: string | null
   ogImageUrl: string | null
+  heroBackgroundUrl: string | null
+  contactPhone: string | null
+  contactEmail: string | null
+  contactAddress: string | null
   robotsIndex: boolean
   robotsFollow: boolean
+}
+
+function extractMediaUrl(field: unknown): string | null {
+  return field && typeof field === 'object' && 'url' in field ? (field.url as string) ?? null : null
 }
 
 export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
@@ -416,16 +424,15 @@ export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
       slug: 'site-settings',
       locale,
     })) as unknown as Record<string, unknown>
-    const ogImage = settings?.ogImage
-    const ogImageUrl =
-      ogImage && typeof ogImage === 'object' && 'url' in ogImage
-        ? (ogImage.url as string) ?? null
-        : null
     return {
       metaTitle: (settings?.metaTitle as string) ?? null,
       metaDescription: (settings?.metaDescription as string) ?? null,
       metaKeywords: (settings?.metaKeywords as string) ?? null,
-      ogImageUrl,
+      ogImageUrl: extractMediaUrl(settings?.ogImage),
+      heroBackgroundUrl: extractMediaUrl(settings?.heroBackground),
+      contactPhone: (settings?.contactPhone as string) ?? null,
+      contactEmail: (settings?.contactEmail as string) ?? null,
+      contactAddress: (settings?.contactAddress as string) ?? null,
       robotsIndex: (settings?.robotsIndex as boolean) ?? true,
       robotsFollow: (settings?.robotsFollow as boolean) ?? true,
     }
@@ -436,6 +443,10 @@ export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
       metaDescription: null,
       metaKeywords: null,
       ogImageUrl: null,
+      heroBackgroundUrl: null,
+      contactPhone: null,
+      contactEmail: null,
+      contactAddress: null,
       robotsIndex: true,
       robotsFollow: true,
     }
@@ -468,6 +479,56 @@ export async function getPageBySlug(
     return page ?? null
   } catch (err) {
     console.error('getPageBySlug failed:', err)
+    return null
+  }
+}
+
+export interface ServiceMeta {
+  title?: string
+  description?: string
+  metaTitle?: string | null
+  metaDescription?: string | null
+  ogImage?: { url?: string } | number | null
+}
+
+export async function getServiceBySlug(slug: string, locale: Locale): Promise<ServiceMeta | null> {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'services',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      locale,
+    })
+    const doc = result.docs[0] as ServiceMeta | undefined
+    return doc ?? null
+  } catch (err) {
+    console.error('getServiceBySlug failed:', err)
+    return null
+  }
+}
+
+export interface CourseMeta {
+  title?: string
+  price?: string
+  metaTitle?: string | null
+  metaDescription?: string | null
+  ogImage?: { url?: string } | number | null
+}
+
+export async function getCourseBySlug(slug: string, locale: Locale): Promise<CourseMeta | null> {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'courses',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      locale,
+    })
+    const doc = result.docs[0] as CourseMeta | undefined
+    return doc ?? null
+  } catch (err) {
+    console.error('getCourseBySlug failed:', err)
     return null
   }
 }

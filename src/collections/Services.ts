@@ -52,6 +52,16 @@ export const Services: CollectionConfig = {
       ],
     },
     {
+      type: 'collapsible',
+      label: 'SEO',
+      admin: { description: 'Override meta for this service page (optional)' },
+      fields: [
+        { name: 'metaTitle', type: 'text', localized: true, admin: { description: 'Meta title (если не задан — используется title)' } },
+        { name: 'metaDescription', type: 'textarea', localized: true, admin: { description: 'Meta description' } },
+        { name: 'ogImage', type: 'upload', relationTo: 'media', localized: true, admin: { description: 'OG изображение (рекомендуется 1200×630 px)' } },
+      ],
+    },
+    {
       name: 'hasTariffs',
       type: 'checkbox',
       defaultValue: false,

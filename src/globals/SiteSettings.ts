@@ -201,7 +201,7 @@ export const SiteSettings: GlobalConfig = {
               type: 'upload',
               relationTo: 'media',
               localized: true,
-              admin: { description: 'Default Open Graph image' },
+              admin: { description: 'OG изображение (рекомендуется 1200×630 px). Если не задано — используется фоновое изображение Hero.' },
             },
             {
               name: 'robotsIndex',

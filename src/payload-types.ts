@@ -193,6 +193,18 @@ export interface Service {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Meta title (если не задан — используется title)
+   */
+  metaTitle?: string | null;
+  /**
+   * Meta description
+   */
+  metaDescription?: string | null;
+  /**
+   * OG изображение (рекомендуется 1200×630 px)
+   */
+  ogImage?: (number | null) | Media;
   hasTariffs?: boolean | null;
   tariffItems?:
     | {
@@ -235,6 +247,18 @@ export interface Course {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Meta title (если не задан — используется title)
+   */
+  metaTitle?: string | null;
+  /**
+   * Meta description
+   */
+  metaDescription?: string | null;
+  /**
+   * OG изображение (рекомендуется 1200×630 px)
+   */
+  ogImage?: (number | null) | Media;
   programSections?:
     | {
         title: string;
@@ -278,7 +302,7 @@ export interface Page {
    */
   metaDescription?: string | null;
   /**
-   * Page Open Graph image
+   * OG изображение для этой страницы (рекомендуется 1200×630 px)
    */
   ogImage?: (number | null) | Media;
   layout?:
@@ -573,6 +597,9 @@ export interface ServicesSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  metaTitle?: T;
+  metaDescription?: T;
+  ogImage?: T;
   hasTariffs?: T;
   tariffItems?:
     | T
@@ -608,6 +635,9 @@ export interface CoursesSelect<T extends boolean = true> {
         topic?: T;
         id?: T;
       };
+  metaTitle?: T;
+  metaDescription?: T;
+  ogImage?: T;
   programSections?:
     | T
     | {
@@ -839,7 +869,7 @@ export interface SiteSetting {
    */
   metaKeywords?: string | null;
   /**
-   * Default Open Graph image
+   * OG изображение (рекомендуется 1200×630 px). Если не задано — используется фоновое изображение Hero.
    */
   ogImage?: (number | null) | Media;
   /**

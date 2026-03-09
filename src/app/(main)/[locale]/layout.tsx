@@ -1,13 +1,19 @@
 import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
 import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
+import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { env } from '@/shared/config/env'
 import { i18n, Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
 import { getSiteMeta } from '@/shared/lib/payload'
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
+import '../../globals.css'
+
+const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }))
@@ -23,10 +29,11 @@ export async function generateMetadata({
   const baseUrl = env.BASE_URL || ''
   const canonicalPath = getLocalePath(locale, '')
   const canonical = baseUrl ? `${baseUrl}${canonicalPath === '/' ? '' : canonicalPath}` : undefined
-  const ogImageUrl = meta.ogImageUrl?.startsWith('http')
-    ? meta.ogImageUrl
-    : meta.ogImageUrl && baseUrl
-      ? `${baseUrl}${meta.ogImageUrl.startsWith('/') ? '' : '/'}${meta.ogImageUrl}`
+  const rawOgImage = meta.ogImageUrl ?? meta.heroBackgroundUrl
+  const ogImageUrl = rawOgImage?.startsWith('http')
+    ? rawOgImage
+    : rawOgImage && baseUrl
+      ? `${baseUrl}${rawOgImage.startsWith('/') ? '' : '/'}${rawOgImage}`
       : undefined
   const alternates =
     baseUrl && i18n.locales.length > 1
@@ -53,7 +60,13 @@ export async function generateMetadata({
       type: 'website',
       locale: locale === 'ru' ? 'ru_RU' : 'en_US',
       url: canonical,
-      images: ogImageUrl ? [{ url: ogImageUrl, width: 192, height: 192, alt: meta.metaTitle ?? 'EBCenter' }] : undefined,
+      images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630, alt: meta.metaTitle ?? 'EBCenter' }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.metaTitle ?? 'EBCenter - Сметные работы и обучение',
+      description: meta.metaDescription ?? undefined,
+      images: ogImageUrl ? [ogImageUrl] : undefined,
     },
     alternates,
   }
@@ -71,12 +84,37 @@ export default async function LocaleLayout({
   // Validate that the incoming `locale` parameter is valid
   if (!i18n.locales.includes(locale as Locale)) notFound()
 
+  const meta = await getSiteMeta(locale)
+  const baseUrl = env.BASE_URL || ''
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'LocalBusiness'],
+    name: 'EBCenter',
+    url: baseUrl || undefined,
+    ...(meta.contactPhone && { telephone: meta.contactPhone }),
+    ...(meta.contactEmail && { email: meta.contactEmail }),
+    ...(meta.contactAddress && {
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: meta.contactAddress,
+        addressCountry: 'BY',
+      },
+    }),
+  }
+
   return (
-    <>
-      <LivePreviewRefresh />
-      <Header locale={locale as Locale} />
-      <main>{children}</main>
-      <Footer locale={locale as Locale} />
-    </>
+    <html lang={locale}>
+      <body className={inter.className}>
+        <div className='min-h-screen flex flex-col'>
+          <JsonLd data={orgSchema} />
+          <LivePreviewRefresh />
+          <Header locale={locale as Locale} />
+          <main>{children}</main>
+          <Footer locale={locale as Locale} />
+          <Analytics />
+        </div>
+      </body>
+    </html>
   )
 }
