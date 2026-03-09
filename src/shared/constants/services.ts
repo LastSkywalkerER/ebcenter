@@ -1,1 +1,5 @@
-export const getServiceUrl = (locale: string, slug: string) => `/${locale}/services/${slug}`
+import type { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
+
+export const getServiceUrl = (locale: Locale, slug: string) =>
+  getLocalePath(locale, `/services/${slug}`)

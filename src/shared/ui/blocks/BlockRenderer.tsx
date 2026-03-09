@@ -3,6 +3,7 @@
 import { ContactForm } from '@/features/ContactForm'
 import { Hero } from '@/features/Hero/Hero'
 import type { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import type { Translations } from '@/shared/i18n/utils'
 import { RenderRichText } from '@/shared/ui/richtext/RenderRichText'
 import { SectionTitle } from '@/shared/ui/sections/SectionTitle'
@@ -46,8 +47,10 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
 
         switch (block.blockType) {
           case 'hero': {
-            const ctaLink = (block.ctaLink as string) || `/${locale}/services`
-            const secondaryCtaLink = (block.secondaryCtaLink as string) || `/${locale}/training`
+            const ctaPath = (block.ctaLink as string) || '/services'
+            const secondaryPath = (block.secondaryCtaLink as string) || '/training'
+            const ctaLink = getLocalePath(locale, ctaPath.startsWith('/') ? ctaPath : `/${ctaPath}`)
+            const secondaryCtaLink = getLocalePath(locale, secondaryPath.startsWith('/') ? secondaryPath : `/${secondaryPath}`)
             const bgUrl = getBackgroundUrl(block.background)
             return (
               <Hero
@@ -56,7 +59,6 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
                 subtitle={(block.subtitle as string) ?? ''}
                 cta={(block.cta as string) ?? t.home.hero.cta}
                 training={(block.secondaryCta as string) ?? t.common.training}
-                locale={locale}
                 backgroundImageUrl={bgUrl}
                 ctaLink={ctaLink}
                 secondaryCtaLink={secondaryCtaLink}

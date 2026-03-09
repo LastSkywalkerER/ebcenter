@@ -175,6 +175,48 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
+        {
+          label: 'SEO',
+          fields: [
+            {
+              name: 'metaTitle',
+              type: 'text',
+              localized: true,
+              admin: { description: 'Default meta title for the site' },
+            },
+            {
+              name: 'metaDescription',
+              type: 'textarea',
+              localized: true,
+              admin: { description: 'Default meta description' },
+            },
+            {
+              name: 'metaKeywords',
+              type: 'text',
+              localized: true,
+              admin: { description: 'Default meta keywords (comma-separated)' },
+            },
+            {
+              name: 'ogImage',
+              type: 'upload',
+              relationTo: 'media',
+              localized: true,
+              admin: { description: 'Default Open Graph image' },
+            },
+            {
+              name: 'robotsIndex',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: { description: 'Allow search engines to index the site' },
+            },
+            {
+              name: 'robotsFollow',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: { description: 'Allow search engines to follow links' },
+            },
+          ],
+        },
       ],
     },
   ],

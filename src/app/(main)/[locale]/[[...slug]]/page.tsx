@@ -1,4 +1,5 @@
 import type { Locale } from '@/shared/i18n/config'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPageBySlug } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
@@ -12,6 +13,35 @@ import { TariffCard } from '@/shared/ui/cards/TariffCard'
 
 type PageProps = {
   params: Promise<{ locale: Locale; slug?: string[] }>
+}
+
+function getPageSlugForMeta(slugSegments: string[] | undefined): string | null {
+  const slug = slugSegments ?? []
+  if (slug.length === 0) return 'home'
+  if (slug.length === 1 && ['services', 'training', 'contacts'].includes(slug[0])) return slug[0]
+  if (slug.length === 1) return slug[0]
+  if (slug.length === 2 && slug[0] === 'services') return null
+  if (slug.length === 3 && slug[0] === 'services' && slug[2] === 'tariffs') return null
+  if (slug.length === 2 && slug[0] === 'training') return null
+  return null
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale, slug: slugSegments } = await params
+  const pageSlug = getPageSlugForMeta(slugSegments)
+  if (!pageSlug) return {}
+  const page = await getPageBySlug(pageSlug, locale)
+  if (!page?.metaTitle && !page?.metaDescription) return {}
+  const ogImage = page.ogImage && typeof page.ogImage === 'object' && 'url' in page.ogImage ? page.ogImage.url : null
+  return {
+    ...(page.metaTitle && { title: page.metaTitle }),
+    ...(page.metaDescription && { description: page.metaDescription }),
+    ...(ogImage && {
+      openGraph: {
+        images: [{ url: ogImage, width: 192, height: 192, alt: page.metaTitle ?? undefined }],
+      },
+    }),
+  }
 }
 
 export default async function DynamicPage({ params }: PageProps) {
@@ -77,7 +107,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return (
       <main className='flex-grow py-16 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <BackButton href={`/${locale}/services`} text={t.services.backToServices} locale={locale} />
+          <BackButton path="/services" text={t.services.backToServices} locale={locale} />
           {serviceDetails ? (
             <ServiceContent serviceDetails={serviceDetails} />
           ) : (
@@ -104,7 +134,7 @@ export default async function DynamicPage({ params }: PageProps) {
     return (
       <main className='flex-grow py-16 bg-white'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <BackButton href={`/${locale}/services`} text={t.services.backToServices} locale={locale} />
+          <BackButton path="/services" text={t.services.backToServices} locale={locale} />
           {tariffs ? (
             <>
               <SectionTitle title={tariffs.title} subtitle={tariffs.description} />
@@ -162,7 +192,7 @@ export default async function DynamicPage({ params }: PageProps) {
       <main className='flex-grow py-16 bg-gray-50'>
         <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
           <BackButton
-            href={`/${locale}/training`}
+            path="/training"
             text={t.training.courseProgram.backToCourses}
             locale={locale}
           />

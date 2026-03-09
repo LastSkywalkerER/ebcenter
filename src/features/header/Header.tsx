@@ -1,6 +1,7 @@
 import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
 import { MobileMenu } from '@/features/header/MobileMenu'
 import { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import { getNavItems, getHeaderLogoUrl } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
@@ -14,10 +15,10 @@ const Header = async ({ locale }: { locale: Locale }) => {
   ])
   const logoSrc = logoUrl || '/web-app-manifest-512x512.png'
   const nav = navItems.length > 0 ? navItems : [
-    { label: t.common.home, href: `/${locale}`, slug: '' },
-    { label: t.common.services, href: `/${locale}/services`, slug: 'services' },
-    { label: t.common.training, href: `/${locale}/training`, slug: 'training' },
-    { label: t.common.contacts, href: `/${locale}/contacts`, slug: 'contacts' },
+    { label: t.common.home, href: getLocalePath(locale, ''), slug: '' },
+    { label: t.common.services, href: getLocalePath(locale, '/services'), slug: 'services' },
+    { label: t.common.training, href: getLocalePath(locale, '/training'), slug: 'training' },
+    { label: t.common.contacts, href: getLocalePath(locale, '/contacts'), slug: 'contacts' },
   ]
 
   return (
@@ -26,7 +27,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
         <div className='flex justify-between items-center h-16'>
           <div className='flex-shrink-0 flex items-center'>
             <Image src={logoSrc} alt={t.header.logo} width={32} height={32} className='mr-2' />
-            <Link href={`/${locale}`} className='text-2xl font-bold text-gray-800'>
+            <Link href={getLocalePath(locale, '')} className='text-2xl font-bold text-gray-800'>
               {t.header.logo}
             </Link>
           </div>

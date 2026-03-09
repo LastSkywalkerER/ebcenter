@@ -2,6 +2,7 @@ import 'server-only'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import type { Translations } from '@/shared/i18n/utils'
 
 export async function getSiteContent(locale: Locale): Promise<Translations | null> {
@@ -388,7 +389,8 @@ export async function getNavItems(locale: Locale): Promise<NavItem[]> {
     return result.docs.map((p) => {
       const page = p as { title?: string; slug?: string }
       const slug = page.slug ?? ''
-      const href = slug === 'home' ? `/${locale}` : `/${locale}/${slug}`
+      const path = slug === 'home' ? '' : `/${slug}`
+      const href = getLocalePath(locale, path)
       const label = labelsBySlug[slug] ?? (page.title as string) ?? slug
       return { label, href, slug }
     })
@@ -398,11 +400,56 @@ export async function getNavItems(locale: Locale): Promise<NavItem[]> {
   }
 }
 
+export interface SiteMeta {
+  metaTitle: string | null
+  metaDescription: string | null
+  metaKeywords: string | null
+  ogImageUrl: string | null
+  robotsIndex: boolean
+  robotsFollow: boolean
+}
+
+export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
+  try {
+    const payload = await getPayload({ config })
+    const settings = (await payload.findGlobal({
+      slug: 'site-settings',
+      locale,
+    })) as unknown as Record<string, unknown>
+    const ogImage = settings?.ogImage
+    const ogImageUrl =
+      ogImage && typeof ogImage === 'object' && 'url' in ogImage
+        ? (ogImage.url as string) ?? null
+        : null
+    return {
+      metaTitle: (settings?.metaTitle as string) ?? null,
+      metaDescription: (settings?.metaDescription as string) ?? null,
+      metaKeywords: (settings?.metaKeywords as string) ?? null,
+      ogImageUrl,
+      robotsIndex: (settings?.robotsIndex as boolean) ?? true,
+      robotsFollow: (settings?.robotsFollow as boolean) ?? true,
+    }
+  } catch (err) {
+    console.error('getSiteMeta failed:', err)
+    return {
+      metaTitle: null,
+      metaDescription: null,
+      metaKeywords: null,
+      ogImageUrl: null,
+      robotsIndex: true,
+      robotsFollow: true,
+    }
+  }
+}
+
 export interface PageData {
   id: string | number
   title?: string
   slug?: string
   layout?: Array<{ blockType: string; [key: string]: unknown }>
+  metaTitle?: string | null
+  metaDescription?: string | null
+  ogImage?: { url?: string } | number | null
 }
 
 export async function getPageBySlug(

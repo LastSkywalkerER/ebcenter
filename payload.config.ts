@@ -23,8 +23,11 @@ export default buildConfig({
     livePreview: {
       url: ({ data, locale }) => {
         const loc = locale?.code ?? 'ru'
-        const path = data?.slug === 'home' ? '' : `/${(data?.slug as string) ?? ''}`
-        return `/${loc}${path}`
+        const pathSegment = data?.slug === 'home' ? '' : `/${(data?.slug as string) ?? ''}`
+        if (loc === 'ru') {
+          return pathSegment || '/'
+        }
+        return `/${loc}${pathSegment}`
       },
       collections: ['pages'],
       breakpoints: [

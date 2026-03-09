@@ -44,6 +44,16 @@ export const Pages: CollectionConfig = {
       },
     },
     {
+      type: 'collapsible',
+      label: 'SEO',
+      admin: { description: 'Override meta for this page (optional)' },
+      fields: [
+        { name: 'metaTitle', type: 'text', localized: true, admin: { description: 'Page meta title' } },
+        { name: 'metaDescription', type: 'textarea', localized: true, admin: { description: 'Page meta description' } },
+        { name: 'ogImage', type: 'upload', relationTo: 'media', localized: true, admin: { description: 'Page Open Graph image' } },
+      ],
+    },
+    {
       name: 'layout',
       type: 'blocks',
       localized: true,

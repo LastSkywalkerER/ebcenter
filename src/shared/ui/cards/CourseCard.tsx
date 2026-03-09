@@ -1,4 +1,5 @@
 import { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import { CheckIcon } from '@/shared/ui/icons/ServiceIcons'
 import Link from 'next/link'
 import React from 'react'
@@ -54,7 +55,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
 
       <div className='space-y-3 mt-auto'>
         <Link
-          href={`/${locale}/training/${course.programSlug}`}
+          href={getLocalePath(locale, `/training/${course.programSlug}`)}
           className='block w-full bg-gray-100 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors text-center'
         >
           {courseProgramText}

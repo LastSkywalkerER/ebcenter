@@ -1,4 +1,5 @@
 import { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import Link from 'next/link'
 import React from 'react'
 
@@ -39,14 +40,14 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       <div className='space-y-3 mt-auto'>
         {hasTariffs && (
           <Link
-            href={`/${locale}/services/${slug}/tariffs`}
+            href={getLocalePath(locale, `/services/${slug}/tariffs`)}
             className='block w-full bg-gray-50 text-gray-900 py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors text-center font-medium'
           >
             {tariffsText}
           </Link>
         )}
         <Link
-          href={`/${locale}/services/${slug}`}
+          href={getLocalePath(locale, `/services/${slug}`)}
           className='block w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors text-center font-medium'
         >
           {moreText}

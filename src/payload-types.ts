@@ -269,6 +269,18 @@ export interface Page {
    * Order in navigation (lower = first)
    */
   navOrder?: number | null;
+  /**
+   * Page meta title
+   */
+  metaTitle?: string | null;
+  /**
+   * Page meta description
+   */
+  metaDescription?: string | null;
+  /**
+   * Page Open Graph image
+   */
+  ogImage?: (number | null) | Media;
   layout?:
     | (
         | {
@@ -620,6 +632,9 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   showInNav?: T;
   navOrder?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  ogImage?: T;
   layout?:
     | T
     | {
@@ -811,6 +826,30 @@ export interface SiteSetting {
   backToCourses?: string | null;
   inDevelopment?: string | null;
   courseProgramTitle?: string | null;
+  /**
+   * Default meta title for the site
+   */
+  metaTitle?: string | null;
+  /**
+   * Default meta description
+   */
+  metaDescription?: string | null;
+  /**
+   * Default meta keywords (comma-separated)
+   */
+  metaKeywords?: string | null;
+  /**
+   * Default Open Graph image
+   */
+  ogImage?: (number | null) | Media;
+  /**
+   * Allow search engines to index the site
+   */
+  robotsIndex?: boolean | null;
+  /**
+   * Allow search engines to follow links
+   */
+  robotsFollow?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -883,6 +922,12 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   backToCourses?: T;
   inDevelopment?: T;
   courseProgramTitle?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  ogImage?: T;
+  robotsIndex?: T;
+  robotsFollow?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

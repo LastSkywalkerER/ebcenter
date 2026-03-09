@@ -9,7 +9,6 @@ interface HeroProps {
   subtitle: string
   cta: string
   training: string
-  locale: string
   backgroundImageUrl?: string | null
   ctaLink?: string
   secondaryCtaLink?: string
@@ -20,10 +19,9 @@ export const Hero = ({
   subtitle,
   cta,
   training,
-  locale,
   backgroundImageUrl,
-  ctaLink = `/${locale}/services`,
-  secondaryCtaLink = `/${locale}/training`,
+  ctaLink = '/services',
+  secondaryCtaLink = '/training',
 }: HeroProps) => {
   const imageSrc = backgroundImageUrl || '/images/hero-bg.png'
   const offset = useParallax(0.1)
@@ -65,13 +63,13 @@ export const Hero = ({
             <p className='text-xl md:text-2xl mb-8 text-gray-200 text-justify'>{subtitle}</p>
             <div className='flex flex-col sm:flex-row gap-4'>
               <Link
-                href={ctaLink.startsWith('/') ? ctaLink : `/${locale}/${ctaLink}`}
+                href={ctaLink.startsWith('/') ? ctaLink : `/${ctaLink}`}
                 className='bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold text-center'
               >
                 {cta}
               </Link>
               <Link
-                href={secondaryCtaLink.startsWith('/') ? secondaryCtaLink : `/${locale}/${secondaryCtaLink}`}
+                href={secondaryCtaLink.startsWith('/') ? secondaryCtaLink : `/${secondaryCtaLink}`}
                 className='bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg hover:bg-white/20 transition-colors text-lg font-semibold text-center'
               >
                 {training}

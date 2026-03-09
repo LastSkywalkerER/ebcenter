@@ -33,14 +33,22 @@ export function middleware(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )
 
+  // Redirect /ru and /ru/* to canonical URL without prefix (default locale)
+  if (pathname === `/${i18n.defaultLocale}` || pathname.startsWith(`/${i18n.defaultLocale}/`)) {
+    const canonicalPath = pathname === `/${i18n.defaultLocale}` ? '/' : pathname.slice(i18n.defaultLocale.length + 1)
+    request.nextUrl.pathname = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`
+    return NextResponse.redirect(request.nextUrl)
+  }
+
   if (pathnameHasLocale) return
 
   // Payload CMS admin at /admin - no locale prefix
   if (pathname.startsWith('/admin')) return
 
+  // Paths without locale: rewrite to default locale (URL stays as /, /services, etc.)
   const locale = request.cookies.get('NEXT_LOCALE')?.value || i18n.defaultLocale
   request.nextUrl.pathname = `/${locale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+  return NextResponse.rewrite(request.nextUrl)
 }
 
 export const config = {

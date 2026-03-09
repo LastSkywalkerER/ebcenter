@@ -1,4 +1,5 @@
 import { Locale } from '@/shared/i18n/config'
+import { getLocalePath } from '@/shared/lib/localePath'
 import { getNavItems } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
@@ -6,10 +7,10 @@ import Link from 'next/link'
 const Footer = async ({ locale }: { locale: Locale }) => {
   const [t, navItems] = await Promise.all([getTranslations(locale), getNavItems(locale)])
   const nav = navItems.length > 0 ? navItems : [
-    { label: t.common.home, href: `/${locale}`, slug: '' },
-    { label: t.common.services, href: `/${locale}/services`, slug: 'services' },
-    { label: t.common.training, href: `/${locale}/training`, slug: 'training' },
-    { label: t.common.contacts, href: `/${locale}/contacts`, slug: 'contacts' },
+    { label: t.common.home, href: getLocalePath(locale, ''), slug: '' },
+    { label: t.common.services, href: getLocalePath(locale, '/services'), slug: 'services' },
+    { label: t.common.training, href: getLocalePath(locale, '/training'), slug: 'training' },
+    { label: t.common.contacts, href: getLocalePath(locale, '/contacts'), slug: 'contacts' },
   ]
 
   return (
