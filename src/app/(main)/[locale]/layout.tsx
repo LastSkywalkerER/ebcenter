@@ -6,7 +6,6 @@ import { env } from '@/shared/config/env'
 import { i18n, Locale } from '@/shared/i18n/config'
 import { buildAlternates } from '@/shared/lib/alternates'
 import { getSiteMeta } from '@/shared/lib/payload'
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
@@ -98,7 +97,6 @@ export default async function LocaleLayout({
           <Header locale={locale as Locale} />
           <main>{children}</main>
           <Footer locale={locale as Locale} />
-          <Analytics />
         </div>
       </body>
     </html>
