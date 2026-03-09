@@ -10,6 +10,7 @@ import { Services } from './src/collections/Services'
 import { Courses } from './src/collections/Courses'
 import { Pages } from './src/collections/Pages'
 import { SiteSettings } from './src/globals/SiteSettings'
+import { Contacts } from './src/globals/Contacts'
 
 export default buildConfig({
   admin: {
@@ -38,7 +39,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, Courses, Pages],
-  globals: [SiteSettings],
+  globals: [SiteSettings, Contacts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

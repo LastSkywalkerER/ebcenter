@@ -1,4 +1,5 @@
 import 'server-only'
+import { cache } from 'react'
 import { Locale } from './config'
 
 type TranslationValue =
@@ -313,37 +314,45 @@ export type Translations = {
   }
 }
 
-const translationsCache: Record<Locale, Translations | null> = {
-  ru: null,
-  en: null,
+// Deep merge: CMS values take precedence, but empty strings fall back to JSON defaults
+function mergeWithDefaults<T>(cms: T, defaults: T): T {
+  if (typeof cms !== 'object' || cms === null) {
+    return (typeof cms === 'string' && cms === '') ? defaults : cms
+  }
+  const result = { ...cms } as Record<string, unknown>
+  for (const key of Object.keys(defaults as Record<string, unknown>)) {
+    const cmsVal = (cms as Record<string, unknown>)[key]
+    const defVal = (defaults as Record<string, unknown>)[key]
+    if (typeof cmsVal === 'string' && cmsVal === '') {
+      result[key] = defVal
+    } else if (typeof cmsVal === 'object' && cmsVal !== null && !Array.isArray(cmsVal)) {
+      result[key] = mergeWithDefaults(cmsVal, defVal)
+    }
+  }
+  return result as T
 }
 
-export async function getTranslations(locale: Locale): Promise<Translations> {
-  if (translationsCache[locale]) {
-    return translationsCache[locale]!
-  }
-
+async function _getTranslations(locale: Locale): Promise<Translations> {
   try {
     const { getSiteContent } = await import('@/shared/lib/payload')
     const cmsContent = await getSiteContent(locale)
     if (cmsContent) {
       const jsonTranslations = (await import(`./locales/${locale}.json`)).default as Translations
-      const merged: Translations = {
-        ...cmsContent,
+      return {
+        ...mergeWithDefaults(cmsContent, jsonTranslations),
         admin: jsonTranslations.admin,
         login: jsonTranslations.login,
       }
-      translationsCache[locale] = merged
-      return merged
     }
   } catch {
     // Fallback to JSON if Payload fails (e.g. DB not ready)
   }
 
-  const translations = (await import(`./locales/${locale}.json`)).default as Translations
-  translationsCache[locale] = translations
-  return translations
+  return (await import(`./locales/${locale}.json`)).default as Translations
 }
+
+// cache() deduplicates calls within the same request, no stale data across requests
+export const getTranslations = cache(_getTranslations)
 
 export async function getTranslation(locale: Locale, key: string): Promise<string | string[]> {
   const translations = await getTranslations(locale)

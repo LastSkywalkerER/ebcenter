@@ -22,7 +22,7 @@ type PageProps = {
 function getPageSlugForMeta(slugSegments: string[] | undefined): string | null {
   const slug = slugSegments ?? []
   if (slug.length === 0) return 'home'
-  if (slug.length === 1 && ['services', 'training', 'contacts'].includes(slug[0])) return slug[0]
+  if (slug.length === 1 && ['services', 'training'].includes(slug[0])) return slug[0]
   if (slug.length === 1) return slug[0]
   return null
 }
@@ -319,23 +319,16 @@ export default async function DynamicPage({ params }: PageProps) {
     )
   }
 
-  // Contacts: slug = ['contacts']
+  // Contacts: slug = ['contacts'] — always rendered from Global Contacts
   if (slug.length === 1 && slug[0] === 'contacts') {
-    const page = await getPageBySlug('contacts', locale)
-    if (!page?.layout?.length) {
-      const fallback = await getPageWithFallback('contacts', locale, t)
-      if (fallback) {
-        return (
-          <main className='flex-grow'>
-            <BlockRenderer blocks={fallback} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
-          </main>
-        )
-      }
-      notFound()
-    }
+    const contactsBlocks: Array<{ blockType: string; [key: string]: unknown }> = [
+      { blockType: 'section', title: t.contacts.title, subtitle: t.contacts.subtitle },
+      { blockType: 'contactInfo' },
+      { blockType: 'contactForm' },
+    ]
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
+        <BlockRenderer blocks={contactsBlocks} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
       </main>
     )
   }

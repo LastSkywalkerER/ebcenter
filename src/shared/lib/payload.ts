@@ -9,13 +9,16 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
   try {
     const payload = await getPayload({ config })
 
-    const [siteSettings, servicesResult, coursesResult] = await Promise.all([
+    const [siteSettings, contactsGlobal, servicesResult, coursesResult] = await Promise.all([
       payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: false }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (payload as any).findGlobal({ slug: 'contacts', locale, fallbackLocale: false }),
       payload.find({ collection: 'services', locale, limit: 100, pagination: false }),
       payload.find({ collection: 'courses', locale, limit: 100, pagination: false }),
     ])
 
     const settings = siteSettings as unknown as Record<string, unknown>
+    const contacts = contactsGlobal as unknown as Record<string, unknown>
     const services = servicesResult.docs
     const courses = coursesResult.docs
 
@@ -169,24 +172,24 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           emailInvalid: (settings?.validationEmailInvalid as string) ?? '',
         },
         contactInfo: {
-          phone: (settings?.contactPhone as string) ?? '',
-          email: (settings?.contactEmail as string) ?? '',
-          address: (settings?.contactAddress as string) ?? '',
-          workingHours: (settings?.contactWorkingHours as string) ?? '',
-          unp: (settings?.contactUnp as string) ?? '',
+          phone: (contacts?.contactPhone as string) ?? '',
+          email: (contacts?.contactEmail as string) ?? '',
+          address: (contacts?.contactAddress as string) ?? '',
+          workingHours: (contacts?.contactWorkingHours as string) ?? '',
+          unp: (contacts?.contactUnp as string) ?? '',
         },
       },
       header: {
         logo: (settings?.headerLogoText as string) ?? '',
         navigation: {
-          home: (settings?.navHome as string) ?? '',
-          services: (settings?.navServices as string) ?? '',
-          training: (settings?.navTraining as string) ?? '',
-          contacts: (settings?.navContacts as string) ?? '',
+          home: (settings?.commonHome as string) ?? '',
+          services: (settings?.commonServices as string) ?? '',
+          training: (settings?.commonTraining as string) ?? '',
+          contacts: (settings?.commonContacts as string) ?? '',
         },
         contact: {
-          phone: (settings?.contactPhone as string) ?? '',
-          email: (settings?.contactEmail as string) ?? '',
+          phone: (contacts?.contactPhone as string) ?? '',
+          email: (contacts?.contactEmail as string) ?? '',
         },
       },
       home: {
@@ -210,10 +213,10 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         },
         contact: {
           title: '',
-          address: (settings?.contactAddress as string) ?? '',
-          phone: (settings?.contactPhone as string) ?? '',
-          email: (settings?.contactEmail as string) ?? '',
-          workingHours: (settings?.contactWorkingHours as string) ?? '',
+          address: (contacts?.contactAddress as string) ?? '',
+          phone: (contacts?.contactPhone as string) ?? '',
+          email: (contacts?.contactEmail as string) ?? '',
+          workingHours: (contacts?.contactWorkingHours as string) ?? '',
         },
       },
       services: {
@@ -253,29 +256,29 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         },
       },
       contacts: {
-        title: (settings?.commonContacts as string) ?? '',
-        subtitle: (settings?.contactsSubtitle as string) ?? '',
+        title: (contacts?.contactsTitle as string) || ((settings?.commonContacts as string) ?? ''),
+        subtitle: (contacts?.contactsSubtitle as string) ?? '',
         contactInfo: {
-          title: (settings?.contactInfoTitle as string) ?? '',
+          title: (contacts?.contactInfoTitle as string) ?? '',
           address: (settings?.commonAddress as string) ?? '',
-          addressValue: (settings?.contactAddress as string) ?? '',
+          addressValue: (contacts?.contactAddress as string) ?? '',
           phone: (settings?.commonPhone as string) ?? '',
-          phoneValue: (settings?.contactPhone as string) ?? '',
+          phoneValue: (contacts?.contactPhone as string) ?? '',
           email: (settings?.commonEmail as string) ?? '',
-          emailValue: (settings?.contactEmail as string) ?? '',
+          emailValue: (contacts?.contactEmail as string) ?? '',
           unp: (settings?.commonUnp as string) ?? '',
-          unpValue: (settings?.contactUnp as string) ?? '',
+          unpValue: (contacts?.contactUnp as string) ?? '',
           workingHours: (settings?.commonWorkingHours as string) ?? '',
-          workingHoursValue: (settings?.contactWorkingHours as string) ?? '',
+          workingHoursValue: (contacts?.contactWorkingHours as string) ?? '',
         },
         form: {
-          title: (settings?.formTitle as string) ?? '',
+          title: (contacts?.formTitle as string) ?? '',
           name: (settings?.commonName as string) ?? '',
           email: (settings?.commonEmail as string) ?? '',
           phone: (settings?.commonPhone as string) ?? '',
           message: (settings?.commonMessage as string) ?? '',
           submit: (settings?.commonSendRequest as string) ?? '',
-          phonePlaceholder: (settings?.phonePlaceholder as string) ?? '',
+          phonePlaceholder: (contacts?.phonePlaceholder as string) ?? '',
           phoneError: (settings?.commonPhoneError as string) ?? '',
           success: (settings?.commonSuccess as string) ?? '',
           error: (settings?.commonError as string) ?? '',
@@ -294,8 +297,8 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           title: (settings?.footerTitle as string) ?? '',
           description: (settings?.footerDescription as string) ?? '',
           unp: (settings?.commonUnp as string) ?? '',
-          address: (settings?.contactAddress as string) ?? '',
-          workingHours: (settings?.contactWorkingHours as string) ?? '',
+          address: (contacts?.contactAddress as string) ?? '',
+          workingHours: (contacts?.contactWorkingHours as string) ?? '',
         },
         quickLinks: {
           title: (settings?.commonContacts as string) ?? '',
@@ -305,9 +308,9 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           contacts: (settings?.commonContacts as string) ?? '',
         },
         contactInfo: {
-          title: (settings?.contactInfoTitle as string) ?? '',
-          phone: (settings?.contactPhone as string) ?? '',
-          email: (settings?.contactEmail as string) ?? '',
+          title: (contacts?.contactInfoTitle as string) ?? '',
+          phone: (contacts?.contactPhone as string) ?? '',
+          email: (contacts?.contactEmail as string) ?? '',
         },
         copyright: (settings?.footerCopyright as string) ?? '',
       },
@@ -381,10 +384,10 @@ export async function getNavItems(locale: Locale): Promise<NavItem[]> {
       unknown
     >
     const labelsBySlug: Record<string, string> = {
-      home: (settings?.navHome as string) ?? '',
-      services: (settings?.navServices as string) ?? '',
-      training: (settings?.navTraining as string) ?? '',
-      contacts: (settings?.navContacts as string) ?? '',
+      home: (settings?.commonHome as string) ?? '',
+      services: (settings?.commonServices as string) ?? '',
+      training: (settings?.commonTraining as string) ?? '',
+      contacts: (settings?.commonContacts as string) ?? '',
     }
     return result.docs.map((p) => {
       const page = p as { title?: string; slug?: string }
@@ -420,19 +423,22 @@ function extractMediaUrl(field: unknown): string | null {
 export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
   try {
     const payload = await getPayload({ config })
-    const settings = (await payload.findGlobal({
-      slug: 'site-settings',
-      locale,
-    })) as unknown as Record<string, unknown>
+    const [settingsRaw, contactsRaw] = await Promise.all([
+      payload.findGlobal({ slug: 'site-settings', locale }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (payload as any).findGlobal({ slug: 'contacts', locale }),
+    ])
+    const settings = settingsRaw as unknown as Record<string, unknown>
+    const contacts = contactsRaw as unknown as Record<string, unknown>
     return {
       metaTitle: (settings?.metaTitle as string) ?? null,
       metaDescription: (settings?.metaDescription as string) ?? null,
       metaKeywords: (settings?.metaKeywords as string) ?? null,
       ogImageUrl: extractMediaUrl(settings?.ogImage),
       heroBackgroundUrl: extractMediaUrl(settings?.heroBackground),
-      contactPhone: (settings?.contactPhone as string) ?? null,
-      contactEmail: (settings?.contactEmail as string) ?? null,
-      contactAddress: (settings?.contactAddress as string) ?? null,
+      contactPhone: (contacts?.contactPhone as string) ?? null,
+      contactEmail: (contacts?.contactEmail as string) ?? null,
+      contactAddress: (contacts?.contactAddress as string) ?? null,
       robotsIndex: (settings?.robotsIndex as boolean) ?? true,
       robotsFollow: (settings?.robotsFollow as boolean) ?? true,
     }

@@ -31,15 +31,6 @@ export async function migrateContent(payload: Payload) {
         descriptionTitle: t?.home?.description?.title ?? '',
         descriptionText: t?.home?.description?.text ?? '',
         headerLogoText: t?.header?.logo ?? '',
-        navHome: t?.common?.home ?? t?.header?.navigation?.home ?? '',
-        navServices: t?.common?.services ?? t?.header?.navigation?.services ?? '',
-        navTraining: t?.common?.training ?? t?.header?.navigation?.training ?? '',
-        navContacts: t?.common?.contacts ?? t?.header?.navigation?.contacts ?? '',
-        contactPhone: t?.common?.contactInfo?.phone ?? '',
-        contactEmail: t?.common?.contactInfo?.email ?? '',
-        contactAddress: t?.common?.contactInfo?.address ?? '',
-        contactWorkingHours: t?.common?.contactInfo?.workingHours ?? '',
-        contactUnp: t?.common?.contactInfo?.unp ?? '',
         footerTitle: t?.footer?.companyInfo?.title ?? '',
         footerDescription: t?.footer?.companyInfo?.description ?? '',
         footerCopyright: t?.footer?.copyright ?? '',
@@ -83,13 +74,28 @@ export async function migrateContent(payload: Payload) {
         backToCourses: t?.training?.courseProgram?.backToCourses ?? '',
         inDevelopment: t?.training?.courseProgram?.inDevelopment ?? '',
         courseProgramTitle: t?.training?.courseProgram?.title ?? '',
+      },
+    })
+    console.log(`  Site Settings (${locale}) updated`)
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (payload as any).updateGlobal({
+      slug: 'contacts',
+      locale,
+      data: {
+        contactPhone: t?.common?.contactInfo?.phone ?? '',
+        contactEmail: t?.common?.contactInfo?.email ?? '',
+        contactAddress: t?.common?.contactInfo?.address ?? '',
+        contactWorkingHours: t?.common?.contactInfo?.workingHours ?? '',
+        contactUnp: t?.common?.contactInfo?.unp ?? '',
+        contactsTitle: t?.contacts?.title ?? '',
         contactsSubtitle: t?.contacts?.subtitle ?? '',
         contactInfoTitle: t?.contacts?.contactInfo?.title ?? '',
         formTitle: t?.contacts?.form?.title ?? '',
         phonePlaceholder: t?.contacts?.form?.phonePlaceholder ?? '',
       },
     })
-    console.log(`  Site Settings (${locale}) updated`)
+    console.log(`  Contacts (${locale}) updated`)
   }
 
   console.log('Migrating Services...')
@@ -334,25 +340,11 @@ export async function migrateContent(payload: Payload) {
   console.log('Migration complete!')
 }
 
-// Run when executed directly (yarn migrate:content), not when imported by seed
-const isMain = process.argv[1]?.includes('migrate-content')
-if (isMain) {
-  async function run() {
-    if (!process.env.DATABASE_URL) {
-      throw new Error('DATABASE_URL is not set. Add it to .env and ensure PostgreSQL is running.')
-    }
-    if (!process.env.PAYLOAD_SECRET) {
-      throw new Error(
-        'PAYLOAD_SECRET is not set. Add it to .env (e.g. generate with: openssl rand -base64 32)'
-      )
-    }
-    console.log('Starting content migration...')
-    const payload = await getPayload({ config })
-    await migrateContent(payload)
-    process.exit(0)
-  }
-  run().catch((err) => {
-    console.error('Migration failed:', err)
-    process.exit(1)
-  })
+// Run when executed via `payload run`
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not set.')
 }
+console.log('Starting content migration...')
+const payload = await getPayload({ config })
+await migrateContent(payload)
+process.exit(0)
