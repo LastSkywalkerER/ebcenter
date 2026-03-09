@@ -340,11 +340,15 @@ export async function migrateContent(payload: Payload) {
   console.log('Migration complete!')
 }
 
-// Run when executed via `payload run`
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set.')
+// Run when executed directly via `payload run` (not when imported by seed.ts)
+const isMain = process.argv[1]?.endsWith('migrate-content.ts') ||
+  process.argv[1]?.endsWith('migrate-content.js')
+if (isMain) {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is not set.')
+  }
+  console.log('Starting content migration...')
+  const payload = await getPayload({ config })
+  await migrateContent(payload)
+  process.exit(0)
 }
-console.log('Starting content migration...')
-const payload = await getPayload({ config })
-await migrateContent(payload)
-process.exit(0)
