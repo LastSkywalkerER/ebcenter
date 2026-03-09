@@ -80,6 +80,38 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
+          slug: 'seoParagraphs',
+          labels: { singular: 'SEO Paragraphs', plural: 'SEO Paragraph blocks' },
+          fields: [
+            { name: 'title', type: 'text', localized: true, admin: { description: 'Optional section heading (h2)' } },
+            {
+              name: 'paragraphs',
+              type: 'array',
+              required: true,
+              localized: true,
+              fields: [{ name: 'text', type: 'textarea', required: true }],
+            },
+          ],
+        },
+        {
+          slug: 'imageText',
+          labels: { singular: 'Image + Text', plural: 'Image + Text blocks' },
+          fields: [
+            { name: 'title', type: 'text', required: true, localized: true },
+            { name: 'image', type: 'upload', relationTo: 'media', admin: { description: 'Optional image' } },
+            { name: 'imageUrl', type: 'text', admin: { description: 'Or use static path: /images/filename.png' } },
+            { name: 'linkUrl', type: 'text', admin: { description: 'Optional link URL (e.g. https://belsmeta.by)' } },
+            { name: 'linkText', type: 'text', localized: true, admin: { description: 'Link text' } },
+            {
+              name: 'paragraphs',
+              type: 'array',
+              required: true,
+              localized: true,
+              fields: [{ name: 'text', type: 'textarea', required: true }],
+            },
+          ],
+        },
+        {
           slug: 'richText',
           labels: { singular: 'Rich Text', plural: 'Rich Text blocks' },
           fields: [
@@ -90,6 +122,7 @@ export const Pages: CollectionConfig = {
           slug: 'serviceList',
           labels: { singular: 'Service List', plural: 'Service List blocks' },
           fields: [
+            { name: 'sectionTitle', type: 'text', localized: true, admin: { description: 'Optional heading above the list' } },
             { name: 'limit', type: 'number', admin: { description: 'Max services to show (0 = all)' }, defaultValue: 0 },
           ],
         },

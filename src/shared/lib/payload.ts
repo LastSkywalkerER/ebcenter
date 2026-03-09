@@ -474,6 +474,7 @@ export async function getPageBySlug(
       where: { slug: { equals: slug } },
       limit: 1,
       locale,
+      depth: 2,
     })
     const page = result.docs[0] as PageData | undefined
     return page ?? null

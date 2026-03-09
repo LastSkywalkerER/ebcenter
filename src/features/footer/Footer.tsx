@@ -1,6 +1,7 @@
 import { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
 import { getNavItems } from '@/shared/lib/payload'
+import { formatPhoneForTel } from '@/shared/lib/utils'
 import { getTranslations } from '@/shared/i18n/utils'
 import Link from 'next/link'
 
@@ -48,16 +49,20 @@ const Footer = async ({ locale }: { locale: Locale }) => {
           <div>
             <h3 className='text-xl font-bold mb-4'>{t.footer.contactInfo.title}</h3>
             <ul className='space-y-2 text-gray-300'>
-              <li>
-                <Link href='tel:+375291234567' className='hover:text-white'>
-                  {t.common.contactInfo.phone}
-                </Link>
-              </li>
-              <li>
-                <Link href='mailto:info@ebcenter.by' className='hover:text-white'>
-                  {t.common.contactInfo.email}
-                </Link>
-              </li>
+              {t.common.contactInfo.phone && (
+                <li>
+                  <Link href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`} className='hover:text-white'>
+                    {t.common.contactInfo.phone}
+                  </Link>
+                </li>
+              )}
+              {t.common.contactInfo.email && (
+                <li>
+                  <Link href={`mailto:${t.common.contactInfo.email}`} className='hover:text-white'>
+                    {t.common.contactInfo.email}
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

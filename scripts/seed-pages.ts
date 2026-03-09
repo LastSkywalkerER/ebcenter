@@ -2,11 +2,11 @@
  * Seeds default Pages (Home, Services, Training, Contacts) with block layouts.
  * Run: yarn payload run scripts/seed-pages.ts
  * Or called from scripts/seed.ts
+ *
+ * Uses Media from Payload (seeded by seed-media) for imageText blocks when available.
  */
 import 'dotenv/config'
 import type { Payload } from 'payload'
-import config from '@payload-config'
-import { getPayload } from 'payload'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Block = { blockType: string; [key: string]: any }
@@ -16,9 +16,29 @@ function layoutAsPayload(layout: Block[]): any {
   return layout
 }
 
+/** Get Media ID by alt (ru). Returns null if not found. */
+async function getMediaIdByAlt(payload: Payload, altRu: string): Promise<number | null> {
+  const result = await payload.find({
+    collection: 'media',
+    where: { alt: { equals: altRu } },
+    limit: 1,
+    locale: 'ru',
+  })
+  return result.docs[0]?.id ?? null
+}
+
 async function seedPages(payload: Payload) {
   const ruJson = (await import('../src/shared/i18n/locales/ru.json')).default
   const enJson = (await import('../src/shared/i18n/locales/en.json')).default
+
+  // Resolve Media IDs for imageText blocks (from seed-media)
+  const [nprMediaId, belsmetaMediaId] = await Promise.all([
+    getMediaIdByAlt(payload, 'Нормативы НРР в Беларуси'),
+    getMediaIdByAlt(payload, 'Работа в программе Belsmeta Cloud'),
+  ])
+
+  const nprImage = nprMediaId ? { image: nprMediaId } : { imageUrl: '/images/npr-normatives.png' }
+  const belsmetaImage = belsmetaMediaId ? { image: belsmetaMediaId } : { imageUrl: '/images/belsmeta-section.png' }
 
   const pages: Array<{
     slug: string
@@ -47,13 +67,29 @@ async function seedPages(payload: Payload) {
         },
         {
           blockType: 'section',
-          title: ruJson?.home?.description?.title ?? ruJson?.home?.hero?.title ?? '',
-          subtitle: ruJson?.home?.description?.text ?? ruJson?.home?.hero?.subtitle ?? '',
+          title: ruJson?.home?.description?.title ?? 'Сметная документация',
+          subtitle: ruJson?.home?.description?.text ?? '',
         },
-        { blockType: 'serviceList', limit: 3 },
+        { blockType: 'serviceList', sectionTitle: ruJson?.home?.services?.title ?? 'Основные услуги', limit: 3 },
+        {
+          blockType: 'imageText',
+          title: (ruJson?.home as { seo?: { nprTitle?: string } })?.seo?.nprTitle ?? 'Нормативы НРР в Беларуси',
+          ...nprImage,
+          linkUrl: 'https://belenir.com/',
+          linkText: 'Подробнее о нормативах НРР',
+          paragraphs: ((ruJson?.home as { seo?: { nprParagraphs?: string[] } })?.seo?.nprParagraphs ?? []).map((t) => ({ text: t })),
+        },
+        {
+          blockType: 'imageText',
+          title: (ruJson?.home as { seo?: { belsmetaTitle?: string } })?.seo?.belsmetaTitle ?? 'Работаем в Belsmeta Cloud',
+          ...belsmetaImage,
+          linkUrl: 'https://www.belsmeta.by/',
+          linkText: 'Подробнее о программе Belsmeta',
+          paragraphs: ((ruJson?.home as { seo?: { belsmetaParagraphs?: string[] } })?.seo?.belsmetaParagraphs ?? []).map((t) => ({ text: t })),
+        },
         {
           blockType: 'section',
-          title: ruJson?.contacts?.title ?? ruJson?.common?.contacts ?? '',
+          title: 'Свяжитесь с нами',
           subtitle: '',
         },
         { blockType: 'contactInfo' },
@@ -71,13 +107,29 @@ async function seedPages(payload: Payload) {
         },
         {
           blockType: 'section',
-          title: enJson?.home?.description?.title ?? enJson?.home?.hero?.title ?? '',
-          subtitle: enJson?.home?.description?.text ?? enJson?.home?.hero?.subtitle ?? '',
+          title: enJson?.home?.description?.title ?? 'Estimate Documentation',
+          subtitle: enJson?.home?.description?.text ?? '',
         },
-        { blockType: 'serviceList', limit: 3 },
+        { blockType: 'serviceList', sectionTitle: enJson?.home?.services?.title ?? 'Main Services', limit: 3 },
+        {
+          blockType: 'imageText',
+          title: (enJson?.home as { seo?: { nprTitle?: string } })?.seo?.nprTitle ?? 'NPR Normatives in Belarus',
+          ...nprImage,
+          linkUrl: 'https://belenir.com/',
+          linkText: 'Learn more about NPR normatives',
+          paragraphs: ((enJson?.home as { seo?: { nprParagraphs?: string[] } })?.seo?.nprParagraphs ?? []).map((t) => ({ text: t })),
+        },
+        {
+          blockType: 'imageText',
+          title: (enJson?.home as { seo?: { belsmetaTitle?: string } })?.seo?.belsmetaTitle ?? 'Working with Belsmeta Cloud',
+          ...belsmetaImage,
+          linkUrl: 'https://www.belsmeta.by/',
+          linkText: 'Learn more about Belsmeta',
+          paragraphs: ((enJson?.home as { seo?: { belsmetaParagraphs?: string[] } })?.seo?.belsmetaParagraphs ?? []).map((t) => ({ text: t })),
+        },
         {
           blockType: 'section',
-          title: enJson?.contacts?.title ?? enJson?.common?.contacts ?? '',
+          title: 'Contact Us',
           subtitle: '',
         },
         { blockType: 'contactInfo' },

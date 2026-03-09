@@ -37,7 +37,7 @@ export async function generateMetadata({
       : undefined
 
   return {
-    title: meta.metaTitle ?? 'EBCenter - Сметные работы и обучение',
+    title: meta.metaTitle ?? 'ProSmety - Сметные работы и обучение',
     description: meta.metaDescription ?? 'Услуги по составлению смет, Сметные работы и обучение сметному делу',
     keywords: meta.metaKeywords ?? undefined,
     openGraph: {
@@ -46,11 +46,11 @@ export async function generateMetadata({
       type: 'website',
       locale: locale === 'ru' ? 'ru_RU' : 'en_US',
       url: canonical,
-      images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630, alt: meta.metaTitle ?? 'EBCenter' }] : undefined,
+      images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630, alt: meta.metaTitle ?? 'ProSmety' }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: meta.metaTitle ?? 'EBCenter - Сметные работы и обучение',
+      title: meta.metaTitle ?? 'ProSmety - Сметные работы и обучение',
       description: meta.metaDescription ?? undefined,
       images: ogImageUrl ? [ogImageUrl] : undefined,
     },
@@ -76,7 +76,7 @@ export default async function LocaleLayout({
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'LocalBusiness'],
-    name: 'EBCenter',
+    name: 'ProSmety',
     url: baseUrl || undefined,
     ...(meta.contactPhone && { telephone: meta.contactPhone }),
     ...(meta.contactEmail && { email: meta.contactEmail }),

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { ContactForm } from '@/features/ContactForm'
 import { Hero } from '@/features/Hero/Hero'
 import type { Locale } from '@/shared/i18n/config'
@@ -26,6 +27,8 @@ interface BlockRendererProps {
   blocks: Block[]
   locale: Locale
   translations: Translations
+  /** Fallback hero background from SiteSettings when block has no background */
+  heroBackgroundUrl?: string | null
 }
 
 function getBackgroundUrl(background: unknown): string | null {
@@ -35,7 +38,7 @@ function getBackgroundUrl(background: unknown): string | null {
   return null
 }
 
-export function BlockRenderer({ blocks, locale, translations }: BlockRendererProps) {
+export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl }: BlockRendererProps) {
   if (!blocks?.length) return null
 
   const t = translations
@@ -51,7 +54,7 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
             const secondaryPath = (block.secondaryCtaLink as string) || '/training'
             const ctaLink = getLocalePath(locale, ctaPath.startsWith('/') ? ctaPath : `/${ctaPath}`)
             const secondaryCtaLink = getLocalePath(locale, secondaryPath.startsWith('/') ? secondaryPath : `/${secondaryPath}`)
-            const bgUrl = getBackgroundUrl(block.background)
+            const bgUrl = getBackgroundUrl(block.background) ?? heroBackgroundUrl ?? null
             return (
               <Hero
                 key={key}
@@ -76,6 +79,74 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
                 </div>
               </section>
             )
+          case 'seoParagraphs': {
+            const paragraphs = (block.paragraphs as Array<{ text?: string }>) ?? []
+            const title = block.title as string | undefined
+            return (
+              <section key={key} className='py-16 bg-white'>
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                  {title && (
+                    <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center'>
+                      {title}
+                    </h2>
+                  )}
+                  <div className='prose prose-gray max-w-none space-y-4'>
+                    {paragraphs.map((p, i) => (
+                      <p key={i} className='text-gray-600 text-justify'>
+                        {p.text}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )
+          }
+          case 'imageText': {
+            const paragraphs = (block.paragraphs as Array<{ text?: string }>) ?? []
+            const img = block.image as { url?: string } | null
+            const imageUrl = img?.url ?? (block.imageUrl as string | undefined)
+            return (
+              <section key={key} className='py-16 bg-white'>
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
+                    {imageUrl && (
+                      <div className='relative aspect-video rounded-lg overflow-hidden bg-gray-100'>
+                        <Image
+                          src={imageUrl}
+                          alt={(block.title as string) ?? ''}
+                          fill
+                          className='object-cover'
+                          sizes='(max-width: 1024px) 100vw, 50vw'
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-6'>
+                        {(block.title as string) ?? ''}
+                      </h2>
+                      <div className='space-y-4'>
+                        {paragraphs.map((p, i) => (
+                          <p key={i} className='text-gray-600 text-justify'>
+                            {p.text}
+                          </p>
+                        ))}
+                        {(block.linkUrl as string) && (
+                          <a
+                            href={(block.linkUrl as string).startsWith('http') ? (block.linkUrl as string) : `https://${block.linkUrl}`}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className='inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium'
+                          >
+                            {(block.linkText as string) || 'Подробнее'}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )
+          }
           case 'richText':
             return (
               <section key={key} className='py-16 bg-white'>
@@ -88,11 +159,17 @@ export function BlockRenderer({ blocks, locale, translations }: BlockRendererPro
             )
           case 'serviceList': {
             const limit = (block.limit as number) ?? 0
+            const sectionTitle = block.sectionTitle as string | undefined
             const items = Object.entries(t.services.items)
             const displayed = limit > 0 ? items.slice(0, limit) : items
             return (
               <section key={key} className='py-16 bg-white'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                  {sectionTitle && (
+                    <h2 className='text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center'>
+                      {sectionTitle}
+                    </h2>
+                  )}
                   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {displayed.map(([keyName, service]) => (
                       <ServiceCard

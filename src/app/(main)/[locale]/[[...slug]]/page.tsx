@@ -1,7 +1,7 @@
 import type { Locale } from '@/shared/i18n/config'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPageBySlug, getServiceBySlug, getCourseBySlug } from '@/shared/lib/payload'
+import { getPageBySlug, getServiceBySlug, getCourseBySlug, getSiteMeta } from '@/shared/lib/payload'
 import { getTranslations } from '@/shared/i18n/utils'
 import { BlockRenderer } from '@/shared/ui/blocks/BlockRenderer'
 import { BackButton } from '@/shared/ui/buttons/BackButton'
@@ -114,7 +114,7 @@ export default async function DynamicPage({ params }: PageProps) {
   const slug = slugSegments ?? []
   const pathSlug = slug.join('/')
 
-  const t = await getTranslations(locale)
+  const [t, meta] = await Promise.all([getTranslations(locale), getSiteMeta(locale)])
 
   // Home: slug = []
   if (slug.length === 0) {
@@ -125,7 +125,7 @@ export default async function DynamicPage({ params }: PageProps) {
       if (fallbackPage) {
         return (
           <main className='flex-grow'>
-            <BlockRenderer blocks={fallbackPage} locale={locale} translations={t} />
+            <BlockRenderer blocks={fallbackPage} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
           </main>
         )
       }
@@ -133,7 +133,7 @@ export default async function DynamicPage({ params }: PageProps) {
     }
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} />
+        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
       </main>
     )
   }
@@ -146,7 +146,7 @@ export default async function DynamicPage({ params }: PageProps) {
       if (fallback) {
         return (
           <main className='flex-grow'>
-            <BlockRenderer blocks={fallback} locale={locale} translations={t} />
+            <BlockRenderer blocks={fallback} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
           </main>
         )
       }
@@ -154,7 +154,7 @@ export default async function DynamicPage({ params }: PageProps) {
     }
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} />
+        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
       </main>
     )
   }
@@ -174,7 +174,7 @@ export default async function DynamicPage({ params }: PageProps) {
       '@type': 'Service',
       name: serviceMeta.title ?? serviceDetails?.title,
       description: serviceMeta.description ?? serviceDetails?.description,
-      provider: { '@type': 'Organization', name: 'EBCenter' },
+      provider: { '@type': 'Organization', name: 'ProSmety' },
       areaServed: { '@type': 'Country', name: 'Belarus' },
     } : null
 
@@ -250,7 +250,7 @@ export default async function DynamicPage({ params }: PageProps) {
       if (fallback) {
         return (
           <main className='flex-grow'>
-            <BlockRenderer blocks={fallback} locale={locale} translations={t} />
+            <BlockRenderer blocks={fallback} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
           </main>
         )
       }
@@ -258,7 +258,7 @@ export default async function DynamicPage({ params }: PageProps) {
     }
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} />
+        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
       </main>
     )
   }
@@ -276,7 +276,7 @@ export default async function DynamicPage({ params }: PageProps) {
       '@type': 'Course',
       name: courseMeta.title ?? program?.title,
       description: courseMeta.metaDescription ?? undefined,
-      provider: { '@type': 'Organization', name: 'EBCenter' },
+      provider: { '@type': 'Organization', name: 'ProSmety' },
       ...(courseMeta.price && {
         offers: {
           '@type': 'Offer',
@@ -327,7 +327,7 @@ export default async function DynamicPage({ params }: PageProps) {
       if (fallback) {
         return (
           <main className='flex-grow'>
-            <BlockRenderer blocks={fallback} locale={locale} translations={t} />
+            <BlockRenderer blocks={fallback} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
           </main>
         )
       }
@@ -335,7 +335,7 @@ export default async function DynamicPage({ params }: PageProps) {
     }
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} />
+        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
       </main>
     )
   }
@@ -346,7 +346,7 @@ export default async function DynamicPage({ params }: PageProps) {
 
   return (
     <main className='flex-grow'>
-      <BlockRenderer blocks={page.layout} locale={locale} translations={t} />
+      <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
     </main>
   )
 }

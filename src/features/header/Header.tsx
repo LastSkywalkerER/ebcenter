@@ -3,6 +3,7 @@ import { MobileMenu } from '@/features/header/MobileMenu'
 import { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
 import { getNavItems, getHeaderLogoUrl } from '@/shared/lib/payload'
+import { formatPhoneForTel } from '@/shared/lib/utils'
 import { getTranslations } from '@/shared/i18n/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,7 +14,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
     getHeaderLogoUrl(locale),
     getNavItems(locale),
   ])
-  const logoSrc = logoUrl || '/web-app-manifest-512x512.png'
+  const logoSrc = logoUrl || '/images/favicon-ps.png'
   const nav = navItems.length > 0 ? navItems : [
     { label: t.common.home, href: getLocalePath(locale, ''), slug: '' },
     { label: t.common.services, href: getLocalePath(locale, '/services'), slug: 'services' },
@@ -41,18 +42,22 @@ const Header = async ({ locale }: { locale: Locale }) => {
           </nav>
 
           <div className='hidden md:flex items-center space-x-4 shrink-0'>
-            <Link
-              href='tel:+375291234567'
-              className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
-            >
-              {t.common.contactInfo.phone}
-            </Link>
-            <Link
-              href='mailto:info@ebcenter.by'
-              className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
-            >
-              {t.common.contactInfo.email}
-            </Link>
+            {t.common.contactInfo.phone && (
+              <Link
+                href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`}
+                className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+              >
+                {t.common.contactInfo.phone}
+              </Link>
+            )}
+            {t.common.contactInfo.email && (
+              <Link
+                href={`mailto:${t.common.contactInfo.email}`}
+                className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+              >
+                {t.common.contactInfo.email}
+              </Link>
+            )}
           </div>
 
           <LanguageSwitcher locale={locale} />

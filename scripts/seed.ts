@@ -9,6 +9,7 @@ import { getPayload } from 'payload'
 
 // Import content migration logic
 import { migrateContent } from './migrate-content'
+import { seedMedia } from './seed-media'
 import { seedPages } from './seed-pages'
 
 async function seed() {
@@ -61,6 +62,11 @@ async function seed() {
   } else {
     console.log('Content exists, skipping migration (FORCE_SEED=1 to re-run)')
   }
+
+  // Seed Media (uploads static images to Payload Media for Admin display)
+  console.log('Seeding Media...')
+  await seedMedia(payload)
+  console.log('Media seeded')
 
   // Seed Pages (idempotent - creates or updates Home, Services, Training, Contacts)
   console.log('Seeding Pages...')

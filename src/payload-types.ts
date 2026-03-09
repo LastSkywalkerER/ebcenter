@@ -333,6 +333,45 @@ export interface Page {
             blockType: 'section';
           }
         | {
+            /**
+             * Optional section heading (h2)
+             */
+            title?: string | null;
+            paragraphs: {
+              text: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'seoParagraphs';
+          }
+        | {
+            title: string;
+            /**
+             * Optional image
+             */
+            image?: (number | null) | Media;
+            /**
+             * Or use static path: /images/filename.png
+             */
+            imageUrl?: string | null;
+            /**
+             * Optional link URL (e.g. https://belsmeta.by)
+             */
+            linkUrl?: string | null;
+            /**
+             * Link text
+             */
+            linkText?: string | null;
+            paragraphs: {
+              text: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageText';
+          }
+        | {
             content?: {
               root: {
                 type: string;
@@ -353,6 +392,10 @@ export interface Page {
             blockType: 'richText';
           }
         | {
+            /**
+             * Optional heading above the list
+             */
+            sectionTitle?: string | null;
             /**
              * Max services to show (0 = all)
              */
@@ -689,6 +732,36 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        seoParagraphs?:
+          | T
+          | {
+              title?: T;
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              title?: T;
+              image?: T;
+              imageUrl?: T;
+              linkUrl?: T;
+              linkText?: T;
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         richText?:
           | T
           | {
@@ -699,6 +772,7 @@ export interface PagesSelect<T extends boolean = true> {
         serviceList?:
           | T
           | {
+              sectionTitle?: T;
               limit?: T;
               id?: T;
               blockName?: T;

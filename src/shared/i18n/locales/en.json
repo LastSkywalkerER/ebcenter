@@ -32,14 +32,14 @@
     },
     "contactInfo": {
       "phone": "+375 (29) 123-45-67",
-      "email": "info@ebcenter.by",
+      "email": "info@prosmety.by",
       "address": "Minsk, Example St., 123",
       "workingHours": "Mon-Fri: 9:00 - 18:00",
       "unp": "123456789"
     }
   },
   "header": {
-    "logo": "EBCenter",
+    "logo": "ProSmety",
     "navigation": {
       "home": "Home",
       "services": "Services",
@@ -56,6 +56,20 @@
     "description": {
       "title": "Estimate Documentation and Estimator Training",
       "text": "Engineering Business Center provides services for preparing estimate documentation, estimate maintenance for construction companies in terms of preparing reporting documentation, and educational services for individual, corporate, remote, and group training in estimate work."
+    },
+    "seo": {
+      "nprTitle": "NPR Normatives in Belarus",
+      "nprParagraphs": [
+        "Natural resource consumption normatives (NPR) form the basis of estimate pricing in Belarus. NPR 2025 and NPR 2026 regulate the determination of construction estimate costs.",
+        "Our specialists work with all current editions of normatives. We prepare local estimates, object estimates and summary estimate calculations in accordance with current legislation.",
+        "Our estimate training includes practical work with NPR normatives. Students learn the procedure for applying rates, calculating transport costs and forming contract prices."
+      ],
+      "belsmetaTitle": "Working with Belsmeta Cloud",
+      "belsmetaParagraphs": [
+        "Belsmeta Cloud is a modern cloud software suite for estimate and percentage calculations. The program supports NPR 2026, NPR 2025 and RSN databases.",
+        "We use Belsmeta Cloud in estimate maintenance and training courses. Automatic database updates and a user-friendly interface speed up documentation preparation.",
+        "Learn more at belsmeta.by. Our Express Estimator and Contract Price courses are conducted using Belsmeta Cloud."
+      ]
     },
     "services": {
       "title": "Main Services",
@@ -412,7 +426,7 @@
               "content": [
                 "Determination of estimate cost of construction of facilities",
                 "Regulatory frameworks for determining construction cost",
-                "Procedure for determining estimate cost of construction of facility and preparation of estimate documentation based on resource consumption standards in natural expression НРР 2017"
+                "Procedure for determining estimate cost of construction of facility and preparation of estimate documentation based on resource consumption standards in natural expression NPR 2025 and NPR 2026"
               ]
             },
             {
@@ -526,7 +540,7 @@
             {
               "title": "13. Comparative Analysis",
               "content": [
-                "Comparative analysis of НРР 2012 and НРР 2017",
+                "Comparative analysis of NPR 2025 and NPR 2026",
                 "Ways to reduce construction cost",
                 "Forming contract price by local estimates and PTM"
               ]
@@ -547,7 +561,7 @@
             {
               "title": "1. Brief Overview",
               "content": [
-                "Rules for determining estimate cost of construction and preparing estimate documentation based on resource consumption standards in natural expression in НРР 2012 and 2017, including formation of individual cost items:",
+                "Rules for determining estimate cost of construction and preparing estimate documentation based on resource consumption standards in natural expression in NPR 2025 and 2026, including formation of individual cost items:",
                 [
                   "Labor costs of workers and machine operators",
                   "Costs for construction materials and operation of construction machines, transport expenses",
@@ -562,7 +576,7 @@
             {
               "title": "2. Standards Comparative Analysis",
               "content": [
-                "Comparative analysis of НРР 2012 and НРР 2017",
+                "Comparative analysis of NPR 2025 and NPR 2026",
                 "Main changes and differences",
                 "Practical application of standards"
               ]
@@ -660,7 +674,7 @@
   },
   "footer": {
     "companyInfo": {
-      "title": "EBCenter",
+      "title": "ProSmety",
       "description": "Construction estimate services and estimate work training"
     },
     "quickLinks": {

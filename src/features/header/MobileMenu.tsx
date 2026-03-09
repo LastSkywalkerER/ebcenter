@@ -1,6 +1,7 @@
 'use client'
 
 import { Locale } from '@/shared/i18n/config'
+import { formatPhoneForTel } from '@/shared/lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -135,8 +136,9 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
           </div>
 
           <div className='border-t border-gray-200 px-4 py-6 space-y-3'>
+            {translations.common.contactInfo.phone && (
             <Link
-              href='tel:+375291234567'
+              href={`tel:${formatPhoneForTel(translations.common.contactInfo.phone)}`}
               className='flex items-center px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
               onClick={() => setIsOpen(false)}
             >
@@ -155,8 +157,10 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
               </svg>
               {translations.common.contactInfo.phone}
             </Link>
+            )}
+            {translations.common.contactInfo.email && (
             <Link
-              href='mailto:info@ebcenter.by'
+              href={`mailto:${translations.common.contactInfo.email}`}
               className='flex items-center px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
               onClick={() => setIsOpen(false)}
             >
@@ -175,6 +179,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
               </svg>
               {translations.common.contactInfo.email}
             </Link>
+            )}
           </div>
         </div>
       </div>
