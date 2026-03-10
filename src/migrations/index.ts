@@ -5,7 +5,8 @@ import * as migration_20260309_083920 from './20260309_083920';
 import * as migration_20260309_120000_services_locales_seo from './20260309_120000_services_locales_seo';
 import * as migration_20260309_161221_add_seo_blocks from './20260309_161221_add_seo_blocks';
 import * as migration_20260309_200000_add_contacts_global from './20260309_200000_add_contacts_global';
-import * as migration_20260310_140000_add_badge_principles_consultation_blocks from './20260310_140000_add_badge_principles_consultation_blocks';
+import * as migration_20260310_140000_add_badge_principles_consultation_blocks from './20260310_140000_add_badge_principles_consultation_blocks'
+import * as migration_20260310_150000_add_footer_quick_links_title from './20260310_150000_add_footer_quick_links_title'
 
 export const migrations = [
   {
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20260310_140000_add_badge_principles_consultation_blocks.up,
     down: migration_20260310_140000_add_badge_principles_consultation_blocks.down,
     name: '20260310_140000_add_badge_principles_consultation_blocks',
+  },
+  {
+    up: migration_20260310_150000_add_footer_quick_links_title.up,
+    down: migration_20260310_150000_add_footer_quick_links_title.down,
+    name: '20260310_150000_add_footer_quick_links_title',
   },
 ];

@@ -666,7 +666,7 @@
   "contacts": {
     "title": "Contacts",
     "contactInfo": {
-      "title": "Contact Information"
+      "title": "Contacts"
     },
     "form": {
       "title": "Contact Us",
@@ -689,7 +689,7 @@
       "description": "Construction estimate services and estimate work training"
     },
     "quickLinks": {
-      "title": "Quick Links"
+      "title": "Navigation"
     },
     "contactInfo": {
       "title": "Contacts"

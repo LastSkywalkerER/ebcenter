@@ -42,7 +42,7 @@ export const Contacts: GlobalConfig = {
           fields: [
             { name: 'contactsTitle', type: 'text', localized: true, defaultValue: 'Контакты', admin: { description: 'Заголовок страницы контактов' } },
             { name: 'contactsSubtitle', type: 'text', localized: true, admin: { description: 'Подзаголовок страницы контактов' } },
-            { name: 'contactInfoTitle', type: 'text', localized: true, defaultValue: 'Контактная информация', admin: { description: 'Заголовок блока контактной информации' } },
+            { name: 'contactInfoTitle', type: 'text', localized: true, defaultValue: 'Контакты', admin: { description: 'Заголовок блока контактной информации в футере' } },
             { name: 'formTitle', type: 'text', localized: true, defaultValue: 'Связаться с нами', admin: { description: 'Заголовок формы обратной связи' } },
             { name: 'phonePlaceholder', type: 'text', localized: true, defaultValue: '+375XXXXXXXXX', admin: { description: 'Placeholder для поля телефона в форме' } },
           ],

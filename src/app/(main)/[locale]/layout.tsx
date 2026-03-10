@@ -93,7 +93,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <div className='min-h-screen flex flex-col'>
+        <div className='min-h-screen flex flex-col overflow-x-hidden'>
           <JsonLd data={orgSchema} />
           <PlausibleProvider />
           <LivePreviewRefresh />

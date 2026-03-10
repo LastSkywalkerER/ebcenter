@@ -35,15 +35,15 @@ export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) 
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  // Prevent scrolling when menu is open
+  // Prevent vertical scroll when menu is open (horizontal scroll prevented by overflow-x: hidden on html/body)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
     }
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
     }
   }, [isOpen])
 

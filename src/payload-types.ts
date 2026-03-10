@@ -849,6 +849,10 @@ export interface SiteSetting {
   headerLogoText?: string | null;
   footerTitle?: string | null;
   footerDescription?: string | null;
+  /**
+   * Заголовок блока навигации в футере
+   */
+  footerQuickLinksTitle?: string | null;
   footerCopyright?: string | null;
   commonMore?: string | null;
   commonTariffs?: string | null;
@@ -937,7 +941,7 @@ export interface Contact {
    */
   contactsSubtitle?: string | null;
   /**
-   * Заголовок блока контактной информации
+   * Заголовок блока контактной информации в футере
    */
   contactInfoTitle?: string | null;
   /**
@@ -966,6 +970,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   headerLogoText?: T;
   footerTitle?: T;
   footerDescription?: T;
+  footerQuickLinksTitle?: T;
   footerCopyright?: T;
   commonMore?: T;
   commonTariffs?: T;

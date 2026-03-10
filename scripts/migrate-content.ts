@@ -33,6 +33,7 @@ export async function migrateContent(payload: Payload) {
         headerLogoText: t?.header?.logo ?? '',
         footerTitle: t?.footer?.companyInfo?.title ?? '',
         footerDescription: t?.footer?.companyInfo?.description ?? '',
+        footerQuickLinksTitle: t?.footer?.quickLinks?.title ?? '',
         footerCopyright: t?.footer?.copyright ?? '',
         commonMore: t?.common?.more ?? '',
         commonTariffs: t?.common?.tariffs ?? '',

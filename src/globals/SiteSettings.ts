@@ -73,6 +73,7 @@ export const SiteSettings: GlobalConfig = {
           fields: [
             { name: 'footerTitle', type: 'text', localized: true, defaultValue: 'ProSmety' },
             { name: 'footerDescription', type: 'textarea', localized: true, defaultValue: 'Сметные услуги в строительстве и обучение сметному делу' },
+            { name: 'footerQuickLinksTitle', type: 'text', localized: true, defaultValue: 'Навигация', admin: { description: 'Заголовок блока навигации в футере' } },
             { name: 'footerCopyright', type: 'text', localized: true, defaultValue: 'Все права защищены' },
           ],
         },

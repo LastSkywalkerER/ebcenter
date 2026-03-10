@@ -328,7 +328,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           workingHours: (contacts?.contactWorkingHours as string) ?? '',
         },
         quickLinks: {
-          title: (settings?.commonContacts as string) ?? '',
+          title: (settings?.footerQuickLinksTitle as string) ?? '',
           home: (settings?.commonHome as string) ?? '',
           services: (settings?.commonServices as string) ?? '',
           training: (settings?.commonTraining as string) ?? '',
