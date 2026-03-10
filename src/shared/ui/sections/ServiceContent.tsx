@@ -8,20 +8,15 @@ interface ServiceContentProps {
 
 export const ServiceContent: React.FC<ServiceContentProps> = ({ serviceDetails }) => {
   return (
-    <>
-      <div className='mb-12 text-center'>
-        <h1 className='text-2xl font-semibold text-gray-900 mb-2'>{serviceDetails.title}</h1>
-        <p className='text-gray-600 text-sm'>{serviceDetails.description}</p>
-      </div>
-
-      <div className='space-y-4'>
-        {serviceDetails.content.map((item, index) => (
-          <div key={index} className='flex items-start'>
+    <div className='space-y-3'>
+      {serviceDetails.content.map((item, index) => (
+        <div key={index} className='flex items-start gap-3 py-3 border-b border-slate-100 last:border-0'>
+          <div className='text-blue-500 mt-0.5 flex-shrink-0'>
             <CheckIcon />
-            <p className='text-gray-600 text-justify'>{item}</p>
           </div>
-        ))}
-      </div>
-    </>
+          <p className='text-sm text-slate-700 leading-relaxed'>{item}</p>
+        </div>
+      ))}
+    </div>
   )
 }

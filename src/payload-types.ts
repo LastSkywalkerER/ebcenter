@@ -328,6 +328,17 @@ export interface Page {
             blockType: 'hero';
           }
         | {
+            items?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'badge';
+          }
+        | {
             title: string;
             subtitle?: string | null;
             id?: string | null;
@@ -420,6 +431,29 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactInfo';
+          }
+        | {
+            /**
+             * Section heading (e.g. Our principles of work)
+             */
+            sectionTitle: string;
+            items: {
+              /**
+               * Icon for the principle card
+               */
+              icon: 'speed' | 'accuracy' | 'honesty' | 'fixedPrice';
+              title: string;
+              description: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'principles';
+          }
+        | {
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'consultationForm';
           }
       )[]
     | null;
@@ -651,6 +685,18 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        badge?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         section?:
           | T
           | {
@@ -717,6 +763,27 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         contactInfo?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
+        principles?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        consultationForm?:
           | T
           | {
               id?: T;

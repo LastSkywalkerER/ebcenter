@@ -23,29 +23,29 @@ const Header = async ({ locale }: { locale: Locale }) => {
   ]
 
   return (
-    <header className='bg-white shadow-md'>
+    <header className='bg-white/95 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-40'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex justify-between items-center h-16'>
+        <div className='flex justify-between items-center h-[68px]'>
           <div className='flex-shrink-0 flex items-center'>
             <Image src={logoSrc} alt={t.header.logo} width={32} height={32} className='mr-2' />
-            <Link href={getLocalePath(locale, '')} className='text-2xl font-bold text-gray-800'>
+            <Link href={getLocalePath(locale, '')} className='text-xl font-bold text-slate-900 tracking-tight'>
               {t.header.logo}
             </Link>
           </div>
 
-          <nav className='hidden md:flex space-x-8'>
+          <nav className='hidden md:flex items-center space-x-1'>
             {nav.map((item) => (
-              <Link key={item.slug || 'home'} href={item.href} className='text-gray-600 hover:text-gray-900'>
+              <Link key={item.slug || 'home'} href={item.href} className='px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-md transition-colors'>
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <div className='hidden md:flex items-center space-x-4 shrink-0'>
+          <div className='hidden md:flex flex-col items-end shrink-0 text-right'>
             {t.common.contactInfo.phone && (
               <Link
                 href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`}
-                className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+                className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
               >
                 {t.common.contactInfo.phone}
               </Link>
@@ -53,14 +53,14 @@ const Header = async ({ locale }: { locale: Locale }) => {
             {t.common.contactInfo.email && (
               <Link
                 href={`mailto:${t.common.contactInfo.email}`}
-                className='text-gray-600 hover:text-gray-900 whitespace-nowrap'
+                className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
               >
                 {t.common.contactInfo.email}
               </Link>
             )}
           </div>
 
-          <LanguageSwitcher locale={locale} />
+          {process.env.NODE_ENV !== 'production' && <LanguageSwitcher locale={locale} />}
 
           <MobileMenu locale={locale} translations={t} navItems={nav} />
         </div>

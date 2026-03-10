@@ -29,48 +29,48 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({
   return (
     <div className='space-y-6'>
       <div className='flex items-start gap-4'>
-        <div className='p-3 bg-blue-50 rounded-lg'>
+        <div className='p-2.5 bg-blue-50 rounded-lg flex-shrink-0'>
           <AddressIcon />
         </div>
         <div>
-          <h3 className='font-semibold text-gray-900 mb-1'>{address}</h3>
-          <p className='text-gray-600'>{addressValue}</p>
+          <h3 className='text-sm font-semibold text-slate-900 mb-0.5'>{address}</h3>
+          <p className='text-sm text-slate-500'>{addressValue}</p>
         </div>
       </div>
       <div className='flex items-start gap-4'>
-        <div className='p-3 bg-blue-50 rounded-lg'>
+        <div className='p-2.5 bg-blue-50 rounded-lg flex-shrink-0'>
           <PhoneIcon />
         </div>
         <div>
-          <h3 className='font-semibold text-gray-900 mb-1'>{phone}</h3>
-          <p className='text-gray-600'>{phoneValue}</p>
+          <h3 className='text-sm font-semibold text-slate-900 mb-0.5'>{phone}</h3>
+          <p className='text-sm text-slate-500'>{phoneValue}</p>
         </div>
       </div>
       <div className='flex items-start gap-4'>
-        <div className='p-3 bg-blue-50 rounded-lg'>
+        <div className='p-2.5 bg-blue-50 rounded-lg flex-shrink-0'>
           <EmailIcon />
         </div>
         <div>
-          <h3 className='font-semibold text-gray-900 mb-1'>{email}</h3>
-          <p className='text-gray-600'>{emailValue}</p>
+          <h3 className='text-sm font-semibold text-slate-900 mb-0.5'>{email}</h3>
+          <p className='text-sm text-slate-500'>{emailValue}</p>
         </div>
       </div>
       <div className='flex items-start gap-4'>
-        <div className='p-3 bg-blue-50 rounded-lg'>
+        <div className='p-2.5 bg-blue-50 rounded-lg flex-shrink-0'>
           <UnpIcon />
         </div>
         <div>
-          <h3 className='font-semibold text-gray-900 mb-1'>{unp}</h3>
-          <p className='text-gray-600'>{unpValue}</p>
+          <h3 className='text-sm font-semibold text-slate-900 mb-0.5'>{unp}</h3>
+          <p className='text-sm text-slate-500'>{unpValue}</p>
         </div>
       </div>
       <div className='flex items-start gap-4'>
-        <div className='p-3 bg-blue-50 rounded-lg'>
+        <div className='p-2.5 bg-blue-50 rounded-lg flex-shrink-0'>
           <WorkingHoursIcon />
         </div>
         <div>
-          <h3 className='font-semibold text-gray-900 mb-1'>{workingHours}</h3>
-          <p className='text-gray-600'>{workingHoursValue}</p>
+          <h3 className='text-sm font-semibold text-slate-900 mb-0.5'>{workingHours}</h3>
+          <p className='text-sm text-slate-500'>{workingHoursValue}</p>
         </div>
       </div>
     </div>

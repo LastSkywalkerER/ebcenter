@@ -4,9 +4,9 @@ import { NextResponse } from 'next/server'
 
 interface ContactFormData {
   name: string
-  email: string
-  phone: string
-  message: string
+  email?: string
+  phone?: string
+  message?: string
   turnstileToken: string
 }
 
@@ -29,7 +29,16 @@ async function validateTurnstileToken(token: string) {
 export async function POST(request: Request) {
   try {
     const body: ContactFormData = await request.json()
-    const { name, email, phone, message, turnstileToken } = body
+    const { name, email, phone, message = '', turnstileToken } = body
+
+    if (!name || typeof name !== 'string' || !name.trim()) {
+      return NextResponse.json({ message: 'Name is required' }, { status: 400 })
+    }
+
+    const hasContact = (email && email.trim()) || (phone && phone.trim())
+    if (!hasContact) {
+      return NextResponse.json({ message: 'Email or phone is required' }, { status: 400 })
+    }
 
     // Validate Turnstile token
     const isValid = await validateTurnstileToken(turnstileToken)
@@ -41,11 +50,11 @@ export async function POST(request: Request) {
     const telegramMessage = `
 <b>New Contact Form Submission</b>
 
-<b>Name:</b> ${name}
-<b>Email:</b> ${email}
-<b>Phone:</b> ${phone}
+<b>Name:</b> ${name.trim()}
+<b>Email:</b> ${email?.trim() ?? '—'}
+<b>Phone:</b> ${phone?.trim() ?? '—'}
 <b>Message:</b>
-${message}
+${typeof message === 'string' && message.trim() ? message.trim() : '—'}
     `.trim()
 
     console.log(telegramMessage)

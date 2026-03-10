@@ -93,7 +93,7 @@ export const SiteSettings: GlobalConfig = {
             { name: 'commonEmail', type: 'text', localized: true, defaultValue: 'Email' },
             { name: 'commonAddress', type: 'text', localized: true, defaultValue: 'Адрес' },
             { name: 'commonWorkingHours', type: 'text', localized: true, defaultValue: 'Режим работы' },
-            { name: 'commonName', type: 'text', localized: true, defaultValue: 'ФИО' },
+            { name: 'commonName', type: 'text', localized: true, defaultValue: 'Имя' },
             { name: 'commonMessage', type: 'text', localized: true, defaultValue: 'Сообщение' },
             { name: 'commonSelectCourse', type: 'text', localized: true, defaultValue: 'Выберите курс' },
             { name: 'commonDisclaimer', type: 'text', localized: true, defaultValue: 'Мы улучшили наш сайт, старую версию вы можете найти по ссылке' },

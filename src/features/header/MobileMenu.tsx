@@ -66,7 +66,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
     <div className='md:hidden'>
       <button
         type='button'
-        className='relative z-50 p-2 text-gray-600 hover:text-gray-900 focus:outline-none'
+        className='relative z-50 p-2 text-slate-600 hover:text-slate-900 focus:outline-none'
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
       >
@@ -91,7 +91,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
 
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out z-40 ${
+        className={`fixed inset-0 bg-slate-900/60 backdrop-blur-[2px] transition-opacity duration-300 ease-in-out z-40 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsOpen(false)}
@@ -99,7 +99,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
 
       {/* Menu */}
       <div
-        className={`fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed inset-y-0 right-0 w-full max-w-sm bg-white border-l border-slate-200 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -108,7 +108,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
           <div className='flex justify-end p-4'>
             <button
               onClick={() => setIsOpen(false)}
-              className='p-2 text-gray-600 hover:text-gray-900 focus:outline-none rounded-full hover:bg-gray-100'
+              className='p-2 text-slate-600 hover:text-slate-900 focus:outline-none rounded-full hover:bg-slate-100'
               aria-label='Close menu'
             >
               <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -127,7 +127,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
               <Link
                 key={item.slug || 'home'}
                 href={item.href}
-                className='block px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
+                className='block px-4 py-3 text-lg font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors duration-200'
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
@@ -135,11 +135,11 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
             ))}
           </div>
 
-          <div className='border-t border-gray-200 px-4 py-6 space-y-3'>
+          <div className='border-t border-slate-200 px-4 py-6 space-y-3'>
             {translations.common.contactInfo.phone && (
             <Link
               href={`tel:${formatPhoneForTel(translations.common.contactInfo.phone)}`}
-              className='flex items-center px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
+              className='flex items-center px-4 py-3 text-lg font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors duration-200'
               onClick={() => setIsOpen(false)}
             >
               <svg
@@ -161,7 +161,7 @@ export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
             {translations.common.contactInfo.email && (
             <Link
               href={`mailto:${translations.common.contactInfo.email}`}
-              className='flex items-center px-4 py-3 text-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors duration-200'
+              className='flex items-center px-4 py-3 text-lg font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors duration-200'
               onClick={() => setIsOpen(false)}
             >
               <svg

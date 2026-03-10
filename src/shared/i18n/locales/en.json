@@ -14,7 +14,7 @@
     "email": "Email",
     "address": "Address",
     "workingHours": "Working Hours",
-    "name": "Full Name",
+    "name": "Name",
     "message": "Message",
     "selectCourse": "Select Course",
     "disclaimer": "We have improved our website, you can find the old version at the link",
@@ -60,13 +60,13 @@
     "seo": {
       "nprTitle": "NPR Normatives in Belarus",
       "nprParagraphs": [
-        "Natural resource consumption normatives (NPR) form the basis of estimate pricing in Belarus. NPR 2025 and NPR 2026 regulate the determination of construction estimate costs.",
+        "Natural resource consumption normatives (NPR) form the basis of estimate pricing in Belarus. NPR 2017 and NPR 2022 regulate the determination of construction estimate costs.",
         "Our specialists work with all current editions of normatives. We prepare local estimates, object estimates and summary estimate calculations in accordance with current legislation.",
         "Our estimate training includes practical work with NPR normatives. Students learn the procedure for applying rates, calculating transport costs and forming contract prices."
       ],
       "belsmetaTitle": "Working with Belsmeta Cloud",
       "belsmetaParagraphs": [
-        "Belsmeta Cloud is a modern cloud software suite for estimate and percentage calculations. The program supports NPR 2026, NPR 2025 and RSN databases.",
+        "Belsmeta Cloud is a modern cloud software suite for estimate and percentage calculations. The program supports NPR 2022, NPR 2017 and RSN databases.",
         "We use Belsmeta Cloud in estimate maintenance and training courses. Automatic database updates and a user-friendly interface speed up documentation preparation.",
         "Learn more at belsmeta.by. Our Express Estimator and Contract Price courses are conducted using Belsmeta Cloud."
       ]
@@ -122,9 +122,9 @@
         "slug": "smetnaya-dokumentatsiya"
       },
       "contractPrice": {
-        "title": "Contract Price Calculation",
-        "description": "Contract price calculation for negotiations or tenders",
-        "slug": "raschet-kontraktnoy-tseny"
+        "title": "Calculation of the contractual (contract) price",
+        "description": "Preparation of work costs for the object",
+        "slug": "raschet-dogovornoy-kontraktnoy-tseny"
       },
       "contracts": {
         "title": "Contract Preparation",
@@ -132,14 +132,14 @@
         "slug": "sostavlenie-dogovorov-podryada"
       },
       "reporting": {
-        "title": "Reporting Documentation",
-        "description": "Preparation of reporting documentation - work completion certificates, statements, additional works",
-        "slug": "otchetnaya-dokumentatsiya"
+        "title": "Acceptance certificates",
+        "description": "Construction and installation works",
+        "slug": "akty-sdachi-priemki"
       },
       "localEstimates": {
-        "title": "Work Type Estimates",
-        "description": "Preparation of local estimates for general construction and special works",
-        "slug": "sostavlenie-lokalnyh-smet"
+        "title": "Local estimate based on a defect act",
+        "description": "Estimate for repair and structuring",
+        "slug": "lokalnaya-smeta-po-defektnomu-aktu"
       },
       "consulting": {
         "title": "Consulting Services",
@@ -199,8 +199,8 @@
         ]
       },
       "contractPrice": {
-        "title": "Contract Price Calculation",
-        "description": "Contract price calculation for negotiations or tenders",
+        "title": "Calculation of the contractual (contract) price",
+        "description": "Preparation of work costs for the object",
         "content": [
           "When forming a competitive proposal for participation in negotiations or tenders for the selection of a general contractor or subcontractor, it is necessary to calculate the contract (contract) price - the estimate cost of construction of the facility or performance of construction works.",
           "When forming an unchanged contract price, it is necessary to take into account the conditions of the competitive task (documentation) for negotiations or tenders, conditions provided for by the design documentation, rules for forming the estimate cost of construction, as well as to think through which cost items to reduce the estimate cost, in case it is planned to be reduced.",
@@ -224,8 +224,8 @@
         ]
       },
       "reporting": {
-        "title": "Reporting Documentation",
-        "description": "Preparation of reporting documentation - work completion certificates, statements, additional works",
+        "title": "Acceptance certificates",
+        "description": "Construction and installation works",
         "content": [
           "⚖️ Why is it important to properly prepare primary documents?",
           "According to Article 10 of the Law of the Republic of Belarus dated 12.07.2013 No. 57-Z \"On Accounting and Reporting\" (as amended on 17.07.2017), any business transaction must be confirmed by a primary accounting document.",
@@ -255,8 +255,8 @@
         ]
       },
       "localEstimates": {
-        "title": "Local Estimates",
-        "description": "Preparation of local estimates for general construction and special works",
+        "title": "Local estimate based on a defect act",
+        "description": "Estimate for repair and structuring",
         "content": [
           "We develop local estimates for the following types of works:",
           "Construction and special works,",
@@ -369,7 +369,7 @@
     "registration": {
       "title": "Training Registration",
       "form": {
-        "name": "Full Name",
+        "name": "Name",
         "phone": "Phone",
         "email": "Email",
         "course": "Select Course",
@@ -426,7 +426,7 @@
               "content": [
                 "Determination of estimate cost of construction of facilities",
                 "Regulatory frameworks for determining construction cost",
-                "Procedure for determining estimate cost of construction of facility and preparation of estimate documentation based on resource consumption standards in natural expression NPR 2025 and NPR 2026"
+                "Procedure for determining estimate cost of construction of facility and preparation of estimate documentation based on resource consumption standards in natural expression NPR 2017 and NPR 2022"
               ]
             },
             {
@@ -540,7 +540,7 @@
             {
               "title": "13. Comparative Analysis",
               "content": [
-                "Comparative analysis of NPR 2025 and NPR 2026",
+                "Comparative analysis of NPR 2017 and NPR 2022",
                 "Ways to reduce construction cost",
                 "Forming contract price by local estimates and PTM"
               ]
@@ -561,7 +561,7 @@
             {
               "title": "1. Brief Overview",
               "content": [
-                "Rules for determining estimate cost of construction and preparing estimate documentation based on resource consumption standards in natural expression in NPR 2025 and 2026, including formation of individual cost items:",
+                "Rules for determining estimate cost of construction and preparing estimate documentation based on resource consumption standards in natural expression in NPR 2017 and 2022, including formation of individual cost items:",
                 [
                   "Labor costs of workers and machine operators",
                   "Costs for construction materials and operation of construction machines, transport expenses",
@@ -576,7 +576,7 @@
             {
               "title": "2. Standards Comparative Analysis",
               "content": [
-                "Comparative analysis of NPR 2025 and NPR 2026",
+                "Comparative analysis of NPR 2017 and NPR 2022",
                 "Main changes and differences",
                 "Practical application of standards"
               ]
@@ -670,6 +670,15 @@
       "title": "Contact Us",
       "submit": "Send Message",
       "phonePlaceholder": "+375XXXXXXXXX"
+    },
+    "consultationForm": {
+      "title": "Consultation on estimating",
+      "description": "Get answers to your questions and recommendations from experts",
+      "namePlaceholder": "Your name",
+      "contactPlaceholder": "Email or phone",
+      "submit": "Get consultation",
+      "contactRequired": "Please enter email or phone",
+      "contactInvalid": "Please enter a valid email or phone (e.g. +375XXXXXXXXX)"
     }
   },
   "footer": {

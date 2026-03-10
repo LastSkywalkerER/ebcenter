@@ -72,6 +72,18 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
+          slug: 'badge',
+          labels: { singular: 'Badge Strip', plural: 'Badge Strip blocks' },
+          fields: [
+            {
+              name: 'items',
+              type: 'array',
+              localized: true,
+              fields: [{ name: 'text', type: 'text', required: true }],
+            },
+          ],
+        },
+        {
           slug: 'section',
           labels: { singular: 'Section', plural: 'Section blocks' },
           fields: [
@@ -139,6 +151,47 @@ export const Pages: CollectionConfig = {
         {
           slug: 'contactInfo',
           labels: { singular: 'Contact Info (data from Contacts global)', plural: 'Contact Info blocks' },
+          fields: [],
+        },
+        {
+          slug: 'principles',
+          labels: { singular: 'Principles of Work', plural: 'Principles blocks' },
+          fields: [
+            {
+              name: 'sectionTitle',
+              type: 'text',
+              required: true,
+              localized: true,
+              admin: { description: 'Section heading (e.g. Our principles of work)' },
+            },
+            {
+              name: 'items',
+              type: 'array',
+              required: true,
+              localized: true,
+              minRows: 1,
+              fields: [
+                {
+                  name: 'icon',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Speed (lightning)', value: 'speed' },
+                    { label: 'Accuracy (check)', value: 'accuracy' },
+                    { label: 'Honesty (handshake)', value: 'honesty' },
+                    { label: 'Fixed price (wallet)', value: 'fixedPrice' },
+                  ],
+                  admin: { description: 'Icon for the principle card' },
+                },
+                { name: 'title', type: 'text', required: true },
+                { name: 'description', type: 'text', required: true },
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'consultationForm',
+          labels: { singular: 'Consultation form (compact)', plural: 'Consultation form blocks' },
           fields: [],
         },
       ],

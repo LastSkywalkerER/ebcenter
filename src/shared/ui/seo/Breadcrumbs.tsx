@@ -26,17 +26,17 @@ export function Breadcrumbs({ items, baseUrl = '' }: BreadcrumbsProps) {
   return (
     <>
       <JsonLd data={schema} />
-      <nav aria-label="breadcrumb" className="mb-4 text-sm text-gray-500">
+      <nav aria-label="breadcrumb" className="mb-3 text-xs text-slate-400">
         <ol className="flex flex-wrap items-center gap-1">
           {items.map((item, index) => (
             <li key={index} className="flex items-center gap-1">
-              {index > 0 && <span aria-hidden="true">/</span>}
+              {index > 0 && <span aria-hidden="true" className='text-slate-300'>/</span>}
               {item.href ? (
-                <Link href={item.href} className="hover:text-gray-700 hover:underline">
+                <Link href={item.href} className="hover:text-slate-600 transition-colors">
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-gray-700">{item.label}</span>
+                <span className="text-slate-600">{item.label}</span>
               )}
             </li>
           ))}

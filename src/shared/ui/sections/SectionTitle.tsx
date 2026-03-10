@@ -9,11 +9,20 @@ interface SectionTitleProps {
 
 export const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, className = '', as: Tag = 'h2' }) => {
   return (
-    <div className={`mb-12 ${className}`}>
-      <Tag className='text-2xl md:text-3xl font-bold text-gray-900 mb-4 mx-auto text-center md:max-w-none'>
-        {title}
-      </Tag>
-      {subtitle && <p className='text-xl text-gray-600 mx-auto text-justify'>{subtitle}</p>}
+    <div className={`mb-8 ${className}`}>
+      <div className='flex items-stretch gap-5'>
+        <div className='w-1 rounded-full bg-blue-600 shrink-0' />
+        <div>
+          <Tag className='text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight'>
+            {title}
+          </Tag>
+          {subtitle && (
+            <p className='mt-2 text-sm text-slate-400 leading-relaxed text-justify'>
+              {subtitle}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

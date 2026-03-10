@@ -15,7 +15,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ path, text, locale }) =>
   return (
     <Link
       href={getLocalePath(locale, path)}
-      className='inline-flex items-center text-gray-600 hover:text-gray-900 mb-8'
+      className='inline-flex items-center text-sm text-slate-500 hover:text-slate-800 mb-6 transition-colors gap-1'
     >
       <BackIcon />
       {text}

@@ -15,14 +15,14 @@ const Footer = async ({ locale }: { locale: Locale }) => {
   ]
 
   return (
-    <footer className='bg-gray-800 text-white'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+    <footer className='bg-slate-900 text-slate-100'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Company Info */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>{t.footer.companyInfo.title}</h3>
-            <p className='text-gray-300 mb-4'>{t.footer.companyInfo.description}</p>
-            <div className='space-y-2 text-gray-300'>
+            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.companyInfo.title}</h3>
+            <p className='text-slate-400 mb-4 text-sm'>{t.footer.companyInfo.description}</p>
+            <div className='space-y-2 text-slate-400 text-sm'>
               <p>
                 {t.common.unp}: {t.common.contactInfo.unp}
               </p>
@@ -33,11 +33,11 @@ const Footer = async ({ locale }: { locale: Locale }) => {
 
           {/* Quick Links */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>{t.footer.quickLinks.title}</h3>
+            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.quickLinks.title}</h3>
             <ul className='space-y-2'>
               {nav.map((item) => (
                 <li key={item.slug || 'home'}>
-                  <Link href={item.href} className='text-gray-300 hover:text-white'>
+                  <Link href={item.href} className='text-slate-400 hover:text-white transition-colors text-sm'>
                     {item.label}
                   </Link>
                 </li>
@@ -47,27 +47,38 @@ const Footer = async ({ locale }: { locale: Locale }) => {
 
           {/* Contact Info */}
           <div>
-            <h3 className='text-xl font-bold mb-4'>{t.footer.contactInfo.title}</h3>
-            <ul className='space-y-2 text-gray-300'>
+            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.contactInfo.title}</h3>
+            <ul className='space-y-2 text-slate-400 text-sm'>
               {t.common.contactInfo.phone && (
                 <li>
-                  <Link href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`} className='hover:text-white'>
+                  <Link href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`} className='hover:text-white transition-colors'>
                     {t.common.contactInfo.phone}
                   </Link>
                 </li>
               )}
               {t.common.contactInfo.email && (
                 <li>
-                  <Link href={`mailto:${t.common.contactInfo.email}`} className='hover:text-white'>
+                  <Link href={`mailto:${t.common.contactInfo.email}`} className='hover:text-white transition-colors'>
                     {t.common.contactInfo.email}
                   </Link>
+                </li>
+              )}
+              {t.common.contactInfo.address && (
+                <li>{t.common.contactInfo.address}</li>
+              )}
+              {t.common.contactInfo.workingHours && (
+                <li>{t.common.contactInfo.workingHours}</li>
+              )}
+              {t.common.contactInfo.unp && (
+                <li>
+                  {t.common.unp}: {t.common.contactInfo.unp}
                 </li>
               )}
             </ul>
           </div>
         </div>
 
-        <div className='mt-8 pt-8 border-t border-gray-700 text-center text-gray-300'>
+        <div className='mt-10 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm'>
           <p>
             &copy; {new Date().getFullYear()} {t.footer.companyInfo.title}. {t.footer.copyright}
           </p>

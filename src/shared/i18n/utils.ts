@@ -221,6 +221,15 @@ export type Translations = {
         emailInvalid: string
       }
     }
+    consultationForm?: {
+      title: string
+      description: string
+      namePlaceholder: string
+      contactPlaceholder: string
+      submit: string
+      contactRequired: string
+      contactInvalid: string
+    }
   }
   footer: {
     companyInfo: {

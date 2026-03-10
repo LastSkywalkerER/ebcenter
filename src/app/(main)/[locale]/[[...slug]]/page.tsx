@@ -8,15 +8,18 @@ import { BackButton } from '@/shared/ui/buttons/BackButton'
 import { CourseProgram } from '@/shared/ui/sections/CourseProgram'
 import { NotFound } from '@/shared/ui/sections/NotFound'
 import { ServiceContent } from '@/shared/ui/sections/ServiceContent'
-import { SectionTitle } from '@/shared/ui/sections/SectionTitle'
 import { TariffCard } from '@/shared/ui/cards/TariffCard'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { Breadcrumbs } from '@/shared/ui/seo/Breadcrumbs'
 import { env } from '@/shared/config/env'
 import { buildAlternates } from '@/shared/lib/alternates'
+import { ContactInfo } from '@/shared/ui/contact/ContactInfo'
+import { ContactForm } from '@/features/ContactForm'
+import { SectionTitle } from '@/shared/ui/sections/SectionTitle'
 
 type PageProps = {
   params: Promise<{ locale: Locale; slug?: string[] }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 function getPageSlugForMeta(slugSegments: string[] | undefined): string | null {
@@ -109,7 +112,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function DynamicPage({ params }: PageProps) {
+export default async function DynamicPage({ params, searchParams }: PageProps) {
   const { locale, slug: slugSegments } = await params
   const slug = slugSegments ?? []
   const pathSlug = slug.join('/')
@@ -186,11 +189,24 @@ export default async function DynamicPage({ params }: PageProps) {
     ]
 
     return (
-      <main className='flex-grow py-16 bg-white'>
+      <main className='flex-grow bg-white'>
         {serviceSchema && <JsonLd data={serviceSchema} />}
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <Breadcrumbs items={breadcrumbs} baseUrl={env.BASE_URL || ''} />
-          <BackButton path="/services" text={t.services.backToServices} locale={locale} />
+        {/* Page header */}
+        <div className='border-b border-slate-100 bg-slate-50'>
+          <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10'>
+            <Breadcrumbs items={breadcrumbs} baseUrl={env.BASE_URL || ''} />
+            <BackButton path="/services" text={t.services.backToServices} locale={locale} />
+            {serviceDetails && (
+              <div className='mt-2'>
+                <h1 className='text-2xl md:text-3xl font-bold text-slate-900 tracking-tight'>{serviceDetails.title}</h1>
+                {serviceDetails.description && (
+                  <p className='mt-2 text-slate-500 text-sm leading-relaxed max-w-2xl'>{serviceDetails.description}</p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
           {serviceDetails ? (
             <ServiceContent serviceDetails={serviceDetails} />
           ) : (
@@ -215,22 +231,32 @@ export default async function DynamicPage({ params }: PageProps) {
       : null
 
     return (
-      <main className='flex-grow py-16 bg-white'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <BackButton path="/services" text={t.services.backToServices} locale={locale} />
-          {tariffs ? (
-            <>
-              <SectionTitle title={tariffs.title} subtitle={tariffs.description} />
-              <div className='space-y-8'>
-                {tariffs.items.map((tariff, index) => (
-                  <TariffCard
-                    key={index}
-                    tariff={tariff}
-                    isLast={index === tariffs.items.length - 1}
-                  />
-                ))}
+      <main className='flex-grow bg-white'>
+        {/* Page header */}
+        <div className='border-b border-slate-100 bg-slate-50'>
+          <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10'>
+            <BackButton path="/services" text={t.services.backToServices} locale={locale} />
+            {tariffs && (
+              <div className='mt-2'>
+                <h1 className='text-2xl md:text-3xl font-bold text-slate-900 tracking-tight'>{tariffs.title}</h1>
+                {tariffs.description && (
+                  <p className='mt-2 text-slate-500 text-sm leading-relaxed max-w-2xl'>{tariffs.description}</p>
+                )}
               </div>
-            </>
+            )}
+          </div>
+        </div>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+          {tariffs ? (
+            <div className='space-y-8'>
+              {tariffs.items.map((tariff, index) => (
+                <TariffCard
+                  key={index}
+                  tariff={tariff}
+                  isLast={index === tariffs.items.length - 1}
+                />
+              ))}
+            </div>
           ) : (
             <NotFound
               title={t.services.notFound.title}
@@ -245,12 +271,32 @@ export default async function DynamicPage({ params }: PageProps) {
   // Training list: slug = ['training']
   if (slug.length === 1 && slug[0] === 'training') {
     const page = await getPageBySlug('training', locale)
+    const searchParamsRes = searchParams != null ? await searchParams : undefined
+    const courseSlugRaw = searchParamsRes?.course
+    const courseSlug = typeof courseSlugRaw === 'string' ? courseSlugRaw : Array.isArray(courseSlugRaw) ? courseSlugRaw[0] : undefined
+    const courseTitle =
+      typeof courseSlug === 'string' && courseSlug
+        ? (t.training.courses as Record<string, { title?: string }>)[courseSlug]?.title
+        : undefined
+    const initialMessageForForm =
+      courseTitle != null
+        ? (locale === 'ru'
+            ? `Здравствуйте. Я хотел бы записаться на курс «${courseTitle}».`
+            : `Hello. I would like to register for the course "${courseTitle}".`)
+        : undefined
+
     if (!page?.layout?.length) {
       const fallback = await getPageWithFallback('training', locale, t)
       if (fallback) {
         return (
           <main className='flex-grow'>
-            <BlockRenderer blocks={fallback} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
+            <BlockRenderer
+              blocks={fallback}
+              locale={locale}
+              translations={t}
+              heroBackgroundUrl={meta.heroBackgroundUrl}
+              initialMessageForForm={initialMessageForForm}
+            />
           </main>
         )
       }
@@ -258,7 +304,13 @@ export default async function DynamicPage({ params }: PageProps) {
     }
     return (
       <main className='flex-grow'>
-        <BlockRenderer blocks={page.layout} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
+        <BlockRenderer
+          blocks={page.layout}
+          locale={locale}
+          translations={t}
+          heroBackgroundUrl={meta.heroBackgroundUrl}
+          initialMessageForForm={initialMessageForForm}
+        />
       </main>
     )
   }
@@ -294,20 +346,25 @@ export default async function DynamicPage({ params }: PageProps) {
     ]
 
     return (
-      <main className='flex-grow py-16 bg-gray-50'>
+      <main className='flex-grow bg-white'>
         {courseSchema && <JsonLd data={courseSchema} />}
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <Breadcrumbs items={courseBreadcrumbs} baseUrl={env.BASE_URL || ''} />
-          <BackButton
-            path="/training"
-            text={t.training.courseProgram.backToCourses}
-            locale={locale}
-          />
+        {/* Page header */}
+        <div className='border-b border-slate-100 bg-slate-50'>
+          <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10'>
+            <Breadcrumbs items={courseBreadcrumbs} baseUrl={env.BASE_URL || ''} />
+            <BackButton
+              path="/training"
+              text={t.training.courseProgram.backToCourses}
+              locale={locale}
+            />
+            {program && (
+              <h1 className='mt-2 text-2xl md:text-3xl font-bold text-slate-900 tracking-tight'>{program.title}</h1>
+            )}
+          </div>
+        </div>
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
           {program ? (
-            <>
-              <SectionTitle title={program.title} />
-              <CourseProgram sections={program.sections} />
-            </>
+            <CourseProgram sections={program.sections} />
           ) : (
             <NotFound
               title={t.training.courseProgram.title}
@@ -321,14 +378,48 @@ export default async function DynamicPage({ params }: PageProps) {
 
   // Contacts: slug = ['contacts'] — always rendered from Global Contacts
   if (slug.length === 1 && slug[0] === 'contacts') {
-    const contactsBlocks: Array<{ blockType: string; [key: string]: unknown }> = [
-      { blockType: 'section', title: t.contacts.title, subtitle: t.contacts.subtitle },
-      { blockType: 'contactInfo' },
-      { blockType: 'contactForm' },
-    ]
     return (
-      <main className='flex-grow'>
-        <BlockRenderer blocks={contactsBlocks} locale={locale} translations={t} heroBackgroundUrl={meta.heroBackgroundUrl} />
+      <main className='flex-grow bg-white'>
+        {/* Combined contact info + form */}
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16'>
+          <SectionTitle title={t.contacts.title} className='mb-12' />
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-12'>
+            <div className='lg:col-span-2'>
+              <ContactInfo
+                address={t.common.address}
+                addressValue={t.common.contactInfo.address}
+                phone={t.common.phone}
+                phoneValue={t.common.contactInfo.phone}
+                email={t.common.email}
+                emailValue={t.common.contactInfo.email}
+                unp={t.common.unp}
+                unpValue={t.common.contactInfo.unp}
+                workingHours={t.common.workingHours}
+                workingHoursValue={t.common.contactInfo.workingHours}
+              />
+            </div>
+            <div className='lg:col-span-3'>
+              <ContactForm
+                title={t.contacts.form.title}
+                name={t.common.name}
+                contactPlaceholder={t.contacts.consultationForm?.contactPlaceholder ?? 'Email или телефон'}
+                message={t.common.message}
+                submit={t.contacts.form.submit}
+                success={t.common.success}
+                error={t.common.error}
+                sending={t.common.sending}
+                securityCheck={t.common.securityCheck}
+                securityError={t.common.securityError}
+                validation={{
+                  nameRequired: t.common.validation.nameRequired,
+                  messageRequired: t.common.validation.messageRequired,
+                }}
+                contactRequired={t.contacts.consultationForm?.contactRequired ?? 'Введите email или телефон'}
+                contactInvalid={t.contacts.consultationForm?.contactInvalid ?? t.common.phoneError}
+              />
+            </div>
+          </div>
+        </div>
       </main>
     )
   }
@@ -353,23 +444,20 @@ async function getPageWithFallback(
   const defaults: Record<string, Array<{ blockType: string; [key: string]: unknown }>> = {
     home: [
       { blockType: 'hero', title: t.home.hero.title, subtitle: t.home.hero.subtitle, cta: t.home.hero.cta, secondaryCta: t.common.training, ctaLink: '/services', secondaryCtaLink: '/training' },
-      { blockType: 'section', title: t.home.description.title, subtitle: t.home.description.text },
-      { blockType: 'serviceList', limit: 3 },
-      { blockType: 'section', title: t.contacts.title, subtitle: '' },
-      { blockType: 'contactInfo' },
+      { blockType: 'badge', items: [
+        locale === 'ru' ? 'Более 20\u202F000 часов практической работы со сметной документацией' : 'Over 20,000 hours of practical work with estimate documentation',
+      ]},
+      { blockType: 'serviceList', limit: 3, sectionTitle: t.home.description.title },
       { blockType: 'contactForm' },
     ],
     services: [
-      { blockType: 'section', title: t.services.title, subtitle: t.services.subtitle },
-      { blockType: 'serviceList', limit: 0 },
+      { blockType: 'serviceList', limit: 0, sectionTitle: t.services.title, sectionSubtitle: t.services.subtitle },
     ],
     training: [
-      { blockType: 'section', title: t.training.title, subtitle: t.training.subtitle },
-      { blockType: 'courseList' },
+      { blockType: 'courseList', sectionTitle: t.training.title, sectionSubtitle: t.training.subtitle },
       { blockType: 'contactForm' },
     ],
     contacts: [
-      { blockType: 'section', title: t.contacts.title, subtitle: t.contacts.subtitle },
       { blockType: 'contactInfo' },
       { blockType: 'contactForm' },
     ],

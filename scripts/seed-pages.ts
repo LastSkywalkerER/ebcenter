@@ -66,11 +66,23 @@ async function seedPages(payload: Payload) {
           secondaryCtaLink: '/training',
         },
         {
-          blockType: 'section',
-          title: ruJson?.home?.description?.title ?? 'Сметная документация',
-          subtitle: ruJson?.home?.description?.text ?? '',
+          blockType: 'badge',
+          items: [
+            { text: 'Более 20\u202F000 часов практической работы со сметной документацией' },
+          ],
         },
         { blockType: 'serviceList', sectionTitle: ruJson?.home?.services?.title ?? 'Основные услуги', limit: 3 },
+        {
+          blockType: 'principles',
+          sectionTitle: 'Наши принципы работы',
+          items: [
+            { icon: 'speed', title: 'Скорость', description: 'Быстро выполняем' },
+            { icon: 'accuracy', title: 'Точность', description: 'Актуальные нормы' },
+            { icon: 'honesty', title: 'Честность', description: 'Прозрачные условия' },
+            { icon: 'fixedPrice', title: 'Фиксированная цена', description: 'Стоимость заранее' },
+          ],
+        },
+        { blockType: 'consultationForm' },
         {
           blockType: 'imageText',
           title: (ruJson?.home as { seo?: { nprTitle?: string } })?.seo?.nprTitle ?? 'Нормативы НРР в Беларуси',
@@ -87,13 +99,6 @@ async function seedPages(payload: Payload) {
           linkText: 'Подробнее о программе Belsmeta',
           paragraphs: ((ruJson?.home as { seo?: { belsmetaParagraphs?: string[] } })?.seo?.belsmetaParagraphs ?? []).map((t) => ({ text: t })),
         },
-        {
-          blockType: 'section',
-          title: 'Свяжитесь с нами',
-          subtitle: '',
-        },
-        { blockType: 'contactInfo' },
-        { blockType: 'contactForm' },
       ],
       layoutEn: [
         {
@@ -106,11 +111,23 @@ async function seedPages(payload: Payload) {
           secondaryCtaLink: '/training',
         },
         {
-          blockType: 'section',
-          title: enJson?.home?.description?.title ?? 'Estimate Documentation',
-          subtitle: enJson?.home?.description?.text ?? '',
+          blockType: 'badge',
+          items: [
+            { text: 'Over 20,000 hours of practical work with estimate documentation' },
+          ],
         },
         { blockType: 'serviceList', sectionTitle: enJson?.home?.services?.title ?? 'Main Services', limit: 3 },
+        {
+          blockType: 'principles',
+          sectionTitle: 'Our principles of work',
+          items: [
+            { icon: 'speed', title: 'Speed', description: 'We deliver quickly' },
+            { icon: 'accuracy', title: 'Accuracy', description: 'Up-to-date standards' },
+            { icon: 'honesty', title: 'Honesty', description: 'Transparent terms' },
+            { icon: 'fixedPrice', title: 'Fixed price', description: 'Cost agreed in advance' },
+          ],
+        },
+        { blockType: 'consultationForm' },
         {
           blockType: 'imageText',
           title: (enJson?.home as { seo?: { nprTitle?: string } })?.seo?.nprTitle ?? 'NPR Normatives in Belarus',
@@ -127,13 +144,6 @@ async function seedPages(payload: Payload) {
           linkText: 'Learn more about Belsmeta',
           paragraphs: ((enJson?.home as { seo?: { belsmetaParagraphs?: string[] } })?.seo?.belsmetaParagraphs ?? []).map((t) => ({ text: t })),
         },
-        {
-          blockType: 'section',
-          title: 'Contact Us',
-          subtitle: '',
-        },
-        { blockType: 'contactInfo' },
-        { blockType: 'contactForm' },
       ],
     },
     {

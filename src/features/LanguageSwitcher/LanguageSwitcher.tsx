@@ -24,10 +24,10 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         <Link
           key={newLocale}
           href={switchLocale(newLocale)}
-          className={`px-3 py-1 rounded-md text-sm font-medium ${
+          className={`px-3 py-1 rounded-md transition-colors ${
             locale === newLocale
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? 'bg-blue-600 text-white text-xs font-semibold'
+              : 'bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium'
           }`}
         >
           {newLocale.toUpperCase()}

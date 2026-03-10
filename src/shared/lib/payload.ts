@@ -20,10 +20,35 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
     const settings = siteSettings as unknown as Record<string, unknown>
     const contacts = contactsGlobal as unknown as Record<string, unknown>
     const services = servicesResult.docs
+
+    // Display order for services (first three appear on the home page)
+    const serviceOrder = [
+      'contractPrice',
+      'localEstimates',
+      'reporting',
+      'estimateService',
+      'currentRepair',
+      'estimateDocs',
+      'contracts',
+      'consulting',
+      'selfService',
+      'individual',
+    ]
+    const sortedServices = [...services].sort((a, b) => {
+      const keyA = (a as { key?: string }).key ?? ''
+      const keyB = (b as { key?: string }).key ?? ''
+      const iA = serviceOrder.indexOf(keyA)
+      const iB = serviceOrder.indexOf(keyB)
+      if (iA === -1 && iB === -1) return 0
+      if (iA === -1) return 1
+      if (iB === -1) return -1
+      return iA - iB
+    })
+
     const courses = coursesResult.docs
 
     const servicesItems: Record<string, { title: string; description: string; slug: string }> = {}
-    for (const s of services) {
+    for (const s of sortedServices) {
       const service = s as { key?: string; title?: string; description?: string; slug?: string }
       if (service.key) {
         servicesItems[service.key] = {
@@ -38,7 +63,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
       string,
       { title: string; description: string; content: string[] }
     > = {}
-    for (const s of services) {
+    for (const s of sortedServices) {
       const service = s as {
         key?: string
         title?: string
@@ -62,7 +87,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         items: { name: string; price: string; description?: string; features: string[] }[]
       }
     > = {}
-    for (const s of services) {
+    for (const s of sortedServices) {
       const service = s as {
         key?: string
         title?: string
