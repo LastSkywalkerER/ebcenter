@@ -1,5 +1,6 @@
 import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
+import { PlausibleProvider } from '@/shared/ui/analytics/PlausibleProvider'
 import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { env } from '@/shared/config/env'
@@ -93,6 +94,7 @@ export default async function LocaleLayout({
       <body className={inter.className}>
         <div className='min-h-screen flex flex-col'>
           <JsonLd data={orgSchema} />
+          <PlausibleProvider />
           <LivePreviewRefresh />
           <Header locale={locale as Locale} />
           <main>{children}</main>
