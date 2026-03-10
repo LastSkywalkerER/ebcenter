@@ -9,9 +9,6 @@ export const env = {
 
   // Base URL
   BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || '',
-
-  // Plausible Analytics domain (optional, falls back to BASE_URL hostname)
-  PLAUSIBLE_DOMAIN: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || '',
 } as const
 
 /**

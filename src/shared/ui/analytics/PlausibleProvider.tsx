@@ -1,12 +1,9 @@
 'use client'
 
-import { init } from '@plausible-analytics/tracker'
 import { env } from '@/shared/config/env'
 import { useEffect } from 'react'
 
 function getDomain(): string | null {
-  if (env.PLAUSIBLE_DOMAIN) return env.PLAUSIBLE_DOMAIN
-
   try {
     if (env.BASE_URL) return new URL(env.BASE_URL).hostname
   } catch {
@@ -20,9 +17,12 @@ export function PlausibleProvider() {
     const domain = getDomain()
     if (!domain) return
 
-    init({
-      domain,
-      captureOnLocalhost: false,
+    // Dynamic import to avoid loading tracker on server (it uses `location` which is browser-only)
+    import('@plausible-analytics/tracker').then(({ init }) => {
+      init({
+        domain,
+        captureOnLocalhost: false,
+      })
     })
   }, [])
 
