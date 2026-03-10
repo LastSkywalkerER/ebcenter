@@ -35,6 +35,7 @@ type ProgramSlug = 'express-course' | 'contract-price' | 'individual'
 export type Translations = {
   common: {
     more: string
+    viewAllServices: string
     tariffs: string
     register: string
     sendRequest: string
@@ -42,6 +43,7 @@ export type Translations = {
     home: string
     services: string
     training: string
+    orderCall: string
     contacts: string
     contactUs: string
     phone: string
@@ -323,7 +325,7 @@ export type Translations = {
   }
 }
 
-// Deep merge: CMS values take precedence, but empty strings fall back to JSON defaults
+// Deep merge: CMS values take precedence, but empty strings and missing keys fall back to JSON defaults
 function mergeWithDefaults<T>(cms: T, defaults: T): T {
   if (typeof cms !== 'object' || cms === null) {
     return (typeof cms === 'string' && cms === '') ? defaults : cms
@@ -332,7 +334,9 @@ function mergeWithDefaults<T>(cms: T, defaults: T): T {
   for (const key of Object.keys(defaults as Record<string, unknown>)) {
     const cmsVal = (cms as Record<string, unknown>)[key]
     const defVal = (defaults as Record<string, unknown>)[key]
-    if (typeof cmsVal === 'string' && cmsVal === '') {
+    if (cmsVal === undefined) {
+      result[key] = defVal
+    } else if (typeof cmsVal === 'string' && cmsVal === '') {
       result[key] = defVal
     } else if (typeof cmsVal === 'object' && cmsVal !== null && !Array.isArray(cmsVal)) {
       result[key] = mergeWithDefaults(cmsVal, defVal)

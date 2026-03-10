@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { ContactForm } from '@/features/ContactForm'
 import { Hero } from '@/features/Hero/Hero'
 import type { Locale } from '@/shared/i18n/config'
@@ -213,11 +214,26 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const sectionSubtitle = block.sectionSubtitle as string | undefined
             const items = Object.entries(t.services.items)
             const displayed = limit > 0 ? items.slice(0, limit) : items
+            const showAllLink = limit > 0
             return (
               <section key={key} className={`py-16 ${altBg}`}>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                   {sectionTitle && (
-                    <SectionTitle title={sectionTitle} subtitle={sectionSubtitle} />
+                    <SectionTitle
+                      title={sectionTitle}
+                      subtitle={sectionSubtitle}
+                      action={
+                        showAllLink ? (
+                          <Link
+                            href={getLocalePath(locale, '/services')}
+                            className='text-sm text-slate-500 hover:text-slate-700 transition-colors whitespace-nowrap'
+                          >
+                            {t.common.viewAllServices}
+                            <span className='ml-1 inline-block'>→</span>
+                          </Link>
+                        ) : undefined
+                      }
+                    />
                   )}
                   <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                     {displayed.map(([keyName, service]) => (
@@ -404,7 +420,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
           case 'consultationForm': {
             const cf = t.contacts.consultationForm
             return (
-              <section key={key} className={`py-16 ${altBg}`}>
+              <section key={key} id='consultation' className={`py-16 ${altBg}`}>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                   <ConsultationForm
                     title={cf?.title ?? 'Консультация по сметному делу'}

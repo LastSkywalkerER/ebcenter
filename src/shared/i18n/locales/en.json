@@ -1,6 +1,7 @@
 {
   "common": {
     "more": "More",
+    "viewAllServices": "All services",
     "tariffs": "Tariffs",
     "register": "Register",
     "courseProgram": "Course Program",
@@ -8,6 +9,7 @@
     "home": "Home",
     "services": "Services",
     "training": "Training",
+    "orderCall": "Order a call",
     "contacts": "Contacts",
     "contactUs": "Contact Us",
     "phone": "Phone",

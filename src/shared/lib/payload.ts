@@ -167,6 +167,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
     const t: Translations = {
       common: {
         more: (settings?.commonMore as string) ?? '',
+        viewAllServices: (settings?.commonViewAllServices as string) ?? '',
         tariffs: (settings?.commonTariffs as string) ?? '',
         register: (settings?.commonRegister as string) ?? '',
         sendRequest: (settings?.commonSendRequest as string) ?? '',
@@ -174,6 +175,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         home: (settings?.commonHome as string) ?? '',
         services: (settings?.commonServices as string) ?? '',
         training: (settings?.commonTraining as string) ?? '',
+        orderCall: (settings?.commonOrderCall as string) ?? '',
         contacts: (settings?.commonContacts as string) ?? '',
         contactUs: (settings?.commonContactUs as string) ?? '',
         phone: (settings?.commonPhone as string) ?? '',

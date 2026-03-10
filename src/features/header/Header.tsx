@@ -1,5 +1,6 @@
 import LanguageSwitcher from '@/features/LanguageSwitcher/LanguageSwitcher'
 import { MobileMenu } from '@/features/header/MobileMenu'
+import { OrderCallLink } from '@/features/header/OrderCallLink'
 import { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
 import { getNavItems, getHeaderLogoUrl } from '@/shared/lib/payload'
@@ -41,23 +42,31 @@ const Header = async ({ locale }: { locale: Locale }) => {
             ))}
           </nav>
 
-          <div className='hidden md:flex flex-col items-end shrink-0 text-right'>
-            {t.common.contactInfo.phone && (
-              <Link
-                href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`}
-                className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
-              >
-                {t.common.contactInfo.phone}
-              </Link>
-            )}
-            {t.common.contactInfo.email && (
-              <Link
-                href={`mailto:${t.common.contactInfo.email}`}
-                className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
-              >
-                {t.common.contactInfo.email}
-              </Link>
-            )}
+          <div className='hidden md:flex items-center gap-4 shrink-0'>
+            <OrderCallLink
+              href={`${getLocalePath(locale, '')}#consultation`}
+              className='inline-flex items-center justify-center min-w-[140px] bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm font-semibold whitespace-nowrap'
+            >
+              {t.common.orderCall}
+            </OrderCallLink>
+            <div className='flex flex-col items-end text-right'>
+              {t.common.contactInfo.phone && (
+                <Link
+                  href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`}
+                  className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
+                >
+                  {t.common.contactInfo.phone}
+                </Link>
+              )}
+              {t.common.contactInfo.email && (
+                <Link
+                  href={`mailto:${t.common.contactInfo.email}`}
+                  className='text-sm text-slate-500 hover:text-blue-600 whitespace-nowrap transition-colors'
+                >
+                  {t.common.contactInfo.email}
+                </Link>
+              )}
+            </div>
           </div>
 
           {process.env.NODE_ENV !== 'production' && <LanguageSwitcher locale={locale} />}

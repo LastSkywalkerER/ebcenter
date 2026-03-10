@@ -1,5 +1,6 @@
 import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
+import { ScrollToConsultation } from '@/features/header/ScrollToConsultation'
 import { PlausibleProvider } from '@/shared/ui/analytics/PlausibleProvider'
 import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
@@ -97,6 +98,7 @@ export default async function LocaleLayout({
           <PlausibleProvider />
           <LivePreviewRefresh />
           <Header locale={locale as Locale} />
+          <ScrollToConsultation />
           <main>{children}</main>
           <Footer locale={locale as Locale} />
         </div>

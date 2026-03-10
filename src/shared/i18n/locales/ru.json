@@ -1,6 +1,7 @@
 {
   "common": {
     "more": "Подробнее",
+    "viewAllServices": "Все услуги",
     "tariffs": "Тарифы",
     "register": "Записаться",
     "courseProgram": "Программа курса",
@@ -8,6 +9,7 @@
     "home": "Главная",
     "services": "Услуги",
     "training": "Обучение",
+    "orderCall": "Заказать звонок",
     "contacts": "Контакты",
     "contactUs": "Связаться с нами",
     "phone": "Телефон",

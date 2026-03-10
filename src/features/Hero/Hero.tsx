@@ -31,7 +31,7 @@ export const Hero = ({
   const offset = useParallax(0.1)
 
   return (
-    <section className='relative h-[580px] md:h-[640px] bg-slate-900 overflow-hidden'>
+    <section className='relative h-[calc(100vh-68px)] min-h-[400px] bg-slate-900 overflow-hidden flex flex-col'>
       <div className='absolute inset-0'>
         <div
           style={{
@@ -58,37 +58,37 @@ export const Hero = ({
         </div>
         <div className='absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/55 to-slate-900/20' />
       </div>
-      <div className='relative max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-end pb-14 md:items-center md:pb-0'>
-        <div className='max-w-2xl'>
-          {badge && (
-            <div className='inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-5'>
-              <div className='w-1.5 h-1.5 rounded-full bg-blue-400' />
-              <span className='text-xs font-medium text-white/80 tracking-wide'>{badge}</span>
+      <div className='relative flex-1 flex flex-col max-w-7xl mx-auto px-6 lg:px-8 w-full min-h-0'>
+        <div className='flex-1 flex items-center py-8'>
+          <div className='max-w-2xl'>
+            {badge && (
+              <div className='inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-5'>
+                <div className='w-1.5 h-1.5 rounded-full bg-blue-400' />
+                <span className='text-xs font-medium text-white/80 tracking-wide'>{badge}</span>
+              </div>
+            )}
+            <h1 className='text-4xl sm:text-5xl md:text-[56px] font-bold mb-4 text-white leading-[1.08] tracking-tight'>
+              {title}
+            </h1>
+            <p className='text-base md:text-lg mb-8 text-slate-300 leading-relaxed'>{subtitle}</p>
+            <div className='flex flex-col sm:flex-row gap-3'>
+              <Link
+                href={ctaLink.startsWith('/') ? ctaLink : `/${ctaLink}`}
+                className='inline-flex items-center justify-center bg-blue-600 text-white px-7 py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm font-semibold shadow-lg shadow-blue-900/40 text-center'
+              >
+                {cta}
+              </Link>
+              <Link
+                href={secondaryCtaLink}
+                className='inline-flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-7 py-3 rounded-lg hover:bg-white/20 transition-colors text-sm font-semibold text-center'
+              >
+                {training}
+              </Link>
             </div>
-          )}
-          <h1 className='text-4xl sm:text-5xl md:text-[56px] font-bold mb-4 text-white leading-[1.08] tracking-tight'>
-            {title}
-          </h1>
-          <p className='text-base md:text-lg mb-8 text-slate-300 leading-relaxed'>{subtitle}</p>
-          <div className='flex flex-col sm:flex-row gap-3'>
-            <Link
-              href={ctaLink.startsWith('/') ? ctaLink : `/${ctaLink}`}
-              className='inline-flex items-center justify-center bg-blue-600 text-white px-7 py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm font-semibold shadow-lg shadow-blue-900/40 text-center'
-            >
-              {cta}
-            </Link>
-            <Link
-              href={secondaryCtaLink.startsWith('/') ? secondaryCtaLink : `/${secondaryCtaLink}`}
-              className='inline-flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/20 text-white px-7 py-3 rounded-lg hover:bg-white/20 transition-colors text-sm font-semibold text-center'
-            >
-              {training}
-            </Link>
           </div>
         </div>
-      </div>
-      {badgeStrip && (
-        <div className='absolute bottom-0 left-0 right-0'>
-          <div className='max-w-7xl mx-auto px-6 lg:px-8 pb-5'>
+        {badgeStrip && (
+          <div className='shrink-0 pb-5'>
             <div className='flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl px-5 py-3'>
               <svg className='w-4 h-4 text-blue-400 shrink-0' viewBox='0 0 16 16' fill='none' stroke='currentColor' strokeWidth='2'>
                 <path strokeLinecap='round' strokeLinejoin='round' d='M2.5 8.5l3.5 3.5 7-7' />
@@ -96,8 +96,8 @@ export const Hero = ({
               <span className='text-base text-white/80 leading-snug'>{badgeStrip}</span>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   )
 }
