@@ -1,7 +1,6 @@
 'use client'
 
-import { env } from '@/shared/config/env'
-import { Turnstile } from 'next-turnstile'
+import { CaptchaModal } from '@/shared/ui/CaptchaModal'
 import { useState } from 'react'
 
 const PHONE_PATTERN = /^\+375\d{9}$/
@@ -53,43 +52,16 @@ export function ConsultationForm({
   const [nameError, setNameError] = useState('')
   const [contactError, setContactError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [showCaptchaModal, setShowCaptchaModal] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-    setErrorMessage('')
-    setNameError('')
-    setContactError('')
-    setSuccessMessage('')
-
+  const submitWithToken = async (turnstileToken: string) => {
     const nameTrim = name.trim()
     const contactTrim = contact.trim()
-
-    if (!nameTrim) {
-      setNameError(nameRequired)
-      setStatus('idle')
-      return
-    }
-    if (!contactTrim) {
-      setContactError(contactRequired)
-      setStatus('idle')
-      return
-    }
-    if (!isEmail(contactTrim) && !isPhone(contactTrim)) {
-      setContactError(contactInvalid)
-      setStatus('idle')
-      return
-    }
-    if (!turnstileToken) {
-      setErrorMessage(securityCheck)
-      setStatus('idle')
-      return
-    }
-
     const email = isEmail(contactTrim) ? contactTrim : ''
     const phone = isPhone(contactTrim) ? contactTrim : isEmail(contactTrim) ? '' : contactTrim
 
+    setStatus('loading')
+    setErrorMessage('')
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -113,11 +85,41 @@ export function ConsultationForm({
       setSuccessMessage(successText)
       setName('')
       setContact('')
-      setTurnstileToken(null)
     } catch (err) {
       setStatus('idle')
       setErrorMessage(err instanceof Error ? err.message : errorText)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setErrorMessage('')
+    setNameError('')
+    setContactError('')
+    setSuccessMessage('')
+
+    const nameTrim = name.trim()
+    const contactTrim = contact.trim()
+
+    if (!nameTrim) {
+      setNameError(nameRequired)
+      return
+    }
+    if (!contactTrim) {
+      setContactError(contactRequired)
+      return
+    }
+    if (!isEmail(contactTrim) && !isPhone(contactTrim)) {
+      setContactError(contactInvalid)
+      return
+    }
+
+    setShowCaptchaModal(true)
+  }
+
+  const handleCaptchaVerify = (token: string) => {
+    setShowCaptchaModal(false)
+    submitWithToken(token)
   }
 
   const inputBase =
@@ -125,8 +127,7 @@ export function ConsultationForm({
   const inputNormal = `${inputBase} border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100`
   const inputError = `${inputBase} border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200`
 
-  const isDisabled =
-    status === 'loading' || !!nameError || !!contactError || !turnstileToken
+  const isDisabled = status === 'loading' || !!nameError || !!contactError
 
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm p-6 md:p-8'>
@@ -188,18 +189,16 @@ export function ConsultationForm({
           </div>
         </form>
       </div>
-      {/* Captcha under the button — always visible, subtle */}
-      <div className='mt-4 flex justify-end'>
-        <div className='opacity-75 hover:opacity-100 transition-opacity w-[300px] h-[65px] [&_iframe]:!w-[300px] [&_iframe]:!h-[65px] [&_iframe]:!min-w-[300px] [&_iframe]:!min-h-[65px]'>
-          <Turnstile
-            siteKey={env.TURNSTILE_SITE_KEY}
-            onVerify={(token: string) => setTurnstileToken(token)}
-            onError={() => setErrorMessage(securityError)}
-            theme='light'
-            size='normal'
-          />
-        </div>
-      </div>
+      <CaptchaModal
+        open={showCaptchaModal}
+        onOpenChange={setShowCaptchaModal}
+        onVerify={handleCaptchaVerify}
+        onError={() => {
+          setShowCaptchaModal(false)
+          setErrorMessage(securityError)
+        }}
+        title={securityCheck}
+      />
       {(nameError || contactError) && (
         <div className='mt-3 flex flex-wrap gap-x-4 gap-y-1 text-red-600 text-sm'>
           {nameError && <span>{nameError}</span>}

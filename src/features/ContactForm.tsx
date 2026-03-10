@@ -1,7 +1,6 @@
 'use client'
 
-import { env } from '@/shared/config/env'
-import { Turnstile } from 'next-turnstile'
+import { CaptchaModal } from '@/shared/ui/CaptchaModal'
 import { useState, useEffect } from 'react'
 
 interface ContactFormProps {
@@ -63,55 +62,22 @@ export const ContactForm = ({
   const [nameError, setNameError] = useState('')
   const [messageError, setMessageError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [showCaptchaModal, setShowCaptchaModal] = useState(false)
 
   // Sync message field when initialMessage changes (e.g. after client-side nav with ?course=)
   useEffect(() => {
     setFormData((prev) => ({ ...prev, message: initialMessage ?? '' }))
   }, [initialMessage])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('loading')
-    setErrorMessage('')
-    setContactError('')
-    setNameError('')
-    setMessageError('')
-    setSuccessMessage('')
-
+  const submitWithToken = async (turnstileToken: string) => {
     const nameTrim = formData.name.trim()
     const contactTrim = formData.contact.trim()
     const messageTrim = formData.message.trim()
-
-    if (!nameTrim) {
-      setNameError(validation.nameRequired)
-      setStatus('idle')
-      return
-    }
-    if (!messageTrim) {
-      setMessageError(validation.messageRequired)
-      setStatus('idle')
-      return
-    }
-    if (!contactTrim) {
-      setContactError(contactRequired)
-      setStatus('idle')
-      return
-    }
-    if (!isEmail(contactTrim) && !isPhone(contactTrim)) {
-      setContactError(contactInvalid)
-      setStatus('idle')
-      return
-    }
-    if (!turnstileToken) {
-      setErrorMessage(securityCheck)
-      setStatus('idle')
-      return
-    }
-
     const email = isEmail(contactTrim) ? contactTrim : ''
     const phone = isPhone(contactTrim) ? contactTrim : contactTrim
 
+    setStatus('loading')
+    setErrorMessage('')
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -134,11 +100,47 @@ export const ContactForm = ({
       setStatus('success')
       setSuccessMessage(successText)
       setFormData({ name: '', contact: '', message: initialMessage })
-      setTurnstileToken(null)
     } catch (err) {
       setStatus('idle')
       setErrorMessage(err instanceof Error ? err.message : errorText)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setErrorMessage('')
+    setContactError('')
+    setNameError('')
+    setMessageError('')
+    setSuccessMessage('')
+
+    const nameTrim = formData.name.trim()
+    const contactTrim = formData.contact.trim()
+    const messageTrim = formData.message.trim()
+
+    if (!nameTrim) {
+      setNameError(validation.nameRequired)
+      return
+    }
+    if (!messageTrim) {
+      setMessageError(validation.messageRequired)
+      return
+    }
+    if (!contactTrim) {
+      setContactError(contactRequired)
+      return
+    }
+    if (!isEmail(contactTrim) && !isPhone(contactTrim)) {
+      setContactError(contactInvalid)
+      return
+    }
+
+    setShowCaptchaModal(true)
+  }
+
+  const handleCaptchaVerify = (token: string) => {
+    setShowCaptchaModal(false)
+    submitWithToken(token)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -157,11 +159,7 @@ export const ContactForm = ({
   const inputError = `${inputBase} border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200`
 
   const isDisabled =
-    status === 'loading' ||
-    !!contactError ||
-    !!nameError ||
-    !!messageError ||
-    !turnstileToken
+    status === 'loading' || !!contactError || !!nameError || !!messageError
 
   return (
     <div className='bg-white rounded-xl border border-slate-200 shadow-sm p-8 md:p-10'>
@@ -207,14 +205,16 @@ export const ContactForm = ({
           />
           {messageError && <div className='text-red-600 text-sm mt-1'>{messageError}</div>}
         </div>
-        <div className='flex justify-center'>
-          <Turnstile
-            siteKey={env.TURNSTILE_SITE_KEY}
-            onVerify={(token: string) => setTurnstileToken(token)}
-            onError={() => setErrorMessage(securityError)}
-            theme='light'
-          />
-        </div>
+        <CaptchaModal
+          open={showCaptchaModal}
+          onOpenChange={setShowCaptchaModal}
+          onVerify={handleCaptchaVerify}
+          onError={() => {
+            setShowCaptchaModal(false)
+            setErrorMessage(securityError)
+          }}
+          title={securityCheck}
+        />
         {errorMessage && (
           <div className='text-red-600 text-sm bg-red-50 border border-red-100 px-4 py-3 rounded-lg'>{errorMessage}</div>
         )}
