@@ -16,7 +16,7 @@
     "seed:media": "yarn payload run scripts/seed-media.ts",
     "generate:icons": "npx tsx scripts/generate-icons.ts",
     "seed": "npx tsx scripts/seed.ts",
-    "deploy:prepare": "npx cross-env NODE_OPTIONS=--no-deprecation payload migrate && npx tsx scripts/seed.ts",
+    "deploy:prepare": "npx tsx scripts/deploy-prepare.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

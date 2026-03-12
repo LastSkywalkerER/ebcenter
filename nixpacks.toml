@@ -1,17 +1,18 @@
 # Nixpacks config for Railway/Render deploy
-# Build: install deps, next build
-# Start: db:migrate, seed (admin+content), then next start
+# Node 20: from package.json engines.node or .nvmrc
+# Required env vars: DATABASE_URL, PAYLOAD_SECRET, PAYLOAD_ADMIN_EMAIL, PAYLOAD_ADMIN_PASSWORD
 
 [phases.install]
-# Yarn only - on Linux build sharp gets correct binaries automatically
 cmds = [
   "npm install -g corepack@0.24.1 && corepack enable",
   "yarn install"
 ]
 
 [phases.build]
-cmds = ["...", "yarn build"]
+cmds = ["yarn build"]
+
+[variables]
+NODE_ENV = "production"
 
 [start]
-# Run migrations, seed default admin + content, then start
 cmd = "yarn deploy:prepare && yarn start"
