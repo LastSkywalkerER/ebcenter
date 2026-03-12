@@ -619,14 +619,18 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             return (
               <div key={key} className='bg-[#F8FAFC] border-b border-slate-200 py-11'>
                 <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
-                  <div className='grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-4'>
+                  <div className='grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-6'>
                     {items.map((item, i) => (
-                      <div key={i} className='text-center flex flex-col items-center gap-2 md:flex-row md:items-start md:gap-0 md:flex-none md:text-center md:block'>
-                        {i > 0 && (
-                          <div className='hidden md:block absolute h-[50px] w-px bg-slate-200' style={{ left: `${(i / items.length) * 100}%` }} />
-                        )}
-                        <div className='text-[clamp(24px,5vw,34px)] font-extrabold text-[#1A2E52] leading-none mb-2'>{item.value}</div>
-                        <div className='text-[13px] text-slate-500 leading-tight max-w-[160px] mx-auto'>{item.label}</div>
+                      <div
+                        key={i}
+                        className={`text-center flex flex-col items-center gap-2 md:flex-col md:items-center md:gap-2 min-w-0 ${i > 0 ? 'md:border-l md:border-slate-200 md:pl-6' : ''}`}
+                      >
+                        <div className='text-[clamp(24px,5vw,34px)] font-extrabold text-[#1A2E52] leading-none'>
+                          {item.value}
+                        </div>
+                        <div className='text-[13px] text-slate-500 leading-tight max-w-[160px]'>
+                          {item.label}
+                        </div>
                       </div>
                     ))}
                   </div>
