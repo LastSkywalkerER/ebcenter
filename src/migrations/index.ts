@@ -10,6 +10,7 @@ import * as migration_20260310_150000_add_footer_quick_links_title from './20260
 import * as migration_20260311_200000_add_knowledge_base_and_new_blocks from './20260311_200000_add_knowledge_base_and_new_blocks'
 import * as migration_20260311_210000_add_stats_and_section_fields from './20260311_210000_add_stats_and_section_fields'
 import * as migration_20260311_220000_add_principles_section_tag from './20260311_220000_add_principles_section_tag'
+import * as migration_20260312_100000_add_site_settings_nav_fields from './20260312_100000_add_site_settings_nav_fields'
 
 export const migrations = [
   {
@@ -71,5 +72,10 @@ export const migrations = [
     up: migration_20260311_220000_add_principles_section_tag.up,
     down: migration_20260311_220000_add_principles_section_tag.down,
     name: '20260311_220000_add_principles_section_tag',
+  },
+  {
+    up: migration_20260312_100000_add_site_settings_nav_fields.up,
+    down: migration_20260312_100000_add_site_settings_nav_fields.down,
+    name: '20260312_100000_add_site_settings_nav_fields',
   },
 ];
