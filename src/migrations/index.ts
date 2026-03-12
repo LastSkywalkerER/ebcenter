@@ -11,6 +11,7 @@ import * as migration_20260311_200000_add_knowledge_base_and_new_blocks from './
 import * as migration_20260311_210000_add_stats_and_section_fields from './20260311_210000_add_stats_and_section_fields'
 import * as migration_20260311_220000_add_principles_section_tag from './20260311_220000_add_principles_section_tag'
 import * as migration_20260312_100000_add_site_settings_nav_fields from './20260312_100000_add_site_settings_nav_fields'
+import * as migration_20260312_110000_add_site_settings_common_fields from './20260312_110000_add_site_settings_common_fields'
 
 export const migrations = [
   {
@@ -77,5 +78,10 @@ export const migrations = [
     up: migration_20260312_100000_add_site_settings_nav_fields.up,
     down: migration_20260312_100000_add_site_settings_nav_fields.down,
     name: '20260312_100000_add_site_settings_nav_fields',
+  },
+  {
+    up: migration_20260312_110000_add_site_settings_common_fields.up,
+    down: migration_20260312_110000_add_site_settings_common_fields.down,
+    name: '20260312_110000_add_site_settings_common_fields',
   },
 ];
