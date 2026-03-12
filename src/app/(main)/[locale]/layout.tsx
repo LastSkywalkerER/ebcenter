@@ -99,7 +99,7 @@ export default async function LocaleLayout({
           <LivePreviewRefresh />
           <Header locale={locale as Locale} />
           <ScrollToConsultation />
-          <main>{children}</main>
+          <div className='flex-grow'>{children}</div>
           <Footer locale={locale as Locale} />
         </div>
       </body>

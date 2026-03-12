@@ -30,6 +30,12 @@ body {
   --input: 214 32% 91%;
   --ring: 221 83% 53%;
   --radius: 0.625rem;
+  /* Brand navy palette */
+  --navy: 220 53% 20%;
+  --navy-dark: 220 53% 14%;
+  --navy-light: 220 53% 35%;
+  --success: 160 84% 39%;
+  --bg-alt: 210 40% 97%;
 }
 
 @theme inline {
@@ -54,6 +60,11 @@ body {
   --color-ring: hsl(var(--ring));
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-navy: hsl(var(--navy));
+  --color-navy-dark: hsl(var(--navy-dark));
+  --color-navy-light: hsl(var(--navy-light));
+  --color-success: hsl(var(--success));
+  --color-bg-alt: hsl(var(--bg-alt));
 }
 
 @media (prefers-color-scheme: dark) {

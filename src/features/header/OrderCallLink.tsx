@@ -4,8 +4,8 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { i18n } from '@/shared/i18n/config'
 
-const scrollToConsultation = () => {
-  document.getElementById('consultation')?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+const scrollToContacts = () => {
+  document.getElementById('contacts')?.scrollIntoView({ block: 'start', behavior: 'smooth' })
 }
 
 interface OrderCallLinkProps {
@@ -20,7 +20,7 @@ export function OrderCallLink({ href, children, className, onClick }: OrderCallL
   const isHome = pathname === '/' || pathname === `/${i18n.defaultLocale}` || i18n.locales.some((loc) => pathname === `/${loc}`)
 
   const handleClick = () => {
-    scrollToConsultation()
+    scrollToContacts()
     onClick?.()
   }
 

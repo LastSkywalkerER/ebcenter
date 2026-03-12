@@ -23,8 +23,9 @@ export const Pages: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      validate: (val: unknown) => (val && String(val) === 'contacts' ? 'Slug "contacts" is not allowed. Contacts are on the main page only. Use Globals → Contact Info.' : true),
       admin: {
-        description: 'URL path (e.g. home, services, about-us). Use "home" for the main page.',
+        description: 'URL path (e.g. home, about-us). Use "home" for the main page. Not: services, training, contacts (reserved).',
       },
     },
     {
@@ -62,6 +63,7 @@ export const Pages: CollectionConfig = {
           slug: 'hero',
           labels: { singular: 'Hero', plural: 'Hero blocks' },
           fields: [
+            { name: 'badge', type: 'text', localized: true, admin: { description: 'Small badge above title (e.g. Сметные услуги · Минск · РБ)' } },
             { name: 'title', type: 'text', required: true, localized: true },
             { name: 'subtitle', type: 'textarea', localized: true },
             { name: 'cta', type: 'text', localized: true },
@@ -80,6 +82,23 @@ export const Pages: CollectionConfig = {
               type: 'array',
               localized: true,
               fields: [{ name: 'text', type: 'text', required: true }],
+            },
+          ],
+        },
+        {
+          slug: 'stats',
+          labels: { singular: 'Trust Stats', plural: 'Trust Stats blocks' },
+          fields: [
+            {
+              name: 'items',
+              type: 'array',
+              required: true,
+              localized: true,
+              minRows: 1,
+              fields: [
+                { name: 'value', type: 'text', required: true },
+                { name: 'label', type: 'text', required: true },
+              ],
             },
           ],
         },
@@ -134,14 +153,20 @@ export const Pages: CollectionConfig = {
           slug: 'serviceList',
           labels: { singular: 'Service List', plural: 'Service List blocks' },
           fields: [
-            { name: 'sectionTitle', type: 'text', localized: true, admin: { description: 'Optional heading above the list' } },
+            { name: 'sectionTag', type: 'text', localized: true, admin: { description: 'Small tag above title (e.g. Услуги)' } },
+            { name: 'sectionTitle', type: 'text', localized: true, admin: { description: 'Section heading' } },
+            { name: 'sectionSubtitle', type: 'textarea', localized: true, admin: { description: 'Subtitle/description below title' } },
             { name: 'limit', type: 'number', admin: { description: 'Max services to show (0 = all)' }, defaultValue: 0 },
           ],
         },
         {
           slug: 'courseList',
           labels: { singular: 'Course List', plural: 'Course List blocks' },
-          fields: [],
+          fields: [
+            { name: 'sectionTag', type: 'text', localized: true, admin: { description: 'Small tag (e.g. Обучение)' } },
+            { name: 'sectionTitle', type: 'text', localized: true },
+            { name: 'sectionSubtitle', type: 'textarea', localized: true },
+          ],
         },
         {
           slug: 'contactForm',
@@ -151,12 +176,22 @@ export const Pages: CollectionConfig = {
         {
           slug: 'contactInfo',
           labels: { singular: 'Contact Info (data from Contacts global)', plural: 'Contact Info blocks' },
-          fields: [],
+          fields: [
+            { name: 'sectionTag', type: 'text', localized: true, admin: { description: 'Tag for CTA section (e.g. Контакты)' } },
+            { name: 'sectionTitle', type: 'text', localized: true, admin: { description: 'Title for CTA+form section' } },
+            { name: 'sectionDescription', type: 'textarea', localized: true, admin: { description: 'Description text' } },
+          ],
         },
         {
           slug: 'principles',
           labels: { singular: 'Principles of Work', plural: 'Principles blocks' },
           fields: [
+            {
+              name: 'sectionTag',
+              type: 'text',
+              localized: true,
+              admin: { description: 'Small tag above title (e.g. Принципы работы)' },
+            },
             {
               name: 'sectionTitle',
               type: 'text',
@@ -193,6 +228,139 @@ export const Pages: CollectionConfig = {
           slug: 'consultationForm',
           labels: { singular: 'Consultation form (compact)', plural: 'Consultation form blocks' },
           fields: [],
+        },
+        {
+          slug: 'advantages',
+          labels: { singular: 'Advantages / Why Us', plural: 'Advantages blocks' },
+          fields: [
+            { name: 'tag', type: 'text', localized: true, admin: { description: 'Small tag above title (e.g. Преимущества)' } },
+            { name: 'title', type: 'text', required: true, localized: true },
+            { name: 'description', type: 'textarea', localized: true },
+            { name: 'ctaText', type: 'text', localized: true, defaultValue: 'Получить консультацию' },
+            {
+              name: 'items',
+              type: 'array',
+              required: true,
+              localized: true,
+              minRows: 1,
+              fields: [
+                {
+                  name: 'icon',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Check (practice)', value: 'check' },
+                    { label: 'Shield (legislation)', value: 'shield' },
+                    { label: 'Clock (deadlines)', value: 'clock' },
+                    { label: 'Dollar (pricing)', value: 'dollar' },
+                  ],
+                },
+                { name: 'title', type: 'text', required: true },
+                { name: 'description', type: 'text', required: true },
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'pricing',
+          labels: { singular: 'Pricing / Tariffs', plural: 'Pricing blocks' },
+          fields: [
+            { name: 'sectionTag', type: 'text', localized: true, admin: { description: 'Small tag (e.g. Тарифы)' } },
+            { name: 'sectionTitle', type: 'text', localized: true },
+            { name: 'sectionDescription', type: 'textarea', localized: true },
+            {
+              name: 'cards',
+              type: 'array',
+              required: true,
+              localized: true,
+              minRows: 1,
+              maxRows: 3,
+              fields: [
+                { name: 'title', type: 'text', required: true },
+                { name: 'description', type: 'textarea' },
+                {
+                  name: 'features',
+                  type: 'array',
+                  fields: [{ name: 'text', type: 'text', required: true }],
+                },
+                { name: 'ctaText', type: 'text', defaultValue: 'Узнать стоимость' },
+                { name: 'isFeatured', type: 'checkbox', defaultValue: false },
+                { name: 'featuredBadge', type: 'text', defaultValue: 'Популярный' },
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'knowledge',
+          labels: { singular: 'Knowledge Base Section', plural: 'Knowledge Base sections' },
+          fields: [
+            { name: 'tag', type: 'text', localized: true, admin: { description: 'Small tag (e.g. База знаний)' } },
+            { name: 'title', type: 'text', required: true, localized: true },
+            {
+              name: 'paragraphs',
+              type: 'array',
+              localized: true,
+              fields: [{ name: 'text', type: 'textarea', required: true }],
+            },
+            { name: 'articlesTitle', type: 'text', localized: true, defaultValue: 'Рекомендуемые статьи' },
+            {
+              name: 'articleSource',
+              type: 'select',
+              defaultValue: 'featured',
+              options: [
+                { label: 'Auto: featured articles', value: 'featured' },
+                { label: 'Manual: specify slugs', value: 'manual' },
+              ],
+            },
+            {
+              name: 'manualSlugs',
+              type: 'array',
+              admin: { condition: (data, siblingData) => siblingData?.articleSource === 'manual' },
+              fields: [{ name: 'slug', type: 'text', required: true }],
+            },
+          ],
+        },
+        {
+          slug: 'about',
+          labels: { singular: 'About / Specialist', plural: 'About blocks' },
+          fields: [
+            { name: 'tag', type: 'text', localized: true, admin: { description: 'Small tag (e.g. О специалисте)' } },
+            { name: 'title', type: 'text', required: true, localized: true },
+            {
+              name: 'paragraphs',
+              type: 'array',
+              localized: true,
+              fields: [{ name: 'text', type: 'textarea', required: true }],
+            },
+            { name: 'avatar', type: 'upload', relationTo: 'media', admin: { description: 'Avatar photo' } },
+            {
+              name: 'stats',
+              type: 'array',
+              localized: true,
+              fields: [
+                { name: 'value', type: 'text', required: true },
+                { name: 'label', type: 'text', required: true },
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'faq',
+          labels: { singular: 'FAQ / Accordion', plural: 'FAQ blocks' },
+          fields: [
+            { name: 'sectionTitle', type: 'text', localized: true },
+            {
+              name: 'items',
+              type: 'array',
+              required: true,
+              localized: true,
+              minRows: 1,
+              fields: [
+                { name: 'question', type: 'text', required: true },
+                { name: 'answer', type: 'textarea', required: true },
+              ],
+            },
+          ],
         },
       ],
     },

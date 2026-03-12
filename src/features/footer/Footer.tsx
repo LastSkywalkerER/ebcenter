@@ -1,87 +1,109 @@
 import { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
-import { getNavItems } from '@/shared/lib/payload'
-import { formatPhoneForTel } from '@/shared/lib/utils'
 import { getTranslations } from '@/shared/i18n/utils'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const Footer = async ({ locale }: { locale: Locale }) => {
-  const [t, navItems] = await Promise.all([getTranslations(locale), getNavItems(locale)])
-  const nav = navItems.length > 0 ? navItems : [
-    { label: t.common.home, href: getLocalePath(locale, ''), slug: '' },
-    { label: t.common.services, href: getLocalePath(locale, '/services'), slug: 'services' },
-    { label: t.common.training, href: getLocalePath(locale, '/training'), slug: 'training' },
-    { label: t.common.contacts, href: getLocalePath(locale, '/contacts'), slug: 'contacts' },
-  ]
+  const t = await getTranslations(locale)
+
+  const serviceEntries = Object.entries(t.services.items).slice(0, 5)
+  const courseEntries = Object.entries(t.training.courses)
 
   return (
-    <footer className='bg-slate-900 text-slate-100'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14'>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          {/* Company Info */}
+    <footer className='bg-[#0F1E3A] text-white'>
+      <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10 pt-[60px] pb-7'>
+        <div className='grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-9 mb-11'>
+          {/* Brand */}
           <div>
-            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.companyInfo.title}</h3>
-            <p className='text-slate-400 mb-4 text-sm'>{t.footer.companyInfo.description}</p>
-            <div className='space-y-2 text-slate-400 text-sm'>
-              <p>
-                {t.common.unp}: {t.common.contactInfo.unp}
-              </p>
-              <p>{t.common.contactInfo.address}</p>
-              <p>{t.common.contactInfo.workingHours}</p>
+            <Link href={getLocalePath(locale, '')} className='flex items-center gap-[9px] mb-2.5'>
+              <Image
+                src='/images/favicon-ps.png'
+                alt=''
+                width={26}
+                height={26}
+                className='text-blue-400'
+              />
+              <span className='text-[20px] font-extrabold text-white tracking-[-0.4px]'>
+                {t.header.logo}
+              </span>
+            </Link>
+            <p className='text-[13px] text-white/65 leading-relaxed max-w-[280px]'>
+              {t.footer.companyInfo.description}
+            </p>
+          </div>
+
+          {/* Navigation groups */}
+          <div className='grid grid-cols-2 sm:grid-cols-3 gap-7'>
+            {/* Services */}
+            <div>
+              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+                {t.common.services}
+              </h4>
+              <div className='flex flex-col gap-1.5'>
+                {serviceEntries.map(([key, service]) => (
+                  <Link
+                    key={key}
+                    href={`${getLocalePath(locale, '/services')}#${service.slug}`}
+                    className='text-[13px] text-white/55 hover:text-white transition-colors leading-snug'
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+                <Link
+                  href={getLocalePath(locale, '/services')}
+                  className='text-[13px] text-white/55 hover:text-white transition-colors'
+                >
+                  {t.common.viewAllServices}
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.quickLinks.title}</h3>
-            <ul className='space-y-2'>
-              {nav.map((item) => (
-                <li key={item.slug || 'home'}>
-                  <Link href={item.href} className='text-slate-400 hover:text-white transition-colors text-sm'>
-                    {item.label}
+            {/* Training */}
+            <div>
+              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+                {t.common.training}
+              </h4>
+              <div className='flex flex-col gap-1.5'>
+                {courseEntries.map(([courseSlug, course]) => (
+                  <Link
+                    key={courseSlug}
+                    href={`${getLocalePath(locale, '/training')}#${courseSlug}`}
+                    className='text-[13px] text-white/55 hover:text-white transition-colors leading-snug'
+                  >
+                    {course.title}
                   </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+                ))}
+              </div>
+            </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className='text-sm font-semibold uppercase tracking-widest text-slate-400 mb-5'>{t.footer.contactInfo.title}</h3>
-            <ul className='space-y-2 text-slate-400 text-sm'>
-              {t.common.contactInfo.phone && (
-                <li>
-                  <Link href={`tel:${formatPhoneForTel(t.common.contactInfo.phone)}`} className='hover:text-white transition-colors'>
-                    {t.common.contactInfo.phone}
-                  </Link>
-                </li>
-              )}
-              {t.common.contactInfo.email && (
-                <li>
-                  <Link href={`mailto:${t.common.contactInfo.email}`} className='hover:text-white transition-colors'>
-                    {t.common.contactInfo.email}
-                  </Link>
-                </li>
-              )}
-              {t.common.contactInfo.address && (
-                <li>{t.common.contactInfo.address}</li>
-              )}
-              {t.common.contactInfo.workingHours && (
-                <li>{t.common.contactInfo.workingHours}</li>
-              )}
-              {t.common.contactInfo.unp && (
-                <li>
-                  {t.common.unp}: {t.common.contactInfo.unp}
-                </li>
-              )}
-            </ul>
+            {/* Company */}
+            <div>
+              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+                {t.footer.companyColumnTitle ?? (locale === 'ru' ? 'Компания' : 'Company')}
+              </h4>
+              <div className='flex flex-col gap-1.5'>
+                <Link href={getLocalePath(locale, '/knowledge')} className='text-[13px] text-white/55 hover:text-white transition-colors'>
+                  {t.header.navigation?.knowledge ?? (locale === 'ru' ? 'База знаний' : 'Knowledge Base')}
+                </Link>
+                <Link href={`${getLocalePath(locale, '')}#pricing`} className='text-[13px] text-white/55 hover:text-white transition-colors'>
+                  {t.common.tariffs}
+                </Link>
+                <Link href={`${getLocalePath(locale, '')}#about`} className='text-[13px] text-white/55 hover:text-white transition-colors'>
+                  {t.footer.aboutSpecialist ?? (locale === 'ru' ? 'О специалисте' : 'About the Specialist')}
+                </Link>
+                <Link href={`${getLocalePath(locale, '')}#contacts`} className='text-[13px] text-white/55 hover:text-white transition-colors'>
+                  {t.common.contacts}
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className='mt-10 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm'>
-          <p>
-            &copy; {new Date().getFullYear()} {t.footer.companyInfo.title}. {t.footer.copyright}
-          </p>
+        {/* Bottom bar */}
+        <div className='pt-7 border-t border-white/[0.08] flex flex-col sm:flex-row justify-between gap-1.5 text-[12px] text-white/50'>
+          <p>© {new Date().getFullYear()} {t.header.logo}. {t.footer.copyright}</p>
+          <p>{t.common.contactInfo.address}</p>
         </div>
       </div>
     </footer>

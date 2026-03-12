@@ -27,11 +27,11 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
       'localEstimates',
       'reporting',
       'estimateService',
-      'currentRepair',
+      'selfService',
       'estimateDocs',
       'contracts',
       'consulting',
-      'selfService',
+      'currentRepair',
       'individual',
     ]
     const sortedServices = [...services].sort((a, b) => {
@@ -176,6 +176,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         services: (settings?.commonServices as string) ?? '',
         training: (settings?.commonTraining as string) ?? '',
         orderCall: (settings?.commonOrderCall as string) ?? '',
+        getConsultation: (settings?.commonGetConsultation as string) ?? '',
         contacts: (settings?.commonContacts as string) ?? '',
         contactUs: (settings?.commonContactUs as string) ?? '',
         phone: (settings?.commonPhone as string) ?? '',
@@ -213,6 +214,9 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           services: (settings?.commonServices as string) ?? '',
           training: (settings?.commonTraining as string) ?? '',
           contacts: (settings?.commonContacts as string) ?? '',
+          tariffs: (settings?.navTariffs as string) ?? '',
+          knowledge: (settings?.navKnowledge as string) ?? '',
+          about: (settings?.navAbout as string) ?? '',
         },
         contact: {
           phone: (contacts?.contactPhone as string) ?? '',
@@ -563,6 +567,62 @@ export async function getCourseBySlug(slug: string, locale: Locale): Promise<Cou
     return doc ?? null
   } catch (err) {
     console.error('getCourseBySlug failed:', err)
+    return null
+  }
+}
+
+export interface KnowledgeArticle {
+  id: string | number
+  title?: string
+  slug?: string
+  description?: string
+  content?: unknown
+  publishedAt?: string | null
+  isFeatured?: boolean
+  order?: number
+  metaTitle?: string | null
+  metaDescription?: string | null
+}
+
+export async function getKnowledgeArticles(
+  locale: Locale,
+  limit = 0,
+  featuredOnly = false
+): Promise<KnowledgeArticle[]> {
+  try {
+    const payload = await getPayload({ config })
+    const where = featuredOnly ? { isFeatured: { equals: true } } : undefined
+    const result = await payload.find({
+      collection: 'knowledge-base',
+      where,
+      sort: 'order',
+      limit: limit > 0 ? limit : 100,
+      locale,
+    })
+    return result.docs as KnowledgeArticle[]
+  } catch (err) {
+    console.error('getKnowledgeArticles failed:', err)
+    return []
+  }
+}
+
+export async function getKnowledgeArticleBySlug(
+  slug: string,
+  locale: Locale
+): Promise<KnowledgeArticle | null> {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'knowledge-base',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      locale,
+      depth: 2,
+    })
+    const doc = result.docs[0] as KnowledgeArticle | undefined
+    return doc ?? null
+  } catch (err) {
+    console.error('getKnowledgeArticleBySlug failed:', err)
     return null
   }
 }

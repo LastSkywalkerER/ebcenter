@@ -2,18 +2,18 @@ import type { GlobalConfig } from 'payload'
 
 export const Contacts: GlobalConfig = {
   slug: 'contacts',
-  label: 'Contacts',
+  label: 'Contact Info',
   access: {
     read: () => true,
   },
   admin: {
+    description: 'Phone, email, address — used on main page and in footer. No separate contacts page.',
     livePreview: {
       url: ({ locale }) => {
         const loc = locale?.code ?? 'ru'
         const base = process.env.NEXT_PUBLIC_SERVER_URL ?? ''
-        const path = '/contacts'
-        if (loc === 'ru') return `${base}${path}`
-        return `${base}/${loc}${path}`
+        const path = loc === 'ru' ? '/#contacts' : `/${loc}#contacts`
+        return `${base}${path}`
       },
       breakpoints: [
         { label: 'Desktop', name: 'desktop', width: 1280, height: 800 },
@@ -37,8 +37,8 @@ export const Contacts: GlobalConfig = {
           ],
         },
         {
-          label: 'Page Labels',
-          admin: { description: 'Заголовки и лейблы страницы контактов' },
+          label: 'Labels',
+          admin: { description: 'Заголовки для блока контактов на главной и в футере' },
           fields: [
             { name: 'contactsTitle', type: 'text', localized: true, defaultValue: 'Контакты', admin: { description: 'Заголовок страницы контактов' } },
             { name: 'contactsSubtitle', type: 'text', localized: true, admin: { description: 'Подзаголовок страницы контактов' } },

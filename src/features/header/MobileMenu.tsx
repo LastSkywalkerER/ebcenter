@@ -66,7 +66,7 @@ export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) 
   if (!mounted) return null
 
   return (
-    <div className='md:hidden'>
+    <div className='lg:hidden'>
       <button
         type='button'
         className='relative z-50 p-2 text-slate-600 hover:text-slate-900 focus:outline-none'
@@ -144,7 +144,7 @@ export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) 
           {/* Bottom section - pinned to bottom */}
           <div className='shrink-0 border-t border-slate-200 px-5 py-6 space-y-4 bg-slate-50'>
             <OrderCallLink
-              href={`${getLocalePath(locale ?? 'ru', '')}#consultation`}
+              href={`${getLocalePath(locale ?? 'ru', '')}#contacts`}
               className='flex items-center justify-center w-full px-5 py-3.5 text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors'
               onClick={() => setIsOpen(false)}
             >

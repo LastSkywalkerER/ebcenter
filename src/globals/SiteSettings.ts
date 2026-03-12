@@ -6,6 +6,21 @@ export const SiteSettings: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    livePreview: {
+      url: ({ locale }) => {
+        const loc = locale?.code ?? 'ru'
+        const base = process.env.NEXT_PUBLIC_SERVER_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? ''
+        if (loc === 'ru') return base || '/'
+        return `${base}/${loc}`.replace(/\/$/, '') || `/${loc}`
+      },
+      breakpoints: [
+        { label: 'Desktop', name: 'desktop', width: 1280, height: 800 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Mobile', name: 'mobile', width: 375, height: 667 },
+      ],
+    },
+  },
   fields: [
     {
       type: 'tabs',
@@ -64,7 +79,17 @@ export const SiteSettings: GlobalConfig = {
               name: 'headerLogoText',
               type: 'text',
               localized: true,
-              defaultValue: 'ProSmety',
+              defaultValue: 'Prosmety',
+            },
+            {
+              type: 'collapsible',
+              label: 'Navigation Labels',
+              admin: { description: 'Labels for header navigation items' },
+              fields: [
+                { name: 'navTariffs', type: 'text', localized: true, defaultValue: 'Тарифы' },
+                { name: 'navKnowledge', type: 'text', localized: true, defaultValue: 'База знаний' },
+                { name: 'navAbout', type: 'text', localized: true, defaultValue: 'О нас' },
+              ],
             },
           ],
         },
@@ -97,6 +122,9 @@ export const SiteSettings: GlobalConfig = {
             { name: 'commonName', type: 'text', localized: true, defaultValue: 'Имя' },
             { name: 'commonMessage', type: 'text', localized: true, defaultValue: 'Сообщение' },
             { name: 'commonSelectCourse', type: 'text', localized: true, defaultValue: 'Выберите курс' },
+            { name: 'commonViewAllServices', type: 'text', localized: true, defaultValue: 'Все услуги' },
+            { name: 'commonOrderCall', type: 'text', localized: true, defaultValue: 'Заказать звонок' },
+            { name: 'commonGetConsultation', type: 'text', localized: true, defaultValue: 'Получить консультацию' },
             { name: 'commonDisclaimer', type: 'text', localized: true, defaultValue: 'Мы улучшили наш сайт, старую версию вы можете найти по ссылке' },
             { name: 'commonPhoneError', type: 'text', localized: true, defaultValue: 'Пожалуйста, введите корректный номер телефона в формате +375XXXXXXXXX' },
             { name: 'commonSuccess', type: 'text', localized: true, defaultValue: 'Ваше сообщение успешно отправлено!' },

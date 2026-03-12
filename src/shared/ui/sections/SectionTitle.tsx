@@ -6,25 +6,31 @@ interface SectionTitleProps {
   className?: string
   as?: 'h1' | 'h2' | 'h3'
   action?: React.ReactNode
+  tag?: string
+  /** Use for dark backgrounds (e.g. principles, CTA) */
+  tagVariant?: 'default' | 'light'
 }
 
-export const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, className = '', as: Tag = 'h2', action }) => {
+export const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, className = '', as: Tag = 'h2', action, tag, tagVariant = 'default' }) => {
+  const tagClass = tagVariant === 'light'
+    ? 'inline-block bg-white/[0.18] text-white/95 text-[12px] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-3'
+    : 'inline-block bg-blue-50 text-blue-600 text-[12px] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-3'
   return (
-    <div className={`mb-8 ${className}`}>
-      <div className='flex items-stretch gap-5'>
-        <div className='w-1 rounded-full bg-blue-600 shrink-0' />
-        <div className='flex-1 min-w-0'>
-          <Tag className='text-3xl md:text-4xl font-bold text-slate-900 tracking-tight leading-tight'>
-            {title}
-          </Tag>
-          {subtitle && (
-            <p className='mt-2 text-sm text-slate-400 leading-relaxed text-justify'>
-              {subtitle}
-            </p>
-          )}
-        </div>
-        {action && <div className='shrink-0 self-center'>{action}</div>}
-      </div>
+    <div className={`text-center mb-[52px] ${className}`}>
+      {tag && (
+        <span className={tagClass}>
+          {tag}
+        </span>
+      )}
+      <Tag className='text-[clamp(22px,4vw,34px)] font-extrabold text-slate-900 leading-tight mb-3.5'>
+        {title}
+      </Tag>
+      {subtitle && (
+        <p className='text-[16px] text-slate-500 max-w-[580px] mx-auto leading-[1.65]'>
+          {subtitle}
+        </p>
+      )}
+      {action && <div className='mt-3'>{action}</div>}
     </div>
   )
 }

@@ -54,6 +54,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip internal paths and Payload admin
-    '/((?!api|admin|_next/static|_next/image|images|manifest.json|favicon.ico|icon0.svg|icon1.png|robots.txt|sitemap.xml).*)',
+    '/((?!api|admin|_next/static|_next/image|images|manifest.json|favicon.ico|icon|apple-icon|robots.txt|sitemap.xml).*)',
   ],
 }

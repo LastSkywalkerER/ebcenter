@@ -72,6 +72,7 @@ export interface Config {
     services: Service;
     courses: Course;
     pages: Page;
+    'knowledge-base': KnowledgeBase;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -284,7 +286,7 @@ export interface Page {
   id: number;
   title: string;
   /**
-   * URL path (e.g. home, services, about-us). Use "home" for the main page.
+   * URL path (e.g. home, about-us). Use "home" for the main page. Not: services, training, contacts (reserved).
    */
   slug: string;
   /**
@@ -310,6 +312,10 @@ export interface Page {
   layout?:
     | (
         | {
+            /**
+             * Small badge above title (e.g. Сметные услуги · Минск · РБ)
+             */
+            badge?: string | null;
             title: string;
             subtitle?: string | null;
             cta?: string | null;
@@ -337,6 +343,16 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'badge';
+          }
+        | {
+            items: {
+              value: string;
+              label: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
           }
         | {
             title: string;
@@ -406,9 +422,17 @@ export interface Page {
           }
         | {
             /**
-             * Optional heading above the list
+             * Small tag above title (e.g. Услуги)
+             */
+            sectionTag?: string | null;
+            /**
+             * Section heading
              */
             sectionTitle?: string | null;
+            /**
+             * Subtitle/description below title
+             */
+            sectionSubtitle?: string | null;
             /**
              * Max services to show (0 = all)
              */
@@ -418,6 +442,12 @@ export interface Page {
             blockType: 'serviceList';
           }
         | {
+            /**
+             * Small tag (e.g. Обучение)
+             */
+            sectionTag?: string | null;
+            sectionTitle?: string | null;
+            sectionSubtitle?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'courseList';
@@ -428,11 +458,27 @@ export interface Page {
             blockType: 'contactForm';
           }
         | {
+            /**
+             * Tag for CTA section (e.g. Контакты)
+             */
+            sectionTag?: string | null;
+            /**
+             * Title for CTA+form section
+             */
+            sectionTitle?: string | null;
+            /**
+             * Description text
+             */
+            sectionDescription?: string | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'contactInfo';
           }
         | {
+            /**
+             * Small tag above title (e.g. Принципы работы)
+             */
+            sectionTag?: string | null;
             /**
              * Section heading (e.g. Our principles of work)
              */
@@ -455,8 +501,160 @@ export interface Page {
             blockName?: string | null;
             blockType: 'consultationForm';
           }
+        | {
+            /**
+             * Small tag above title (e.g. Преимущества)
+             */
+            tag?: string | null;
+            title: string;
+            description?: string | null;
+            ctaText?: string | null;
+            items: {
+              icon: 'check' | 'shield' | 'clock' | 'dollar';
+              title: string;
+              description: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'advantages';
+          }
+        | {
+            /**
+             * Small tag (e.g. Тарифы)
+             */
+            sectionTag?: string | null;
+            sectionTitle?: string | null;
+            sectionDescription?: string | null;
+            cards: {
+              title: string;
+              description?: string | null;
+              features?:
+                | {
+                    text: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              ctaText?: string | null;
+              isFeatured?: boolean | null;
+              featuredBadge?: string | null;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pricing';
+          }
+        | {
+            /**
+             * Small tag (e.g. База знаний)
+             */
+            tag?: string | null;
+            title: string;
+            paragraphs?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            articlesTitle?: string | null;
+            articleSource?: ('featured' | 'manual') | null;
+            manualSlugs?:
+              | {
+                  slug: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'knowledge';
+          }
+        | {
+            /**
+             * Small tag (e.g. О специалисте)
+             */
+            tag?: string | null;
+            title: string;
+            paragraphs?:
+              | {
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * Avatar photo
+             */
+            avatar?: (number | null) | Media;
+            stats?:
+              | {
+                  value: string;
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'about';
+          }
+        | {
+            sectionTitle?: string | null;
+            items: {
+              question: string;
+              answer: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base".
+ */
+export interface KnowledgeBase {
+  id: number;
+  title: string;
+  /**
+   * URL path for the article (e.g. kak-sostavlyaetsya-smeta)
+   */
+  slug: string;
+  /**
+   * Short description shown in article list
+   */
+  description?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Publication date
+   */
+  publishedAt?: string | null;
+  /**
+   * Show in Knowledge section on home page (recommended articles)
+   */
+  isFeatured?: boolean | null;
+  /**
+   * Display order (lower = first)
+   */
+  order?: number | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -503,6 +701,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'knowledge-base';
+        value: number | KnowledgeBase;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -675,6 +877,7 @@ export interface PagesSelect<T extends boolean = true> {
         hero?:
           | T
           | {
+              badge?: T;
               title?: T;
               subtitle?: T;
               cta?: T;
@@ -692,6 +895,19 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
                     id?: T;
                   };
               id?: T;
@@ -745,7 +961,9 @@ export interface PagesSelect<T extends boolean = true> {
         serviceList?:
           | T
           | {
+              sectionTag?: T;
               sectionTitle?: T;
+              sectionSubtitle?: T;
               limit?: T;
               id?: T;
               blockName?: T;
@@ -753,6 +971,9 @@ export interface PagesSelect<T extends boolean = true> {
         courseList?:
           | T
           | {
+              sectionTag?: T;
+              sectionTitle?: T;
+              sectionSubtitle?: T;
               id?: T;
               blockName?: T;
             };
@@ -765,12 +986,16 @@ export interface PagesSelect<T extends boolean = true> {
         contactInfo?:
           | T
           | {
+              sectionTag?: T;
+              sectionTitle?: T;
+              sectionDescription?: T;
               id?: T;
               blockName?: T;
             };
         principles?:
           | T
           | {
+              sectionTag?: T;
               sectionTitle?: T;
               items?:
                 | T
@@ -789,7 +1014,125 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        advantages?:
+          | T
+          | {
+              tag?: T;
+              title?: T;
+              description?: T;
+              ctaText?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        pricing?:
+          | T
+          | {
+              sectionTag?: T;
+              sectionTitle?: T;
+              sectionDescription?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    features?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    ctaText?: T;
+                    isFeatured?: T;
+                    featuredBadge?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        knowledge?:
+          | T
+          | {
+              tag?: T;
+              title?: T;
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              articlesTitle?: T;
+              articleSource?: T;
+              manualSlugs?:
+                | T
+                | {
+                    slug?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        about?:
+          | T
+          | {
+              tag?: T;
+              title?: T;
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              avatar?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              sectionTitle?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base_select".
+ */
+export interface KnowledgeBaseSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  content?: T;
+  publishedAt?: T;
+  isFeatured?: T;
+  order?: T;
+  metaTitle?: T;
+  metaDescription?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -847,6 +1190,9 @@ export interface SiteSetting {
   descriptionText?: string | null;
   headerLogo?: (number | null) | Media;
   headerLogoText?: string | null;
+  navTariffs?: string | null;
+  navKnowledge?: string | null;
+  navAbout?: string | null;
   footerTitle?: string | null;
   footerDescription?: string | null;
   /**
@@ -871,6 +1217,9 @@ export interface SiteSetting {
   commonName?: string | null;
   commonMessage?: string | null;
   commonSelectCourse?: string | null;
+  commonViewAllServices?: string | null;
+  commonOrderCall?: string | null;
+  commonGetConsultation?: string | null;
   commonDisclaimer?: string | null;
   commonPhoneError?: string | null;
   commonSuccess?: string | null;
@@ -922,6 +1271,8 @@ export interface SiteSetting {
   createdAt?: string | null;
 }
 /**
+ * Phone, email, address — used on main page and in footer. No separate contacts page.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts".
  */
@@ -968,6 +1319,9 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   descriptionText?: T;
   headerLogo?: T;
   headerLogoText?: T;
+  navTariffs?: T;
+  navKnowledge?: T;
+  navAbout?: T;
   footerTitle?: T;
   footerDescription?: T;
   footerQuickLinksTitle?: T;
@@ -989,6 +1343,9 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   commonName?: T;
   commonMessage?: T;
   commonSelectCourse?: T;
+  commonViewAllServices?: T;
+  commonOrderCall?: T;
+  commonGetConsultation?: T;
   commonDisclaimer?: T;
   commonPhoneError?: T;
   commonSuccess?: T;

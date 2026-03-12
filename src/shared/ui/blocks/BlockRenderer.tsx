@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { ContactForm } from '@/features/ContactForm'
+import { consumeContactFormMessage } from '@/shared/lib/scrollToContacts'
 import { Hero } from '@/features/Hero/Hero'
 import type { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
@@ -12,6 +13,11 @@ import { SectionTitle } from '@/shared/ui/sections/SectionTitle'
 import { ContactInfo } from '@/shared/ui/contact/ContactInfo'
 import { CourseCard } from '@/shared/ui/cards/CourseCard'
 import { ServiceCard } from '@/shared/ui/cards/ServiceCard'
+import { PricingCard } from '@/shared/ui/cards/PricingCard'
+import { AdvantagesSection } from '@/shared/ui/sections/AdvantagesSection'
+import { KnowledgeSection } from '@/shared/ui/sections/KnowledgeSection'
+import { AboutSection } from '@/shared/ui/sections/AboutSection'
+import { FAQSection } from '@/shared/ui/sections/FAQSection'
 import { getServiceIcon } from '@/shared/utils/serviceIcons'
 import {
   ContractPriceIcon,
@@ -26,6 +32,12 @@ type Block = {
   [key: string]: unknown
 }
 
+interface KnowledgeArticle {
+  title: string
+  slug: string
+  href: string
+}
+
 interface BlockRendererProps {
   blocks: Block[]
   locale: Locale
@@ -34,6 +46,8 @@ interface BlockRendererProps {
   heroBackgroundUrl?: string | null
   /** Pre-fill message in contact form (e.g. for course registration) */
   initialMessageForForm?: string
+  /** Pre-fetched knowledge articles for the knowledge block */
+  knowledgeArticles?: KnowledgeArticle[]
 }
 
 function getBackgroundUrl(background: unknown): string | null {
@@ -43,10 +57,23 @@ function getBackgroundUrl(background: unknown): string | null {
   return null
 }
 
-export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl, initialMessageForForm }: BlockRendererProps) {
-  if (!blocks?.length) return null
-
+export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl, initialMessageForForm, knowledgeArticles }: BlockRendererProps) {
+  const [scrollMessage, setScrollMessage] = useState<string | undefined>(undefined)
   const t = translations
+
+  useEffect(() => {
+    const stored = consumeContactFormMessage()
+    if (stored) setScrollMessage(stored)
+  }, [])
+
+  const scrollToContacts = (message?: string) => {
+    if (message) setScrollMessage(message)
+    document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const formMessage = scrollMessage ?? initialMessageForForm
+
+  if (!blocks?.length) return null
 
   // Merge standalone 'section' blocks that precede a list block into that list block's title.
   // Also merge 'contactInfo' + 'contactForm' pairs into a single combined block.
@@ -95,7 +122,8 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
           case 'hero': {
             const ctaPath = (block.ctaLink as string) || '/services'
             const secondaryPath = (block.secondaryCtaLink as string) || '/training'
-            const ctaLink = getLocalePath(locale, ctaPath.startsWith('/') ? ctaPath : `/${ctaPath}`)
+            const isAnchor = ctaPath.startsWith('#')
+            const ctaLink = isAnchor ? ctaPath : getLocalePath(locale, ctaPath.startsWith('/') ? ctaPath : `/${ctaPath}`)
             const secondaryCtaLink = getLocalePath(locale, secondaryPath.startsWith('/') ? secondaryPath : `/${secondaryPath}`)
             const bgUrl = getBackgroundUrl(block.background) ?? heroBackgroundUrl ?? null
             return (
@@ -103,12 +131,12 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
                 key={key}
                 title={(block.title as string) ?? ''}
                 subtitle={(block.subtitle as string) ?? ''}
-                cta={(block.cta as string) ?? t.home.hero.cta}
+                cta={(block.cta as string) ?? t.common.services}
                 training={(block.secondaryCta as string) ?? t.common.training}
                 backgroundImageUrl={bgUrl}
                 ctaLink={ctaLink}
                 secondaryCtaLink={secondaryCtaLink}
-                badgeStrip={(block.badgeStrip as string) ?? null}
+                badge={(block.badge as string) ?? null}
               />
             )
           }
@@ -116,7 +144,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const sectionSubtitle = (block.subtitle as string) || undefined
             return (
               <section key={key} className={`${sectionSubtitle ? 'py-16' : 'pt-16 pb-2'} ${altBg}`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <SectionTitle
                     title={(block.title as string) ?? ''}
                     subtitle={sectionSubtitle}
@@ -154,7 +182,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const isEven = index % 2 === 0
             return (
               <section key={key} className={`py-20 ${altBg} overflow-hidden`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch rounded-2xl overflow-hidden border border-slate-100 shadow-sm ${isEven ? '' : 'lg:[&>*:first-child]:order-last'}`}>
                     {imageUrl && (
                       <div className='relative min-h-[280px] lg:min-h-[380px] bg-slate-100'>
@@ -201,7 +229,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
           case 'richText':
             return (
               <section key={key} className={`py-20 ${altBg}`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <div className='prose prose-gray max-w-none'>
                     <RenderRichText content={block.content} />
                   </div>
@@ -212,43 +240,36 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const limit = (block.limit as number) ?? 0
             const sectionTitle = block.sectionTitle as string | undefined
             const sectionSubtitle = block.sectionSubtitle as string | undefined
+            const sectionTag = block.sectionTag as string | undefined
             const items = Object.entries(t.services.items)
             const displayed = limit > 0 ? items.slice(0, limit) : items
-            const showAllLink = limit > 0
             return (
-              <section key={key} className={`py-16 ${altBg}`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+              <section key={key} id='services' className='py-[72px] bg-white'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   {sectionTitle && (
                     <SectionTitle
                       title={sectionTitle}
                       subtitle={sectionSubtitle}
-                      action={
-                        showAllLink ? (
-                          <Link
-                            href={getLocalePath(locale, '/services')}
-                            className='text-sm text-slate-500 hover:text-slate-700 transition-colors whitespace-nowrap'
-                          >
-                            {t.common.viewAllServices}
-                            <span className='ml-1 inline-block'>→</span>
-                          </Link>
-                        ) : undefined
-                      }
+                      tag={sectionTag ?? (locale === 'ru' ? 'Услуги' : 'Services')}
                     />
                   )}
-                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                    {displayed.map(([keyName, service]) => (
-                      <ServiceCard
-                        key={keyName}
-                        title={service.title}
-                        description={service.description}
-                        slug={service.slug}
-                        icon={getServiceIcon(keyName)}
-                        locale={locale}
-                        hasTariffs={keyName in t.services.tariffs}
-                        tariffsText={t.common.tariffs}
-                        moreText={t.common.more}
-                      />
-                    ))}
+                  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[14px]'>
+                    {displayed.map(([keyName, service], i) => {
+                      const isAccent = i === displayed.length - 1
+                      return (
+                        <ServiceCard
+                          key={keyName}
+                          title={service.title}
+                          description={service.description}
+                          slug={service.slug}
+                          icon={getServiceIcon(keyName)}
+                          locale={locale}
+                          moreText={t.common.more}
+                          isAccent={isAccent}
+                          onCtaClick={isAccent ? () => scrollToContacts(locale === 'ru' ? 'Индивидуальный запрос: обсудить задачу' : 'Individual request: discuss the task') : undefined}
+                        />
+                      )
+                    })}
                   </div>
                 </div>
               </section>
@@ -258,21 +279,28 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const courseOrder = t.training.courseOrder ?? Object.keys(t.training.courses)
             const courseSectionTitle = block.sectionTitle as string | undefined
             const courseSectionSubtitle = block.sectionSubtitle as string | undefined
+            const courseSectionTag = block.sectionTag as string | undefined
             const courseIcons: Record<string, React.ReactNode> = {
               'express-course': <ExpressCourseIcon />,
               'contract-price': <ContractPriceIcon />,
               individual: <IndividualIcon />,
             }
+            const courseBadge: Record<string, { badge: string; variant: 'default' | 'blue' | 'dark'; featured?: boolean }> = {
+              'express-course': { badge: 'Старт', variant: 'default' },
+              'contract-price': { badge: 'Продвинутый', variant: 'blue', featured: true },
+              individual: { badge: 'Индивидуально', variant: 'dark' },
+            }
             return (
-              <section key={key} className={`py-16 ${altBg}`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+              <section key={key} className='py-[72px] bg-white'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   {courseSectionTitle && (
-                    <SectionTitle title={courseSectionTitle} subtitle={courseSectionSubtitle} />
+                    <SectionTitle title={courseSectionTitle} subtitle={courseSectionSubtitle} tag={courseSectionTag ?? (locale === 'ru' ? 'Обучение' : 'Training')} />
                   )}
-                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[22px]'>
                     {courseOrder.map((slug) => {
                       const courseData = t.training.courses[slug as keyof typeof t.training.courses]
                       if (!courseData) return null
+                      const badgeConfig = courseBadge[slug]
                       return (
                         <CourseCard
                           key={slug}
@@ -285,9 +313,15 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
                             topics: courseData.topics,
                           }}
                           locale={locale}
-                          courseProgramText={t.common.courseProgram}
-                          registerText={t.common.register}
-                          courseDetailsText={t.training.courseDetails}
+                          registerText={
+                            slug === 'individual'
+                              ? (locale === 'ru' ? 'Обсудить программу' : 'Discuss program')
+                              : (locale === 'ru' ? 'Записаться на курс' : 'Register')
+                          }
+                          badge={badgeConfig?.badge}
+                          badgeVariant={badgeConfig?.variant}
+                          isFeatured={badgeConfig?.featured}
+                          href={`${getLocalePath(locale, '/training')}#${slug}`}
                         />
                       )
                     })}
@@ -323,58 +357,73 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
                     }}
                     contactRequired={cf?.contactRequired ?? 'Введите email или телефон'}
                     contactInvalid={cf?.contactInvalid ?? t.common.phoneError}
-                    initialMessage={initialMessageForForm}
+                    initialMessage={formMessage}
                   />
                 </div>
               </section>
             )
           }
           case 'contactWithForm': {
+            const sectionTag = block.sectionTag as string | undefined
             const sectionTitle = block.sectionTitle as string | undefined
-            const sectionSubtitle = block.sectionSubtitle as string | undefined
+            const sectionDescription = block.sectionDescription as string | undefined
             const cf = t.contacts.consultationForm
             return (
-              <section key={key} id='registration' className='py-16 bg-slate-50'>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-                  {sectionTitle && (
-                    <SectionTitle title={sectionTitle} subtitle={sectionSubtitle} />
-                  )}
-                  <div className='grid grid-cols-1 lg:grid-cols-5 gap-10'>
-                    <div className='lg:col-span-2'>
-                      <ContactInfo
-                        address={t.common.address}
-                        addressValue={t.common.contactInfo.address}
-                        phone={t.common.phone}
-                        phoneValue={t.common.contactInfo.phone}
-                        email={t.common.email}
-                        emailValue={t.common.contactInfo.email}
-                        unp={t.common.unp}
-                        unpValue={t.common.contactInfo.unp}
-                        workingHours={t.common.workingHours}
-                        workingHoursValue={t.common.contactInfo.workingHours}
-                      />
+              <section key={key} id='contacts' className='py-[72px] bg-gradient-to-br from-[#1A2E52] to-[#2B4A8A]'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
+                  <div className='grid grid-cols-1 lg:grid-cols-2 gap-[72px] items-start'>
+                    <div className='text-white'>
+                      {sectionTag && (
+                        <span className='inline-block bg-white/[0.18] text-white/95 text-[12px] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-3.5'>
+                          {sectionTag}
+                        </span>
+                      )}
+                      {sectionTitle && (
+                        <h2 className='text-[clamp(22px,4vw,34px)] font-extrabold text-white mb-3.5 leading-tight'>{sectionTitle}</h2>
+                      )}
+                      {sectionDescription && (
+                        <p className='text-[15px] text-white/80 mb-7 leading-[1.65]'>{sectionDescription}</p>
+                      )}
+                      <div className='space-y-[12px]'>
+                        <div className='flex items-center gap-3'>
+                          <svg className='w-5 h-5 text-white/60 shrink-0' viewBox='0 0 20 20' fill='currentColor'>
+                            <path d='M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z' />
+                          </svg>
+                          <a href={`tel:${t.common.contactInfo.phone.replace(/\D/g,'')}`} className='text-white/85 hover:text-white text-[15px]'>{t.common.contactInfo.phone}</a>
+                        </div>
+                        <div className='flex items-center gap-3'>
+                          <svg className='w-5 h-5 text-white/60 shrink-0' viewBox='0 0 20 20' fill='currentColor'>
+                            <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z' /><path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z' />
+                          </svg>
+                          <a href={`mailto:${t.common.contactInfo.email}`} className='text-white/85 hover:text-white text-[15px]'>{t.common.contactInfo.email}</a>
+                        </div>
+                        <div className='flex items-center gap-3'>
+                          <svg className='w-5 h-5 text-white/60 shrink-0' viewBox='0 0 20 20' fill='currentColor'>
+                            <path fillRule='evenodd' d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z' clipRule='evenodd' />
+                          </svg>
+                          <span className='text-white/85 text-[15px]'>{t.common.contactInfo.address}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className='lg:col-span-3'>
-                      <ContactForm
-                        title={t.contacts.form.title}
-                        name={t.common.name}
-                        contactPlaceholder={cf?.contactPlaceholder ?? 'Email или телефон'}
-                        message={t.common.message}
-                        submit={t.contacts.form.submit}
-                        success={t.common.success}
-                        error={t.common.error}
-                        sending={t.common.sending}
-                        securityCheck={t.common.securityCheck}
-                        securityError={t.common.securityError}
-                        validation={{
-                          nameRequired: t.common.validation.nameRequired,
-                          messageRequired: t.common.validation.messageRequired,
-                        }}
-                        contactRequired={cf?.contactRequired ?? 'Введите email или телефон'}
-                        contactInvalid={cf?.contactInvalid ?? t.common.phoneError}
-                        initialMessage={initialMessageForForm}
-                      />
-                    </div>
+                    <ContactForm
+                      title={t.contacts.form.title}
+                      name={t.common.name}
+                      contactPlaceholder={cf?.contactPlaceholder ?? 'Email или телефон'}
+                      message={t.common.message}
+                      submit={t.contacts.form.submit}
+                      success={t.common.success}
+                      error={t.common.error}
+                      sending={t.common.sending}
+                      securityCheck={t.common.securityCheck}
+                      securityError={t.common.securityError}
+                      validation={{
+                        nameRequired: t.common.validation.nameRequired,
+                        messageRequired: t.common.validation.messageRequired,
+                      }}
+                      contactRequired={cf?.contactRequired ?? 'Введите email или телефон'}
+                      contactInvalid={cf?.contactInvalid ?? t.common.phoneError}
+                      initialMessage={formMessage}
+                    />
                   </div>
                 </div>
               </section>
@@ -383,7 +432,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
           case 'contactInfo': {
             return (
               <section key={key} className='py-16 bg-white'>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <div className='bg-white rounded-xl border border-slate-200 shadow-sm p-8 md:p-10'>
                     <ContactInfo
                       address={t.common.address}
@@ -403,11 +452,13 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             )
           }
           case 'principles': {
+            const sectionTag = (block.sectionTag as string) || (locale === 'ru' ? 'Принципы работы' : 'Principles of work')
             const sectionTitle = (block.sectionTitle as string) ?? ''
             const items = (block.items as Array<{ icon?: string; title?: string; description?: string }>) ?? []
             return (
               <PrinciplesSection
                 key={key}
+                sectionTag={sectionTag}
                 sectionTitle={sectionTitle}
                 items={items.map((item) => ({
                   icon: (item.icon ?? 'accuracy') as 'speed' | 'accuracy' | 'honesty' | 'fixedPrice',
@@ -421,7 +472,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const cf = t.contacts.consultationForm
             return (
               <section key={key} id='consultation' className={`py-16 ${altBg}`}>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <ConsultationForm
                     title={cf?.title ?? 'Консультация по сметному делу'}
                     description={cf?.description ?? 'Получайте ответы на вопросы и рекомендации от экспертов'}
@@ -441,12 +492,110 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
               </section>
             )
           }
+          case 'advantages': {
+            const items = (block.items as Array<{ icon?: string; title?: string; description?: string }>) ?? []
+            return (
+              <AdvantagesSection
+                key={key}
+                tag={block.tag as string | undefined}
+                title={(block.title as string) ?? ''}
+                description={block.description as string | undefined}
+                ctaText={(block.ctaText as string) ?? t.common.getConsultation}
+                items={items.map(item => ({
+                  icon: (item.icon ?? 'check') as 'check' | 'shield' | 'clock' | 'dollar',
+                  title: item.title ?? '',
+                  description: item.description ?? '',
+                }))}
+                onCtaClick={() => scrollToContacts(locale === 'ru' ? 'Получить консультацию' : 'Get consultation')}
+              />
+            )
+          }
+          case 'pricing': {
+            const cards = (block.cards as Array<{
+              title?: string
+              description?: string
+              features?: Array<{ text?: string }>
+              ctaText?: string
+              isFeatured?: boolean
+              featuredBadge?: string
+            }>) ?? []
+            return (
+              <section key={key} id='pricing' className='py-[72px] bg-white'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
+                  {!!(block.sectionTitle || block.sectionDescription) && (
+                    <SectionTitle
+                      title={(block.sectionTitle as string) ?? ''}
+                      subtitle={block.sectionDescription as string | undefined}
+                      tag={(block.sectionTag as string | undefined) ?? (locale === 'ru' ? 'Тарифы' : 'Pricing')}
+                    />
+                  )}
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10'>
+                    {cards.map((card, i) => (
+                      <PricingCard
+                        key={i}
+                        title={card.title ?? ''}
+                        description={card.description ?? ''}
+                        features={(card.features ?? []).map(f => f.text ?? '')}
+                        ctaText={card.ctaText ?? t.common.getConsultation}
+                        isFeatured={card.isFeatured}
+                        featuredBadge={card.featuredBadge}
+                        onCtaClick={() =>
+                          scrollToContacts(
+                            locale === 'ru' ? `Узнать стоимость: ${card.title ?? ''}` : `Get price: ${card.title ?? ''}`
+                          )
+                        }
+                      />
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )
+          }
+          case 'knowledge': {
+            const paragraphs = (block.paragraphs as Array<{ text?: string }>) ?? []
+            const articles = knowledgeArticles ?? []
+            return (
+              <KnowledgeSection
+                key={key}
+                tag={block.tag as string | undefined}
+                title={(block.title as string) ?? ''}
+                paragraphs={paragraphs.map(p => p.text ?? '')}
+                articlesTitle={(block.articlesTitle as string) ?? 'Рекомендуемые статьи'}
+                articles={articles}
+              />
+            )
+          }
+          case 'about': {
+            const paragraphs = (block.paragraphs as Array<{ text?: string }>) ?? []
+            const stats = (block.stats as Array<{ value?: string; label?: string }>) ?? []
+            const avatarObj = block.avatar as { url?: string } | null
+            return (
+              <AboutSection
+                key={key}
+                tag={block.tag as string | undefined}
+                title={(block.title as string) ?? ''}
+                paragraphs={paragraphs.map(p => p.text ?? '')}
+                avatarUrl={avatarObj?.url}
+                stats={stats.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))}
+              />
+            )
+          }
+          case 'faq': {
+            const items = (block.items as Array<{ question?: string; answer?: string }>) ?? []
+            return (
+              <FAQSection
+                key={key}
+                sectionTitle={block.sectionTitle as string | undefined}
+                items={items.map(item => ({ question: item.question ?? '', answer: item.answer ?? '' }))}
+              />
+            )
+          }
           case 'badge': {
             const items = (block.items as Array<{ text?: string } | string>) ?? []
             if (!items.length) return null
             return (
               <div key={key} className='bg-slate-50 py-5 border-b border-slate-100'>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
                   <div className='flex flex-col sm:flex-row gap-3'>
                     {items.map((item, i) => {
                       const text = typeof item === 'string' ? item : item.text
@@ -468,13 +617,16 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
             const items = (block.items as Array<{ value: string; label: string }>) ?? []
             if (!items.length) return null
             return (
-              <div key={key} className='bg-white border-b border-slate-100'>
-                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-                  <div className='grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-slate-100'>
+              <div key={key} className='bg-[#F8FAFC] border-b border-slate-200 py-11'>
+                <div className='max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10'>
+                  <div className='grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-4'>
                     {items.map((item, i) => (
-                      <div key={i} className='py-5 px-6 text-center'>
-                        <div className='text-xl md:text-2xl font-bold text-slate-900'>{item.value}</div>
-                        <div className='text-xs text-slate-500 mt-0.5'>{item.label}</div>
+                      <div key={i} className='text-center flex flex-col items-center gap-2 md:flex-row md:items-start md:gap-0 md:flex-none md:text-center md:block'>
+                        {i > 0 && (
+                          <div className='hidden md:block absolute h-[50px] w-px bg-slate-200' style={{ left: `${(i / items.length) * 100}%` }} />
+                        )}
+                        <div className='text-[clamp(24px,5vw,34px)] font-extrabold text-[#1A2E52] leading-none mb-2'>{item.value}</div>
+                        <div className='text-[13px] text-slate-500 leading-tight max-w-[160px] mx-auto'>{item.label}</div>
                       </div>
                     ))}
                   </div>

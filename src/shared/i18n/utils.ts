@@ -44,6 +44,7 @@ export type Translations = {
     services: string
     training: string
     orderCall: string
+    getConsultation: string
     contacts: string
     contactUs: string
     phone: string
@@ -81,6 +82,9 @@ export type Translations = {
       services: string
       training: string
       contacts: string
+      tariffs?: string
+      knowledge?: string
+      about?: string
     }
     contact: {
       phone: string
@@ -241,6 +245,8 @@ export type Translations = {
       address: string
       workingHours: string
     }
+    companyColumnTitle?: string
+    aboutSpecialist?: string
     quickLinks: {
       title: string
       home: string

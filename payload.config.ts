@@ -9,6 +9,7 @@ import { Media } from './src/collections/Media'
 import { Services } from './src/collections/Services'
 import { Courses } from './src/collections/Courses'
 import { Pages } from './src/collections/Pages'
+import { KnowledgeBase } from './src/collections/KnowledgeBase'
 import { SiteSettings } from './src/globals/SiteSettings'
 import { Contacts } from './src/globals/Contacts'
 
@@ -23,12 +24,11 @@ export default buildConfig({
     },
     livePreview: {
       url: ({ data, locale }) => {
+        const base = process.env.NEXT_PUBLIC_SERVER_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'
         const loc = locale?.code ?? 'ru'
         const pathSegment = data?.slug === 'home' ? '' : `/${(data?.slug as string) ?? ''}`
-        if (loc === 'ru') {
-          return pathSegment || '/'
-        }
-        return `/${loc}${pathSegment}`
+        const path = loc === 'ru' ? (pathSegment || '/') : `/${loc}${pathSegment || ''}`
+        return `${base.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`
       },
       collections: ['pages'],
       breakpoints: [
@@ -38,7 +38,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Services, Courses, Pages],
+  collections: [Users, Media, Services, Courses, Pages, KnowledgeBase],
   globals: [SiteSettings, Contacts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -9,9 +9,9 @@ interface ServiceCardProps {
   slug: string
   icon: React.ReactNode
   locale: Locale
-  hasTariffs?: boolean
-  tariffsText: string
   moreText: string
+  isAccent?: boolean
+  onCtaClick?: () => void
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -20,40 +20,55 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   slug,
   icon,
   locale,
-  hasTariffs = false,
-  tariffsText,
   moreText,
+  isAccent = false,
+  onCtaClick,
 }) => {
-  return (
-    <div className='group bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full min-w-0'>
-      <div className='flex-grow'>
-        <div className='p-2.5 bg-blue-50 rounded-lg inline-flex mb-4 group-hover:bg-blue-100 transition-colors'>
-          {icon}
+  const homePath = getLocalePath(locale, '')
+
+  if (isAccent) {
+    const content = (
+      <>
+        <div className='w-[52px] h-[52px] bg-white/18 rounded-lg flex items-center justify-center mb-3.5 shrink-0'>
+          <div className='text-white [&>svg]:w-7 [&>svg]:h-7'>{icon}</div>
         </div>
-        <h3 className='text-base font-semibold text-slate-900 mb-2 leading-snug'>
-          {title}
-        </h3>
-        <p className='text-sm text-slate-500 leading-relaxed'>{description}</p>
-      </div>
-      <div className='flex items-center gap-4 mt-5 pt-4 border-t border-slate-100'>
-        <Link
-          href={getLocalePath(locale, `/services/${slug}`)}
-          className='text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1'
+        <h3 className='text-[15px] font-bold text-white mb-1.5'>{title}</h3>
+        <p className='text-[13px] text-white/78 flex-1 leading-snug mb-3.5 line-clamp-2'>{description}</p>
+        <span className='text-[13px] font-semibold text-white/85 mt-auto'>Обсудить задачу →</span>
+      </>
+    )
+    if (onCtaClick) {
+      return (
+        <button
+          type='button'
+          onClick={onCtaClick}
+          className='flex flex-col p-[22px] rounded-[14px] border border-transparent bg-gradient-to-br from-[#1A2E52] to-[#2B4A8A] text-white cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md text-left w-full'
         >
-          {moreText}
-          <svg className='w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-          </svg>
-        </Link>
-        {hasTariffs && (
-          <Link
-            href={getLocalePath(locale, `/services/${slug}/tariffs`)}
-            className='text-sm text-slate-400 hover:text-slate-600 transition-colors'
-          >
-            {tariffsText}
-          </Link>
-        )}
+          {content}
+        </button>
+      )
+    }
+    return (
+      <Link
+        href={`${homePath}#contacts`}
+        className='flex flex-col p-[22px] rounded-[14px] border border-transparent bg-gradient-to-br from-[#1A2E52] to-[#2B4A8A] text-white cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md'
+      >
+        {content}
+      </Link>
+    )
+  }
+
+  return (
+    <Link
+      href={`${getLocalePath(locale, '/services')}#${slug}`}
+      className='group flex flex-col p-[22px] bg-white border-[1.5px] border-slate-200 rounded-[14px] transition-all duration-200 hover:border-blue-600 hover:shadow-md hover:-translate-y-0.5 cursor-pointer'
+    >
+      <div className='w-[52px] h-[52px] bg-blue-50 rounded-lg flex items-center justify-center mb-3.5 shrink-0 text-blue-600 group-hover:bg-blue-100 transition-colors [&>svg]:w-7 [&>svg]:h-7'>
+        {icon}
       </div>
-    </div>
+      <h3 className='text-[15px] font-bold text-slate-900 mb-1.5'>{title}</h3>
+      <p className='text-[13px] text-slate-500 flex-1 leading-snug mb-3.5 line-clamp-2'>{description}</p>
+      <span className='text-[13px] font-semibold text-blue-600 mt-auto'>{moreText} →</span>
+    </Link>
   )
 }

@@ -1,8 +1,9 @@
 import { Locale } from '@/shared/i18n/config'
 import { getLocalePath } from '@/shared/lib/localePath'
-import { CheckIcon } from '@/shared/ui/icons/ServiceIcons'
 import Link from 'next/link'
 import React from 'react'
+
+type BadgeVariant = 'default' | 'blue' | 'dark'
 
 interface CourseCardProps {
   course: {
@@ -14,61 +15,91 @@ interface CourseCardProps {
     topics: string[]
   }
   locale: Locale
-  courseProgramText: string
   registerText: string
-  courseDetailsText: string
+  badge?: string
+  badgeVariant?: BadgeVariant
+  isFeatured?: boolean
+  onRegisterClick?: () => void
+  /** Link to training page with hash (e.g. /training#express-course) */
+  href?: string
+}
+
+const badgeClasses: Record<BadgeVariant, string> = {
+  default: 'bg-slate-400 text-white',
+  blue: 'bg-blue-600 text-white',
+  dark: 'bg-[#1A2E52] text-white',
 }
 
 export const CourseCard: React.FC<CourseCardProps> = ({
   course,
   locale,
-  courseProgramText,
   registerText,
-  courseDetailsText,
+  badgeVariant = 'default',
+  badge,
+  isFeatured = false,
+  onRegisterClick,
+  href: hrefProp,
 }) => {
+  const homePath = getLocalePath(locale, '')
+  const isOutline = badgeVariant === 'dark'
+  const linkHref = hrefProp ?? `${homePath}#contacts`
+
   return (
-    <div className='bg-white rounded-xl border border-slate-200 shadow-sm p-6 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col min-w-0'>
-      <div className='flex-grow'>
-        <div className='flex flex-col items-start mb-5'>
-          <div className='inline-flex p-2.5 bg-blue-50 rounded-lg mb-3'>{course.icon}</div>
-          <h2 className='text-base font-semibold text-slate-900 mb-1'>{course.title}</h2>
-          <div className='flex items-center gap-2 text-xs text-slate-400'>
-            <span>{course.duration}</span>
-            <span>·</span>
-            <span className='font-medium text-blue-600'>{course.price}</span>
-          </div>
+    <div
+      className={`relative bg-white rounded-[14px] p-[30px] flex flex-col gap-[14px] transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
+        isFeatured
+          ? 'border-[1.5px] border-blue-600 shadow-[0_0_0_1px_rgb(37,99,235)]'
+          : 'border-[1.5px] border-slate-200'
+      }`}
+    >
+      {badge && (
+        <div
+          className={`absolute top-[-12px] left-6 text-[11px] font-bold px-3 py-0.5 rounded-full ${badgeClasses[badgeVariant]}`}
+        >
+          {badge}
         </div>
-        <div>
-          <h3 className='text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2'>{courseDetailsText}</h3>
-          <ul className='space-y-1.5'>
-            {course.topics.map((topic, idx) => (
-              <li key={idx} className='flex items-start gap-2'>
-                <div className='w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0'>
-                  <CheckIcon />
-                </div>
-                <span className='text-xs text-slate-600 leading-relaxed break-words'>{topic}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      )}
+
+      <div className='w-14 h-14 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center [&>svg]:w-9 [&>svg]:h-9'>
+        {course.icon}
       </div>
 
-      <div className='flex items-center gap-4 mt-5 pt-4 border-t border-slate-100'>
-        <Link
-          href={`${getLocalePath(locale, '/training')}?course=${encodeURIComponent(course.programSlug)}#registration`}
-          className='text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1'
-        >
-          {registerText}
-          <svg className='w-3.5 h-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-          </svg>
-        </Link>
-        <Link
-          href={getLocalePath(locale, `/training/${course.programSlug}`)}
-          className='text-sm text-slate-400 hover:text-slate-600 transition-colors'
-        >
-          {courseProgramText}
-        </Link>
+      <h3 className='text-[19px] font-bold text-slate-900'>{course.title}</h3>
+
+      <ul className='flex flex-col gap-[7px] flex-1'>
+        {course.topics.map((topic, idx) => (
+          <li key={idx} className='relative pl-[18px] text-[13px] text-slate-500 leading-relaxed'>
+            <span className='absolute left-0 text-[#10B981] font-bold text-[12px]'>✓</span>
+            {topic}
+          </li>
+        ))}
+      </ul>
+
+      <div className='pt-0'>
+        {onRegisterClick ? (
+          <button
+            type='button'
+            onClick={onRegisterClick}
+            className={`w-full py-2.5 px-5 rounded-lg text-sm font-semibold transition-colors ${
+              isOutline
+                ? 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {registerText}
+          </button>
+        ) : (
+          <Link
+            href={linkHref}
+            className={`w-full inline-flex justify-center py-2.5 px-5 rounded-lg text-sm font-semibold transition-colors ${
+              isOutline
+                ? 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {registerText}
+          </Link>
+        )}
       </div>
     </div>
   )

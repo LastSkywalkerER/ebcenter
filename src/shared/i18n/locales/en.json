@@ -10,6 +10,7 @@
     "services": "Services",
     "training": "Training",
     "orderCall": "Order a call",
+    "getConsultation": "Get a consultation",
     "contacts": "Contacts",
     "contactUs": "Contact Us",
     "phone": "Phone",
@@ -41,11 +42,14 @@
     }
   },
   "header": {
-    "logo": "ProSmety",
+    "logo": "Prosmety",
     "navigation": {
       "home": "Home",
       "services": "Services",
+      "tariffs": "Tariffs",
       "training": "Training",
+      "knowledge": "Knowledge Base",
+      "about": "About",
       "contacts": "Contacts"
     }
   },
@@ -688,6 +692,8 @@
       "title": "ProSmety",
       "description": "Construction estimate services and estimate work training"
     },
+    "companyColumnTitle": "Company",
+    "aboutSpecialist": "About the Specialist",
     "quickLinks": {
       "title": "Navigation"
     },
