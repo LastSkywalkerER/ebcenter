@@ -640,6 +640,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE TABLE IF NOT EXISTS "pages_blocks_knowledge_manual_slugs" (
     "_order" integer NOT NULL,
     "_parent_id" varchar NOT NULL,
+    "_locale" "_locales" NOT NULL,
     "id" varchar PRIMARY KEY NOT NULL,
     "slug" varchar NOT NULL
   );
@@ -786,6 +787,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "pages_blocks_pricing" ADD COLUMN IF NOT EXISTS "section_title" varchar;
   ALTER TABLE "pages_blocks_pricing" ADD COLUMN IF NOT EXISTS "section_description" varchar;
   ALTER TABLE "pages_blocks_pricing_locales" ADD COLUMN IF NOT EXISTS "section_tag" varchar;
+  ALTER TABLE "pages_blocks_knowledge_manual_slugs" ADD COLUMN IF NOT EXISTS "_locale" "_locales" NOT NULL DEFAULT 'ru';
   `)
 
   await db.execute(sql`
