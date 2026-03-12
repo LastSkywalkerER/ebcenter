@@ -14,6 +14,7 @@ import * as migration_20260312_100000_add_site_settings_nav_fields from './20260
 import * as migration_20260312_110000_add_site_settings_common_fields from './20260312_110000_add_site_settings_common_fields'
 import * as migration_20260312_120000_add_locked_docs_knowledge_base_id from './20260312_120000_add_locked_docs_knowledge_base_id'
 import * as migration_20260312_130000_add_pages_blocks_advantages_fields from './20260312_130000_add_pages_blocks_advantages_fields'
+import * as migration_20260312_140000_add_locale_to_pricing_cards_features from './20260312_140000_add_locale_to_pricing_cards_features'
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20260312_130000_add_pages_blocks_advantages_fields.up,
     down: migration_20260312_130000_add_pages_blocks_advantages_fields.down,
     name: '20260312_130000_add_pages_blocks_advantages_fields',
+  },
+  {
+    up: migration_20260312_140000_add_locale_to_pricing_cards_features.up,
+    down: migration_20260312_140000_add_locale_to_pricing_cards_features.down,
+    name: '20260312_140000_add_locale_to_pricing_cards_features',
   },
 ];
