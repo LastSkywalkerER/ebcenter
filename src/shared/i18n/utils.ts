@@ -101,6 +101,13 @@ export type Translations = {
       title: string
       text: string
     }
+    seo?: {
+      metaTitle?: string
+      metaDescription?: string
+      knowledgeMetaTitle?: string
+      servicesMetaTitle?: string
+      trainingMetaTitle?: string
+    }
     services: {
       title: string
       description: string

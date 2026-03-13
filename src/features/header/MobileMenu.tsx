@@ -132,6 +132,7 @@ export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) 
                 <Link
                   key={item.slug || 'home'}
                   href={item.href}
+                  prefetch={false}
                   className='block px-5 py-3 text-lg font-medium text-slate-800 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors duration-200'
                   onClick={() => setIsOpen(false)}
                 >

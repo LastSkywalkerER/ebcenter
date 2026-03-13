@@ -46,14 +46,18 @@ function buildOgMetadata(ogImageUrl: string | null, title: string | null | undef
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug: slugSegments } = await params
   const slug = slugSegments ?? []
-
+  const t = await getTranslations(locale)
+  const defaultTitle = t?.home?.seo?.metaTitle ?? 'ProSmety | Сметы и обучение'
+  const knowledgeMetaTitle = t?.home?.seo?.knowledgeMetaTitle ?? (locale === 'ru' ? 'ProSmety | База знаний' : 'ProSmety | Knowledge Base')
+  const servicesMetaTitle = t?.home?.seo?.servicesMetaTitle ?? (locale === 'ru' ? 'ProSmety | Сметные услуги' : 'ProSmety | Estimate Services')
+  const trainingMetaTitle = t?.home?.seo?.trainingMetaTitle ?? (locale === 'ru' ? 'ProSmety | Обучение сметному делу' : 'ProSmety | Estimating Training')
   const baseUrl = env.BASE_URL || ''
 
   // Service detail: /services/{slug}
   if (slug.length === 2 && slug[0] === 'services') {
     const service = await getServiceBySlug(slug[1], locale)
-    if (!service) return {}
-    const title = service.metaTitle ?? service.title ?? null
+    if (!service) return { title: defaultTitle }
+    const title = (service.metaTitle ?? service.title ?? defaultTitle).toString().trim() || defaultTitle
     const description = service.metaDescription ?? service.description ?? null
     const ogImageUrl = service.ogImage && typeof service.ogImage === 'object' && 'url' in service.ogImage ? (service.ogImage.url ?? null) : null
     const path = slugToPath(slug)
@@ -68,8 +72,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Tariffs: /services/{slug}/tariffs — inherit from service
   if (slug.length === 3 && slug[0] === 'services' && slug[2] === 'tariffs') {
     const service = await getServiceBySlug(slug[1], locale)
-    if (!service) return {}
-    const title = service.metaTitle ?? service.title ?? null
+    if (!service) return { title: defaultTitle }
+    const title = (service.metaTitle ?? service.title ?? defaultTitle).toString().trim() || defaultTitle
     const path = slugToPath(slug)
     return {
       ...(title && { title }),
@@ -81,8 +85,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Course detail: /training/{slug}
   if (slug.length === 2 && slug[0] === 'training') {
     const course = await getCourseBySlug(slug[1], locale)
-    if (!course) return {}
-    const title = course.metaTitle ?? course.title ?? null
+    if (!course) return { title: defaultTitle }
+    const title = (course.metaTitle ?? course.title ?? defaultTitle).toString().trim() || defaultTitle
     const ogImageUrl = course.ogImage && typeof course.ogImage === 'object' && 'url' in course.ogImage ? (course.ogImage.url ?? null) : null
     const path = slugToPath(slug)
     return {
@@ -97,7 +101,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (slug.length === 1 && slug[0] === 'knowledge') {
     const page = await getPageBySlug('knowledge', locale)
     return {
-      title: page?.metaTitle ?? (locale === 'ru' ? 'База знаний | ProSmety' : 'Knowledge Base | ProSmety'),
+      title: (page?.metaTitle?.trim() || knowledgeMetaTitle) as string,
       description: page?.metaDescription ?? (locale === 'ru' ? 'Статьи и материалы по сметному делу в строительстве' : 'Articles and materials on construction estimating'),
       alternates: buildAlternates(baseUrl, locale, '/knowledge'),
     }
@@ -106,9 +110,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Knowledge article: /knowledge/{slug}
   if (slug.length === 2 && slug[0] === 'knowledge') {
     const article = await getKnowledgeArticleBySlug(slug[1], locale)
-    if (!article) return {}
+    if (!article) return { title: defaultTitle }
+    const articleTitle = (article.metaTitle ?? article.title ?? defaultTitle).toString().trim() || defaultTitle
     return {
-      title: article.metaTitle ?? article.title ?? undefined,
+      title: articleTitle,
       description: article.metaDescription ?? article.description ?? undefined,
       alternates: buildAlternates(baseUrl, locale, `/knowledge/${slug[1]}`),
     }
@@ -118,7 +123,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (slug.length === 1 && slug[0] === 'services') {
     const page = await getPageBySlug('services', locale)
     return {
-      title: page?.metaTitle ?? (locale === 'ru' ? 'Сметные услуги | ProSmety' : 'Estimate Services | ProSmety'),
+      title: (page?.metaTitle?.trim() || servicesMetaTitle) as string,
       description: page?.metaDescription ?? (locale === 'ru' ? 'Профессиональные сметные услуги для строительства в Республике Беларусь' : 'Professional estimate services for construction in Belarus'),
       alternates: buildAlternates(baseUrl, locale, '/services'),
     }
@@ -128,24 +133,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (slug.length === 1 && slug[0] === 'training') {
     const page = await getPageBySlug('training', locale)
     return {
-      title: page?.metaTitle ?? (locale === 'ru' ? 'Обучение сметному делу | ProSmety' : 'Estimating Training | ProSmety'),
+      title: (page?.metaTitle?.trim() || trainingMetaTitle) as string,
       description: page?.metaDescription ?? (locale === 'ru' ? 'Курсы по сметному делу для начинающих и специалистов' : 'Estimating courses for beginners and professionals'),
       alternates: buildAlternates(baseUrl, locale, '/training'),
     }
   }
 
   const pageSlug = getPageSlugForMeta(slugSegments)
-  if (!pageSlug) return {}
+  if (!pageSlug) return { title: defaultTitle }
   const page = await getPageBySlug(pageSlug, locale)
-  if (!page) return {}
+  if (!page) return { title: defaultTitle }
   const ogImage = page.ogImage && typeof page.ogImage === 'object' && 'url' in page.ogImage ? (page.ogImage.url ?? null) : null
   const path = slugToPath(slug)
   const title =
-    page.metaTitle ??
-    (page.title ? `${page.title} | ProSmety` : pageSlug === 'home' ? (locale === 'ru' ? 'Сметы и обучение | ProSmety' : 'Estimate Services | ProSmety') : undefined)
+    (page.metaTitle?.trim() || (page.title?.trim() ? `ProSmety | ${page.title.trim()}` : defaultTitle)) as string
   const description = page.metaDescription ?? undefined
   return {
-    ...(title && { title }),
+    title: title || defaultTitle,
     ...(description && { description }),
     ...buildOgMetadata(ogImage, page.metaTitle ?? title ?? undefined),
     alternates: buildAlternates(baseUrl, locale, path),

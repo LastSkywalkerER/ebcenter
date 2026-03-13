@@ -25,7 +25,8 @@ export async function migrateContent(payload: Payload) {
       slug: 'site-settings',
       locale: locale as 'ru' | 'en',
       data: {
-        metaTitle: t?.home?.seo?.metaTitle ?? (locale === 'ru' ? 'Сметы и обучение | ProSmety' : 'Estimate Services | ProSmety'),
+        metaTitle: t?.home?.seo?.metaTitle ?? (locale === 'ru' ? 'ProSmety | Сметы и обучение' : 'ProSmety | Estimate Services'),
+        metaDescription: t?.home?.seo?.metaDescription ?? (locale === 'ru' ? 'Услуги по составлению смет, Сметные работы и обучение сметному делу' : 'Professional preparation of estimates, acts and contracts. Estimate services and training in Belarus.'),
         heroTitle: t?.home?.hero?.title ?? '',
         heroSubtitle: t?.home?.hero?.subtitle ?? '',
         heroCta: t?.home?.hero?.cta ?? '',

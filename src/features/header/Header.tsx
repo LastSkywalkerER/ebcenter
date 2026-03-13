@@ -65,11 +65,13 @@ const Header = async ({ locale }: { locale: Locale }) => {
             </span>
           </Link>
 
+          {/* prefetch={false} prevents metadata flash (wrong page title) during client navigation with middleware rewrite */}
           <nav className='hidden lg:flex items-center gap-0.5 flex-1'>
             {nav.map((item) => (
               <Link
                 key={item.slug || 'home'}
                 href={item.href}
+                prefetch={false}
                 className='px-[11px] py-1.5 text-[14px] font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors whitespace-nowrap'
               >
                 {item.label}
