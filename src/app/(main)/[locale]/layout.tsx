@@ -2,6 +2,7 @@ import Footer from '@/features/footer/Footer'
 import Header from '@/features/header/Header'
 import { ScrollToConsultation } from '@/features/header/ScrollToConsultation'
 import { PlausibleProvider } from '@/shared/ui/analytics/PlausibleProvider'
+import { YandexMetrika } from '@/shared/ui/analytics/YandexMetrika'
 import { LivePreviewRefresh } from '@/shared/ui/LivePreviewRefresh'
 import { JsonLd } from '@/shared/ui/seo/JsonLd'
 import { env } from '@/shared/config/env'
@@ -98,6 +99,7 @@ export default async function LocaleLayout({
         <div className='min-h-screen flex flex-col overflow-x-hidden'>
           <JsonLd data={orgSchema} />
           <PlausibleProvider />
+          <YandexMetrika />
           <LivePreviewRefresh />
           <Header locale={locale as Locale} />
           <ScrollToConsultation />
