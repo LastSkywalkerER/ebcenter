@@ -4,36 +4,24 @@ import Script from 'next/script'
 
 const YANDEX_ID = 107694202
 
-declare global {
-  interface Window {
-    ym?: (id: number, action: string, opts?: Record<string, unknown>) => void
-  }
-}
-
+// Official Yandex.Metrika snippet — creates queue and loads tag.js
 export function YandexMetrika() {
   return (
     <>
-      <Script
-        id="yandex-metrika"
-        strategy="afterInteractive"
-        src="https://mc.yandex.ru/metrika/tag.js"
-        onLoad={() => {
-          if (typeof window !== 'undefined' && window.ym) {
-            window.ym(YANDEX_ID, 'init', {
-              ssr: true,
-              webvisor: true,
-              clickmap: true,
-              ecommerce: 'dataLayer',
-              referrer: document.referrer,
-              url: location.href,
-              accurateTrackBounce: true,
-              trackLinks: true,
-            })
-          }
-        }}
-      />
+      <Script id="yandex-metrika" strategy="afterInteractive">
+        {`
+          (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+          })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=${YANDEX_ID}", "ym");
+          ym(${YANDEX_ID}, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        `}
+      </Script>
       <noscript>
         <div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Yandex Metrika 1x1 tracking pixel, no next/image needed */}
           <img
             src={`https://mc.yandex.ru/watch/${YANDEX_ID}`}
             style={{ position: 'absolute', left: -9999 }}

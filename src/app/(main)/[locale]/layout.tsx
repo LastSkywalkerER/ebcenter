@@ -96,10 +96,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
+        <YandexMetrika />
         <div className='min-h-screen flex flex-col overflow-x-hidden'>
           <JsonLd data={orgSchema} />
           <PlausibleProvider />
-          <YandexMetrika />
           <LivePreviewRefresh />
           <Header locale={locale as Locale} />
           <ScrollToConsultation />
