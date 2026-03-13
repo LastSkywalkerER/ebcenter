@@ -562,6 +562,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
                 paragraphs={paragraphs.map(p => p.text ?? '')}
                 articlesTitle={(block.articlesTitle as string) ?? 'Рекомендуемые статьи'}
                 articles={articles}
+                locale={locale}
               />
             )
           }
@@ -577,6 +578,7 @@ export function BlockRenderer({ blocks, locale, translations, heroBackgroundUrl,
                 paragraphs={paragraphs.map(p => p.text ?? '')}
                 avatarUrl={avatarObj?.url}
                 stats={stats.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))}
+                locale={locale}
               />
             )
           }

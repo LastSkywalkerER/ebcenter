@@ -19,7 +19,7 @@ const Footer = async ({ locale }: { locale: Locale }) => {
             <Link href={getLocalePath(locale, '')} className='flex items-center gap-[9px] mb-2.5'>
               <Image
                 src='/images/favicon-ps.png'
-                alt=''
+                alt={t.header.logo}
                 width={26}
                 height={26}
                 className='text-blue-400'
@@ -37,9 +37,9 @@ const Footer = async ({ locale }: { locale: Locale }) => {
           <div className='grid grid-cols-2 sm:grid-cols-3 gap-7'>
             {/* Services */}
             <div>
-              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+              <p className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
                 {t.common.services}
-              </h4>
+              </p>
               <div className='flex flex-col gap-1.5'>
                 {serviceEntries.map(([key, service]) => (
                   <Link
@@ -61,9 +61,9 @@ const Footer = async ({ locale }: { locale: Locale }) => {
 
             {/* Training */}
             <div>
-              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+              <p className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
                 {t.common.training}
-              </h4>
+              </p>
               <div className='flex flex-col gap-1.5'>
                 {courseEntries.map(([courseSlug, course]) => (
                   <Link
@@ -79,9 +79,9 @@ const Footer = async ({ locale }: { locale: Locale }) => {
 
             {/* Company */}
             <div>
-              <h4 className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
+              <p className='text-[11px] font-bold uppercase tracking-[0.1em] text-white mb-3.5'>
                 {t.footer.companyColumnTitle ?? (locale === 'ru' ? 'Компания' : 'Company')}
-              </h4>
+              </p>
               <div className='flex flex-col gap-1.5'>
                 <Link href={getLocalePath(locale, '/knowledge')} className='text-[13px] text-white/55 hover:text-white transition-colors'>
                   {t.header.navigation?.knowledge ?? (locale === 'ru' ? 'База знаний' : 'Knowledge Base')}

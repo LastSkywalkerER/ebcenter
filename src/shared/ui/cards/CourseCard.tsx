@@ -64,7 +64,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         {course.icon}
       </div>
 
-      <h3 className='text-[19px] font-bold text-slate-900'>{course.title}</h3>
+      <p className='text-[19px] font-bold text-slate-900'>{course.title}</p>
 
       <ul className='flex flex-col gap-[7px] flex-1'>
         {course.topics.map((topic, idx) => (

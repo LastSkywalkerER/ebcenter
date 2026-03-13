@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import type { Locale } from '@/shared/i18n/config'
+import { textWithLinks } from '@/shared/lib/textWithLinks'
 
 interface AboutStat {
   value: string
@@ -11,9 +13,10 @@ interface AboutSectionProps {
   paragraphs: string[]
   avatarUrl?: string | null
   stats: AboutStat[]
+  locale?: Locale
 }
 
-export function AboutSection({ tag, title, paragraphs, avatarUrl, stats }: AboutSectionProps) {
+export function AboutSection({ tag, title, paragraphs, avatarUrl, stats, locale = 'ru' }: AboutSectionProps) {
   return (
     <section id="about" className="py-[72px] bg-white">
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -45,7 +48,9 @@ export function AboutSection({ tag, title, paragraphs, avatarUrl, stats }: About
             </h2>
             <div className='space-y-3.5 mb-5'>
               {paragraphs.map((p, i) => (
-                <p key={i} className='text-[15px] text-slate-500 leading-[1.7]'>{p}</p>
+                <p key={i} className='text-[15px] text-slate-500 leading-[1.7]'>
+                  {textWithLinks(p, locale)}
+                </p>
               ))}
             </div>
 

@@ -89,7 +89,7 @@ export function AdvantagesSection({
                   <AdvantageIcon icon={item.icon as AdvantageIconKey} />
                 </div>
                 <div>
-                  <h3 className='text-[15px] font-bold text-slate-900 mb-1'>{item.title}</h3>
+                  <p className='text-[15px] font-bold text-slate-900 mb-1'>{item.title}</p>
                   <p className='text-[13px] text-slate-500 leading-relaxed'>{item.description}</p>
                 </div>
               </div>

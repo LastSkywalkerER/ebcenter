@@ -32,7 +32,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className='w-[52px] h-[52px] bg-white/18 rounded-lg flex items-center justify-center mb-3.5 shrink-0'>
           <div className='text-white [&>svg]:w-7 [&>svg]:h-7'>{icon}</div>
         </div>
-        <h3 className='text-[15px] font-bold text-white mb-1.5'>{title}</h3>
+        <p className='text-[15px] font-bold text-white mb-1.5'>{title}</p>
         <p className='text-[13px] text-white/78 flex-1 leading-snug mb-3.5 line-clamp-2'>{description}</p>
         <span className='text-[13px] font-semibold text-white/85 mt-auto'>Обсудить задачу →</span>
       </>
@@ -66,7 +66,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       <div className='w-[52px] h-[52px] bg-blue-50 rounded-lg flex items-center justify-center mb-3.5 shrink-0 text-blue-600 group-hover:bg-blue-100 transition-colors [&>svg]:w-7 [&>svg]:h-7'>
         {icon}
       </div>
-      <h3 className='text-[15px] font-bold text-slate-900 mb-1.5'>{title}</h3>
+      <p className='text-[15px] font-bold text-slate-900 mb-1.5'>{title}</p>
       <p className='text-[13px] text-slate-500 flex-1 leading-snug mb-3.5 line-clamp-2'>{description}</p>
       <span className='text-[13px] font-semibold text-blue-600 mt-auto'>{moreText} →</span>
     </Link>

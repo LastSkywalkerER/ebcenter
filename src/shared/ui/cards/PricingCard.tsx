@@ -31,7 +31,7 @@ export function PricingCard({
         </div>
       )}
       <div>
-        <h3 className='text-xl font-bold text-slate-900'>{title}</h3>
+        <p className='text-xl font-bold text-slate-900'>{title}</p>
         <p className='mt-2 text-sm text-slate-500 leading-relaxed'>{description}</p>
       </div>
       <ul className='flex flex-col gap-2.5 flex-1'>

@@ -13,10 +13,11 @@ function localeUrl(baseUrl: string, locale: Locale, path: string): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = env.BASE_URL
+  let baseUrl = env.BASE_URL
   if (!baseUrl) {
     throw new Error('NEXT_PUBLIC_BASE_URL environment variable is not set')
   }
+  baseUrl = baseUrl.replace(/\/$/, '') // Remove trailing slash for canonical URLs
 
   const routes = ['', '/services', '/training', '/knowledge']
 
@@ -48,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const customPageEntries = i18n.locales.flatMap((locale) =>
       pages
-        .filter((p): p is DocWithMeta & { slug: string } => !!p.slug && p.slug !== 'home' && p.slug !== 'services' && p.slug !== 'training')
+        .filter((p): p is DocWithMeta & { slug: string } => !!p.slug && p.slug !== 'home' && p.slug !== 'services' && p.slug !== 'training' && p.slug !== 'contacts')
         .map((p) => ({
           url: localeUrl(baseUrl, locale, `/${p.slug}`),
           lastModified: p.updatedAt ? new Date(p.updatedAt) : new Date(),

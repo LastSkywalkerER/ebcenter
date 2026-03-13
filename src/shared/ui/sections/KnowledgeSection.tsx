@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import type { Locale } from '@/shared/i18n/config'
+import { textWithLinks } from '@/shared/lib/textWithLinks'
 
 export interface KnowledgeArticle {
   title: string
@@ -12,6 +14,7 @@ interface KnowledgeSectionProps {
   paragraphs: string[]
   articlesTitle?: string
   articles: KnowledgeArticle[]
+  locale?: Locale
 }
 
 const DocIcon = () => (
@@ -27,6 +30,7 @@ export function KnowledgeSection({
   paragraphs,
   articlesTitle = 'Рекомендуемые статьи',
   articles,
+  locale = 'ru',
 }: KnowledgeSectionProps) {
   return (
     <section id='knowledge' className='py-[72px] bg-slate-50'>
@@ -45,7 +49,7 @@ export function KnowledgeSection({
             <div className='space-y-3.5'>
               {paragraphs.map((p, i) => (
                 <p key={i} className='text-[15px] text-slate-500 leading-[1.7]'>
-                  {p}
+                  {textWithLinks(p, locale)}
                 </p>
               ))}
             </div>

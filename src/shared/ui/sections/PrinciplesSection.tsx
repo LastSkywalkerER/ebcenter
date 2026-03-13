@@ -43,7 +43,7 @@ export const PrinciplesSection: React.FC<PrinciplesSectionProps> = ({
               <div className='text-[36px] font-black text-white/15 leading-none mb-2.5'>
                 {String(index + 1).padStart(2, '0')}
               </div>
-              <h3 className='text-[17px] font-bold text-white mb-2'>{item.title}</h3>
+              <p className='text-[17px] font-bold text-white mb-2'>{item.title}</p>
               <p className='text-[13px] text-white/70 leading-relaxed'>{item.description}</p>
             </div>
           ))}

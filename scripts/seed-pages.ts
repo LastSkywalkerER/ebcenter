@@ -160,7 +160,7 @@ async function seedPages(payload: Payload) {
           tag: 'База знаний',
           title: 'Сметное дело в строительстве РБ',
           paragraphs: [
-            { text: 'Нормативная база ценообразования в строительстве Республики Беларусь основана на Нормативах расхода ресурсов — НРР 2017 и НРР 2022. Эти документы определяют порядок расчёта стоимости строительно-монтажных работ, нормы расхода материалов, затрат труда и работы машин и механизмов.' },
+            { text: 'Профессиональная подготовка смет, актов и договоров — наша основная специализация. Нормативная база ценообразования в строительстве Республики Беларусь основана на Нормативах расхода ресурсов — НРР 2017 и НРР 2022. Эти документы определяют порядок расчёта стоимости строительно-монтажных работ, нормы расхода материалов, затрат труда и работы машин и механизмов.' },
             { text: 'Для подготовки сметной документации применяется специализированное программное обеспечение Belsmeta — отечественная программа для составления смет, актов выполненных работ и расчёта договорной цены. Программа работает с актуальной нормативной базой и формирует все необходимые формы документов.' },
             { text: 'Правильно составленная сметная документация — основа финансовой безопасности строительного проекта. Она определяет стоимость работ, является основанием для расчётов между заказчиком и подрядчиком, а также контролирует целевое использование средств.' },
           ],
@@ -300,7 +300,7 @@ async function seedPages(payload: Payload) {
           tag: 'Knowledge Base',
           title: 'Estimating in RB construction',
           paragraphs: [
-            { text: 'The pricing regulatory base in construction of the Republic of Belarus is based on Natural Resource Consumption Standards — NRR 2017 and NRR 2022. These documents define the procedure for calculating the cost of construction and installation works, consumption rates of materials, labor costs and operation of machines and mechanisms.' },
+            { text: 'Professional preparation of estimates, acts and contracts is our core specialty. The pricing regulatory base in construction of the Republic of Belarus is based on Natural Resource Consumption Standards — NRR 2017 and NRR 2022. These documents define the procedure for calculating the cost of construction and installation works, consumption rates of materials, labor costs and operation of machines and mechanisms.' },
             { text: 'Belsmeta specialized software is used for preparing estimate documentation — a domestic program for preparing estimates, completion certificates and contract price calculation. The program works with the current regulatory base and generates all necessary document forms.' },
             { text: 'Properly prepared estimate documentation is the basis of financial security for a construction project. It determines the cost of work, serves as the basis for settlements between the customer and the contractor, and also controls the targeted use of funds.' },
           ],

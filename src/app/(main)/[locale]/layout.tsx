@@ -37,9 +37,15 @@ export async function generateMetadata({
       ? `${baseUrl}${rawOgImage.startsWith('/') ? '' : '/'}${rawOgImage}`
       : undefined
 
+  const defaultTitle = locale === 'ru' ? 'ProSmety - Сметные работы и обучение' : 'ProSmety - Construction Estimate Services'
+  const defaultDescription =
+    locale === 'ru'
+      ? 'Услуги по составлению смет, Сметные работы и обучение сметному делу'
+      : 'Professional preparation of estimates, acts and contracts. Estimate services and training in Belarus.'
+
   return {
-    title: meta.metaTitle ?? 'ProSmety - Сметные работы и обучение',
-    description: meta.metaDescription ?? 'Услуги по составлению смет, Сметные работы и обучение сметному делу',
+    title: meta.metaTitle ?? defaultTitle,
+    description: meta.metaDescription ?? defaultDescription,
     keywords: meta.metaKeywords ?? undefined,
     openGraph: {
       title: meta.metaTitle ?? undefined,
@@ -51,7 +57,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: meta.metaTitle ?? 'ProSmety - Сметные работы и обучение',
+      title: meta.metaTitle ?? defaultTitle,
       description: meta.metaDescription ?? undefined,
       images: ogImageUrl ? [ogImageUrl] : undefined,
     },

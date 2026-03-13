@@ -55,7 +55,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
           <Link href={homePath} className='flex items-center gap-[9px] shrink-0'>
             <Image
               src='/images/favicon-ps.png'
-              alt=''
+              alt={t.header.logo}
               width={28}
               height={28}
               className='text-blue-600'

@@ -137,13 +137,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageSlug = getPageSlugForMeta(slugSegments)
   if (!pageSlug) return {}
   const page = await getPageBySlug(pageSlug, locale)
-  if (!page?.metaTitle && !page?.metaDescription) return {}
+  if (!page) return {}
   const ogImage = page.ogImage && typeof page.ogImage === 'object' && 'url' in page.ogImage ? (page.ogImage.url ?? null) : null
   const path = slugToPath(slug)
+  const title =
+    page.metaTitle ??
+    (page.title ? `${page.title} | ProSmety` : pageSlug === 'home' ? (locale === 'ru' ? 'ProSmety - Сметные работы и обучение' : 'ProSmety - Construction Estimate Services') : undefined)
+  const description = page.metaDescription ?? undefined
   return {
-    ...(page.metaTitle && { title: page.metaTitle }),
-    ...(page.metaDescription && { description: page.metaDescription }),
-    ...buildOgMetadata(ogImage, page.metaTitle),
+    ...(title && { title }),
+    ...(description && { description }),
+    ...buildOgMetadata(ogImage, page.metaTitle ?? title ?? undefined),
     alternates: buildAlternates(baseUrl, locale, path),
   }
 }
