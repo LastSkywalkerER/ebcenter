@@ -175,7 +175,7 @@ export const SiteSettings: GlobalConfig = {
               name: 'metaTitle',
               type: 'text',
               localized: true,
-              admin: { description: 'Default meta title for the site' },
+              admin: { description: 'Default meta title for the site (max ~58 chars / 580px)' },
             },
             {
               name: 'metaDescription',

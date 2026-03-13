@@ -88,7 +88,9 @@ const Header = async ({ locale }: { locale: Locale }) => {
 
           {process.env.NODE_ENV !== 'production' && <LanguageSwitcher locale={locale} />}
 
-          <MobileMenu locale={locale} translations={t} navItems={nav} />
+          <div className='lg:hidden ml-auto shrink-0 flex items-center'>
+            <MobileMenu locale={locale} translations={t} navItems={nav} />
+          </div>
         </div>
       </div>
     </header>

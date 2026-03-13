@@ -1244,7 +1244,7 @@ export interface SiteSetting {
   inDevelopment?: string | null;
   courseProgramTitle?: string | null;
   /**
-   * Default meta title for the site
+   * Default meta title for the site (max ~58 chars / 580px)
    */
   metaTitle?: string | null;
   /**

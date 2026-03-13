@@ -142,7 +142,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const path = slugToPath(slug)
   const title =
     page.metaTitle ??
-    (page.title ? `${page.title} | ProSmety` : pageSlug === 'home' ? (locale === 'ru' ? 'ProSmety - Сметные работы и обучение' : 'ProSmety - Construction Estimate Services') : undefined)
+    (page.title ? `${page.title} | ProSmety` : pageSlug === 'home' ? (locale === 'ru' ? 'Сметы и обучение | ProSmety' : 'Estimate Services | ProSmety') : undefined)
   const description = page.metaDescription ?? undefined
   return {
     ...(title && { title }),

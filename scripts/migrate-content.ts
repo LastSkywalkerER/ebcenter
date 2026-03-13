@@ -25,6 +25,7 @@ export async function migrateContent(payload: Payload) {
       slug: 'site-settings',
       locale: locale as 'ru' | 'en',
       data: {
+        metaTitle: t?.home?.seo?.metaTitle ?? (locale === 'ru' ? 'Сметы и обучение | ProSmety' : 'Estimate Services | ProSmety'),
         heroTitle: t?.home?.hero?.title ?? '',
         heroSubtitle: t?.home?.hero?.subtitle ?? '',
         heroCta: t?.home?.hero?.cta ?? '',

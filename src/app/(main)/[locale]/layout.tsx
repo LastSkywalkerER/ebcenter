@@ -37,7 +37,7 @@ export async function generateMetadata({
       ? `${baseUrl}${rawOgImage.startsWith('/') ? '' : '/'}${rawOgImage}`
       : undefined
 
-  const defaultTitle = locale === 'ru' ? 'ProSmety - Сметные работы и обучение' : 'ProSmety - Construction Estimate Services'
+  const defaultTitle = locale === 'ru' ? 'Сметы и обучение | ProSmety' : 'Estimate Services | ProSmety'
   const defaultDescription =
     locale === 'ru'
       ? 'Услуги по составлению смет, Сметные работы и обучение сметному делу'
