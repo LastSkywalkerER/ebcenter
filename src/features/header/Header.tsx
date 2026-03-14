@@ -90,7 +90,13 @@ const Header = async ({ locale }: { locale: Locale }) => {
 
           {process.env.NODE_ENV !== 'production' && <LanguageSwitcher locale={locale} />}
 
-          <div className='lg:hidden ml-auto shrink-0 flex items-center'>
+          <div className='lg:hidden ml-auto shrink-0 flex items-center gap-2'>
+            <OrderCallLink
+              href={`${homePath}#contacts`}
+              className='inline-flex items-center justify-center bg-blue-600 text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-sm font-semibold whitespace-nowrap shrink-0'
+            >
+              {t.common.orderCall}
+            </OrderCallLink>
             <MobileMenu locale={locale} translations={t} navItems={nav} />
           </div>
         </div>

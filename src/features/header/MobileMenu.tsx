@@ -1,8 +1,6 @@
 'use client'
 
 import { Locale } from '@/shared/i18n/config'
-import { OrderCallLink } from '@/features/header/OrderCallLink'
-import { getLocalePath } from '@/shared/lib/localePath'
 import { formatPhoneForTel } from '@/shared/lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -21,7 +19,6 @@ interface MobileMenuProps {
       services: string
       training: string
       contacts: string
-      orderCall: string
       contactInfo: {
         phone: string
         email: string
@@ -144,14 +141,7 @@ export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) 
 
           {/* Bottom section - pinned to bottom */}
           <div className='shrink-0 border-t border-slate-200 px-5 py-6 space-y-4 bg-slate-50'>
-            <OrderCallLink
-              href={`${getLocalePath(locale ?? 'ru', '')}#contacts`}
-              className='flex items-center justify-center w-full px-5 py-3.5 text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors'
-              onClick={() => setIsOpen(false)}
-            >
-              {translations.common.orderCall}
-            </OrderCallLink>
-            <div className='space-y-2 pt-1'>
+            <div className='space-y-2'>
               {translations.common.contactInfo.phone && (
                 <Link
                   href={`tel:${formatPhoneForTel(translations.common.contactInfo.phone)}`}
