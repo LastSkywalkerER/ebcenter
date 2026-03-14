@@ -3,6 +3,8 @@ import type { NextConfig } from 'next'
 import { withPayload } from '@payloadcms/next/withPayload'
 
 const nextConfig: NextConfig = {
+  // Disable streaming metadata to prevent title flash during client-side navigation (Next.js 15.2+)
+  htmlLimitedBots: /.*/,
   serverExternalPackages: ['sharp'],
   images: {
     remotePatterns: [

@@ -44,6 +44,8 @@ async function seedPages(payload: Payload) {
     slug: string
     titleRu: string
     titleEn: string
+    metaTitleRu?: string
+    metaTitleEn?: string
     showInNav: boolean
     navOrder: number
     layoutRu: Block[]
@@ -53,6 +55,8 @@ async function seedPages(payload: Payload) {
       slug: 'home',
       titleRu: ruJson?.home?.hero?.title ?? 'Главная',
       titleEn: enJson?.home?.hero?.title ?? 'Home',
+      metaTitleRu: ruJson?.home?.seo?.metaTitle ?? 'ProSmety | Сметы и обучение',
+      metaTitleEn: enJson?.home?.seo?.metaTitle ?? 'ProSmety | Estimate Services',
       showInNav: true,
       navOrder: 0,
       layoutRu: [
@@ -406,40 +410,46 @@ async function seedPages(payload: Payload) {
 
     if (existing.docs.length > 0) {
       const doc = existing.docs[0]
+      const ruData = {
+        title: page.titleRu,
+        showInNav: page.showInNav,
+        navOrder: page.navOrder,
+        layout: layoutAsPayload(page.layoutRu),
+        ...('metaTitleRu' in page && page.metaTitleRu && { metaTitle: page.metaTitleRu }),
+      }
       await payload.update({
         collection: 'pages',
         id: doc.id,
         locale: 'ru',
-        data: {
-          title: page.titleRu,
-          showInNav: page.showInNav,
-          navOrder: page.navOrder,
-          layout: layoutAsPayload(page.layoutRu),
-        },
+        data: ruData,
       })
+      const enData = {
+        title: page.titleEn,
+        showInNav: page.showInNav,
+        navOrder: page.navOrder,
+        layout: layoutAsPayload(page.layoutEn),
+        ...('metaTitleEn' in page && page.metaTitleEn && { metaTitle: page.metaTitleEn }),
+      }
       await payload.update({
         collection: 'pages',
         id: doc.id,
         locale: 'en',
-        data: {
-          title: page.titleEn,
-          showInNav: page.showInNav,
-          navOrder: page.navOrder,
-          layout: layoutAsPayload(page.layoutEn),
-        },
+        data: enData,
       })
       console.log(`  Page "${page.slug}" updated`)
     } else {
+      const ruCreateData = {
+        slug: page.slug,
+        title: page.titleRu,
+        showInNav: page.showInNav,
+        navOrder: page.navOrder,
+        layout: layoutAsPayload(page.layoutRu),
+        ...('metaTitleRu' in page && page.metaTitleRu && { metaTitle: page.metaTitleRu }),
+      }
       await payload.create({
         collection: 'pages',
         locale: 'ru',
-        data: {
-          slug: page.slug,
-          title: page.titleRu,
-          showInNav: page.showInNav,
-          navOrder: page.navOrder,
-          layout: layoutAsPayload(page.layoutRu),
-        },
+        data: ruCreateData,
       })
       const created = await payload.find({
         collection: 'pages',
@@ -447,14 +457,16 @@ async function seedPages(payload: Payload) {
         limit: 1,
       })
       if (created.docs[0]) {
+        const enData = {
+          title: page.titleEn,
+          layout: layoutAsPayload(page.layoutEn),
+          ...('metaTitleEn' in page && page.metaTitleEn && { metaTitle: page.metaTitleEn }),
+        }
         await payload.update({
           collection: 'pages',
           id: created.docs[0].id,
           locale: 'en',
-          data: {
-            title: page.titleEn,
-            layout: layoutAsPayload(page.layoutEn),
-          },
+          data: enData,
         })
       }
       console.log(`  Page "${page.slug}" created`)

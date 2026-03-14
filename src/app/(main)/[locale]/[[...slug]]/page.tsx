@@ -141,12 +141,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const pageSlug = getPageSlugForMeta(slugSegments)
   if (!pageSlug) return { title: defaultTitle }
-  const page = await getPageBySlug(pageSlug, locale)
+  const [page, meta] = await Promise.all([getPageBySlug(pageSlug, locale), getSiteMeta(locale)])
   if (!page) return { title: defaultTitle }
   const ogImage = page.ogImage && typeof page.ogImage === 'object' && 'url' in page.ogImage ? (page.ogImage.url ?? null) : null
   const path = slugToPath(slug)
+  // Home: use site_settings metaTitle (from ru.json home.seo.metaTitle via migrate-content), not page.title (hero H1)
   const title =
-    (page.metaTitle?.trim() || (page.title?.trim() ? `ProSmety | ${page.title.trim()}` : defaultTitle)) as string
+    (page.metaTitle?.trim() ||
+      (pageSlug === 'home' ? (meta.metaTitle?.trim() ?? defaultTitle) : page.title?.trim() ? `ProSmety | ${page.title.trim()}` : defaultTitle)) as string
   const description = page.metaDescription ?? undefined
   return {
     title: title || defaultTitle,
