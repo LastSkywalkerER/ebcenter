@@ -118,6 +118,8 @@ export const SiteSettings: GlobalConfig = {
             { name: 'commonPhone', type: 'text', localized: true, defaultValue: 'Телефон' },
             { name: 'commonEmail', type: 'text', localized: true, defaultValue: 'Email' },
             { name: 'commonAddress', type: 'text', localized: true, defaultValue: 'Адрес' },
+            { name: 'commonOrganizationName', type: 'text', localized: true, defaultValue: 'Наименование организации' },
+            { name: 'commonPostalAddress', type: 'text', localized: true, defaultValue: 'Почтовый адрес' },
             { name: 'commonWorkingHours', type: 'text', localized: true, defaultValue: 'Режим работы' },
             { name: 'commonName', type: 'text', localized: true, defaultValue: 'Имя' },
             { name: 'commonMessage', type: 'text', localized: true, defaultValue: 'Сообщение' },

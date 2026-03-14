@@ -11,8 +11,7 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
 
     const [siteSettings, contactsGlobal, servicesResult, coursesResult] = await Promise.all([
       payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: false }),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (payload as any).findGlobal({ slug: 'contacts', locale, fallbackLocale: false }),
+      payload.findGlobal({ slug: 'contacts', locale, fallbackLocale: 'ru' }),
       payload.find({ collection: 'services', locale, limit: 100, pagination: false }),
       payload.find({ collection: 'courses', locale, limit: 100, pagination: false }),
     ])
@@ -182,6 +181,8 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
         phone: (settings?.commonPhone as string) ?? '',
         email: (settings?.commonEmail as string) ?? '',
         address: (settings?.commonAddress as string) ?? '',
+        organizationName: (settings?.commonOrganizationName as string) ?? '',
+        postalAddress: (settings?.commonPostalAddress as string) ?? '',
         workingHours: (settings?.commonWorkingHours as string) ?? '',
         name: (settings?.commonName as string) ?? '',
         message: (settings?.commonMessage as string) ?? '',
@@ -203,6 +204,8 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           phone: (contacts?.contactPhone as string) ?? '',
           email: (contacts?.contactEmail as string) ?? '',
           address: (contacts?.contactAddress as string) ?? '',
+          organizationName: (contacts?.contactOrganizationName as string) ?? '',
+          postalAddress: (contacts?.contactPostalAddress as string) ?? '',
           workingHours: (contacts?.contactWorkingHours as string) ?? '',
           unp: (contacts?.contactUnp as string) ?? '',
         },
@@ -293,6 +296,10 @@ export async function getSiteContent(locale: Locale): Promise<Translations | nul
           title: (contacts?.contactInfoTitle as string) ?? '',
           address: (settings?.commonAddress as string) ?? '',
           addressValue: (contacts?.contactAddress as string) ?? '',
+          organizationName: (settings?.commonOrganizationName as string) ?? '',
+          organizationNameValue: (contacts?.contactOrganizationName as string) ?? '',
+          postalAddress: (settings?.commonPostalAddress as string) ?? '',
+          postalAddressValue: (contacts?.contactPostalAddress as string) ?? '',
           phone: (settings?.commonPhone as string) ?? '',
           phoneValue: (contacts?.contactPhone as string) ?? '',
           email: (settings?.commonEmail as string) ?? '',
@@ -456,8 +463,7 @@ export async function getSiteMeta(locale: Locale): Promise<SiteMeta> {
     const payload = await getPayload({ config })
     const [settingsRaw, contactsRaw] = await Promise.all([
       payload.findGlobal({ slug: 'site-settings', locale }),
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (payload as any).findGlobal({ slug: 'contacts', locale }),
+      payload.findGlobal({ slug: 'contacts', locale, fallbackLocale: 'ru' }),
     ])
     const settings = settingsRaw as unknown as Record<string, unknown>
     const contacts = contactsRaw as unknown as Record<string, unknown>

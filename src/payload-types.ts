@@ -1213,6 +1213,8 @@ export interface SiteSetting {
   commonPhone?: string | null;
   commonEmail?: string | null;
   commonAddress?: string | null;
+  commonOrganizationName?: string | null;
+  commonPostalAddress?: string | null;
   commonWorkingHours?: string | null;
   commonName?: string | null;
   commonMessage?: string | null;
@@ -1278,9 +1280,20 @@ export interface SiteSetting {
  */
 export interface Contact {
   id: number;
+  /**
+   * Full legal name of the organization
+   */
+  contactOrganizationName?: string | null;
   contactPhone?: string | null;
   contactEmail?: string | null;
+  /**
+   * Physical/visit address
+   */
   contactAddress?: string | null;
+  /**
+   * Postal address for correspondence
+   */
+  contactPostalAddress?: string | null;
   contactWorkingHours?: string | null;
   contactUnp?: string | null;
   /**
@@ -1339,6 +1352,8 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   commonPhone?: T;
   commonEmail?: T;
   commonAddress?: T;
+  commonOrganizationName?: T;
+  commonPostalAddress?: T;
   commonWorkingHours?: T;
   commonName?: T;
   commonMessage?: T;
@@ -1384,9 +1399,11 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "contacts_select".
  */
 export interface ContactsSelect<T extends boolean = true> {
+  contactOrganizationName?: T;
   contactPhone?: T;
   contactEmail?: T;
   contactAddress?: T;
+  contactPostalAddress?: T;
   contactWorkingHours?: T;
   contactUnp?: T;
   contactsTitle?: T;

@@ -16,6 +16,8 @@
     "phone": "Телефон",
     "email": "Email",
     "address": "Адрес",
+    "organizationName": "Наименование организации",
+    "postalAddress": "Почтовый адрес",
     "workingHours": "Режим работы",
     "name": "Имя",
     "message": "Сообщение",

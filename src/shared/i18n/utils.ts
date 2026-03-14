@@ -50,6 +50,8 @@ export type Translations = {
     phone: string
     email: string
     address: string
+    organizationName: string
+    postalAddress: string
     workingHours: string
     name: string
     message: string
@@ -71,6 +73,8 @@ export type Translations = {
       phone: string
       email: string
       address: string
+      organizationName: string
+      postalAddress: string
       workingHours: string
       unp: string
     }
@@ -205,6 +209,10 @@ export type Translations = {
       title: string
       address: string
       addressValue: string
+      organizationName: string
+      organizationNameValue: string
+      postalAddress: string
+      postalAddressValue: string
       phone: string
       phoneValue: string
       email: string

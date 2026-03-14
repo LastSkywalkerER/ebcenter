@@ -16,6 +16,8 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
+    "organizationName": "Organization Name",
+    "postalAddress": "Postal Address",
     "workingHours": "Working Hours",
     "name": "Name",
     "message": "Message",

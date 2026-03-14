@@ -29,9 +29,11 @@ export const Contacts: GlobalConfig = {
         {
           label: 'Contact Info',
           fields: [
+            { name: 'contactOrganizationName', type: 'text', localized: true, admin: { description: 'Full legal name of the organization' } },
             { name: 'contactPhone', type: 'text', localized: true, defaultValue: '+375 (29) 123-45-67' },
             { name: 'contactEmail', type: 'text', localized: true, defaultValue: 'info@prosmety.by' },
-            { name: 'contactAddress', type: 'text', localized: true, defaultValue: 'г. Минск, ул. Примерная, 123' },
+            { name: 'contactAddress', type: 'text', localized: true, defaultValue: 'г. Минск, ул. Примерная, 123', admin: { description: 'Physical/visit address' } },
+            { name: 'contactPostalAddress', type: 'text', localized: true, admin: { description: 'Postal address for correspondence' } },
             { name: 'contactWorkingHours', type: 'text', localized: true, defaultValue: 'Пн-Пт: 9:00 - 18:00' },
             { name: 'contactUnp', type: 'text', localized: true, defaultValue: '123456789' },
           ],
