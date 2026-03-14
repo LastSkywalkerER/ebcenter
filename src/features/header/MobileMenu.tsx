@@ -1,6 +1,4 @@
 'use client'
-
-import { Locale } from '@/shared/i18n/config'
 import { formatPhoneForTel } from '@/shared/lib/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -12,7 +10,6 @@ interface NavItem {
 }
 
 interface MobileMenuProps {
-  locale?: Locale
   translations: {
     common: {
       home: string
@@ -28,7 +25,7 @@ interface MobileMenuProps {
   navItems: NavItem[]
 }
 
-export const MobileMenu = ({ locale, translations, navItems }: MobileMenuProps) => {
+export const MobileMenu = ({ translations, navItems }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 

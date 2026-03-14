@@ -97,7 +97,7 @@ const Header = async ({ locale }: { locale: Locale }) => {
             >
               {t.common.orderCall}
             </OrderCallLink>
-            <MobileMenu locale={locale} translations={t} navItems={nav} />
+            <MobileMenu translations={t} navItems={nav} />
           </div>
         </div>
       </div>
