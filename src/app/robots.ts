@@ -4,10 +4,11 @@ import { getSiteMeta } from '@/shared/lib/payload'
 import type { MetadataRoute } from 'next'
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const baseUrl = env.BASE_URL
+  let baseUrl = env.BASE_URL
   if (!baseUrl) {
     throw new Error('NEXT_PUBLIC_BASE_URL environment variable is not set')
   }
+  baseUrl = baseUrl.replace(/\/$/, '') // no trailing slash so sitemap URL is valid
 
   const meta = await getSiteMeta(i18n.defaultLocale)
 

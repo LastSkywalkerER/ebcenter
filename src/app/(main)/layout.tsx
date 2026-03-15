@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   // No title here — pages set it. Root title would flash during client navigation.
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' }, // /favicon.ico for crawlers (Yandex, Google)
       { url: '/images/favicon-ps.png', sizes: '32x32', type: 'image/png' },
       { url: '/images/favicon-ps.png', sizes: '192x192', type: 'image/png' },
     ],
